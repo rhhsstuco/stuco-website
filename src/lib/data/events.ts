@@ -26,8 +26,8 @@ const getEvents = async (maxResults?: number) => {
 		return {
 			name: row[0],
 			description: row[1],
-			startDate: new Date(+splitStartDate[0], +splitStartDate[1] + 1, +splitStartDate[2]),
-			endDate: new Date(+splitEndDate[0], +splitEndDate[1] + 1, +splitEndDate[2]),
+			startDate: new Date(+splitStartDate[2], +splitStartDate[0] - 1, +splitStartDate[1]),
+			endDate: new Date(+splitEndDate[2], +splitEndDate[0] - 1, +splitEndDate[1]),
 		} as SchoolEvent
 	});
 
