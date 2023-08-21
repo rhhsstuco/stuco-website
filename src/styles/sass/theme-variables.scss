@@ -10,6 +10,9 @@
 	--light-theme-color-light: hsl(0, 0%, 100%);
 	--light-theme-color-dark: hsl(0, 0%, 0%);
 
+	--light-theme-color-lighter: hsl(0, 0%, 90%);
+	--light-theme-color-darker: hsl(0, 0%, 10%);
+
 	// Dark theme colors
 	--dark-theme-color-primary: hsl(116, 100%, 50%);
 	--dark-theme-color-background: hsl(0, 0%, 73%);
@@ -17,9 +20,6 @@
 
 	--dark-theme-color-gradient-light: hsl(117, 100%, 31%);
 	--dark-theme-color-text: hsl(0, 0%, 0%);
-
-	--dark-theme-color-light: hsl(0, 0%, 0%);
-	--dark-theme-color-dark: hsl(0, 0%, 100%);
 }
 
 
@@ -31,8 +31,11 @@
 	--color-gradient-light: var(--dark-theme-color-gradient-light);
 	--color-text: var(--dark-theme-color-text);
 
-	--color-light: var(--dark-theme-color-light);
-	--color-dark: var(--dark-theme-color-light);
+	--color-light: var(--light-theme-color-dark);
+	--color-dark: var(--light-theme-color-light);
+
+	--color-lighter: var(--light-theme-color-darker);
+	--color-darker: var(--light-theme-color-lighter);
 }
 
 [data-theme="light"] {
@@ -45,4 +48,7 @@
 
 	--color-light: var(--light-theme-color-light);
 	--color-dark: var(--light-theme-color-dark);
+
+	--color-lighter: var(--light-theme-color-lighter);
+	--color-darker: var(--light-theme-color-darker);
 }
