@@ -1,5 +1,6 @@
 interface SchoolEvent {
 	name: string;
 	description: string;
-	date: Date;
+	startDate: Date;
+	endDate: Date;
 }
