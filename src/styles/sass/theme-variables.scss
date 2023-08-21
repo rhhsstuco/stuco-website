@@ -1,0 +1,48 @@
+:root {
+	// Light theme colors
+	--light-theme-color-primary: hsl(116, 28%, 41%);
+	--light-theme-color-background: hsl(0, 0%, 94%);
+	--light-theme-color-accent: hsl(115, 25%, 69%);
+
+	--light-theme-color-gradient-light: hsl(116, 28%, 61%);
+	--light-theme-color-text: hsl(0, 0%, 0%);
+
+	--light-theme-color-light: hsl(0, 0%, 100%);
+	--light-theme-color-dark: hsl(0, 0%, 0%);
+
+	// Dark theme colors
+	--dark-theme-color-primary: hsl(116, 100%, 50%);
+	--dark-theme-color-background: hsl(0, 0%, 73%);
+	--dark-theme-color-accent: hsl(0, 0%, 83%);
+
+	--dark-theme-color-gradient-light: hsl(117, 100%, 31%);
+	--dark-theme-color-text: hsl(0, 0%, 0%);
+
+	--dark-theme-color-light: hsl(0, 0%, 0%);
+	--dark-theme-color-dark: hsl(0, 0%, 100%);
+}
+
+
+[data-theme="dark"] {
+	--color-primary: var(--dark-theme-color-primary);
+	--color-background: var(--dark-theme-color-background);
+	--color-accent: var(--dark-theme-color-accent);
+
+	--color-gradient-light: var(--dark-theme-color-gradient-light);
+	--color-text: var(--dark-theme-color-text);
+
+	--color-light: var(--dark-theme-color-light);
+	--color-dark: var(--dark-theme-color-light);
+}
+
+[data-theme="light"] {
+	--color-primary: var(--light-theme-color-primary);
+	--color-background: var(--light-theme-color-background);
+	--color-accent: var(--light-theme-color-accent);
+
+	--color-gradient-light: var(--light-theme-color-gradient-light);
+	--color-text: var(--light-theme-color-text);
+
+	--color-light: var(--light-theme-color-light);
+	--color-dark: var(--light-theme-color-dark);
+}
