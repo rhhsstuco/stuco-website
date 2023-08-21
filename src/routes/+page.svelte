@@ -7,12 +7,14 @@
 
   $: data.events = data.events.map((event) => ({
     ...event,
-    date: new Date(event.date),
+    startDate: new Date(event.startDate),
+	endDate: new Date(event.endDate),
   }));
 </script>
 
 <main>
   <div class="hero__navbar">
+	<!-- Header -->
     <header>
       <Navbar />
     </header>
@@ -28,7 +30,7 @@
 
   <!-- Upcoming events -->
   <section class="events">
-    <h2>Events</h2>
+    <h2>Upcoming Events</h2>
     {#each data.events as event}
       <HomePageEvent {event} />
     {/each}
@@ -94,11 +96,21 @@
   .events {
 	font-family: 'Poppins', sans-serif;
 	
-	width: clamp(52rem, 40%, 32rem);
+	width: clamp(32rem, 60%, 56rem);
 	margin: 0 auto;
 
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: 1.5rem;
+
+	padding: 5rem 0;
+
+	h2 {
+		text-transform: uppercase;
+		font-size: 4rem;
+		font-weight: 900;
+		color: var(--color-primary);
+		text-align: center;
+	}
   }
 </style>

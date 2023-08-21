@@ -5,10 +5,10 @@
 <div class="event">
 	<div class="event__date">
 		<span class="event__date__day">
-			{event.date.getDate()}
+			{event.startDate.getDate()}
 		</span>
 		<span class="event__date__month">
-			{event.date.toLocaleString('default', { month: 'short' })}
+			{event.startDate.toLocaleString('default', { month: 'short' })}
 		</span>
 	</div>
 	<div class="event__info">
@@ -47,7 +47,7 @@
 		padding: 0.75rem;
 		gap: 0.5rem;
 
-		flex-basis: 10%;
+		width: 5rem;
 
 		.event__date__day {
 			font-size: 3rem;
@@ -63,14 +63,20 @@
 	.event__info {
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: 0.75rem;
 
 		padding: 0.75rem;
+		flex-basis: 90%;
 
 		.event__info__title {
-			font-weight: 700;
+			font-weight: 900;
 			font-size: 2rem;
 			color: var(--color-primary)
+		}
+
+		.event__info__description {
+			font-size: 1.125rem;
+			color: var(--color-darker)
 		}
 	}
 	
