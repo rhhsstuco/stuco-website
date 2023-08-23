@@ -1,0 +1,24 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"compile": "tsc",
+	"download-images": "npm run compile && node ./build/downloadImages.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.5.3",
+    "dotenv": "^16.3.1",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.6.2"
+  },
+  "dependencies": {
+    "@googleapis/drive": "^8.2.0"
+  }
+}

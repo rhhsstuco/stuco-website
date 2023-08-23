@@ -2,8 +2,10 @@
 	// Global Styling
 	import '../app.scss';
 
+
  	import { onMount } from 'svelte';
 	import themeStore, { type Theme } from '$lib/stores/theme.store';
+  	import Footer from '$lib/components/Footer.svelte';
 
 	onMount(() => {
 		let theme = <Theme> localStorage.getItem("theme") ?? "light";
@@ -28,3 +30,5 @@
 </script>
 
 <slot/>
+
+<Footer/>

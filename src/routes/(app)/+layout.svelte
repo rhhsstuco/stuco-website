@@ -8,10 +8,9 @@
 
 <slot />
 
-<footer />
-
 <style lang="scss">
   header {
     color: var(--color-text);
   }
 </style>
+

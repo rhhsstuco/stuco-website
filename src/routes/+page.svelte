@@ -1,9 +1,12 @@
 <script lang="ts">
+  import Carousel from "$lib/components/Carousel/Carousel.svelte";
   import HomePageEvent from "$lib/components/HomePageEvent.svelte";
   import Navbar from "$lib/components/Navbar.svelte";
   import type { PageServerData } from "./$types";
 
   export let data: PageServerData;
+
+  $: console.log(data)
 
   $: data.events = data.events.map((event) => ({
     ...event,
@@ -11,6 +14,10 @@
 	endDate: new Date(event.endDate),
   }));
 </script>
+
+<svelte:head>
+	<link rel="preconnect" href="https://drive.google.com">
+</svelte:head>
 
 <main>
   <div class="hero__navbar">
@@ -31,9 +38,20 @@
   <!-- Upcoming events -->
   <section class="events">
     <h2>Upcoming Events</h2>
-    {#each data.events as event}
-      <HomePageEvent {event} />
-    {/each}
+    <div class="events__list">
+		{#each data.events as event}
+		  <HomePageEvent {event} />
+		{/each}
+	</div>
+  </section>
+
+  <section class="gallery">
+	<h2>Gallery</h2>
+	{#await Promise.all(data.imageURLs)}
+		<p>waiting...</p>
+	{:then urls}
+		<Carousel imageURLs={urls}/>
+	{/await}
   </section>
 </main>
 
@@ -101,7 +119,7 @@
 
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 4rem;
 
 	padding: 5rem 0;
 
@@ -112,5 +130,19 @@
 		color: var(--color-primary);
 		text-align: center;
 	}
+
+	.events__list {
+	  display: flex;
+	  flex-direction: column;
+	  gap: 2rem;
+	}
   }
+
+  .gallery {
+	font-family: 'Poppins', sans-serif;
+	
+	width: clamp(32rem, 60%, 56rem);
+	margin: 0 auto;
+  }
+
 </style>

@@ -1,18 +1,17 @@
 import getEvents from '$lib/data/events';
+import getImages from '$lib/data/images';
 import type { PageServerLoad } from "./$types";
 
 
 export const load: PageServerLoad = async () => {
-	let spreadsheetData: SchoolEvent[];
 
-	try {
-		spreadsheetData = await getEvents(3);
-	} catch (err) {
-		console.error(err);
-		return {
-			events: []
-		}
-	}
+	const spreadsheetDataPromise = getEvents(3);
+	const imageURLsPromise = getImages(6);
 
-	return { events: spreadsheetData };
+	const [spreadsheetData, imageURLs] = await Promise.all([spreadsheetDataPromise, imageURLsPromise]);
+
+	return {
+		events: spreadsheetData,
+		imageURLs: imageURLs,
+	};
 };

@@ -1,5 +1,5 @@
 import { PUBLIC_SPREADSHEET_ID } from '$env/static/public';
-import { initAuth, getSpreadSheetValues } from './spreadsheet';
+import { getSpreadSheetValues, initSheetsAuth } from './spreadsheet';
 
 
 /**
@@ -9,7 +9,7 @@ import { initAuth, getSpreadSheetValues } from './spreadsheet';
  */
 const getEvents = async (maxResults?: number) => {
 	// Initialize service account connection with Google Sheet
-	await initAuth();
+	await initSheetsAuth();
 
 	// Optionally limit size of result set
 	const range = maxResults === undefined ? "A:D" : `A1:D${(+maxResults) + 1}`;

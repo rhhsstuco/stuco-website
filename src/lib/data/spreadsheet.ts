@@ -1,18 +1,17 @@
+import { SECRET_GOOGLE_SHEETS_CREDENTIALS } from '$env/static/private';
 import { google } from "googleapis";
-import { SECRET_CREDENTIALS } from '$env/static/private';
 
 const sheets = google.sheets('v4');
 
 // Decode credentials from .env file
 const credentials = JSON.parse(
-	Buffer.from(SECRET_CREDENTIALS, "base64").toString()
+	Buffer.from(SECRET_GOOGLE_SHEETS_CREDENTIALS, "base64").toString()
 )
 
 /**
- * Authenticates the Google Sheets API service account and returns the authentication token.
- * @returns {JSONClient | Compute} The authentication token provided by the Google Sheets API.
+ * Authenticates the Google Sheets API service account and binds the authentication token to further calls.
  */
-export const initAuth = async () => {
+export const initSheetsAuth = async () => {
 	const auth = new google.auth.GoogleAuth({
 		projectId: credentials.project_id,
 		credentials: {
