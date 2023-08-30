@@ -13,9 +13,10 @@ const envFilePath = path.join(__dirname, "../../.env");
 dotenv.config({ path: envFilePath });
 
 const SECRET_GOOGLE_DRIVE_CREDENTIALS = process.env.SECRET_GOOGLE_DRIVE_CREDENTIALS; 
-const PUBLIC_FOLDER_ID = process.env.PUBLIC_FOLDER_ID; 
+const PUBLIC_GALLERY_FOLDER_ID = process.env.PUBLIC_GALLERY_FOLDER_ID; 
+const PUBLIC_CLUB_LOGOS_FOLDER_ID = process.env.PUBLIC_CLUB_LOGOS_FOLDER_ID; 
 
-if (!SECRET_GOOGLE_DRIVE_CREDENTIALS || !PUBLIC_FOLDER_ID) {
+if (!SECRET_GOOGLE_DRIVE_CREDENTIALS || !PUBLIC_GALLERY_FOLDER_ID || !PUBLIC_CLUB_LOGOS_FOLDER_ID) {
 	throw new Error(`.env variables not defined in ${envFilePath}`)
 }
 
@@ -45,29 +46,21 @@ export const initDriveAuth = async () => {
 } 
 
 /**
- * Gets events from the Google Drive folder
+ * Download images from a Google Drive folder to the machine
+ * @param {string} driveFolderID the ID of the Google Drive folder to download from
+ * @param {string} outputFolder the path to the folder where the downloaded file is output. Relative to this script's location
  * @param {number?} maxResults the maximum size of the response set or undefined if no limit is specified.
  * @returns 
  */
-const getImages = async (maxResults?: number) => {
+const downloadImages = async (driveFolderID: string, outputFolder: string, maxResults?: number) => {
 	const authClient = await initDriveAuth();
 
 	const drive = google.drive({ version: 'v3', auth: authClient as any});
 
-	// const image = drive.files.get({
-	// 	fileId: '1fm6-F5rHGquyIuJvS0rxravbwLSUSwrv'
-	// });
-
-	// console.log((await image).data); 
-
-	console.log(`'${PUBLIC_FOLDER_ID}' in parents and trashed=false`)
-
 	const files = await drive.files.list({ 
 		pageSize: maxResults,
-		q: `'${PUBLIC_FOLDER_ID}' in parents and trashed=false`
+		q: `'${driveFolderID}' in parents and trashed=false`
 	})
-
-	drive.files.list
 
 	if (files.data.files) {
 		files.data.files.forEach(async file => {
@@ -78,7 +71,17 @@ const getImages = async (maxResults?: number) => {
 				responseType: "stream"
 			})
 
-			const filename = path.join(__dirname, `../../static/images/gallery/${file.name}`);
+			if (!file.name) {
+				throw new Error('Name should exist')
+			}
+
+			const filename = path.join(
+				__dirname, 
+				path.join(
+					outputFolder,
+					file.name
+				),
+			);
 
 			if (!existsSync(filename)) {
 				const destStream = createWriteStream(filename);
@@ -89,12 +92,10 @@ const getImages = async (maxResults?: number) => {
 					.pipe(destStream);
 			}
 
-			if (!file.name) {
-				throw new Error('Name should exist')
-			}
 		});
 			
 	}
 }
 
-getImages();
+downloadImages(PUBLIC_GALLERY_FOLDER_ID, '../../static/images/gallery');
+downloadImages(PUBLIC_CLUB_LOGOS_FOLDER_ID, '../../static/images/club_logos');
