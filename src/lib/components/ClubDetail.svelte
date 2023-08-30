@@ -1,12 +1,13 @@
 <script lang="ts">
+  import Image from "./Image.svelte";
+
   export let club: SchoolClub;
 </script>
 
 <div class="club">
   <div class="club__banner" style:background-color={club.bannerColor}>
     <div class="club__banner__icon">
-		
-      <img src={club.imageURL} alt={club.name} />
+		<Image src={club.imageURL} alt={club.name}/>
     </div>
   </div>
   <div class="club__info">
@@ -23,63 +24,63 @@
 </div>
 
 <style lang="scss">
-  .club {
-    --club-title-font-size: 2rem;
-    --club-subtitle-font-size: 1.25rem;
+	@use '../../styles/exports.scss' as exports;
 
-    font-family: "Poppins", sans-serif;
+	.club {
+		--club-title-font-size: 2rem;
+		--club-subtitle-font-size: 1.25rem;
 
-    box-shadow: 0 4px 4px var(--color-box-shadow);
+		font-family: "Poppins", sans-serif;
 
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+		box-shadow: exports.$box-shadow;
 
-    background-color: var(--color-light);
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
 
-	min-height: 18rem;
-  }
+		background-color: var(--color-light);
 
-  .club__banner {
-    position: relative;
-    height: 5.75rem;
+		min-height: 18rem;
+	}
 
-    .club__banner__icon {
-      position: absolute;
+	.club__banner {
+		position: relative;
+		height: 5.75rem;
 
-      aspect-ratio: 1 / 1;
+		.club__banner__icon {
+		position: absolute;
 
-      border: 0.5rem solid var(--color-light);
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 4px 4px var(--color-box-shadow);
+		aspect-ratio: 1 / 1;
 
-      top: -25%;
-      left: -12.5%;
+		border: 0.5rem solid var(--color-light);
+		border-radius: 50%;
+		overflow: hidden;
+		box-shadow: exports.$box-shadow;
 
-      img {
-        width: 8rem;
-      }
-    }
-  }
+		top: -28%;
+		left: -12.5%;
 
-  .club__info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
+		width: 8rem;
+		}
+	}
 
-    padding: 1rem;
+	.club__info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.125rem;
 
-    .club__info__title {
-      font-size: var(--club-title-font-size);
-      font-weight: 900;
-      color: var(--color-dark);
-    }
+		padding: 1rem;
 
-    .club__info__room,
-    .club__info__meeting-time {
-      font-size: var(--club-subtitle-font-size);
-      color: var(--color-darker-1);
-    }
-  }
+		.club__info__title {
+		font-size: var(--club-title-font-size);
+		font-weight: 900;
+		color: var(--color-dark);
+		}
+
+		.club__info__room,
+		.club__info__meeting-time {
+		font-size: var(--club-subtitle-font-size);
+		color: var(--color-darker-1);
+		}
+	}
 </style>

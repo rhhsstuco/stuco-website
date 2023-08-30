@@ -1,6 +1,7 @@
 <script lang="ts">
  	import themeStore from "$lib/stores/theme.store";
 	import { base } from "$app/paths";
+	import { page } from '$app/stores';  
 
 	// Reads theme data from the theme store
 	$: icon = $themeStore === "dark" ? "ri-moon-fill" : "ri-moon-line";
@@ -17,6 +18,9 @@
 			return "dark";
 		})
 	}
+
+	$: url = $page.url.pathname;
+	
 </script>
 
 <nav>
@@ -25,11 +29,11 @@
 	</div>
 	<div class="nav__links">
 		<ul>
-		<li><a href="{base}/">Home</a></li>
-		<li><a href="{base}/events">Events</a></li>
-		<li><a href="{base}/clubs">Clubs</a></li>
-		<li><a href="{base}/gallery">Gallery</a></li>
-		<li><a href="{base}/members">Members</a></li>
+		<li><a href="{base}/" class:active={url === '/' || url === ''}>Home</a></li>
+		<li><a href="{base}/events" class:active={url === '/events'}>Events</a></li>
+		<li><a href="{base}/clubs" class:active={url === '/clubs'}>Clubs</a></li>
+		<li><a href="{base}/gallery" class:active={url === '/gallery'}>Gallery</a></li>
+		<li><a href="{base}/members" class:active={url === '/members'}>Members</a></li>
 		<button
 			class="{icon} change-theme"
 			on:click={onThemeChange}
@@ -52,6 +56,17 @@
   nav a {
     color: inherit;
     text-decoration: none;
+
+	position: relative;
+
+	box-sizing: border-box;
+
+	&.active {
+
+		border-bottom: 2px solid
+	}
+
+
   }
 
   .nav__logo,

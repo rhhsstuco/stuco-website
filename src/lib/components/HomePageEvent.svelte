@@ -22,61 +22,63 @@
 </div>
 
 <style lang="scss">
-  .event {
-    background-color: var(--color-light);
-    font-family: "Poppins", sans-serif;
+	@use '../../styles/exports.scss' as exports;
 
-    display: flex;
-    flex-direction: row;
+	.event {
+		background-color: var(--color-light);
+		font-family: "Poppins", sans-serif;
 
-    gap: 0.5rem;
+		display: flex;
+		flex-direction: row;
 
-    border-radius: 1.6rem;
-    overflow: hidden;
-    box-shadow: 0 4px 4px var(--color-box-shadow);
-  }
+		gap: 0.5rem;
 
-  .event__date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+		border-radius: 1.6rem;
+		overflow: hidden;
+		box-shadow: exports.$box-shadow;
+	}
 
-    color: var(--color-light);
-    background-color: var(--color-primary);
+	.event__date {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
-    padding: 0.75rem;
-    gap: 0.5rem;
+		color: var(--color-light);
+		background-color: var(--color-primary);
 
-    width: 5rem;
+		padding: 0.75rem;
+		gap: 0.5rem;
 
-    .event__date__day {
-      font-size: 3rem;
-      font-weight: 900;
-    }
+		width: 5rem;
 
-    .event__date__month {
-      font-size: 1.25rem;
-      font-weight: 900;
-    }
-  }
+		.event__date__day {
+		font-size: 3rem;
+		font-weight: 900;
+		}
 
-  .event__info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+		.event__date__month {
+		font-size: 1.25rem;
+		font-weight: 900;
+		}
+	}
 
-    padding: 0.75rem;
-    flex-basis: 90%;
+	.event__info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
 
-    .event__info__title {
-      font-weight: 900;
-      font-size: 2rem;
-      color: var(--color-primary);
-    }
+		padding: 0.75rem;
+		flex-basis: 90%;
 
-    .event__info__description {
-      font-size: 1.125rem;
-      color: var(--color-darker);
-    }
-  }
+		.event__info__title {
+		font-weight: 900;
+		font-size: 2rem;
+		color: var(--color-primary);
+		}
+
+		.event__info__description {
+		font-size: 1.125rem;
+		color: var(--color-darker);
+		}
+	}
 </style>
