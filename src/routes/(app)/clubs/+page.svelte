@@ -62,9 +62,10 @@
 
 	.clubs__grid {
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		grid-auto-flow: row;
 
-		gap: 5%;
+		gap: 3rem 5%;
 
 		margin: 2rem 7rem;
 	}
@@ -75,5 +76,22 @@
 		width: fit-content;
 
 		font-size: 2rem;
+	}
+
+	@include exports.media(1536px, 1760px) {
+		.clubs__grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+	}
+
+	@include exports.media(exports.$breakpoint-largest, 1536px) {
+		.clubs__grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+
+			$margin-horizontal: 15rem;
+
+			margin-left: $margin-horizontal;
+			margin-right: $margin-horizontal;
+		}
 	}
 </style>
