@@ -13,6 +13,11 @@
   }));
 </script>
 
+<svelte:head>
+	<title>RHHS StuCo</title>
+	<meta name="description" content="StuCo is a group of students who come together and act as the liason between admin and the student body.">
+</svelte:head>
+
 <main>
   <div class="hero__navbar">
 	<!-- Header -->

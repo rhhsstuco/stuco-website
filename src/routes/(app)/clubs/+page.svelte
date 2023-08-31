@@ -18,6 +18,10 @@
 	);
 </script>
 
+<svelte:head>
+	<title>Clubs</title>
+	<meta name="description" content="Want to find a club? You came to the right place! Here you can search for clubs that fit your interests.">
+</svelte:head>
 
 <main class="clubs">
 	<h1>Find a Club</h1>

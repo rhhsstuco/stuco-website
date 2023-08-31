@@ -6,6 +6,11 @@
 
 </script>
 
+<svelte:head>
+	<title>Events</title>
+	<meta name="description" content="Stay up to date on all school events here!">
+</svelte:head>
+
 <div>
 	{#each data.events as event}
 		<HomePageEvent event={event}/>
