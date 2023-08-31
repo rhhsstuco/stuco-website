@@ -1,30 +1,79 @@
 <script lang="ts">
 	import ClubDetail from "$lib/components/ClubDetail.svelte";
+  	import SearchBar from "$lib/components/SearchBar.svelte";
   	import type { PageServerData } from "./$types";
 
-	export let data: PageServerData
+	export let data: PageServerData;
+
+	let value: string = '';
+	
+	function onValueChange(v: CustomEvent<string>) {
+		value = v.detail.toLowerCase();
+	}
+
+	$: filteredClubs = data.clubs.filter(club => 
+		club.meetingTime.toLowerCase().includes(value) ||
+		club.name.toLowerCase().includes(value) ||
+		club.room.toLowerCase().includes(value)
+	);
 </script>
 
 
-<div class="club__grid">
-	{#each data.clubs as club}
-		<ClubDetail {club}/>
-	{/each}
-</div>
+<main class="clubs">
+	<h1>Find a Club</h1>
+	<div class="clubs__search">
+
+			<SearchBar on:value-change={onValueChange}/>
+
+	</div>
+	{#if filteredClubs.length}
+		<div class="clubs__grid">
+			{#each filteredClubs as club}
+				<ClubDetail {club}/>
+			{/each}
+		</div>
+	{:else} 
+		<p class="clubs__grid__not-found">No Clubs Found :(</p>
+	{/if}
+</main>
 
 <style lang="scss">
-	.club__grid {
+	@use '../../../styles/exports.scss' as exports;
+
+	h1 {
+		@include exports.header;
+	}
+
+	.clubs {
+		font-family: 'Poppins', sans-serif;
+
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+
+		min-height: 100vh;
+	}
+
+	.clubs__search {
+		width: clamp(32rem, 50%, 46rem);
+		margin: 0 auto;
+	}
+
+
+	.clubs__grid {
 		display: grid;
-		grid-template-columns: repeat(
-			auto-fit,
-			minmax(
-				min(10rem, 100%),
-				1fr
-			)
-		);
+		grid-template-columns: repeat(5, 1fr);
 
 		gap: 1rem 6rem;
 
 		margin: 0 4rem;
+	}
+
+	.clubs__grid__not-found {
+		margin: 4rem auto;
+
+		width: fit-content;
+
+		font-size: 2rem;
 	}
 </style>

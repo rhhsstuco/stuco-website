@@ -1,0 +1,8 @@
+@mixin header($color: var(--color-primary), $align: center) {
+	text-transform: uppercase;
+	font-size: 4rem;
+	font-weight: 900;
+	
+	color: $color;
+	text-align: $align;
+}

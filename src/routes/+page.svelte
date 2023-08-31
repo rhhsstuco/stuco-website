@@ -6,18 +6,12 @@
 
   export let data: PageServerData;
 
-  $: console.log(data)
-
   $: data.events = data.events.map((event) => ({
     ...event,
     startDate: new Date(event.startDate),
 	endDate: new Date(event.endDate),
   }));
 </script>
-
-<svelte:head>
-	<link rel="preconnect" href="https://drive.google.com">
-</svelte:head>
 
 <main>
   <div class="hero__navbar">
@@ -47,11 +41,8 @@
 
   <section class="gallery">
 	<h2>Gallery</h2>
-	{#await Promise.all(data.imageURLs)}
-		<p>waiting...</p>
-	{:then urls}
-		<Carousel imageURLs={urls}/>
-	{/await}
+	
+	<Carousel imageURLs={data.imageURLs}/>
   </section>
 </main>
 
@@ -110,6 +101,9 @@
       -webkit-text-fill-color: transparent;
     }
   }
+  h2 {
+	  @include exports.header;
+  }
 
   .events {
 	font-family: 'Poppins', sans-serif;
@@ -123,13 +117,6 @@
 
 	padding: 5rem 0;
 
-	h2 {
-		text-transform: uppercase;
-		font-size: 4rem;
-		font-weight: 900;
-		color: var(--color-primary);
-		text-align: center;
-	}
 
 	.events__list {
 	  display: flex;
@@ -141,8 +128,14 @@
   .gallery {
 	font-family: 'Poppins', sans-serif;
 	
-	width: clamp(32rem, 60%, 56rem);
+	width: clamp(52rem, 65%, 64rem);
 	margin: 0 auto;
+
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+
+	padding: 5rem 0;
   }
 
 </style>
