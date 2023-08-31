@@ -64,9 +64,9 @@
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
 
-		gap: 1rem 6rem;
+		gap: 5%;
 
-		margin: 0 4rem;
+		margin: 2rem 7rem;
 	}
 
 	.clubs__grid__not-found {
