@@ -1,8 +1,41 @@
+@use "./breakpoints" as breakpoints;
+
 @mixin header($color: var(--color-primary), $align: center) {
 	text-transform: uppercase;
-	font-size: 4rem;
+	font-size: var(--font-size-h1);
 	font-weight: 900;
 	
 	color: $color;
 	text-align: $align;
 }
+
+// Responsive styles
+@mixin media($start, $end) {
+	@media only screen and (min-width: $start) and (max-width: $end) {
+		@content;
+	}
+}
+
+@mixin media-small {
+	@include media(0px, breakpoints.$breakpoint-small) {
+		@content;
+	}
+};
+
+@mixin media-medium {
+	@include media(breakpoints.$breakpoint-small, breakpoints.$breakpoint-medium) {
+		@content;
+	}
+};
+
+@mixin media-large {
+	@include media(breakpoints.$breakpoint-medium, breakpoints.$breakpoint-large) {
+		@content;
+	}
+};
+
+@mixin media-largest {
+	@include media(breakpoints.$breakpoint-large, breakpoints.$breakpoint-largest) {
+		@content;
+	}
+};

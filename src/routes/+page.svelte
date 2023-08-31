@@ -85,7 +85,7 @@
       grid-row: 7 / 16;
       grid-column: 4 / 12;
 
-      font-size: 10rem;
+      font-size: var(--font-size-hero);
       font-weight: 900;
       font-family: "Poppins";
       line-height: 0.85;
