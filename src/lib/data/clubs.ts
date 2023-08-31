@@ -22,7 +22,6 @@ const getClubs = async (maxResults?: number) => {
 	// Remove metadata row and transform the values
 	const transformedValues = values.slice(1).map(row => {
 
-		console.log(row)
 
 		return {
 			name: row[0],
