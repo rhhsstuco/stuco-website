@@ -1,7 +1,7 @@
 <script lang="ts">
   import Carousel from "$lib/components/Carousel/Carousel.svelte";
   import HomePageEvent from "$lib/components/HomePageEvent.svelte";
-  import Navbar from "$lib/components/Navbar.svelte";
+  import Navbar from "$lib/components/Navbar/Navbar.svelte";
   import type { PageServerData } from "./$types";
 
   export let data: PageServerData;
@@ -52,95 +52,101 @@
 </main>
 
 <style lang="scss">
-  @use "../styles/exports.scss" as exports;
-  @use "sass:color";
+	@use "../styles/exports.scss" as exports;
+	@use "sass:color";
 
-  .vector-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-  }
+	.vector-container {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 1;
+		width: clamp(30rem, 60%, 56rem);
+		aspect-ratio: 1 / 1;
 
-  .hero__navbar {
-    background-color: var(--color-accent);
-
-    header {
-      position: relative;
-      z-index: 20;
-
-      color: var(--color-accent);
-    }
-  }
-
-  .hero {
-    /* Grid layout to layout the text and image */
-    $dimensions: 24;
-
-    display: grid;
-    grid-template-columns: repeat($dimensions, calc(100vw / $dimensions));
-    grid-template-rows: repeat(
-      $dimensions,
-      calc(calc(100vh - 6rem) / $dimensions)
-    );
-
-    max-height: calc(100vh - 6rem);
-
-    h1 {
-      grid-row: 7 / 16;
-      grid-column: 4 / 12;
-
-      font-size: var(--font-size-hero);
-      font-weight: 900;
-      font-family: "Poppins";
-      line-height: 0.85;
-
-      background: var(--color-primary);
-      background: linear-gradient(
-        135deg,
-        var(--color-primary) 30%,
-        var(--color-gradient-light) 100%
-      );
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  }
-  h2 {
-	  @include exports.header;
-  }
-
-  .events {
-	font-family: 'Poppins', sans-serif;
-	
-	width: clamp(32rem, 60%, 56rem);
-	margin: 0 auto;
-
-	display: flex;
-	flex-direction: column;
-	gap: 4rem;
-
-	padding: 5rem 0;
-
-
-	.events__list {
-	  display: flex;
-	  flex-direction: column;
-	  gap: 2rem;
+		img {
+			width: 100%;
+			object-fit: cover;
+		}
 	}
-  }
 
-  .gallery {
-	font-family: 'Poppins', sans-serif;
-	
-	width: clamp(52rem, 65%, 64rem);
-	margin: 0 auto;
+	.hero__navbar {
+		background-color: var(--color-accent);
 
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
+		header {
+			position: relative;
+			z-index: 20;
 
-	padding: 5rem 0;
-  }
+			color: var(--color-accent);
+		}
+	}
 
+	.hero {
+		/* Grid layout to layout the text and image */
+		$dimensions: 24;
+
+		display: grid;
+		grid-template-columns: repeat($dimensions, calc(100vw / $dimensions));
+		grid-template-rows: repeat(
+		$dimensions,
+		calc(calc(100vh - 6rem) / $dimensions)
+		);
+
+		max-height: calc(100vh - 6rem);
+
+		h1 {
+			grid-row: 7 / 16;
+			grid-column: 4 / 12;
+
+			font-size: var(--font-size-hero);
+			font-weight: 900;
+			font-family: "Poppins";
+			line-height: 0.85;
+
+			background: var(--color-primary);
+			background: linear-gradient(
+				135deg,
+				var(--color-primary) 30%,
+				var(--color-gradient-light) 100%
+			);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+	h2 {
+		@include exports.header;
+	}
+
+	.events {
+		font-family: 'Poppins', sans-serif;
+		
+		width: clamp(32rem, 60%, 56rem);
+		margin: 0 auto;
+
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+
+		padding: 5rem 0;
+
+
+		.events__list {
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+		}
+	}
+
+	.gallery {
+		font-family: 'Poppins', sans-serif;
+		
+		width: clamp(52rem, 65%, 64rem);
+		margin: 0 auto;
+
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+
+		padding: 5rem 0;
+	}
 </style>
