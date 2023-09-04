@@ -2,8 +2,11 @@
  	import themeStore from "$lib/stores/theme.store";
 	import { base } from "$app/paths";
 	import { page } from '$app/stores';  
-  import MediaQuery from "../MediaQuery.svelte";
-  import Hamburger from "./Hamburger.svelte";
+	import MediaQuery from "../MediaQuery.svelte";
+	import Hamburger from "./Hamburger.svelte";
+	import Menu from "./Menu.svelte";
+
+	let menuIsOpen: boolean = false;
 
 	// Reads theme data from the theme store
 	$: icon = $themeStore === "dark" ? "ri-moon-fill" : "ri-moon-line";
@@ -30,7 +33,7 @@
 	</div>
 	<div class="nav__links">
 		<ul>
-			<MediaQuery query="(min-width: 1152px)" let:matches>
+			<MediaQuery query="(min-width: 1024px)" let:matches>
 				{#if matches}
 					<li><a href="{base}/" class:active={url === '/' || url === ''}>Home</a></li>
 					<li><a href="{base}/events" class:active={url === '/events'}>Events</a></li>
@@ -38,7 +41,10 @@
 					<li><a href="{base}/gallery" class:active={url === '/gallery'}>Gallery</a></li>
 					<li><a href="{base}/members" class:active={url === '/members'}>Members</a></li>
 				{:else}
-					<Hamburger/>
+					<Hamburger bind:open={menuIsOpen}/>
+					{#if menuIsOpen}
+						<Menu on:menu-close={() => menuIsOpen = false}/>
+					{/if}
 				{/if}
 			</MediaQuery>
 			<button
@@ -53,6 +59,9 @@
 	@use "../../../styles/exports.scss" as exports;
 
 	nav {
+		--font-size-logo: 1.5rem;
+		--font-size-links: 1.125rem;
+
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -82,7 +91,7 @@
 	}
 
 	.nav__logo a {
-		font-size: 1.5rem;
+		font-size: var(--font-size-logo);
 		font-weight: 900;
 		color: var(--color-primary);
 	}
@@ -91,7 +100,7 @@
 		gap: 3.5rem;
 
 		a {
-			font-size: 1.125rem;
+			font-size: var(--font-size-links);
 			font-weight: lighter;
 			color: inherit;
 		}
@@ -101,7 +110,7 @@
 		all: unset;
 		display: inline-block;
 		color: inherit;
-		font-size: 1.5rem;
+		font-size: var(--font-size-logo);
 
 		&:hover {
 			cursor: pointer;
@@ -109,13 +118,22 @@
 	}
 
 	@include exports.media-largest {
+		nav {
+			--font-size-links: 1rem;
+		}
 		.nav__links > ul {
 			gap: 2.5rem;
-
 		}
 	}
 	
-	@include exports.media(exports.$breakpoint-large, 1151px) {
+
+	@include exports.media-larger {
+		.nav__links > ul {
+			gap: 1.5rem;
+		}
+	}
+	
+	@include exports.media-max(calc(exports.$breakpoint-large - 1px)) {
 		.nav__links > ul {
 			gap: 1rem;
 			flex-direction: row-reverse;

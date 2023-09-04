@@ -1,12 +1,13 @@
 <script lang="ts"> 
 	export let src: string;
 	export let alt: string = "";
+	export let fallbackExtension: string = 'jpg';
 </script>
 
 <picture>
 	<source srcset="{src}.avif" type="image/avif">
 	<img
-	src="{src}.jpg"
+	src="{src}.{fallbackExtension}"
 	alt="{alt}"
 	/>
 </picture>

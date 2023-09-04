@@ -27,7 +27,7 @@
 	<h1>Find a Club</h1>
 	<div class="clubs__search">
 
-			<SearchBar on:value-change={onValueChange}/>
+		<SearchBar on:value-change={onValueChange}/>
 
 	</div>
 	{#if filteredClubs.length}

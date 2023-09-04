@@ -16,26 +16,38 @@
 	}
 }
 
+@mixin media-max($max) {
+	@media only screen and (max-width: $max) {
+		@content;
+	}
+}
+
 @mixin media-small {
-	@include media(0px, breakpoints.$breakpoint-small) {
+	@include media-max(breakpoints.$breakpoint-small) {
 		@content;
 	}
 };
 
 @mixin media-medium {
-	@include media(breakpoints.$breakpoint-small, breakpoints.$breakpoint-medium) {
+	@include media-max(breakpoints.$breakpoint-medium) {
 		@content;
 	}
 };
 
 @mixin media-large {
-	@include media(breakpoints.$breakpoint-medium, breakpoints.$breakpoint-large) {
+	@include media-max(breakpoints.$breakpoint-large) {
+		@content;
+	}
+};
+
+@mixin media-larger {
+	@include media-max(breakpoints.$breakpoint-larger) {
 		@content;
 	}
 };
 
 @mixin media-largest {
-	@include media(breakpoints.$breakpoint-large, breakpoints.$breakpoint-largest) {
+	@include media-max(breakpoints.$breakpoint-largest) {
 		@content;
 	}
 };

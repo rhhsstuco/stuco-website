@@ -1,4 +1,12 @@
-<button class="hamburger">
+<script lang="ts">
+	export let open: boolean;
+
+	function onClick() {
+		open = !open;
+	}
+</script>
+
+<button class="hamburger" on:click={onClick}>
 	<i class="ri-menu-line"></i>
 </button>
 

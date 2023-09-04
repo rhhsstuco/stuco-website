@@ -1,16 +1,17 @@
 <script lang="ts">
-  import Carousel from "$lib/components/Carousel/Carousel.svelte";
-  import HomePageEvent from "$lib/components/HomePageEvent.svelte";
-  import Navbar from "$lib/components/Navbar/Navbar.svelte";
-  import type { PageServerData } from "./$types";
+	import Carousel from "$lib/components/Carousel/Carousel.svelte";
+	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
+  	import MediaQuery from "$lib/components/MediaQuery.svelte";
+	import Navbar from "$lib/components/Navbar/Navbar.svelte";
+	import type { PageServerData } from "./$types";
 
-  export let data: PageServerData;
+	export let data: PageServerData;
 
-  $: data.events = data.events.map((event) => ({
-    ...event,
-    startDate: new Date(event.startDate),
-	endDate: new Date(event.endDate),
-  }));
+	$: data.events = data.events.map((event) => ({
+		...event,
+		startDate: new Date(event.startDate),
+		endDate: new Date(event.endDate),
+	}));
 </script>
 
 <svelte:head>
@@ -27,8 +28,11 @@
 
     <!-- Hero Section -->
     <div class="vector-container">
-      <img src="images/bg-vector.svg" />
+      <img class="vector" src="images/bg-vector.svg" alt=""/>
     </div>
+	<div class="hero-image-container">
+		<img class="people-laptop" src="images/home-page-people-laptop.png" alt=""/>
+	</div>
     <section class="hero">
       <h1>RHHS STUCO</h1>
     </section>
@@ -44,10 +48,12 @@
 	</div>
   </section>
 
+  <!-- Image Gallery -->
   <section class="gallery">
 	<h2>Gallery</h2>
-	
-	<Carousel imageURLs={data.imageURLs}/>
+	<MediaQuery query="(max-width: 864px)" let:matches>
+		<Carousel imageURLs={data.imageURLs} arrowStyling={matches ? 'inside' : 'outside'}/>
+	</MediaQuery>
   </section>
 </main>
 
@@ -60,7 +66,21 @@
 		top: 0;
 		right: 0;
 		z-index: 1;
-		width: clamp(30rem, 60%, 56rem);
+		width: clamp(28rem, 52%, 54rem);
+		aspect-ratio: 1 / 1;
+
+		img {
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.hero-image-container {
+		position: absolute;
+		top: 18%;
+		right: 16%;
+		z-index: 1;
+		width: clamp(14rem, 22%, 24rem);
 		aspect-ratio: 1 / 1;
 
 		img {
@@ -84,18 +104,22 @@
 		/* Grid layout to layout the text and image */
 		$dimensions: 24;
 
+		--font-size-hero: 12rem;
+
 		display: grid;
 		grid-template-columns: repeat($dimensions, calc(100vw / $dimensions));
 		grid-template-rows: repeat(
-		$dimensions,
-		calc(calc(100vh - 6rem) / $dimensions)
+			$dimensions,
+			calc(calc(100vh - 6rem) / $dimensions)
 		);
 
 		max-height: calc(100vh - 6rem);
 
+		overflow-x: visible;
+
 		h1 {
-			grid-row: 7 / 16;
-			grid-column: 4 / 12;
+			grid-row: 6 / 18;
+			grid-column: 4 / 14;
 
 			font-size: var(--font-size-hero);
 			font-weight: 900;
@@ -140,7 +164,7 @@
 	.gallery {
 		font-family: 'Poppins', sans-serif;
 		
-		width: clamp(52rem, 65%, 64rem);
+		width: clamp(48rem, 65%, 64rem);
 		margin: 0 auto;
 
 		display: flex;
@@ -148,5 +172,101 @@
 		gap: 2rem;
 
 		padding: 5rem 0;
+	}
+
+	@include exports.media(1680px, 1712px) {
+		.hero h1 {
+			--font-size-hero: 11rem;
+			grid-column: 3 / 14;
+		}
+	}
+
+	@include exports.media(1536px, 1680px) {
+		.hero h1 {
+			--font-size-hero: 11rem;
+			grid-column: 3 / 14;
+		}
+	}
+	
+	@include exports.media(exports.$breakpoint-largest, 1536px) {
+		.hero h1 {
+			--font-size-hero: 10rem;
+			grid-column: 3 / 14;
+		}
+	}
+
+	@include exports.media-largest {
+		.hero h1 {
+			--font-size-hero: 9rem;
+			grid-column: 3 / 14;
+			grid-row: 8 / 20;
+		}
+		
+		.hero-image-container {
+			width: clamp(14rem, 25%, 24rem);
+			
+			top: 24%;
+			right: 12%;
+		}
+	}
+	
+	@include exports.media-larger {
+		.hero h1 {
+			--font-size-hero: 8rem;
+		}
+	}
+	
+	@include exports.media-large {
+		.hero h1 {
+			--font-size-hero: 7rem;
+		}
+	}
+	
+	// Shift layout of hero
+	@include exports.media-max(864px) {
+		// The top margin from the bottom of the navbar
+		$top-margin: 2rem;
+
+		.hero h1 {
+			--font-size-hero: 6.5rem;
+
+			grid-column: 7 / 19;
+			grid-row: 15 / 21;
+
+			text-align: center;
+		}
+
+		.vector-container {
+			width: clamp(28rem, 65%, 54rem);
+		}
+
+		.hero-image-container {
+			width: clamp(14rem, 35%, 30rem);
+
+			top: calc(5.5rem + $top-margin);
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+		}
+
+		.gallery {
+			font-family: 'Poppins', sans-serif;
+			
+			width: clamp(20rem, 60%, 54rem);
+			margin: 0 auto;
+
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+
+			padding: 5rem 0;
+		}
+	}
+
+	@include exports.media-medium {
+	}
+
+	@include exports.media-small {
+
 	}
 </style>

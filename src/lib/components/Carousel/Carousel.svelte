@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { base } from "$app/paths";
-  import { slide } from "svelte/transition";
+
   import Image from "../Image.svelte";
 
+  type CarouselArrowStyling = 'outside' | 'inside';
+
   export let imageURLs: string[];
+  export let arrowStyling: CarouselArrowStyling = 'outside';
 
 
   let currentIndex = 0;
-  $: nextIndex = mod(currentIndex + 1, imageURLs.length);
-  $: prevIndex = mod(currentIndex - 1, imageURLs.length);
 
   /**
    * Modulo function which wraps around negative numbers to the divisor
@@ -35,20 +35,26 @@
 </script>
 
 <div class="carousel">
-  <button class="carousel__left-arrow" on:click={prevImage}>
-    <i class="ri-arrow-left-s-line" />
-  </button>
-  <div class="carousel__image">
-    {#each [imageURLs[currentIndex]] as src (currentIndex)}
-		<Image src={src}/>
+	<button
+		class="carousel__left-arrow"
+		class:inside={arrowStyling === 'inside'}
+		on:click={prevImage}
+	>
+		<i class="ri-arrow-left-s-line" />
+	</button>
+	<div class="carousel__image">
+		{#each [imageURLs[currentIndex]] as src (currentIndex)}
+			<Image src={src}/>
+		{/each}
+	</div>
 
-
-
-    {/each}
-  </div>
-  <button class="carousel__right-arrow" on:click={nextImage}>
-    <i class="ri-arrow-right-s-line" />
-  </button>
+	<button
+		class="carousel__right-arrow"
+		class:inside={arrowStyling === 'inside'}
+		on:click={nextImage}
+	>
+		<i class="ri-arrow-right-s-line" />
+	</button>
 </div>
 
 <style lang="scss">
@@ -61,6 +67,7 @@
 	.carousel {
 		display: flex;
 		flex-direction: row;
+		position: relative;
 	}
 
 	.carousel__left-arrow,
@@ -73,7 +80,25 @@
 		justify-content: center;
 		align-items: center;
 
-		font-size: 5rem;
+		font-size: 400%;
+	}
+
+	.carousel__left-arrow.inside,
+	.carousel__right-arrow.inside {
+		position: absolute;
+		z-index: 10;
+	}
+
+	.carousel__left-arrow.inside {
+		top: 50%;
+		left: -2%;
+		transform: translateY(-50%);
+	}
+	
+	.carousel__right-arrow.inside {
+		top: 50%;
+		right: -2%;
+		transform: translateY(-50%);
 	}
 
 	:is(.carousel__left-arrow, .carousel__right-arrow) i {
@@ -96,6 +121,28 @@
 			background-color: rgba(0, 0, 0, 0.125);
 
 			border-radius: 50%;
+		}
+	}
+
+	:is(.carousel__left-arrow.inside, .carousel__right-arrow.inside) i {
+
+		&::after {
+			content: '';
+
+			inset: 0;
+
+			width: 100%;
+			height: 100%;
+
+			position: absolute;
+
+			background-color: rgba(0, 0, 0, 0.5);
+
+			border-radius: 50%;
+		}
+
+		&:hover::after {
+			background-color: rgba(0, 0, 0, 0.75);
 		}
 	}
 

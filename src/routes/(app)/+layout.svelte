@@ -9,8 +9,8 @@
 <slot />
 
 <style lang="scss">
-  header {
-    color: var(--color-text);
-  }
+	header {
+		color: var(--color-text);
+	}
 </style>
 
