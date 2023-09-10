@@ -82,20 +82,37 @@
 		font-size: 2rem;
 	}
 
-	@include exports.media(1536px, 1760px) {
+	@include exports.media-max(1760px) {
 		.clubs__grid {
-			grid-template-columns: repeat(4, minmax(0, 1fr));
+			--columns: 4;
+
+			grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
 		}
 	}
 
-	@include exports.media(exports.$breakpoint-largest, 1536px) {
+	@include exports.media-max(1536px) {
 		.clubs__grid {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
+			--columns: 3;
 
-			$margin-horizontal: 15rem;
+			--margin-horizontal: 15rem;
+			
+			margin-left: var(--margin-horizontal);
+			margin-right: var(--margin-horizontal);
+		}
+	}
+	
+	@include exports.media-largest {
+		.clubs__grid {
+			--columns: 2;
+			
+			column-gap: 8%;
+		}
+	}
 
-			margin-left: $margin-horizontal;
-			margin-right: $margin-horizontal;
+	@include exports.media-large {
+		.clubs__grid {
+			--columns: 1;
+			--margin-horizontal: auto;
 		}
 	}
 </style>

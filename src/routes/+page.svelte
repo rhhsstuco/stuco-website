@@ -138,7 +138,7 @@
 		}
 	}
 	h2 {
-		@include exports.header;
+		@include exports.header();
 	}
 
 	.events {
@@ -220,6 +220,15 @@
 		.hero h1 {
 			--font-size-hero: 7rem;
 		}
+
+		.events {
+			--font-size-header: 3.5rem;
+
+			--event-day-font-size: 2.5rem;
+			--event-month-font-size: 1.125rem;
+			--event-title-font-size: 1.75rem;
+			--event-description-font-size: 1.05rem;
+		}
 	}
 	
 	// Shift layout of hero
@@ -231,13 +240,13 @@
 			--font-size-hero: 6.5rem;
 
 			grid-column: 7 / 19;
-			grid-row: 15 / 21;
+			grid-row: 16 / 22;
 
 			text-align: center;
 		}
 
 		.vector-container {
-			width: clamp(28rem, 65%, 54rem);
+			width: clamp(20rem, 60%, 54rem);
 		}
 
 		.hero-image-container {
@@ -264,9 +273,44 @@
 	}
 
 	@include exports.media-medium {
+		.hero h1 {
+			--font-size-hero: 6rem;
+
+			grid-column: 5 / 21;
+
+			text-align: center;
+		}
 	}
 
 	@include exports.media-small {
+		.vector-container {
+			width: clamp(10rem, 55%, 54rem);
+		}
 
+		.events {
+			width: clamp(20rem, 80%, 56rem);
+
+			--event-day-font-size: 2.25rem;
+			--event-month-font-size: 1rem;
+			--event-title-font-size: 1.5rem;
+			--event-description-font-size: 0.95rem;
+		}
 	}
+
+	@include exports.media-smallest {
+
+		.events {
+			--event-day-font-size: 2rem;
+			--event-month-font-size: 0.9rem;
+			--event-title-font-size: 1.25rem;
+			--event-description-font-size: 0.85rem;
+		}
+	}
+
+	@media screen and (max-width: exports.$breakpoint-medium) and (max-height: exports.$breakpoint-large) {
+		.hero h1 {
+			grid-row: 13 / 19;
+		}
+	}
+
 </style>

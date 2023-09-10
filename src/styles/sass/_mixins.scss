@@ -1,8 +1,8 @@
 @use "./breakpoints" as breakpoints;
 
-@mixin header($color: var(--color-primary), $align: center) {
+@mixin header($color: var(--color-primary), $align: center, $font-size: var(--font-size-header)) {
 	text-transform: uppercase;
-	font-size: var(--font-size-h1);
+	font-size: $font-size;
 	font-weight: 900;
 	
 	color: $color;
@@ -21,6 +21,12 @@
 		@content;
 	}
 }
+
+@mixin media-smallest {
+	@include media-max(breakpoints.$breakpoint-smallest) {
+		@content;
+	}
+};
 
 @mixin media-small {
 	@include media-max(breakpoints.$breakpoint-small) {

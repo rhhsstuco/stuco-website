@@ -41,6 +41,8 @@
 		background-color: var(--color-light);
 
 		min-height: 18rem;
+
+		min-width: 16rem;
 	}
 
 	.club__banner {

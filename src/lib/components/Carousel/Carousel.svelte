@@ -59,11 +59,7 @@
 
 <style lang="scss">
 	@use '../../../styles/exports.scss' as exports;
-
-	.hidden {
-		display: none;
-	}
-
+	
 	.carousel {
 		display: flex;
 		flex-direction: row;

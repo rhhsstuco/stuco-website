@@ -42,6 +42,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 
 		color: var(--color-light);
 		background-color: var(--color-primary);
@@ -52,13 +53,13 @@
 		width: 5rem;
 
 		.event__date__day {
-		font-size: 3rem;
-		font-weight: 900;
+			font-size: var(--event-day-font-size, 3rem);
+			font-weight: 900;
 		}
 
 		.event__date__month {
-		font-size: 1.25rem;
-		font-weight: 900;
+			font-size: var(--event-month-font-size, 1.25rem);
+			font-weight: 900;
 		}
 	}
 
@@ -71,14 +72,20 @@
 		flex-basis: 90%;
 
 		.event__info__title {
-		font-weight: 900;
-		font-size: 2rem;
-		color: var(--color-primary);
+			font-weight: 900;
+			font-size: var(--event-title-font-size, 2rem);
+			color: var(--color-primary);
 		}
 
 		.event__info__description {
-		font-size: 1.125rem;
-		color: var(--color-darker);
+			font-size: var(--event-description-font-size, 1.125rem);
+			color: var(--color-darker);
+		}
+	}
+
+	@include exports.media-small {
+		.event__info {
+			gap: 0.25rem;
 		}
 	}
 </style>

@@ -31,8 +31,14 @@
 </footer>
 
 <style lang="scss">
+	@use "../../styles/exports.scss" as exports;
+
 	.footer {
-		width: clamp(32rem, 60%, 56rem);
+		--footer-heading-font-size: 1.75rem;
+		--footer-text-font-size: 1.25rem;
+
+
+		width: clamp(20rem, 60%, 56rem);
 		margin: 2rem auto 3rem auto;
 	}
 
@@ -45,8 +51,10 @@
 		flex-direction: row;
 		gap: 1rem;
 
+		margin: 0 auto;
+
 		h2 {
-			font-size: 1.75rem;
+			font-size: var(--footer-heading-font-size);
 			font-weight: bold;
 			color: var(--color-darker-1);
 		}
@@ -56,6 +64,10 @@
 			flex-direction: column;
 			gap: 0.5rem;
 			color: var(--color-darker-2);
+
+			li {
+				font-size: var(--footer-text-font-size);
+			}
 		}
 	
 	}
@@ -74,7 +86,26 @@
 		ul > li > a {
 			color: var(--color-dark);
 			text-decoration: none;
-			font-size: 1.25rem;
+			font-size: var(--footer-text-font-size);
+		}
+	}
+
+	@include exports.media-small {
+		.footer {
+			--footer-heading-font-size: 1.25rem;
+			--footer-text-font-size: 0.9rem;
+		}
+
+		.footer__content {
+			flex-direction: column;
+			align-items: center;
+			max-width: 20rem;
+
+			gap: 2rem;
+
+			> div {
+				align-self: stretch;
+			}
 		}
 	}
 </style>
