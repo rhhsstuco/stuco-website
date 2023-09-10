@@ -25,6 +25,12 @@
 	}
 
 	$: url = $page.url.pathname;
+
+	// Close menu when url changes
+	$: {
+		menuIsOpen = false;
+		url = url;
+	}
 </script>
 
 <nav>

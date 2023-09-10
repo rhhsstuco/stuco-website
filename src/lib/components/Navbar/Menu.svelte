@@ -48,6 +48,8 @@
 		width: 30%;
 
 		padding: 2rem;
+
+		z-index: 9999999;
 	}
 
 	.menu__top {
