@@ -145,4 +145,17 @@
 			flex-direction: row-reverse;
 		}
 	}
+
+	@include exports.media-small {
+		nav {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+	}
+
+	@include exports.media-smallest {
+		nav {
+			--font-size-logo: 1.25rem;
+		}
+	}
 </style>

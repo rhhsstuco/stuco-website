@@ -83,6 +83,12 @@
 		}
 	}
 
+	@include exports.media-medium {
+		.event__date {
+			width: 4rem;
+		}
+	}
+
 	@include exports.media-small {
 		.event__info {
 			gap: 0.25rem;

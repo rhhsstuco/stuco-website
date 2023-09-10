@@ -14,14 +14,14 @@
 	.hamburger {
 		all: unset;
 
-		width: 1rem;
 
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
 
 		i {
-			font-size: 1.5rem;
+			width: 24px;
+			font-size: var(--font-size-logo, 1.5rem);
 		}
 	}
 </style>

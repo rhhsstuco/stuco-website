@@ -221,9 +221,11 @@
 			--font-size-hero: 7rem;
 		}
 
-		.events {
+		:root {
 			--font-size-header: 3.5rem;
+		}
 
+		.events {
 			--event-day-font-size: 2.5rem;
 			--event-month-font-size: 1.125rem;
 			--event-title-font-size: 1.75rem;
@@ -280,24 +282,53 @@
 
 			text-align: center;
 		}
+
+		:root {
+			--font-size-header: 3rem;
+		}
+
+		.events {
+			padding-bottom: 0;
+		}
 	}
 
 	@include exports.media-small {
+		.hero h1 {
+			--font-size-hero: 5.5rem;
+		}
+
 		.vector-container {
 			width: clamp(10rem, 55%, 54rem);
 		}
 
 		.events {
-			width: clamp(20rem, 80%, 56rem);
+			width: clamp(16rem, 80%, 56rem);
 
 			--event-day-font-size: 2.25rem;
 			--event-month-font-size: 1rem;
 			--event-title-font-size: 1.5rem;
 			--event-description-font-size: 0.95rem;
 		}
+
+		.gallery {			
+			width: clamp(16rem, 75%, 54rem);
+		}
 	}
 
 	@include exports.media-smallest {
+		.hero h1 {
+			--font-size-hero: 5rem;
+
+			grid-column: 3 / 24;
+		}
+
+		:root {
+			--font-size-header: 2.5rem;
+		}
+
+		.vector-container {
+			width: clamp(8rem, 45%, 54rem);
+		}
 
 		.events {
 			--event-day-font-size: 2rem;
@@ -310,6 +341,13 @@
 	@media screen and (max-width: exports.$breakpoint-medium) and (max-height: exports.$breakpoint-large) {
 		.hero h1 {
 			grid-row: 13 / 19;
+		}
+
+		.events {
+			--event-day-font-size: 2rem;
+			--event-month-font-size: 0.9rem;
+			--event-title-font-size: 1.25rem;
+			--event-description-font-size: 0.85rem;
 		}
 	}
 

@@ -158,4 +158,28 @@
 
 		background-color: var(--color-lighter-2);
 	}
+
+	@include exports.media-large {
+		.carousel__left-arrow,
+		.carousel__right-arrow {
+			min-width: 8rem;
+			font-size: 350%;
+		}
+	}
+
+	@include exports.media-medium {
+		.carousel__left-arrow,
+		.carousel__right-arrow {
+			min-width: 7rem;
+			font-size: 300%;
+		}
+	}
+
+	@include exports.media-small {
+		.carousel__left-arrow,
+		.carousel__right-arrow {
+			min-width: 6rem;
+			font-size: 250%;
+		}
+	}
 </style>
