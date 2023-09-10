@@ -1,4 +1,5 @@
 <script lang="ts">
+  	import Calendar from "$lib/components/Calendar/Calendar.svelte";
 	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
 	import type { PageServerData } from "./$types";
 
@@ -12,7 +13,8 @@
 </svelte:head>
 
 <div>
-	{#each data.events as event}
+	<Calendar events={data.events}/>
+	<!-- {#each data.events as event}
 		<HomePageEvent event={event}/>
-	{/each}
+	{/each} -->
 </div>
