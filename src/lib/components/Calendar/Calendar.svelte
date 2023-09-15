@@ -1,4 +1,5 @@
 <script lang="ts">
+  	import CalendarDay from "./CalendarDay.svelte";
 	export let events: SchoolEvent[];
 
 	/** 
@@ -48,7 +49,17 @@
 		"October",
 		"November",
 		"December",
-	]
+	];
+
+	const DAYS = [
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+		"Sunday",
+	];
 
 	export let date: Date = new Date();
 	$: month = date.getMonth();
@@ -58,23 +69,27 @@
 	]
 	$: firstDayOffset = new Date(year, month, 1).getDay();
 	$: rows = Math.ceil((firstDayOffset + daysInMonth[month]) / 7);
-
 </script>
 
 <div class="calendar">
 	<div class="calendar__header">
-		<div class="calendar__header__month">
-			<h2>{MONTHS[month]}</h2>
+		<div class="calendar__header__date">
+			<h2>{MONTHS[month]} {year}</h2>
+		</div>
+		<div class="calendar__header__days">
+			{#each DAYS as day}
+				<div>{day}</div>
+			{/each}
 		</div>
 	</div>
 	<div class="calendar__body">
 		{#each { length: rows } as _, i}
 			{#each { length: DAYS_IN_WEEK} as _, j}
-				<div class="calendar__body__day">
+				<CalendarDay events={eventsMap.get(new Date(year, month, ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1).toISOString())}>
 					{#if (!((i === 0) && (j < firstDayOffset))) }
 						{ ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1 }
 					{/if}
-				</div>
+				</CalendarDay>
 			{/each}
 		{/each}
 	</div>
@@ -89,7 +104,7 @@
 	.calendar {
 		font-family: 'Poppins', sans-serif;
 
-		width: clamp(64rem, 60%, 10rem);
+		width: clamp(48rem, 50%, 18rem);
 		margin: 0 auto;
 
 		background-color: var(--color-light);
@@ -99,24 +114,43 @@
 
 	.calendar__header {
 		background-color: var(--color-primary);
+		color: var(--color-light);
+
+		padding: 0.5rem 0;
 
 		height: 4rem;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+
+		h2 {
+			text-transform: uppercase;
+			font-size: 1.5rem;
+			width: fit-content;
+
+			font-weight: bold;
+		}
+	}
+
+	.calendar__header__days {
+		display: grid;
+		width: 100%;
+		grid-template-columns: repeat(7, calc(100% / 7));
+
+		> div {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
 	}
 
 	.calendar__body {
 		display: grid;
 		grid-template-columns: repeat(7, calc(100% / 7));
-	}
-
-	.calendar__body__day {
-		font-size: 1.25rem;
-		padding: 0.5rem;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		aspect-ratio: 4 / 3;
 	}
 </style>
 

@@ -91,6 +91,7 @@
 
 	.hero__navbar {
 		background-color: var(--color-accent);
+		min-height: 100vh;
 
 		header {
 			position: relative;
@@ -110,10 +111,8 @@
 		grid-template-columns: repeat($dimensions, calc(100vw / $dimensions));
 		grid-template-rows: repeat(
 			$dimensions,
-			calc(calc(100vh - 6rem) / $dimensions)
+			calc(calc(100vh - 5.5rem) / $dimensions)
 		);
-
-		max-height: calc(100vh - 6rem);
 
 		overflow-x: visible;
 
