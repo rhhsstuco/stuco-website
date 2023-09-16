@@ -1,6 +1,9 @@
 <script lang="ts">
+ 	import { fly, type FlyParams } from "svelte/transition";
   	import CalendarDay from "./CalendarDay.svelte";
-  import CalendarDetail from "./CalendarDetail.svelte";
+	import CalendarDetail from "./CalendarDetail.svelte";
+	import { quadInOut } from "svelte/easing";
+  import reducedMotion from "$lib/stores/reducedMotion.store";
 	export let events: SchoolEvent[];
 
 	/** 
@@ -26,7 +29,7 @@
 		return map;
 	}
 
-	$: eventsMap = groupBy(events, event => event.startDate.toISOString());
+	$: eventsMap = groupBy(events, event => event.startDate.toDateString());
 
 	function isLeapYear(year: number): boolean {
 		return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0);
@@ -62,6 +65,7 @@
 		"Sun",
 	];
 
+	// Date and date derived properties
 	export let date: Date = new Date();
 
 	$: month = date.getMonth();
@@ -72,6 +76,7 @@
 	$: firstDayOffset = new Date(year, month, 1).getDay();
 	$: rows = Math.ceil((firstDayOffset + daysInMonth[month]) / 7);
 
+	// Selecting date for detail
 	let selectedDate: Date | null = null;
 
 	const selectDate = (date: Date) => () => selectedDate = date;
@@ -88,14 +93,14 @@
 			{/each}
 		</div>
 	</div>
-	<div class="calendar__body">
+	<div class="calendar__body" class:selected-date={selectedDate}>
 		{#each { length: rows } as _, i}
 			{#each { length: DAYS_IN_WEEK} as _, j}
 				{@const currentDate = new Date(year, month, ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1)}
 				{@const validDate = !((i === 0) && (j < firstDayOffset))}
 
 				<CalendarDay
-					events={eventsMap.get(currentDate.toISOString())}
+					events={eventsMap.get(currentDate.toDateString())}
 					clickable={validDate}
 					on:click={selectDate(currentDate)}
 				>
@@ -116,8 +121,16 @@
 				{event.name}
 			</div>
 		{/each}
+		<!-- Calender detail that slides in from the right -->
+		<!-- Does not transitions if the user preferes reduced motion -->
 		{#if selectedDate}
-			<CalendarDetail date={selectedDate}/>
+			<div class="calendar-detail" transition:fly={{ x: 200, duration: $reducedMotion ? 0: 300, easing: quadInOut }}>
+				<CalendarDetail
+					date={selectedDate}
+					events={eventsMap.get(selectedDate.toDateString()) || []}
+					on:close={() => selectedDate = null}
+				/>
+			</div>
 		{/if}
 	</div>
 </div>
@@ -131,6 +144,10 @@
 	.calendar {
 		--body-events-font-size: 0.7rem;
 
+		overflow: hidden;
+
+		position: relative;
+
 		font-family: 'Poppins', sans-serif;
 
 		width: clamp(18rem, 50%, 52rem);
@@ -141,7 +158,7 @@
 		background-color: var(--color-light);
 
 		box-shadow: exports.$box-shadow;
-
+		z-index: 1;
 	}
 
 	.calendar__header {
@@ -193,6 +210,12 @@
 		position: relative;
 		display: grid;
 		grid-template-columns: repeat(7, calc(100% / 7));
+
+		transition: background-color 300ms ease-in-out;
+
+		&.selected-date {
+			background-color: var(--color-box-shadow);
+		}
 	}
 
 	.calendar__body__event {
@@ -209,6 +232,17 @@
 		font-size: var(--body-events-font-size);
 
 		background-color: var(--color-accent);
+	}
+
+	.calendar-detail {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+
+		width: 30%;
+
+		z-index: 3;
 	}
 </style>
 

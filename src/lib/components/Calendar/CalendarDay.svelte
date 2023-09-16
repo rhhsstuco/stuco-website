@@ -28,7 +28,7 @@
 		aspect-ratio: 4 / 3;
 
 		&:not(:disabled):hover {
-			background-color: var(--color-lighter-1);
+			background-color: var(--color-lighter-2);
 			cursor: pointer;
 		}
 	}
