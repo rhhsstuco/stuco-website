@@ -1,18 +1,20 @@
 <script lang="ts">
 	export let events: SchoolEvent[] | undefined;
+	export let clickable: boolean = false;
 </script>
 
-<div class="calendar-day">
+<button class="calendar-day" disabled={!clickable} on:click>
 	{#if events}
 		<div class="calendar-day__event-count">{events.length}</div>
 	{/if}
 	<slot/>
-</div>
+</button>
 
 <style lang="scss">
 	@use "sass:color";
 
 	.calendar-day {
+		all: unset;
 		position: relative;
 
 		font-size: 1rem;
@@ -24,6 +26,11 @@
 		align-items: center;
 
 		aspect-ratio: 4 / 3;
+
+		&:not(:disabled):hover {
+			background-color: var(--color-lighter-1);
+			cursor: pointer;
+		}
 	}
 
 	.calendar-day__event-count {
@@ -31,12 +38,15 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
+		text-align: center;
 
 		position: absolute;
 		background-color: var(--color-accent);
 		border-radius: 50%;
 		width: 1.25rem;
 		aspect-ratio: 1 / 1;
+
+		font-size: var(--body-events-font-size, 0.6rem);
 		
 		top: 0.125rem;
 		right: 0.125rem;

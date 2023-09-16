@@ -1,5 +1,6 @@
 <script lang="ts">
   	import CalendarDay from "./CalendarDay.svelte";
+  import CalendarDetail from "./CalendarDetail.svelte";
 	export let events: SchoolEvent[];
 
 	/** 
@@ -52,23 +53,28 @@
 	];
 
 	const DAYS = [
-		"Monday",
-		"Tuesday",
-		"Wednesday",
-		"Thursday",
-		"Friday",
-		"Saturday",
-		"Sunday",
+		"Mon",
+		"Tue",
+		"Wed",
+		"Thu",
+		"Fri",
+		"Sat",
+		"Sun",
 	];
 
 	export let date: Date = new Date();
+
 	$: month = date.getMonth();
 	$: year = date.getFullYear();
 	$: daysInMonth = [
 		31, getFebruaryDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
-	]
+	];
 	$: firstDayOffset = new Date(year, month, 1).getDay();
 	$: rows = Math.ceil((firstDayOffset + daysInMonth[month]) / 7);
+
+	let selectedDate: Date | null = null;
+
+	const selectDate = (date: Date) => () => selectedDate = date;
 </script>
 
 <div class="calendar">
@@ -85,13 +91,34 @@
 	<div class="calendar__body">
 		{#each { length: rows } as _, i}
 			{#each { length: DAYS_IN_WEEK} as _, j}
-				<CalendarDay events={eventsMap.get(new Date(year, month, ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1).toISOString())}>
-					{#if (!((i === 0) && (j < firstDayOffset))) }
+				{@const currentDate = new Date(year, month, ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1)}
+				{@const validDate = !((i === 0) && (j < firstDayOffset))}
+
+				<CalendarDay
+					events={eventsMap.get(currentDate.toISOString())}
+					clickable={validDate}
+					on:click={selectDate(currentDate)}
+				>
+					{#if validDate}
 						{ ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1 }
 					{/if}
 				</CalendarDay>
 			{/each}
 		{/each}
+		{#each events as event}
+			<div
+				class="calendar__body__event"
+				style={`
+					grid-row: ${Math.ceil(event.startDate.getDate() / 7) + 1} / ${Math.ceil(event.endDate.getDate() / 7) + 2};
+					grid-column: ${event.startDate.getDay() + 1} / ${event.endDate.getDay()+ 2};
+				`}
+				>
+				{event.name}
+			</div>
+		{/each}
+		{#if selectedDate}
+			<CalendarDetail date={selectedDate}/>
+		{/if}
 	</div>
 </div>
 {#each eventsMap.entries() as entry}
@@ -102,14 +129,19 @@
 	@use "../../../styles/exports.scss" as exports;
 
 	.calendar {
+		--body-events-font-size: 0.7rem;
+
 		font-family: 'Poppins', sans-serif;
 
-		width: clamp(48rem, 50%, 18rem);
+		width: clamp(18rem, 50%, 52rem);
 		margin: 0 auto;
+		margin-top: 3rem;
 
+		color: var(--color-dark);
 		background-color: var(--color-light);
 
 		box-shadow: exports.$box-shadow;
+
 	}
 
 	.calendar__header {
@@ -135,6 +167,15 @@
 		}
 	}
 
+	.calendar__body__event {
+		
+		position: absolute;
+
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
 	.calendar__header__days {
 		display: grid;
 		width: 100%;
@@ -149,8 +190,25 @@
 	}
 
 	.calendar__body {
+		position: relative;
 		display: grid;
 		grid-template-columns: repeat(7, calc(100% / 7));
+	}
+
+	.calendar__body__event {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+
+		border-radius: 4rem;
+		padding: 0.125rem;
+		margin: 0 0.25rem 0.25rem 0.25rem;
+
+		font-size: var(--body-events-font-size);
+
+		background-color: var(--color-accent);
 	}
 </style>
 
