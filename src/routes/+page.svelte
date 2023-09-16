@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from "$app/paths";
 	import Carousel from "$lib/components/Carousel/Carousel.svelte";
 	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
   	import MediaQuery from "$lib/components/MediaQuery.svelte";
@@ -17,6 +18,9 @@
 <svelte:head>
 	<title>RHHS StuCo</title>
 	<meta name="description" content="StuCo is a group of students who come together and act as the liason between admin and the student body.">
+	{#each data.imageURLs.map(url => `${base}/${url}`) as url}
+		<link rel="preload" as="image" href={`${url}.avif`} />
+	{/each}
 </svelte:head>
 
 <main>
