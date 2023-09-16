@@ -22,11 +22,11 @@
 	</div>
 	<div class="menu__content">
 		<ul class="menu__content__links">
-			<li><a href="{base}/" class:active={url === '/' || url === ''}>Home</a></li>
-			<li><a href="{base}/events" class:active={url === '/events'}>Events</a></li>
-			<li><a href="{base}/clubs" class:active={url === '/clubs'}>Clubs</a></li>
-			<li><a href="{base}/gallery" class:active={url === '/gallery'}>Gallery</a></li>
-			<li><a href="{base}/members" class:active={url === '/members'}>Members</a></li>
+			<li><a href="{base}/" class:active={url === `${base}/` || url === `${base}`}>Home</a></li>
+			<li><a href="{base}/events" class:active={url === `${base}/events`}>Events</a></li>
+			<li><a href="{base}/clubs" class:active={url === `${base}/clubs`}>Clubs</a></li>
+			<li><a href="{base}/gallery" class:active={url === `${base}/gallery`}>Gallery</a></li>
+			<li><a href="{base}/members" class:active={url === `${base}/members`}>Members</a></li>
 		</ul>
 	</div>
 </div>
