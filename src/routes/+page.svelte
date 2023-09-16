@@ -32,7 +32,7 @@
 
     <!-- Hero Section -->
     <div class="vector-container">
-      <img class="vector" src="{base}images/bg-vector.svg" alt=""/>
+      <img class="vector" src="{base}/images/bg-vector.svg" alt=""/>
     </div>
 	<div class="hero-image-container">
 		<img class="people-laptop" src="{base}/images/home-page-people-laptop.png" alt=""/>
