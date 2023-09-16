@@ -1,6 +1,7 @@
 @use "./breakpoints" as breakpoints;
 
 @mixin header($color: var(--color-primary), $align: center, $font-size: var(--font-size-header)) {
+	font-family: "Poppins", sans-serif;
 	text-transform: uppercase;
 	font-size: $font-size;
 	font-weight: 900;

@@ -1,9 +1,9 @@
 <script lang="ts">
- 	import { fly, type FlyParams } from "svelte/transition";
+ 	import { fly } from "svelte/transition";
   	import CalendarDay from "./CalendarDay.svelte";
 	import CalendarDetail from "./CalendarDetail.svelte";
 	import { quadInOut } from "svelte/easing";
-  import reducedMotion from "$lib/stores/reducedMotion.store";
+  	import reducedMotion from "$lib/stores/reducedMotion.store";
 	export let events: SchoolEvent[];
 
 	/** 
@@ -15,22 +15,44 @@
 	 * Groups the entries in the array using the keyMapper function
 	 * 
 	*/
-	function groupBy<K, T>(array: T[], keyMapper: (obj: T) => K): Grouping<K, T> {
+	function groupBy<K, T>(array: T[], keyMapper: (obj: T) => K[]): Grouping<K, T> {
 		const map: Grouping<K, T> = new Map();
 
 		array.forEach(item => {
-			const key = keyMapper(item);
-			const collection = map.get(key) || [];
-			collection.push(item);
+			const keys = keyMapper(item);
+			console.log(keys)
+			for (const key of keys) {
+				const collection = map.get(key) || [];
 
-			map.set(key, collection);
+				collection.push(item);
+				map.set(key, collection);
+			}
+
 		})
 
 		return map;
 	}
 
-	$: eventsMap = groupBy(events, event => event.startDate.toDateString());
+	const MS_IN_DAY = 1000 * 60 * 60 * 24;
 
+	function numDays(date1: Date, date2: Date) {
+		return (date2.getTime() - date1.getTime()) / (MS_IN_DAY);
+	}
+
+	$: eventsMap = groupBy(events, event => {
+		const days = Array(numDays(event.startDate, event.endDate) + 1).fill(0);
+
+		const startYear = event.startDate.getFullYear();
+		const startMonth = event.startDate.getMonth();
+		const startDate = event.startDate.getDate();
+
+
+		return days.map((_, i) => new Date(startYear, startMonth, startDate + i).toDateString());;
+	});
+
+	$: console.log(eventsMap)
+
+	// Calculations to render calendar
 	function isLeapYear(year: number): boolean {
 		return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0);
 	}
@@ -73,7 +95,7 @@
 	$: daysInMonth = [
 		31, getFebruaryDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
 	];
-	$: firstDayOffset = new Date(year, month, 1).getDay();
+	$: firstDayOffset = ((((new Date(year, month, 1).getDay()) % 7) - 1) + 7) % 7;
 	$: rows = Math.ceil((firstDayOffset + daysInMonth[month]) / 7);
 
 	// Selecting date for detail
@@ -85,7 +107,13 @@
 <div class="calendar">
 	<div class="calendar__header">
 		<div class="calendar__header__date">
+			<button on:click={() => date = new Date(year, month - 1, 1)}>
+				<i class="ri-arrow-left-s-line"></i>
+			</button>
 			<h2>{MONTHS[month]} {year}</h2>
+			<button on:click={() => date = new Date(year, month + 1, 1)}>
+				<i class="ri-arrow-right-s-line"></i>
+			</button>
 		</div>
 		<div class="calendar__header__days">
 			{#each DAYS as day}
@@ -96,8 +124,9 @@
 	<div class="calendar__body" class:selected-date={selectedDate}>
 		{#each { length: rows } as _, i}
 			{#each { length: DAYS_IN_WEEK} as _, j}
-				{@const currentDate = new Date(year, month, ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1)}
-				{@const validDate = !((i === 0) && (j < firstDayOffset))}
+				{@const dayCount = ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1}
+				{@const currentDate = new Date(year, month, dayCount)}
+				{@const validDate = (dayCount > 0) && (dayCount <= daysInMonth[month])}
 
 				<CalendarDay
 					events={eventsMap.get(currentDate.toDateString())}
@@ -111,15 +140,17 @@
 			{/each}
 		{/each}
 		{#each events as event}
-			<div
-				class="calendar__body__event"
-				style={`
-					grid-row: ${Math.ceil(event.startDate.getDate() / 7) + 1} / ${Math.ceil(event.endDate.getDate() / 7) + 2};
-					grid-column: ${event.startDate.getDay() + 1} / ${event.endDate.getDay()+ 2};
-				`}
-				>
-				{event.name}
-			</div>
+			{#if ((event.startDate.getMonth() === month) && (event.startDate.getFullYear() === year))}
+				<div
+					class="calendar__body__event"
+					style={`
+						grid-row: ${Math.ceil((event.startDate.getDate() + firstDayOffset) / 7)} / ${Math.ceil((event.endDate.getDate() + firstDayOffset) / 7)};
+						grid-column: ${event.startDate.getDay()} / ${event.endDate.getDay() + 1};
+					`}
+					>
+					{event.name}
+				</div>
+			{/if}
 		{/each}
 		<!-- Calender detail that slides in from the right -->
 		<!-- Does not transitions if the user preferes reduced motion -->
@@ -134,9 +165,6 @@
 		{/if}
 	</div>
 </div>
-{#each eventsMap.entries() as entry}
-	{entry[0]}: {JSON.stringify(entry[1])} <br>
-{/each}
 
 <style lang="scss">
 	@use "../../../styles/exports.scss" as exports;
@@ -150,7 +178,7 @@
 
 		font-family: 'Poppins', sans-serif;
 
-		width: clamp(18rem, 50%, 52rem);
+		width: clamp(18rem, 70%, 52rem);
 		margin: 0 auto;
 		margin-top: 3rem;
 
@@ -165,15 +193,15 @@
 		background-color: var(--color-primary);
 		color: var(--color-light);
 
-		padding: 0.5rem 0;
+		padding: 1rem 0;
 
-		height: 4rem;
+		min-height: 4rem;
 
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: 1rem;
+		gap: 1.5rem;
 
 		h2 {
 			text-transform: uppercase;
@@ -191,6 +219,41 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
+	}
+
+	.calendar__header__date {
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+		justify-content: center;
+		align-items: center;
+
+		button {
+			all: unset;
+		}
+
+		h2, button {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-self: center;
+			text-align: center;
+		}
+
+		i {
+			position: relative;
+			font-size: 2rem;
+			z-index: 20;
+			
+			&:hover {
+				cursor: pointer;
+			}
+			
+			&:hover::before {
+				background-color: var(--color-box-shadow);
+				border-radius: 50%;
+			}
+		}
 	}
 
 	.calendar__header__days {

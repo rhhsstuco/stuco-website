@@ -12,9 +12,19 @@
 	<meta name="description" content="Stay up to date on all school events here!">
 </svelte:head>
 
-<div>
+<main>
+	<h1>Events</h1>
 	<Calendar events={data.events}/>
-	<!-- {#each data.events as event}
-		<HomePageEvent event={event}/>
-	{/each} -->
-</div>
+</main>
+
+<style lang="scss">
+	@use "../../../styles/exports.scss" as exports;
+
+	main {
+		min-height: calc(100vh - 5.5rem);
+	}
+
+	h1 {
+		@include exports.header;
+	}
+</style>

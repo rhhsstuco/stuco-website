@@ -21,7 +21,8 @@ const getEvents = async (maxResults?: number): Promise<SchoolEvent[]> => {
 	const transformedValues = values.slice(1).map(row => {
 
 		const splitStartDate = row[2].split('/');
-		const splitEndDate = row[2].split('/');
+		const splitEndDate = row[3].split('/');
+
 
 		return {
 			name: row[0],

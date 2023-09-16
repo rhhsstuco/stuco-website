@@ -4,7 +4,7 @@
 </script>
 
 <button class="calendar-day" disabled={!clickable} on:click>
-	{#if events}
+	{#if events && clickable}
 		<div class="calendar-day__event-count">{events.length}</div>
 	{/if}
 	<slot/>
@@ -14,6 +14,8 @@
 	@use "sass:color";
 
 	.calendar-day {
+		--color-event-marker: var(--color-marker, var(--color-accent));
+		
 		all: unset;
 		position: relative;
 
@@ -41,7 +43,7 @@
 		text-align: center;
 
 		position: absolute;
-		background-color: var(--color-accent);
+		background-color: var(--color-event-marker);
 		border-radius: 50%;
 		width: 1.25rem;
 		aspect-ratio: 1 / 1;

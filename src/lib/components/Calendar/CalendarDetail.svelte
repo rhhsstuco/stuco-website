@@ -60,6 +60,11 @@
 		button {
 			all: unset;
 			font-size: 2rem;
+			margin-bottom: 0.5rem;
+
+			&:hover {
+				cursor:pointer
+			}
 		}
 
 		h3 {

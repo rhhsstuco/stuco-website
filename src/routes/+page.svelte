@@ -320,7 +320,7 @@
 
 	@include exports.media-smallest {
 		.hero h1 {
-			--font-size-hero: 5rem;
+			--font-size-hero: 4.5rem;
 
 			grid-column: 3 / 24;
 		}
@@ -351,6 +351,30 @@
 			--event-month-font-size: 0.9rem;
 			--event-title-font-size: 1.25rem;
 			--event-description-font-size: 0.85rem;
+		}
+	}
+
+	@media screen and (max-width: exports.$breakpoint-small) and (max-height: 724px) {
+		.hero h1 {
+			grid-row: 16 / 24;
+		}
+
+		.hero-image-container {	
+			width: clamp(12rem, 30%, 30rem);
+
+			top: 9rem;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+		}
+	}
+
+	@media screen and (max-width: exports.$breakpoint-small) and (max-height: 624px) {
+		.hero-image-container {	
+			width: clamp(11rem, 30%, 30rem);
+
+			top: 6rem;
+
 		}
 	}
 

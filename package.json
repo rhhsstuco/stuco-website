@@ -33,6 +33,7 @@
 		"google-spreadsheet": "^4.0.2",
 		"googleapis": "^105.0.0",
 		"moment": "^2.29.4",
-		"supports-color": "^9.4.0"
+		"supports-color": "^9.4.0",
+		"svelte-gestures": "^1.5.2"
 	}
 }

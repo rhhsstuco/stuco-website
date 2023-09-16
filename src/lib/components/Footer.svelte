@@ -34,8 +34,8 @@
 	@use "../../styles/exports.scss" as exports;
 
 	.footer {
-		--footer-heading-font-size: 1.75rem;
-		--footer-text-font-size: 1.25rem;
+		--footer-heading-font-size: 1.25rem;
+		--footer-text-font-size: 1rem;
 
 
 		width: clamp(20rem, 60%, 56rem);
@@ -87,6 +87,12 @@
 			color: var(--color-dark);
 			text-decoration: none;
 			font-size: var(--footer-text-font-size);
+		}
+	}
+	@include exports.media-large {
+		.footer {
+			--footer-heading-font-size: 1rem;
+			--footer-text-font-size: 0.9rem;
 		}
 	}
 
