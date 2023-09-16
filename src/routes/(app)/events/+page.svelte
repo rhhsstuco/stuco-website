@@ -1,6 +1,5 @@
 <script lang="ts">
   	import Calendar from "$lib/components/Calendar/Calendar.svelte";
-	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
 	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;

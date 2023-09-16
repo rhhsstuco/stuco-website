@@ -32,10 +32,10 @@
 
     <!-- Hero Section -->
     <div class="vector-container">
-      <img class="vector" src="images/bg-vector.svg" alt=""/>
+      <img class="vector" src="{base}images/bg-vector.svg" alt=""/>
     </div>
 	<div class="hero-image-container">
-		<img class="people-laptop" src="images/home-page-people-laptop.png" alt=""/>
+		<img class="people-laptop" src="{base}/images/home-page-people-laptop.png" alt=""/>
 	</div>
     <section class="hero">
       <h1>RHHS STUCO</h1>
