@@ -32,7 +32,7 @@
 					<p>{event.description}</p>
 				</div>
 			{:else}
-				<div>
+				<div class="calendar-detail__no-events">
 					No events on this day.
 				</div>
 			{/each}
@@ -45,6 +45,7 @@
 		background-color: var(--color-light);
 		width: 100%;
 		height: 100%;
+		overflow-y: scroll;
 
 	}
 
@@ -53,7 +54,7 @@
 
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: var(--calendar-detail-heading-gap, 0.75rem);
 	}
 
 	.calendar-detail__content__heading {
@@ -69,29 +70,31 @@
 
 		h3 {
 			font-weight: bold;
-			font-size: 1.25rem;
+			font-size: var(--calendar-detail-date-font-size, 1.25rem);
 		}
 	}
 	
 	.calendar-detail__content__events {
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: var(--calendar-detail-events-gap, 0.25rem);
 	}
 
 	.calendar-detail__content__events__event {
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: var(--calendar-detail-events-info-gap, 0.25rem);
 
 		h4 {
 			font-weight: 600;
 			text-transform: uppercase;
-			font-size: 1rem;
+			font-size: var(--calendar-detail-event-font-size, 1rem);
 		}
 
-		p {
-			font-size: 0.9rem;
-		}
+	}
+
+	.calendar-detail__content__events__event p, .calendar-detail__no-events {
+		font-size: var(--calendar-detail-description-font-size, 0.9rem);
+		line-height: 1.15;
 	}
 </style>

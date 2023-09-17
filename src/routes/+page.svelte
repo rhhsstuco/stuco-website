@@ -224,7 +224,7 @@
 			--font-size-hero: 7rem;
 		}
 
-		:root {
+		main {
 			--font-size-header: 3.5rem;
 		}
 
@@ -286,7 +286,7 @@
 			text-align: center;
 		}
 
-		:root {
+		main {
 			--font-size-header: 3rem;
 		}
 
@@ -325,7 +325,7 @@
 			grid-column: 3 / 24;
 		}
 
-		:root {
+		main {
 			--font-size-header: 2.5rem;
 		}
 
@@ -356,7 +356,7 @@
 
 	@media screen and (max-width: exports.$breakpoint-small) and (max-height: 724px) {
 		.hero h1 {
-			grid-row: 16 / 24;
+			grid-row: 14 / 24;
 		}
 
 		.hero-image-container {	
@@ -370,12 +370,31 @@
 	}
 
 	@media screen and (max-width: exports.$breakpoint-small) and (max-height: 624px) {
+		.hero h1 {
+			grid-row: 14 / 24;
+		}
+
 		.hero-image-container {	
 			width: clamp(11rem, 30%, 30rem);
 
 			top: 6rem;
 
 		}
+
+	}
+
+	@media screen and (max-width: exports.$breakpoint-small) and (max-height: 512px) {
+		.hero h1 {
+			grid-row: 16 / 24;
+		}
+
+		.hero-image-container {	
+			width: clamp(11rem, 30%, 30rem);
+
+			top: 5rem;
+
+		}
+
 	}
 
 </style>

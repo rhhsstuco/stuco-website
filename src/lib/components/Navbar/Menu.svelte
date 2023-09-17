@@ -14,7 +14,7 @@
 </script>
 
 
-<div class="menu" in:fly={{ x: 100 }} out:fly={{ x: 100 }}>
+<div class="menu" transition:fly={{ x: 500, duration: 600 }}>
 	<div class="menu__top">
 		<button on:click={onClose}>
 			<i class="ri-close-line"></i>
@@ -36,8 +36,6 @@
 	@use '../../../styles/exports.scss' as exports;
 
 	.menu {
-
-
 		position: fixed;
 		top: 0;
 		bottom: 0;

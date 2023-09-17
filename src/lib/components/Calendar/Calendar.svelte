@@ -1,9 +1,10 @@
 <script lang="ts">
- 	import { fly } from "svelte/transition";
+ 	import { fly, type FlyParams } from "svelte/transition";
   	import CalendarDay from "./CalendarDay.svelte";
 	import CalendarDetail from "./CalendarDetail.svelte";
 	import { quadInOut } from "svelte/easing";
   	import reducedMotion from "$lib/stores/reducedMotion.store";
+  import MediaQuery from "../MediaQuery.svelte";
 	export let events: SchoolEvent[];
 
 	/** 
@@ -20,7 +21,7 @@
 
 		array.forEach(item => {
 			const keys = keyMapper(item);
-			console.log(keys)
+
 			for (const key of keys) {
 				const collection = map.get(key) || [];
 
@@ -50,7 +51,6 @@
 		return days.map((_, i) => new Date(startYear, startMonth, startDate + i).toDateString());;
 	});
 
-	$: console.log(eventsMap)
 
 	// Calculations to render calendar
 	function isLeapYear(year: number): boolean {
@@ -102,11 +102,25 @@
 	let selectedDate: Date | null = null;
 
 	const selectDate = (date: Date) => () => selectedDate = date;
+
+	// Custom transition
+	const directedFlyTransition = (node: Element, args: Omit<FlyParams, 'x' | 'y'> & { distance: number, direction: 'x' | 'y' }) => {
+		return fly(node, { 
+			delay: args.delay,
+			duration: args.duration,
+			easing: args.easing,
+			opacity: args.opacity,
+			[args.direction]: args.distance
+		})
+	}
 </script>
 
 <div class="calendar">
 	<div class="calendar__header">
 		<div class="calendar__header__date">
+			<button on:click={() => date = new Date(year - 1, month , 1)}>
+				<i class="ri-arrow-left-double-line"></i>
+			</button>
 			<button on:click={() => date = new Date(year, month - 1, 1)}>
 				<i class="ri-arrow-left-s-line"></i>
 			</button>
@@ -134,7 +148,7 @@
 					on:click={selectDate(currentDate)}
 				>
 					{#if validDate}
-						{ ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1 }
+						<span class="calendar__body__day">{ dayCount }</span>
 					{/if}
 				</CalendarDay>
 			{/each}
@@ -155,7 +169,10 @@
 		<!-- Calender detail that slides in from the right -->
 		<!-- Does not transitions if the user preferes reduced motion -->
 		{#if selectedDate}
-			<div class="calendar-detail" transition:fly={{ x: 200, duration: $reducedMotion ? 0: 300, easing: quadInOut }}>
+			<div
+				class="calendar-detail"
+				transition:fly={{ x: 250, opacity: 1, duration: $reducedMotion ? 0: 250, easing: quadInOut }}
+			>
 				<CalendarDetail
 					date={selectedDate}
 					events={eventsMap.get(selectedDate.toDateString()) || []}
@@ -170,7 +187,18 @@
 	@use "../../../styles/exports.scss" as exports;
 
 	.calendar {
-		--body-events-font-size: 0.7rem;
+		--calendar-events-font-size: 0.7rem;
+		--calendar-heading-font-size: 1.5rem; 
+		--calendar-day-font-size: 1rem;
+		--calendar-week-day-font-size: 1rem;
+
+		--calendar-detail-desciption-font-size: 0.9rem;
+		--calendar-detail-event-font-size: 1rem;
+		--calendar-detail-date-font-size: 1.25rem;
+
+		--calendar-detail-heading-gap: 0.75rem;
+		--calendar-detail-events-gap: 0.25rem;
+		--calendar-detail-events-info-gap: 0.125rem;
 
 		overflow: hidden;
 
@@ -178,7 +206,7 @@
 
 		font-family: 'Poppins', sans-serif;
 
-		width: clamp(18rem, 70%, 52rem);
+		width: clamp(18rem, 80%, 52rem);
 		margin: 0 auto;
 		margin-top: 3rem;
 
@@ -195,8 +223,6 @@
 
 		padding: 1rem 0;
 
-		min-height: 4rem;
-
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -205,7 +231,7 @@
 
 		h2 {
 			text-transform: uppercase;
-			font-size: 1.5rem;
+			font-size: var(--calendar-heading-font-size);
 			width: fit-content;
 
 			font-weight: bold;
@@ -256,6 +282,10 @@
 		}
 	}
 
+	.calendar__body__day {
+		font-size: var(--calendar-day-font-size);
+	}
+
 	.calendar__header__days {
 		display: grid;
 		width: 100%;
@@ -266,6 +296,8 @@
 			flex-direction: row;
 			justify-content: center;
 			align-items: center;
+
+			font-size: var(--calendar-week-day-font-size);
 		}
 	}
 
@@ -292,7 +324,7 @@
 		padding: 0.125rem;
 		margin: 0 0.25rem 0.25rem 0.25rem;
 
-		font-size: var(--body-events-font-size);
+		font-size: var(--calendar-events-font-size);
 
 		background-color: var(--color-accent);
 	}
@@ -307,6 +339,67 @@
 
 		z-index: 3;
 	}
+
+	@include exports.media-large {
+		.calendar {
+			--calendar-events-font-size: 0.6rem;
+			--calendar-day-font-size: 0.9rem;
+			--calendar-week-day-font-size: 0.9rem;
+
+			--calendar-detail-date-font-size: 1.125rem;
+			--calendar-detail-description-font-size: 0.85rem;
+			--calendar-detail-event-font-size: 0.95rem;
+
+			--calendar-detail-heading-gap: 0.5rem;
+			--calendar-detail-events-gap: 0.25rem;
+			--calendar-detail-events-info-gap: 0.125rem;
+		}
+
+		.calendar-detail {
+			width: 35%;
+		}
+	}
+
+	@include exports.media-medium {
+		.calendar {
+			--calendar-events-font-size: 0.55rem;
+			--calendar-heading-font-size: 1.25rem; 
+			--calendar-day-font-size: 0.8rem;
+			--calendar-week-day-font-size: 0.9rem;
+
+			--calendar-detail-date-font-size: 1rem;
+			--calendar-detail-description-font-size: 0.8rem;
+			--calendar-detail-event-font-size: 0.9rem;
+
+		}
+
+		.calendar__header {
+			gap: 0.75rem;
+			padding: 0.75rem 0.25rem;
+		}
+
+		.calendar-detail {
+			width: 42%;
+		}
+	}
+
+	@include exports.media-small {
+		.calendar__body__event {
+			display: none;
+		}
+
+		.calendar-detail {
+			width: 50%;
+		}
+	}
+
+	@include exports.media-smallest {
+		.calendar-detail {
+			width: 100%;
+		}
+	}
+
+
 </style>
 
 

@@ -13,9 +13,7 @@
 <style lang="scss">
 	@use "sass:color";
 
-	.calendar-day {
-		--color-event-marker: var(--color-marker, var(--color-accent));
-		
+	.calendar-day {		
 		all: unset;
 		position: relative;
 
@@ -43,12 +41,12 @@
 		text-align: center;
 
 		position: absolute;
-		background-color: var(--color-event-marker);
+		background-color: var(--color-accent);
 		border-radius: 50%;
-		width: 1.25rem;
+		width: max(17%, 0.8rem);
 		aspect-ratio: 1 / 1;
 
-		font-size: var(--body-events-font-size, 0.6rem);
+		font-size: var(--calendar-events-font-size, 0.6rem);
 		
 		top: 0.125rem;
 		right: 0.125rem;
