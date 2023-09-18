@@ -10,7 +10,11 @@
 
 <style lang="scss">
 	header {
-		color: var(--color-text);
+		color: var(--color-dark);
+	}
+
+	:global(*) {
+		transition: background-color 200ms ease-in-out;
 	}
 </style>
 

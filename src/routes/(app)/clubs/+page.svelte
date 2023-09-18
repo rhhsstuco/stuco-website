@@ -79,6 +79,8 @@
 	}
 
 	.clubs__grid__not-found {
+		color: var(--color-dark);
+		
 		margin: 4rem auto;
 
 		width: fit-content;

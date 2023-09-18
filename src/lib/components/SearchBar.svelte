@@ -24,6 +24,7 @@
 		display: flex;
 		flex-direction: row;
 		background-color: var(--color-light);
+		color: var(--color-dark);
 
 		display: flex;
 		flex-direction: row;
@@ -34,13 +35,14 @@
 
 	.search__icon {
 		padding: 1rem;
-
+		
 		i {
 			display: flex;
 			flex-direction: row;
 			justify-content: center;
 			align-items: center;
 			font-size: 1.25rem;
+			color: var(--color-dark);
 		}
 	}
 

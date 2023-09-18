@@ -99,6 +99,7 @@
 
 	:is(.carousel__left-arrow, .carousel__right-arrow) i {
 		position: relative;
+		color: var(--color-dark);
 
 		&:hover {
 			cursor: pointer;
@@ -121,7 +122,6 @@
 	}
 
 	:is(.carousel__left-arrow.inside, .carousel__right-arrow.inside) i {
-
 		&::after {
 			content: '';
 

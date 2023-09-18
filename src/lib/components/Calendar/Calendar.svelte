@@ -219,7 +219,7 @@
 
 	.calendar__header {
 		background-color: var(--color-primary);
-		color: var(--color-light);
+		color: var(--color-light-2);
 
 		padding: 1rem 0;
 

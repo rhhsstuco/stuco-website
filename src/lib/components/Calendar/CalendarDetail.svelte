@@ -45,7 +45,7 @@
 		background-color: var(--color-light);
 		width: 100%;
 		height: 100%;
-		overflow-y: scroll;
+		overflow-y: auto;
 
 	}
 

@@ -79,7 +79,7 @@
 
 		.event__info__description {
 			font-size: var(--event-description-font-size, 1.125rem);
-			color: var(--color-darker);
+			color: var(--color-darker-1);
 		}
 	}
 

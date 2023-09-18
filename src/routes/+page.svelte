@@ -4,6 +4,7 @@
 	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
   	import MediaQuery from "$lib/components/MediaQuery.svelte";
 	import Navbar from "$lib/components/Navbar/Navbar.svelte";
+  import themeStore from "$lib/stores/theme.store";
 	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
@@ -32,7 +33,7 @@
 
     <!-- Hero Section -->
     <div class="vector-container">
-      <img class="vector" src="{base}/images/bg-vector.svg" alt=""/>
+      <img class="vector" src="{base}/images/bg-vector-{$themeStore}.svg" alt=""/>
     </div>
 	<div class="hero-image-container">
 		<img class="people-laptop" src="{base}/images/home-page-people-laptop.png" alt=""/>

@@ -8,6 +8,7 @@
 	--light-theme-color-text: hsl(0, 0%, 0%);
 
 	--light-theme-color-light: hsl(0, 0%, 100%);
+	--light-theme-color-light-2: var(--light-theme-color-light);
 	--light-theme-color-dark: hsl(0, 0%, 0%);
 
 	--light-theme-color-lighter-1: hsl(0, 0%, 90%);
@@ -19,16 +20,25 @@
 	--light-theme-box-shadow: hsla(0, 0%, 0%, 0.25);
 	
 	// Dark theme colors
-	--dark-theme-color-primary: hsl(116, 100%, 50%);
-	--dark-theme-color-background: hsl(0, 0%, 73%);
-	--dark-theme-color-accent: hsl(0, 0%, 83%);
+	--dark-theme-color-primary: hsl(152, 24%, 42%);
+	--dark-theme-color-background: hsl(156, 8%, 12%);
+	--dark-theme-color-accent: hsl(120, 21%, 8%);
 	
-	--dark-theme-color-gradient-light: hsl(117, 100%, 31%);
+	--dark-theme-color-gradient-light: hsl(152, 24%, 67%);
 	--dark-theme-color-text: hsl(0, 0%, 0%);
 
-	--dark-theme-box-shadow: hsla(0, 0%, 100%, 0.25);
+	--dark-theme-color-light: hsl(150, 8%, 20%);
+	--dark-theme-color-light-2: hsl(0, 0%, 95%);
+	--dark-theme-color-dark: hsl(0, 0%, 90%);
 
-	--color-alarm: hsl(0, 100%, 70%);
+	--dark-theme-color-lighter-1: hsl(0, 0%, 75%);
+	--dark-theme-color-darker-1: hsl(0, 0%, 70%);
+
+	--dark-theme-color-lighter-2: hsl(0, 0%, 60%);
+	--dark-theme-color-darker-2: hsl(0, 0%, 60%);
+
+
+	--dark-theme-box-shadow: hsla(0, 0%, 0%, 0.4);
 }
 
 
@@ -40,14 +50,15 @@
 	--color-gradient-light: var(--dark-theme-color-gradient-light);
 	--color-text: var(--dark-theme-color-text);
 
-	--color-light: var(--light-theme-color-dark);
-	--color-dark: var(--light-theme-color-light);
+	--color-light: var(--dark-theme-color-light);
+	--color-light-2: var(--dark-theme-color-light-2);
+	--color-dark: var(--dark-theme-color-dark);
 
-	--color-lighter-1: var(--light-theme-color-darker-1);
-	--color-darker-1: var(--light-theme-color-lighter-1);
+	--color-lighter-1: var(--dark-theme-color-lighter-1);
+	--color-darker-1: var(--dark-theme-color-darker-1);
 
-	--color-lighter-2: var(--light-theme-color-darker-2);
-	--color-darker-2: var(--light-theme-color-lighter-2);
+	--color-lighter-2: var(--dark-theme-color-lighter-2);
+	--color-darker-2: var(--dark-theme-color-darker-2);
 
 	--color-box-shadow: var(--dark-theme-box-shadow);
 }
@@ -59,8 +70,10 @@
 	
 	--color-gradient-light: var(--light-theme-color-gradient-light);
 	--color-text: var(--light-theme-color-text);
-
+	
 	--color-light: var(--light-theme-color-light);
+	--color-elevated: var(--color-light);
+	--color-light-2: var(--light-theme-color-light-2);
 	--color-dark: var(--light-theme-color-dark);
 	
 	--color-lighter-1: var(--light-theme-color-lighter-1);
