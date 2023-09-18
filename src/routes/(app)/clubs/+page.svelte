@@ -24,7 +24,7 @@
 </svelte:head>
 
 <main class="clubs">
-	<h1>Find a Club</h1>
+	<h1>Clubs</h1>
 	<div class="clubs__search">
 
 		<SearchBar on:value-change={onValueChange}/>
@@ -59,14 +59,15 @@
 	}
 
 	.clubs__search {
-		width: clamp(20rem, 60%, 48rem);
+		width: clamp(18rem, 60%, 48rem);
 		margin: 0 auto;
 	}
 
 
 	.clubs__grid {
+		--columns: 5;
 		display: grid;
-		grid-template-columns: repeat(5, minmax(0, 1fr));
+		grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
 		grid-auto-flow: row;
 
 		gap: 3rem 5%;
@@ -85,8 +86,6 @@
 	@include exports.media-max(1760px) {
 		.clubs__grid {
 			--columns: 4;
-
-			grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
 		}
 	}
 
@@ -105,7 +104,7 @@
 		.clubs__grid {
 			--columns: 2;
 			
-			column-gap: 8%;
+			column-gap: 10%;
 		}
 	}
 
@@ -114,6 +113,28 @@
 			--columns: 2;
 
 			--margin-horizontal: 10rem;
+			
+			column-gap: 12%;
+		}
+	}
+
+	@include exports.media-max(864px) {
+		.clubs__grid {
+			--columns: 2;
+
+			--margin-horizontal: auto;
+			
+			max-width: 32rem;
+		}
+	}
+
+	@include exports.media-small {
+		.clubs__grid {
+			--columns: 1;
+
+			--margin-horizontal: auto;
+			
+			max-width: 16rem;
 		}
 	}
 </style>

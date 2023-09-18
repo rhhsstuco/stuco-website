@@ -42,7 +42,7 @@
 
 		min-height: 18rem;
 
-		min-width: 16rem;
+		/* min-width: 16rem; */
 	}
 
 	.club__banner {
@@ -50,19 +50,19 @@
 		height: 5.75rem;
 
 		.club__banner__icon {
-		position: absolute;
+			position: absolute;
 
-		aspect-ratio: 1 / 1;
+			aspect-ratio: 1 / 1;
 
-		border: 0.5rem solid var(--color-light);
-		border-radius: 50%;
-		overflow: hidden;
-		box-shadow: exports.$box-shadow;
+			border: 0.5rem solid var(--color-light);
+			border-radius: 50%;
+			overflow: hidden;
+			box-shadow: exports.$box-shadow;
 
-		top: -28%;
-		left: -12.5%;
+			top: -28%;
+			left: -12.5%;
 
-		width: 8rem;
+			width: 8rem;
 		}
 	}
 
