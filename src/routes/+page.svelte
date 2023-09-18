@@ -377,6 +377,7 @@
 
 		.hero-image-container {	
 			width: clamp(11rem, 30%, 30rem);
+			
 
 			top: 6rem;
 
@@ -421,7 +422,7 @@
 		}
 	}
 
-	@media only screen and (max-height: 750px) and (orientation: landscape) {	
+	@media only screen and (max-height: 724px) and (orientation: landscape) {	
 		.hero h1 {
 			grid-row: 1 / -1;
 			grid-column: 2 / 14;
@@ -445,7 +446,7 @@
 		}
 	}
 
-	@media only screen and (max-height: 750px) and (max-width: exports.$breakpoint-medium) and (orientation: landscape) {	
+	@media only screen and (max-height: 724px) and (max-width: exports.$breakpoint-medium) and (orientation: landscape) {	
 		.hero h1 {
 			--font-size-hero: 5rem;
 		}
@@ -460,7 +461,7 @@
 		}
 	}
 
-	@media only screen and (max-height: 750px) and (max-width: exports.$breakpoint-medium) and (orientation: landscape) {	
+	@media only screen and (max-height: 724px) and (max-width: exports.$breakpoint-medium) and (orientation: landscape) {	
 		.hero h1 {
 			--font-size-hero: 4rem;
 

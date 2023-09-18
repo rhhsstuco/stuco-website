@@ -40,8 +40,7 @@
 	<div class="nav__links">
 		<ul>
 			<MediaQuery query="(min-width: 1024px)" let:matches={matches1}>
-			<MediaQuery query="(min-height: 768px)" let:matches={matches2}>
-				
+			<MediaQuery query="(min-height: 725px)" let:matches={matches2}>
 				{#if matches1 && matches2}
 					<li><a href="{base}/" class:active={url === `${base}/` || url === `${base}`}>Home</a></li>
 					<li><a href="{base}/events" class:active={url === `${base}/events`}>Events</a></li>
@@ -106,7 +105,7 @@
 	}
 
 	.nav__links > ul {
-		gap: 3.5rem;
+		gap: 3.125rem;
 
 		a {
 			font-size: var(--font-size-links);
