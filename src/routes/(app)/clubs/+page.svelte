@@ -49,6 +49,9 @@
 	}
 
 	.clubs {
+		--club-title-font-size: 2rem;
+		--club-subtitle-font-size: 1.25rem;
+
 		font-family: 'Poppins', sans-serif;
 
 		display: flex;
@@ -109,6 +112,11 @@
 	}
 
 	@include exports.media-large {
+		.clubs {
+			--club-title-font-size: 1.5rem;
+			--club-subtitle-font-size: 1.125rem;
+		}
+
 		.clubs__grid {
 			--columns: 2;
 

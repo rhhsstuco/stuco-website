@@ -27,9 +27,6 @@
 	@use '../../styles/exports.scss' as exports;
 
 	.club {
-		--club-title-font-size: 2rem;
-		--club-subtitle-font-size: 1.25rem;
-
 		font-family: "Poppins", sans-serif;
 
 		box-shadow: exports.$box-shadow;
@@ -41,8 +38,6 @@
 		background-color: var(--color-light);
 
 		min-height: 18rem;
-
-		/* min-width: 16rem; */
 	}
 
 	.club__banner {
@@ -74,15 +69,15 @@
 		padding: 1rem;
 
 		.club__info__title {
-		font-size: var(--club-title-font-size);
-		font-weight: 900;
-		color: var(--color-dark);
+			font-size: var(--club-title-font-size, 2rem);
+			font-weight: 900;
+			color: var(--color-dark);
 		}
 
 		.club__info__room,
 		.club__info__meeting-time {
-		font-size: var(--club-subtitle-font-size);
-		color: var(--color-darker-1);
+			font-size: var(--club-subtitle-font-size, 1.25rem);
+			color: var(--color-darker-1);
 		}
 	}
 </style>
