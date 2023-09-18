@@ -61,6 +61,7 @@
 		}
 
 		i {
+			color: var(--color-dark);
 			font-size: 2rem;
 		}
 	}
@@ -75,7 +76,7 @@
 		a {
 			font-size: var(--font-size-links);
 			font-weight: lighter;
-			color: var(--color-text);
+			color: var(--color-dark);
 			text-decoration: none;
 		}
 
