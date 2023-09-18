@@ -399,6 +399,11 @@
 		}
 	}
 
+	@media (prefers-reduced-motion: reduce) {
+		.calendar__body {
+			transition: none;
+		}
+	}
 
 </style>
 

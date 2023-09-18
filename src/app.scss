@@ -58,6 +58,8 @@ html,body {
 	min-height: 100%;
 }
 
-* {
-	transition: background-color 200ms ease-in-out;
+@media (prefers-reduced-motion: no-preference) {
+	* {
+		transition: background-color 200ms ease-in-out;
+	}
 }
