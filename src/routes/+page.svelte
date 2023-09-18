@@ -96,7 +96,6 @@
 	.hero__navbar {
 		background-color: var(--color-accent);
 		height: clamp(20rem, 100vh, 70rem);
-		max-width: 160rem;
 
 		header {
 			position: relative;

@@ -78,13 +78,13 @@
 	];
 
 	const DAYS = [
+		"Sun",
 		"Mon",
 		"Tue",
 		"Wed",
 		"Thu",
 		"Fri",
 		"Sat",
-		"Sun",
 	];
 
 	// Date and date derived properties
@@ -95,7 +95,7 @@
 	$: daysInMonth = [
 		31, getFebruaryDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
 	];
-	$: firstDayOffset = ((((new Date(year, month, 1).getDay()) % 7) - 1) + 7) % 7;
+	$: firstDayOffset = ((((new Date(year, month, 1).getDay()) % 7 + 1) - 1) + 7) % 7;
 	$: rows = Math.ceil((firstDayOffset + daysInMonth[month]) / 7);
 
 	// Selecting date for detail
@@ -159,7 +159,7 @@
 					class="calendar__body__event"
 					style={`
 						grid-row: ${Math.ceil((event.startDate.getDate() + firstDayOffset) / 7)} / ${Math.ceil((event.endDate.getDate() + firstDayOffset) / 7)};
-						grid-column: ${event.startDate.getDay()} / ${event.endDate.getDay() + 1};
+						grid-column: ${event.startDate.getDay() + 1} / ${event.endDate.getDay() + 2};
 					`}
 					>
 					{event.name}
