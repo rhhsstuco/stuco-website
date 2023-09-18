@@ -23,5 +23,9 @@
 			width: 24px;
 			font-size: var(--font-size-logo, 1.5rem);
 		}
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 </style>
