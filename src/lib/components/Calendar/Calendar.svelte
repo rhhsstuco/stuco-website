@@ -206,7 +206,7 @@
 
 		font-family: 'Poppins', sans-serif;
 
-		width: clamp(18rem, 80%, 52rem);
+		width: clamp(18rem, 85%, 52rem);
 		margin: 0 auto;
 		margin-top: 3rem;
 

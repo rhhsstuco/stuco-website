@@ -70,7 +70,7 @@
 		top: 0;
 		right: 0;
 		z-index: 1;
-		width: clamp(28rem, 52%, 54rem);
+		width: clamp(28rem, 48%, 60rem);
 		aspect-ratio: 1 / 1;
 
 		img {
@@ -95,7 +95,8 @@
 
 	.hero__navbar {
 		background-color: var(--color-accent);
-		min-height: 100vh;
+		height: clamp(20rem, 100vh, 70rem);
+		max-width: 160rem;
 
 		header {
 			position: relative;
@@ -115,7 +116,7 @@
 		grid-template-columns: repeat($dimensions, calc(100vw / $dimensions));
 		grid-template-rows: repeat(
 			$dimensions,
-			calc(calc(100vh - 5.5rem) / $dimensions)
+			calc(calc(min(100vh, 70rem) - 5.5rem) / $dimensions)
 		);
 
 		overflow-x: visible;
@@ -395,6 +396,95 @@
 
 		}
 
+	}
+
+	@media only screen and (min-width: 1000px) and (min-height: 1200px) and (orientation: landscape) {	
+		.hero__navbar {
+			height: clamp(20rem, 100vh, 40rem);
+		}
+
+		.hero h1 {
+			grid-row: 3 / 20;
+			grid-column: 2 / 14;
+		}
+
+		.hero-image-container {
+			right: 4rem;
+			margin: 0;
+			top: 14%;
+			left: auto;
+			width: clamp(12rem, 22%, 20rem);
+		}
+
+		.vector-container {
+			width: clamp(22rem, 45%, 60rem);
+		}
+	}
+
+	@media only screen and (max-height: 750px) and (orientation: landscape) {	
+		.hero h1 {
+			grid-row: 1 / -1;
+			grid-column: 2 / 14;
+			text-align: start;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+
+		}
+
+		.hero-image-container {
+			right: 4rem;
+			margin: 0;
+			left: auto;
+			width: clamp(12rem, 22%, 20rem);
+		}
+
+		.vector-container {
+			width: clamp(22rem, 22%, 60rem);
+		}
+	}
+
+	@media only screen and (max-height: 750px) and (max-width: exports.$breakpoint-medium) and (orientation: landscape) {	
+		.hero h1 {
+			--font-size-hero: 5rem;
+		}
+
+		.hero-image-container {
+			top: 22%;
+			width: clamp(10rem, 22%, 20rem);
+		}
+
+		.vector-container {
+			width: clamp(16rem, 22%, 60rem);
+		}
+	}
+
+	@media only screen and (max-height: 750px) and (max-width: exports.$breakpoint-medium) and (orientation: landscape) {	
+		.hero h1 {
+			--font-size-hero: 4rem;
+
+			grid-row: 6 / 20;
+			grid-column: 2 / 14;
+		}
+
+		.hero-image-container {
+			right: 4rem;
+			top: 22%;
+			margin: 0;
+			right: 1rem;
+			width: clamp(10rem, 20%, 20rem);
+		}
+
+		.vector-container {
+			width: clamp(14rem, 22%, 60rem);
+		}
+	}
+
+	@media only screen and (min-height: 70rem) and (orientation: portrait) {
+		.hero-image-container {
+			top: 15%;
+		}
 	}
 
 </style>

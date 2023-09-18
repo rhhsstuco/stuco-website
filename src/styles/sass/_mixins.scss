@@ -17,6 +17,12 @@
 	}
 }
 
+@mixin media-max-h($max) {
+	@media only screen and (max-height: $max) {
+		@content;
+	}
+}
+
 @mixin media-max($max) {
 	@media only screen and (max-width: $max) {
 		@content;

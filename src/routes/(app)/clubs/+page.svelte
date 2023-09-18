@@ -59,7 +59,7 @@
 	}
 
 	.clubs__search {
-		width: clamp(32rem, 50%, 46rem);
+		width: clamp(20rem, 60%, 48rem);
 		margin: 0 auto;
 	}
 
@@ -111,8 +111,9 @@
 
 	@include exports.media-large {
 		.clubs__grid {
-			--columns: 1;
-			--margin-horizontal: auto;
+			--columns: 2;
+
+			--margin-horizontal: 10rem;
 		}
 	}
 </style>
