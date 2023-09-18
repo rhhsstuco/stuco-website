@@ -12,9 +12,5 @@
 	header {
 		color: var(--color-dark);
 	}
-
-	:global(*) {
-		transition: background-color 200ms ease-in-out;
-	}
 </style>
 
