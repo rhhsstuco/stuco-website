@@ -1,3 +1,4 @@
+import { base } from "$app/paths";
 import { readdir } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -20,7 +21,7 @@ const getGalleryImages = async (maxResults?: number) => {
 
 	const prefixedFiles = Array.from(
 		new Set(
-			files.map(filename => `images/gallery/${path.parse(filename).name}`).slice(0, maxResults)
+			files.map(filename => `${base}/images/gallery/${path.parse(filename).name}`).slice(0, maxResults)
 		)
 	);
 
