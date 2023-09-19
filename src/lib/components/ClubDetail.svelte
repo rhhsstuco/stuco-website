@@ -58,6 +58,7 @@
 			left: -12.5%;
 
 			width: 8rem;
+			height: 8rem;
 		}
 	}
 
