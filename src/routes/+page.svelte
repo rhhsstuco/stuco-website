@@ -428,12 +428,18 @@
 			align-items: center;
 			justify-content: center;
 		}
+	}
 
+	@media only screen and (max-width: 1124px) and (max-height: 724px) and (orientation: landscape) {	
 		.hero-image-container {
 			left: auto;
 			right: 2rem;
 			top: 28%;
-			width: clamp(12rem, 30%, 20rem);
+			width: clamp(12rem, 28%, 20rem);
+		}
+
+		.vector-container {
+			width: clamp(22rem, 50%, 60rem);
 		}
 	}
 
@@ -477,8 +483,8 @@
 			right: 4rem;
 			top: 24%;
 			margin: 0;
-			right: 1rem;
-			width: clamp(10rem, 30%, 20rem);
+			right: 1.5rem;
+			width: clamp(10rem, 32%, 20rem);
 		}
 
 		.vector-container {
