@@ -57,7 +57,7 @@
   <section class="gallery">
 	<h2>Gallery</h2>
 	<MediaQuery query="(max-width: 864px)" let:matches>
-		<Carousel imageURLs={data.imageURLs} arrowStyling={matches ? 'inside' : 'outside'}/>
+		<Carousel imageURLs={data.imageURLs.map(url => `${base}/${url}`)} arrowStyling={matches ? 'inside' : 'outside'}/>
 	</MediaQuery>
   </section>
 </main>
@@ -116,14 +116,14 @@
 		grid-template-columns: repeat($dimensions, calc(100vw / $dimensions));
 		grid-template-rows: repeat(
 			$dimensions,
-			calc(calc(min(100vh, 70rem) - 5.5rem) / $dimensions)
+			calc(calc(clamp(20rem, 100vh, 70rem) - 5.5rem) / $dimensions)
 		);
 
 		overflow-x: visible;
 
 		h1 {
 			grid-row: 6 / 18;
-			grid-column: 4 / 14;
+			grid-column: 3 / 14;
 
 			font-size: var(--font-size-hero);
 			font-weight: 900;
@@ -343,10 +343,6 @@
 	}
 
 	@media screen and (max-width: exports.$breakpoint-medium) and (max-height: exports.$breakpoint-large) {
-		.hero h1 {
-			grid-row: 13 / 19;
-		}
-
 		.events {
 			--event-day-font-size: 2rem;
 			--event-month-font-size: 0.9rem;
@@ -432,15 +428,36 @@
 			align-items: center;
 			justify-content: center;
 		}
+
+		.hero-image-container {
+			left: auto;
+			right: 2rem;
+			top: 28%;
+			width: clamp(12rem, 30%, 20rem);
+		}
 	}
 
-	@media only screen and (max-height: 676px) and (orientation: landscape) {	
+	@media only screen and (max-aspect-ratio: 1 / 1) and (max-height: 676px) and (orientation: landscape) {	
+		.hero-image-container {
+			right: 4rem;
+			margin: 0;
+			top: 30%;
+			left: auto;
+			width: clamp(12rem, 30%, 20rem);
+		}
+
+		.vector-container {
+			width: clamp(22rem, 35%, 60rem);
+		}
+	}
+
+	@media only screen and (max-height: 576px) and (orientation: landscape) {	
 
 		.hero-image-container {
 			right: 4rem;
 			margin: 0;
 			left: auto;
-			width: clamp(12rem, 22%, 20rem);
+			width: clamp(12rem, 24%, 20rem);
 		}
 
 		.vector-container {
@@ -450,37 +467,33 @@
 
 	@media only screen and (max-height: 724px) and (max-width: exports.$breakpoint-medium) and (orientation: landscape) {	
 		.hero h1 {
-			--font-size-hero: 5rem;
-		}
+			--font-size-hero: 6rem;
 
-		.hero-image-container {
-			top: 22%;
-			width: clamp(10rem, 22%, 20rem);
-		}
-
-		.vector-container {
-			width: clamp(16rem, 22%, 60rem);
-		}
-	}
-
-	@media only screen and (max-height: 724px) and (max-width: exports.$breakpoint-medium) and (orientation: landscape) {	
-		.hero h1 {
-			--font-size-hero: 4rem;
-
-			grid-row: 6 / 20;
-			grid-column: 2 / 14;
+			grid-row: 4 / 20;
+			grid-column: 2 / 16;
 		}
 
 		.hero-image-container {
 			right: 4rem;
-			top: 22%;
+			top: 24%;
 			margin: 0;
 			right: 1rem;
-			width: clamp(10rem, 20%, 20rem);
+			width: clamp(10rem, 30%, 20rem);
 		}
 
 		.vector-container {
-			width: clamp(14rem, 22%, 60rem);
+			width: clamp(14rem, 40%, 60rem);
+		}
+	}
+
+	@media only screen and (max-height: 724px) and (max-width: exports.$breakpoint-small) and (orientation: landscape) {	
+		.hero h1 {
+			--font-size-hero: 4rem;
+		}
+	}
+	@media only screen and (max-aspect-ratio: 4 / 3) and (max-height: 724px) and (max-width: exports.$breakpoint-small) and (orientation: landscape) {	
+		.hero h1 {
+			--font-size-hero: 5rem;
 		}
 	}
 

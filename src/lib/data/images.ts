@@ -21,7 +21,7 @@ const getGalleryImages = async (maxResults?: number) => {
 
 	const prefixedFiles = Array.from(
 		new Set(
-			files.map(filename => `${base}/images/gallery/${path.parse(filename).name}`).slice(0, maxResults)
+			files.map(filename => `images/gallery/${path.parse(filename).name}`).slice(0, maxResults)
 		)
 	);
 

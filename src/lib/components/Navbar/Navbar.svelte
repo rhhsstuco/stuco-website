@@ -40,7 +40,7 @@
 	<div class="nav__links">
 		<ul>
 			<MediaQuery query="(min-width: 1024px)" let:matches={matches1}>
-			<MediaQuery query="(min-height: 677px)" let:matches={matches2}>
+			<MediaQuery query="(min-height: 577px)" let:matches={matches2}>
 				{#if matches1 && matches2}
 					<li><a href="{base}/" class:active={url === `${base}/` || url === `${base}`}>Home</a></li>
 					<li><a href="{base}/events" class:active={url === `${base}/events`}>Events</a></li>
