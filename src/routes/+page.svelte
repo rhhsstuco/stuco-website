@@ -431,8 +431,10 @@
 			flex-direction: row;
 			align-items: center;
 			justify-content: center;
-
 		}
+	}
+
+	@media only screen and (max-height: 676px) and (orientation: landscape) {	
 
 		.hero-image-container {
 			right: 4rem;
