@@ -41,7 +41,7 @@
 		text-align: center;
 
 		position: absolute;
-		background-color: var(--color-accent);
+		background-color: var(--color-badge);
 		border-radius: 50%;
 		width: max(17%, 0.8rem);
 		aspect-ratio: 1 / 1;

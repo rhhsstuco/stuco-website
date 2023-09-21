@@ -5,6 +5,7 @@
 	import { quadInOut } from "svelte/easing";
   	import reducedMotion from "$lib/stores/reducedMotion.store";
   import MediaQuery from "../MediaQuery.svelte";
+  import themeStore from "$lib/stores/theme.store";
 	export let events: SchoolEvent[];
 
 	/** 
@@ -135,7 +136,12 @@
 			{/each}
 		</div>
 	</div>
-	<div class="calendar__body" class:selected-date={selectedDate}>
+	<div
+		class="calendar__body"
+		class:selected-date={selectedDate}
+		class:dark-mode={$themeStore === 'dark'}
+		class:light-mode={$themeStore === 'light'}	
+	>
 		{#each { length: rows } as _, i}
 			{#each { length: DAYS_IN_WEEK} as _, j}
 				{@const dayCount = ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1}
@@ -308,8 +314,9 @@
 
 		transition: background-color 300ms ease-in-out;
 
-		&.selected-date {
+		&.selected-date{
 			background-color: var(--color-box-shadow);
+
 		}
 	}
 
@@ -326,7 +333,7 @@
 
 		font-size: var(--calendar-events-font-size);
 
-		background-color: var(--color-accent);
+		background-color: var(--color-badge);
 	}
 
 	.calendar-detail {
