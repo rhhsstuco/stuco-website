@@ -1,19 +1,45 @@
 <script lang="ts">
   	import { base } from "$app/paths";
-  	import Image from "$lib/components/Image.svelte";
-  import ImageGrid from "$lib/components/ImageGrid.svelte";
+  	import ImageGrid from "$lib/components/ImageGrid.svelte";
   	import type { PageServerData } from "./$types";
+  	import { mediaSmallest, mediaSmall, mediaMedium, mediaLarge, mediaLarger, mediaLargest, mediaSmaller } from "$lib/stores/screenWidth.store";
+  	import { page } from "$app/stores";
+  import { onDestroy, onMount } from "svelte";
+  import type { Unsubscriber } from "svelte/store";
 
 	export let data: PageServerData;
 
+	let galleryElement: HTMLElement;
+	let isMounted = false;
 	let columns = 5;
 
-	$: imageLength = data.imageURLs.length;
-
-	const splitImages = (imageURLS: string[]) => {
-		const imagesPerColumn = imageLength / columns;
-		const remainderImages = imageLength % columns;
+	function changeColumns(numColumns: number) {
+		return (matches: boolean) => {
+			if (matches) {
+				columns = numColumns;
+			}
+		}
 	}
+
+	// $: url = $page.url.pathname;
+
+	const mediaUnsubscribe: Unsubscriber[] = [];
+
+	mediaUnsubscribe.push(mediaLargest.subscribe(changeColumns(4)));
+	mediaUnsubscribe.push(mediaLarger.subscribe(changeColumns(4)));
+	mediaUnsubscribe.push(mediaLarge.subscribe(changeColumns(3)));
+	mediaUnsubscribe.push(mediaMedium.subscribe(changeColumns(3)));
+	mediaUnsubscribe.push(mediaSmall.subscribe(changeColumns(2)));
+	mediaUnsubscribe.push(mediaSmaller.subscribe(changeColumns(2)));
+	mediaUnsubscribe.push(mediaSmallest.subscribe(changeColumns(1)));
+
+	onDestroy(() => {
+		mediaUnsubscribe.forEach(fn => fn())
+	})
+	
+
+
+
 	
 
 </script>
@@ -25,8 +51,8 @@
 
 <main class="gallery">
 	<h1>Gallery</h1>
-	<div class="gallery__image-grid">
-		<ImageGrid imageURLs={data.imageURLs}/>
+	<div class="gallery__image-grid" bind:this={galleryElement}>
+		<ImageGrid imageURLs={data.imageURLs.map(url => `${base}${url}`)} {columns}/>
 	</div>
 </main>
 
@@ -52,5 +78,7 @@
 	.gallery__image-grid {
 		margin: 0 auto;
 	}
+
+
 
 </style>
