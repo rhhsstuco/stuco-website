@@ -13,10 +13,9 @@ const __dirname = path.dirname(__filename);
  * @returns an array of image URL strings
  */
 const getGalleryImages = async (maxResults?: number) => {
-	const relativePath = process.env.NODE_ENV === "production" ? "../../../client/images/gallery" : "../../../static/images/gallery"
+	const relativePath = process.env.NODE_ENV === "production" ? "../../client/images/gallery" : "../../../static/images/gallery"
 
 	const files = await readdir(path.join(__dirname, relativePath));
-
 	
 
 	const prefixedFiles = Array.from(

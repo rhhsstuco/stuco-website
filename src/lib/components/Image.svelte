@@ -4,7 +4,7 @@
 	export let fallbackExtension: string = 'jpg';
 </script>
 
-<picture>
+<picture {...$$restProps}>
 	<source srcset="{src}.avif" type="image/avif">
 	<img
 	src="{src}.{fallbackExtension}"
@@ -15,6 +15,10 @@
 <style lang="scss">
 	picture {
 		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		display: inline-block;
+		
 	}
 
     img, source {
