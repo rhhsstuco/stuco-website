@@ -2,13 +2,15 @@
 	export let src: string;
 	export let alt: string = "";
 	export let fallbackExtension: string = 'jpg';
+	export let loading: "lazy" | "eager" | undefined = undefined;
 </script>
 
 <picture {...$$restProps}>
 	<source srcset="{src}.avif" type="image/avif">
 	<img
 	src="{src}.{fallbackExtension}"
-	alt="{alt}"
+	{alt}
+	{loading}
 	/>
 </picture>
 

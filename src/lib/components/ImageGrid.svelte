@@ -36,7 +36,7 @@
 		<div class="gallery__column">
 			{#each imageColumn as image}
 				<div class="gallery__column__image">
-					<Image src={image}/>
+					<Image src={image} loading="lazy"/>
 				</div>
 			{/each}
 		</div>
