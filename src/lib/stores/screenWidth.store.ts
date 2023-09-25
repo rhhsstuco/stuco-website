@@ -9,8 +9,6 @@ const maxWidthQuery = (minWidth: number, maxWidth: number) => readable<boolean>(
 	onMount(() => {
 		const initialMatch = window.matchMedia(query).matches;
 		
-		console.log(query)
-		console.log("setting " + initialMatch)
 		set(initialMatch)
 
 		const updateMatch = (event: MediaQueryListEvent) => {

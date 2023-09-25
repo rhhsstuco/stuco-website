@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from "$app/paths";
 	import Image from "$lib/components/Image.svelte";
 
 	export let imageURLs: string[];
@@ -37,7 +36,7 @@
 		<div class="gallery__column">
 			{#each imageColumn as image}
 				<div class="gallery__column__image">
-					<Image src="{base}/{image}"/>
+					<Image src={image}/>
 				</div>
 			{/each}
 		</div>

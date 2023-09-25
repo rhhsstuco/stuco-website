@@ -36,11 +36,7 @@
 	onDestroy(() => {
 		mediaUnsubscribe.forEach(fn => fn())
 	})
-	
 
-
-
-	
 
 </script>
 
@@ -52,7 +48,7 @@
 <main class="gallery">
 	<h1>Gallery</h1>
 	<div class="gallery__image-grid" bind:this={galleryElement}>
-		<ImageGrid imageURLs={data.imageURLs.map(url => `${base}${url}`)} {columns}/>
+		<ImageGrid imageURLs={data.imageURLs.map(url => `${base}/${url}`)} {columns}/>
 	</div>
 </main>
 
