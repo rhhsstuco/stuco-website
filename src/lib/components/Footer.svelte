@@ -17,12 +17,12 @@
 			<ul>
 				<li>
 					<a href="https://www.instagram.com/rhhs_stuco/">
-						<i class="ri-instagram-line"></i>
+						<i class="ri-instagram-line"></i> &mdash; rhhs_stuco
 					</a>
 				</li>
 				<li>
 					<a href="https://twitter.com/RHHS_StuCo/">
-						<i class="ri-twitter-line"></i>
+						<i class="ri-twitter-line"></i> &mdash; RHHS_StuCo
 					</a>
 				</li>
 			</ul>
@@ -81,14 +81,17 @@
 		flex-basis: 50%;
 	}
 
-	.footer__content__links {
-
-		ul > li > a {
-			color: var(--color-dark);
-			text-decoration: none;
-			font-size: var(--footer-text-font-size);
-		}
+	.footer__content__links ul > li > a {
+		color: var(--color-dark);
+		text-decoration: none;
+		font-size: var(--footer-text-font-size);
+		
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
 	}
+	
 	@include exports.media-large {
 		.footer {
 			--footer-heading-font-size: 1rem;
