@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { base } from "$app/paths";
+  	import { base } from "$app/paths";
 	import Carousel from "$lib/components/Carousel/Carousel.svelte";
 	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
   	import MediaQuery from "$lib/components/MediaQuery.svelte";
 	import Navbar from "$lib/components/Navbar/Navbar.svelte";
-  import themeStore from "$lib/stores/theme.store";
+  	import themeStore from "$lib/stores/theme.store";
 	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;

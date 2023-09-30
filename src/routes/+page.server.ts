@@ -5,7 +5,11 @@ import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async () => {
 
-	const spreadsheetDataPromise = getEvents(3);
+	const spreadsheetDataPromise = getEvents({
+		maxResults: 3,
+		minDate: new Date(),
+	});
+	
 	const imageURLsPromise = getGalleryImages(6);
 
 	return {
