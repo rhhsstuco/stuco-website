@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
 
   import Image from "../Image.svelte";
 
@@ -122,6 +124,12 @@
 	}
 
 	:is(.carousel__left-arrow.inside, .carousel__right-arrow.inside) i {
+		&::before {
+			z-index: 10;
+			color: white;
+		}
+
+
 		&::after {
 			content: '';
 
@@ -135,6 +143,7 @@
 			background-color: rgba(0, 0, 0, 0.5);
 
 			border-radius: 50%;
+			z-index: -1;
 		}
 
 		&:hover::after {
@@ -154,6 +163,8 @@
 		flex-direction: row;
 
 		flex-grow: 1;
+		width: 100%;
+		height: 100%;
 		aspect-ratio: 16 / 9;
 
 		background-color: var(--color-lighter-2);
