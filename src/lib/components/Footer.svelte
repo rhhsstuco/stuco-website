@@ -82,7 +82,7 @@
 	}
 
 	.footer__content__links ul > li > a {
-		color: var(--color-dark);
+		color: var(--color-darker-2);
 		text-decoration: none;
 		font-size: var(--footer-text-font-size);
 		
