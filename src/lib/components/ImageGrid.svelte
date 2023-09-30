@@ -81,6 +81,10 @@
 
 	.gallery__column__image {
 		all: unset;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	.dialog__image {
