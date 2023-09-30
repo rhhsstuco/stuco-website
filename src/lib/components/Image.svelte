@@ -5,12 +5,13 @@
 	export let loading: "lazy" | "eager" | undefined = undefined;
 </script>
 
-<picture {...$$restProps}>
+<picture>
 	<source srcset="{src}.avif" type="image/avif">
 	<img
-	src="{src}.{fallbackExtension}"
-	{alt}
-	{loading}
+		{...$$restProps}
+		src="{src}.{fallbackExtension}"
+		{alt}
+		{loading}
 	/>
 </picture>
 
@@ -29,5 +30,6 @@
 		width: 100%;
 		height: 100%; 
 		object-fit: cover;
+		overflow: hidden;
     }
 </style>

@@ -9,8 +9,6 @@
 
 	export let data: PageServerData;
 
-	let galleryElement: HTMLElement;
-	let isMounted = false;
 	let columns = 5;
 
 	function changeColumns(numColumns: number) {
@@ -20,8 +18,6 @@
 			}
 		}
 	}
-
-	// $: url = $page.url.pathname;
 
 	const mediaUnsubscribe: Unsubscriber[] = [];
 
@@ -37,7 +33,6 @@
 		mediaUnsubscribe.forEach(fn => fn())
 	})
 
-
 </script>
 
 <svelte:head>
@@ -47,7 +42,7 @@
 
 <main class="gallery">
 	<h1>Gallery</h1>
-	<div class="gallery__image-grid" bind:this={galleryElement}>
+	<div class="gallery__image-grid">
 		<ImageGrid imageURLs={data.imageURLs.map(url => `${base}/${url}`)} {columns}/>
 	</div>
 </main>
@@ -74,7 +69,4 @@
 	.gallery__image-grid {
 		margin: 0 auto;
 	}
-
-
-
 </style>

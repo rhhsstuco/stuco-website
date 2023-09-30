@@ -1,5 +1,7 @@
 <script lang="ts">
 	import Image from "$lib/components/Image.svelte";
+	import clickOutside from "$lib/actions/clickOutside";
+  	import Dialog from "./Dialog.svelte";
 
 	export let imageURLs: string[];
 	export let columns = 5;
@@ -25,8 +27,16 @@
 
 	$: imageGrid = splitImages(imageURLs, columns);
 
+	let selectedImageURL: string;
+	let dialog: HTMLDialogElement;
 
+	function onImageClick(url: string) {
+		selectedImageURL = url;
 
+		return (e: Event) => dialog.showModal();
+	}
+
+	
 	
 
 </script>
@@ -35,12 +45,19 @@
 	{#each imageGrid as imageColumn}
 		<div class="gallery__column">
 			{#each imageColumn as image}
-				<div class="gallery__column__image">
+				<button class="gallery__column__image" on:click={onImageClick(image)}>
 					<Image src={image} loading="lazy"/>
-				</div>
+				</button>
 			{/each}
 		</div>
 	{/each}
+	<Dialog bind:dialog>
+		{#if selectedImageURL}
+			<div class="dialog__image" use:clickOutside on:click_outside={dialog.close()}>
+				<Image src={selectedImageURL}/>
+			</div>
+		{/if}
+	</Dialog>
 </section>
 
 <style lang="scss">
@@ -60,5 +77,16 @@
 		flex-basis: calc(100% / var(--columns));
 	
 		gap: 0.25rem;
+	}
+
+	.gallery__column__image {
+		all: unset;
+	}
+
+	.dialog__image {
+		max-width: 34rem;
+		height: auto;
+		
+		object-fit: cover;
 	}
 </style>
