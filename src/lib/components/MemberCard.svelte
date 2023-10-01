@@ -55,6 +55,9 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		gap: 0.125rem;
+
+		color: var(--color-dark);
 
 		h2 {
 			font-weight: bold;
@@ -64,6 +67,7 @@
 		h3 {
 			font-weight: 300;
 			font-size: var(--position-font-size);
+			color: var(--color-darker-1);
 		}
 	}
 </style>
