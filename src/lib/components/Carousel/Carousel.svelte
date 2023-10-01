@@ -10,8 +10,6 @@
 
 	let showNavigation = true;
 
-	const subscriptions = [];
-
 	const unsubscribe = mediaMobile.subscribe(matches => {
 		showNavigation = !matches;
 	})
