@@ -1,161 +1,79 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { mediaMobile, mediaSmall } from "$lib/stores/screenWidth.store";
+  import { onDestroy } from "svelte";
+	import Image from "../Image.svelte";
+  	import { register } from 'swiper/element/bundle';
 
+	register();
 
-  import Image from "../Image.svelte";
+	export let imageURLs: string[];
 
-  type CarouselArrowStyling = 'outside' | 'inside';
+	let showNavigation = true;
 
-  export let imageURLs: string[];
-  export let arrowStyling: CarouselArrowStyling = 'outside';
+	const subscriptions = [];
 
+	const unsubscribe = mediaMobile.subscribe(matches => {
+		showNavigation = !matches;
+	})
 
-  let currentIndex = 0;
-
-  /**
-   * Modulo function which wraps around negative numbers to the divisor
-   * @param n the divident
-   * @param m the divisor
-   */
-  function mod(n: number, m: number) {
-    return ((n % m) + m) % m;
-  }
-
-  /**
-   * Increments the current image index, looping around if necessary
-   */
-  function nextImage() {
-    currentIndex = mod(currentIndex + 1, imageURLs.length);
-  }
-
-  /**
-   * Decrements the current image index, looping around if necessary
-   */
-  function prevImage() {
-    currentIndex = mod(currentIndex - 1, imageURLs.length);
-  }
+	onDestroy(unsubscribe)
 </script>
 
-<div class="carousel">
-	<button
-		class="carousel__left-arrow"
-		class:inside={arrowStyling === 'inside'}
-		on:click={prevImage}
+<div class="gallery">	
+	<swiper-container
+		class="carousel"
+		slides-per-view={1}
+		space-between={10}
+		speed={300}
+		loop={true}
+		grab-cursor={true}
+		autoplay={{
+			delay: 2500,
+		}}
+		navigation={showNavigation}
 	>
-		<i class="ri-arrow-left-s-line" />
-	</button>
-	<div class="carousel__image">
-		{#each [imageURLs[currentIndex]] as src (currentIndex)}
-			<Image src={src}/>
+		<!-- <div class="carousel__image"> -->
+		{#each imageURLs as src}
+			<swiper-slide class="carousel__image">
+				<div class="swiper-zoom-container">
+					<Image src={src}/>
+				</div>
+			</swiper-slide>
 		{/each}
-	</div>
+		<!-- </div> -->
+	
+	</swiper-container>
 
-	<button
-		class="carousel__right-arrow"
-		class:inside={arrowStyling === 'inside'}
-		on:click={nextImage}
-	>
-		<i class="ri-arrow-right-s-line" />
-	</button>
 </div>
 
 <style lang="scss">
 	@use '../../../styles/exports.scss' as exports;
-	
-	.carousel {
-		display: flex;
-		flex-direction: row;
-		position: relative;
-	}
 
-	.carousel__left-arrow,
-	.carousel__right-arrow {
-		all: unset;
-		min-width: 10rem;
-
+	.gallery {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 
-		font-size: 400%;
-	}
+		--swiper-navigation-sides-offset: 1.5rem;
+		--swiper-navigation-color: white;
 
-	.carousel__left-arrow.inside,
-	.carousel__right-arrow.inside {
-		position: absolute;
-		z-index: 10;
-	}
-
-	.carousel__left-arrow.inside {
-		top: 50%;
-		left: -2%;
-		transform: translateY(-50%);
+		--swiper-pagination-color: white;
 	}
 	
-	.carousel__right-arrow.inside {
-		top: 50%;
-		right: -2%;
-		transform: translateY(-50%);
-	}
-
-	:is(.carousel__left-arrow, .carousel__right-arrow) i {
+	.carousel {
+		display: flex;
+		flex-direction: row;
 		position: relative;
-		color: var(--color-dark);
+		width: 100%;
+		background-color: var(--color-light);
 
-		&:hover {
-			cursor: pointer;
-		}
-
-		&:hover::after {
-			content: "";
-
-			inset: 0;
-
-			width: 100%;
-			height: 100%;
-
-			position: absolute;
-
-			background-color: rgba(0, 0, 0, 0.125);
-
-			border-radius: 50%;
-		}
-	}
-
-	:is(.carousel__left-arrow.inside, .carousel__right-arrow.inside) i {
-		&::before {
-			z-index: 10;
-			color: white;
-		}
-
-
-		&::after {
-			content: '';
-
-			inset: 0;
-
-			width: 100%;
-			height: 100%;
-
-			position: absolute;
-
-			background-color: rgba(0, 0, 0, 0.5);
-
-			border-radius: 50%;
-			z-index: -1;
-		}
-
-		&:hover::after {
-			background-color: rgba(0, 0, 0, 0.75);
-		}
+		box-shadow: exports.$box-shadow;
+		border: 4px solid var(--color-light);
 	}
 
 	.carousel__image {
 		position: relative;
-
-		box-shadow: exports.$box-shadow;
-		border: 4px solid var(--color-light);
 
 		overflow: hidden;
 
@@ -168,29 +86,5 @@
 		aspect-ratio: 16 / 9;
 
 		background-color: var(--color-lighter-2);
-	}
-
-	@include exports.media-large {
-		.carousel__left-arrow,
-		.carousel__right-arrow {
-			min-width: 8rem;
-			font-size: 350%;
-		}
-	}
-
-	@include exports.media-medium {
-		.carousel__left-arrow,
-		.carousel__right-arrow {
-			min-width: 7rem;
-			font-size: 300%;
-		}
-	}
-
-	@include exports.media-small {
-		.carousel__left-arrow,
-		.carousel__right-arrow {
-			min-width: 6rem;
-			font-size: 250%;
-		}
 	}
 </style>

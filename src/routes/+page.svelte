@@ -57,7 +57,7 @@
   <section class="gallery">
 	<h2>Gallery</h2>
 	<MediaQuery query="(max-width: 864px)" let:matches>
-		<Carousel imageURLs={data.imageURLs.map(url => `${base}/${url}`)} arrowStyling={matches ? 'inside' : 'outside'}/>
+		<Carousel imageURLs={data.imageURLs.map(url => `${base}/${url}`)}/>
 	</MediaQuery>
   </section>
 </main>

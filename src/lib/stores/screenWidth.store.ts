@@ -28,6 +28,7 @@ const maxWidthQuery = (minWidth: number, maxWidth: number) => readable<boolean>(
 export const mediaSmallest = maxWidthQuery(0, 480);
 export const mediaSmaller = maxWidthQuery(480, 640);
 export const mediaSmall = maxWidthQuery(640, 768);
+export const mediaMobile = maxWidthQuery(0, 768);
 export const mediaMedium = maxWidthQuery(768, 1024);
 export const mediaLarge = maxWidthQuery(1024, 1152);
 export const mediaLarger = maxWidthQuery(1152, 1280);
