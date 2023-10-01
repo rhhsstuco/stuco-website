@@ -38,7 +38,7 @@
 		--footer-text-font-size: 1rem;
 
 
-		width: clamp(20rem, 60%, 56rem);
+		width: clamp(16rem, 60%, 56rem);
 		margin: 2rem auto 3rem auto;
 	}
 

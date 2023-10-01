@@ -2,7 +2,7 @@ import { onMount } from "svelte";
 import { readable } from "svelte/store";
 
 
-const maxWidthQuery = (minWidth: number, maxWidth: number) => readable<boolean>(false, set => {
+export const screenWidthQuery = (minWidth: number, maxWidth: number) => readable<boolean>(false, set => {
 
 	const query = `(max-width: ${maxWidth}px) and (min-width: ${minWidth}px) `;
 
@@ -25,11 +25,11 @@ const maxWidthQuery = (minWidth: number, maxWidth: number) => readable<boolean>(
 	})
 });
 
-export const mediaSmallest = maxWidthQuery(0, 480);
-export const mediaSmaller = maxWidthQuery(480, 640);
-export const mediaSmall = maxWidthQuery(640, 768);
-export const mediaMobile = maxWidthQuery(0, 768);
-export const mediaMedium = maxWidthQuery(768, 1024);
-export const mediaLarge = maxWidthQuery(1024, 1152);
-export const mediaLarger = maxWidthQuery(1152, 1280);
-export const mediaLargest = maxWidthQuery(1280, 100000000000000);
+export const mediaSmallest = screenWidthQuery(0, 480);
+export const mediaSmaller = screenWidthQuery(480, 640);
+export const mediaSmall = screenWidthQuery(640, 768);
+export const mediaMobile = screenWidthQuery(0, 768);
+export const mediaMedium = screenWidthQuery(768, 1024);
+export const mediaLarge = screenWidthQuery(1024, 1152);
+export const mediaLarger = screenWidthQuery(1152, 1280);
+export const mediaLargest = screenWidthQuery(1280, 100000000000000);

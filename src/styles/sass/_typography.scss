@@ -1,3 +1,11 @@
+@use "./mixins" as mixins;
+
 :root {
 	--font-size-header: 4rem;
+}
+
+@include mixins.media-small {
+	:root {
+		--font-size-header: 3rem;
+	}
 }

@@ -25,10 +25,11 @@
 	.member-card {
 		--name-font-size: 1.25rem;
 		--position-font-size: 1rem;
+		--max-padding: 1rem;
 
 		box-shadow: exports.$box-shadow;
 		background-color: var(--color-light);
-		padding: 1rem;
+		padding: min(var(--max-padding), 5%);
 	}
 
 	.member-card__photo {
@@ -62,12 +63,26 @@
 		h2 {
 			font-weight: bold;
 			font-size: var(--name-font-size);
+			text-align: center;
 		}
 
 		h3 {
 			font-weight: 300;
 			font-size: var(--position-font-size);
 			color: var(--color-darker-1);
+		}
+	}
+
+	@media (max-width: 92rem) {
+		.member-card {
+			--name-font-size: 1.125rem;
+			--position-font-size: 0.95rem;
+		}
+	}
+
+	@include exports.media-largest {
+		.member-card {
+			--max-padding: 0.5rem;
 		}
 	}
 </style>

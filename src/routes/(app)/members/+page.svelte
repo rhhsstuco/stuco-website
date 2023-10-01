@@ -1,8 +1,11 @@
 <script lang="ts">
   	import MemberCard from "$lib/components/MemberCard.svelte";
+  import { mediaMaxLarge } from "$lib/stores/maxScreenWidth.store";
   	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
+
+	$: gridOffset = $mediaMaxLarge ? 0 : 3; 
 	
 </script>
 
@@ -14,13 +17,15 @@
 <main class="members">
 	<h1>Members</h1>
 	<section class="members__display">
-		<div class="members__display__row">
-			{#each data.members.slice(0, 3) as member}
-				<MemberCard {member}/>
-			{/each}
-		</div>
+		{#if !$mediaMaxLarge}
+			<div class="members__display__row">
+				{#each data.members.slice(0, 3) as member}
+					<MemberCard {member}/>
+				{/each}
+			</div>
+		{/if}
 		<div class="members__display__grid">
-			{#each data.members.slice(3) as member}
+			{#each data.members.slice(gridOffset) as member}
 				<MemberCard {member}/>
 			{/each}
 		</div>
@@ -65,5 +70,37 @@
 		grid-template-columns: repeat(4, 1fr);
 
 		gap: 2rem;
+	}
+
+	@include exports.media-largest {
+		.members__display__grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	@include exports.media-large {
+		.members__display__grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@include exports.media-small {
+		.members {
+			width: clamp(18rem, 80%, 80rem);
+		}
+
+		.members__display__grid {
+			gap: 1rem;
+		}
+	}
+
+	@include exports.media-smallest {
+		.members {
+			width: clamp(16rem, 75%, 80rem);
+		}
+
+		.members__display__grid {
+			grid-template-columns: repeat(1, 1fr);
+		}
 	}
 </style>
