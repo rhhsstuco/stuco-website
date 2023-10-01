@@ -23,12 +23,12 @@
 	<swiper-container
 		class="carousel"
 		slides-per-view={1}
-		space-between={10}
+		space-between={4}
 		speed={300}
 		loop={true}
 		grab-cursor={true}
 		autoplay={{
-			delay: 2500,
+			delay: 3000,
 		}}
 		navigation={showNavigation}
 	>
@@ -57,8 +57,6 @@
 
 		--swiper-navigation-sides-offset: 1.5rem;
 		--swiper-navigation-color: white;
-
-		--swiper-pagination-color: white;
 	}
 	
 	.carousel {
