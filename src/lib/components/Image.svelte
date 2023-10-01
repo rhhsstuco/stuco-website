@@ -20,13 +20,10 @@
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
-		display: inline-block;
-		
+		display: inline-block;		
 	}
 
     img, source {
-		/* position: absolute; */
-
 		width: 100%;
 		height: 100%; 
 		object-fit: cover;

@@ -5,22 +5,22 @@
 </script>
 
 <div class="club">
-  <div class="club__banner" style:background-color={club.bannerColor}>
-    <div class="club__banner__icon">
-		<Image src={club.imageURL} alt={club.name}/>
-    </div>
-  </div>
-  <div class="club__info">
-    <h2 class="club__info__title">
-      {club.name}
-    </h2>
-    <span class="club__info__room">
-      {club.room}
-    </span>
-    <span class="club__info__meeting-time">
-      {club.meetingTime}
-    </span>
-  </div>
+	<div class="club__banner" style:background-color={club.bannerColor}>
+		<div class="club__banner__icon">
+			<Image src={club.imageURL} alt={club.name}/>
+		</div>
+	</div>
+	<div class="club__info">
+		<h2 class="club__info__title">
+			{club.name}
+		</h2>
+		<span class="club__info__room">
+			{club.room}
+		</span>
+		<span class="club__info__meeting-time">
+			{club.meetingTime}
+		</span>
+	</div>
 </div>
 
 <style lang="scss">

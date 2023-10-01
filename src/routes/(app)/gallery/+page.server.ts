@@ -1,4 +1,3 @@
-
 import getGalleryImages from "$lib/data/images";
 import type { PageServerLoad } from "./$types";
 

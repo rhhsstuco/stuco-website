@@ -24,6 +24,7 @@
 	}
 
 	h1 {
+		margin-top: 2rem;
 		@include exports.header;
 	}
 </style>
