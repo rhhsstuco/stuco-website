@@ -38,7 +38,6 @@ const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
 	}).filter(schoolEvent => {
 		
 		if (minDate) {
-			console.log(schoolEvent.name)
 			return schoolEvent.startDate > minDate;
 		}
 

@@ -256,7 +256,7 @@
 	.calendar__header__date {
 		display: flex;
 		flex-direction: row;
-		gap: 0.5rem;
+		gap: 0.75rem;
 		justify-content: center;
 		align-items: center;
 
