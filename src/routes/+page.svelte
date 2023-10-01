@@ -168,7 +168,7 @@
 	.gallery {
 		font-family: 'Poppins', sans-serif;
 		
-		width: clamp(48rem, 65%, 64rem);
+		width: clamp(48rem, 65%, 60rem);
 		margin: 0 auto;
 
 		display: flex;

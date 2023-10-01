@@ -60,6 +60,8 @@
 		gap: 3rem;
 
 		min-height: 100vh;
+
+		margin-bottom: 8rem;
 	}
 
 	.clubs__search {

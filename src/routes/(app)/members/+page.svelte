@@ -40,6 +40,7 @@
 		width: clamp(18rem, 70%, 80rem);
 		margin: 0 auto;
 		font-family: 'Poppins', sans-serif;
+		margin-bottom: 8rem;
 
 		display: flex;
 		flex-direction: column;

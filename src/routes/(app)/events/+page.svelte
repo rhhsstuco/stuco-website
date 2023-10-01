@@ -21,6 +21,7 @@
 
 	main {
 		min-height: calc(100vh - 5.5rem);
+		margin-bottom: 8rem;
 	}
 
 	h1 {
