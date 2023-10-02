@@ -57,6 +57,7 @@
 			</MediaQuery>
 			<button
 				class="{icon} change-theme"
+				aria-label="Change theme"
 				on:click={onThemeChange}
 			/>
 		</ul>

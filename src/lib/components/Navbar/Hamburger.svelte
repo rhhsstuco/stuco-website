@@ -6,7 +6,7 @@
 	}
 </script>
 
-<button class="hamburger" on:click={onClick}>
+<button class="hamburger" on:click={onClick} aria-label="Open hamburger menu">
 	<i class="ri-menu-line"></i>
 </button>
 

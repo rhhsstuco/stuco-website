@@ -1,6 +1,6 @@
 <script lang="ts">
   	import MemberCard from "$lib/components/MemberCard.svelte";
-  import { mediaMaxLarge } from "$lib/stores/maxScreenWidth.store";
+  	import { mediaMaxLarge } from "$lib/stores/maxScreenWidth.store";
   	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
