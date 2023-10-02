@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { mediaMobile } from "$lib/stores/screenWidth.store";
 	import { onDestroy } from "svelte";
-	import Image from "../Image.svelte";
+	import Image from "./Image.svelte";
   	import { register } from 'swiper/element/bundle';
 
 	register();
@@ -45,7 +45,7 @@
 </div>
 
 <style lang="scss">
-	@use '../../../styles/exports.scss' as exports;
+	@use '../../styles/exports.scss' as exports;
 
 	.gallery {
 		display: flex;

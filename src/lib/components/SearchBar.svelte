@@ -14,6 +14,7 @@
 	</span>
 	<input
 		type="text"
+		aria-label="Search clubs"
 		class="search__input"
 		bind:value
 	>

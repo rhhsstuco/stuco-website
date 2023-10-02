@@ -1,6 +1,6 @@
 <script lang="ts">
   	import { base } from "$app/paths";
-	import Carousel from "$lib/components/Carousel/Carousel.svelte";
+	import Carousel from "$lib/components/Carousel.svelte";
 	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
   	import MediaQuery from "$lib/components/MediaQuery.svelte";
 	import Navbar from "$lib/components/Navbar/Navbar.svelte";

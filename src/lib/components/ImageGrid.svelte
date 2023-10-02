@@ -45,7 +45,7 @@
 	{#each imageGrid as imageColumn}
 		<div class="gallery__column">
 			{#each imageColumn as image}
-				<button class="gallery__column__image" on:click={onImageClick(image)}>
+				<button class="gallery__column__image" on:click={onImageClick(image)} aria-label="Select this image">
 					<Image src={image} loading="lazy"/>
 				</button>
 			{/each}
