@@ -14,12 +14,14 @@
 		<h2 class="club__info__title">
 			{club.name}
 		</h2>
-		<span class="club__info__room">
-			{club.room}
-		</span>
-		<span class="club__info__meeting-time">
-			{club.meetingTime}
-		</span>
+		<div>
+			<span class="club__info__room">
+				{club.room}
+			</span>
+			<span class="club__info__meeting-time">
+				{club.meetingTime}
+			</span>
+		</div>
 	</div>
 </div>
 
@@ -67,6 +69,8 @@
 		flex-direction: column;
 		gap: 0.125rem;
 
+		font-family: 'Inter', sans-serif;
+
 		padding: 1rem;
 
 		.club__info__title {
@@ -79,6 +83,16 @@
 		.club__info__meeting-time {
 			font-size: var(--club-subtitle-font-size, 1.25rem);
 			color: var(--color-darker-1);
+
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
+		> div {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
 		}
 	}
 </style>
