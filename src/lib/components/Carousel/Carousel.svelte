@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { mediaMobile, mediaSmall } from "$lib/stores/screenWidth.store";
-  import { onDestroy } from "svelte";
+	import { mediaMobile } from "$lib/stores/screenWidth.store";
+	import { onDestroy } from "svelte";
 	import Image from "../Image.svelte";
   	import { register } from 'swiper/element/bundle';
 
@@ -34,7 +34,7 @@
 		{#each imageURLs as src}
 			<swiper-slide class="carousel__image">
 				<div class="swiper-zoom-container">
-					<Image src={src}/>
+					<Image src={src} loading="lazy"/>
 				</div>
 			</swiper-slide>
 		{/each}

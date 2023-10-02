@@ -26,7 +26,7 @@
 		{/if}
 		<div class="members__display__grid">
 			{#each data.members.slice(gridOffset) as member}
-				<MemberCard {member}/>
+				<MemberCard {member} loading="lazy"/>
 			{/each}
 		</div>
 	</section>
