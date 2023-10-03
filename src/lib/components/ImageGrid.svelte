@@ -44,9 +44,9 @@
 <section class="gallery" style:--columns={columns}>
 	{#each imageGrid as imageColumn}
 		<div class="gallery__column">
-			{#each imageColumn as image}
+			{#each imageColumn as image, index}
 				<button class="gallery__column__image" on:click={onImageClick(image)}>
-					<Image src={image} loading="lazy"/>
+					<Image src={image} loading={index < 2 ? "eager" : "lazy"}/>
 				</button>
 			{/each}
 		</div>

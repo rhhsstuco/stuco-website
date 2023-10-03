@@ -1,4 +1,3 @@
-import { base } from "$app/paths";
 import { readdir } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
