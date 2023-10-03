@@ -1,6 +1,6 @@
 <script lang="ts">
   	import MemberCard from "$lib/components/MemberCard.svelte";
-  import { mediaMaxLarge } from "$lib/stores/maxScreenWidth.store";
+  	import { mediaMaxLarge } from "$lib/stores/maxScreenWidth.store";
   	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
@@ -26,7 +26,7 @@
 		{/if}
 		<div class="members__display__grid">
 			{#each data.members.slice(gridOffset) as member}
-				<MemberCard {member}/>
+				<MemberCard {member} loading="lazy"/>
 			{/each}
 		</div>
 	</section>

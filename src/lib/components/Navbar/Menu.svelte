@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { base } from "$app/paths";
 	import { page } from "$app/stores";
+  import clickOutside from "$lib/actions/clickOutside";
   	import { createEventDispatcher } from "svelte";
   	import { fly } from "svelte/transition";
 
@@ -14,7 +15,7 @@
 </script>
 
 
-<div class="menu" transition:fly={{ x: 500, duration: 600 }}>
+<div class="menu" transition:fly={{ x: 500, duration: 600 }} use:clickOutside on:click_outside={onClose}>
 	<div class="menu__top">
 		<button on:click={onClose}>
 			<i class="ri-close-line"></i>

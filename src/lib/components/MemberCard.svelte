@@ -2,12 +2,13 @@
   	import Image from "./Image.svelte";
 
 	export let member: StucoMember;
+	export let loading: "lazy" | "eager" = "eager";
 
 </script>
 
 <div class="member-card">
 	<div class="member-card__photo">
-		<Image src={member.imageURL} alt={member.name} loading="lazy"/>
+		<Image src={member.imageURL} alt={member.name} {loading}/>
 	</div>
 	<div class="member-card__text">
 		<h2 class="member-card__text__name">

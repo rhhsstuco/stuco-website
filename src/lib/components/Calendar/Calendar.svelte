@@ -119,14 +119,11 @@
 <div class="calendar">
 	<div class="calendar__header">
 		<div class="calendar__header__date">
-			<button on:click={() => date = new Date(year - 1, month , 1)}>
-				<i class="ri-arrow-left-double-line"></i>
-			</button>
-			<button on:click={() => date = new Date(year, month - 1, 1)}>
+			<button on:click={() => date = new Date(year, month - 1, 1)} aria-label="Previous month">
 				<i class="ri-arrow-left-s-line"></i>
 			</button>
 			<h2>{MONTHS[month]} {year}</h2>
-			<button on:click={() => date = new Date(year, month + 1, 1)}>
+			<button on:click={() => date = new Date(year, month + 1, 1)} aria-label="Next month">
 				<i class="ri-arrow-right-s-line"></i>
 			</button>
 		</div>

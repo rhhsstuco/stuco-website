@@ -48,17 +48,22 @@
 					<li><a href="{base}/gallery" class:active={url === `${base}/gallery`}>Gallery</a></li>
 					<li><a href="{base}/members" class:active={url === `${base}/members`}>Members</a></li>
 				{:else}
-					<Hamburger bind:open={menuIsOpen}/>
+					<li>
+						<Hamburger bind:open={menuIsOpen}/>
+					</li>
 					{#if menuIsOpen}
 						<Menu on:menu-close={() => menuIsOpen = false}/>
 					{/if}
 				{/if}
 			</MediaQuery>
 			</MediaQuery>
-			<button
-				class="{icon} change-theme"
-				on:click={onThemeChange}
-			/>
+			<li>
+				<button
+					class="{icon} change-theme"
+					aria-label="Change theme"
+					on:click={onThemeChange}
+				/>
+			</li>
 		</ul>
 	</div>
 </nav>
