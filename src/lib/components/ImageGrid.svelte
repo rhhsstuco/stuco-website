@@ -2,17 +2,19 @@
 	import Image from "$lib/components/Image.svelte";
 	import clickOutside from "$lib/actions/clickOutside";
   	import Dialog from "./Dialog.svelte";
+  	import type ImageMeta from "$lib/types/image.types";
+  	import Picture from "./Picture.svelte";
 
-	export let imageURLs: string[];
+	export let imageURLs: ImageMeta[];
 	export let columns = 5;
 
 	$: imageLength = imageURLs.length;
 
-	const splitImages = (imageURLS: string[], columns: number) => {
+	const splitImages = (imageURLS: ImageMeta[], columns: number) => {
 		const imagesPerColumn = Math.floor(imageLength / columns);
 		const remainderImages = imageLength % columns;
 
-		const images: string[][] = [];
+		const images: ImageMeta[][] = [];
 
 		for (let i = 0; i < columns; i++) {
 			images[i] = imageURLS.slice(i * imagesPerColumn, (i + 1) * imagesPerColumn);
@@ -27,10 +29,10 @@
 
 	$: imageGrid = splitImages(imageURLs, columns);
 
-	let selectedImageURL: string;
+	let selectedImageURL: ImageMeta;
 	let dialog: HTMLDialogElement;
 
-	function onImageClick(url: string) {
+	function onImageClick(url: ImageMeta) {
 		selectedImageURL = url;
 
 		return (e: Event) => dialog.showModal();
@@ -46,7 +48,7 @@
 		<div class="gallery__column">
 			{#each imageColumn as image, index}
 				<button class="gallery__column__image" on:click={onImageClick(image)} aria-label="Select this image">
-					<Image src={image} loading={index < 2 ? "eager" : "lazy"}/>
+					<Picture meta={image}/>
 				</button>
 			{/each}
 		</div>
@@ -54,7 +56,7 @@
 	<Dialog bind:dialog>
 		{#if selectedImageURL}
 			<div class="dialog__image" use:clickOutside on:click_outside={dialog.close()}>
-				<Image src={selectedImageURL}/>
+				<Picture meta={selectedImageURL}/>
 			</div>
 		{/if}
 	</Dialog>

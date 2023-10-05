@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { mediaMobile } from "$lib/stores/screenWidth.store";
 	import { onDestroy } from "svelte";
-	import Image from "./Image.svelte";
+	import Picture from "./Picture.svelte";
   	import { register } from 'swiper/element/bundle';
+  	import type ImageMeta from "$lib/types/image.types";
 
 	register();
 
-	export let imageURLs: string[];
+	export let imageURLs: ImageMeta[];
 
 	let showNavigation = true;
 
@@ -34,7 +35,7 @@
 		{#each imageURLs as src}
 			<swiper-slide class="carousel__image">
 				<div class="swiper-zoom-container">
-					<Image src={src} loading="lazy"/>
+					<Picture meta={src} loading="lazy"/>
 				</div>
 			</swiper-slide>
 		{/each}

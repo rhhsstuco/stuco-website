@@ -3,9 +3,9 @@
   	import ImageGrid from "$lib/components/ImageGrid.svelte";
   	import type { PageServerData } from "./$types";
   	import { mediaSmallest, mediaSmall, mediaMedium, mediaLarge, mediaLarger, mediaLargest, mediaSmaller } from "$lib/stores/screenWidth.store";
-  	import { page } from "$app/stores";
-  import { onDestroy, onMount } from "svelte";
-  import type { Unsubscriber } from "svelte/store";
+  	
+	import { onDestroy } from "svelte";
+	import type { Unsubscriber } from "svelte/store";
 
 	export let data: PageServerData;
 
@@ -43,7 +43,7 @@
 <main class="gallery">
 	<h1>Gallery</h1>
 	<div class="gallery__image-grid">
-		<ImageGrid imageURLs={data.imageURLs.map(url => `${base}/${url}`)} {columns}/>
+		<ImageGrid imageURLs={data.imageURLs} {columns}/>
 	</div>
 </main>
 

@@ -1,10 +1,15 @@
-import { readdir } from "fs/promises";
-import path from "path";
-import { fileURLToPath } from "url";
+import { base } from "$app/paths";
+import type { ImageProps, ImagePropsWithHeight } from "$lib/types/image.types";
+import type ImageMeta from "$lib/types/image.types";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+const coolFiles = import.meta.glob("../../../static/images/gallery/*.jpg", {
+	query: {
+		w: '200;400;800',
+		format: 'jpg;webp;avif',
+		meta: true,
+		as: 'picture',
+	}
+})
 
 /**
  * Reads image names from static folder and transformes them into image URLs
@@ -12,18 +17,22 @@ const __dirname = path.dirname(__filename);
  * @returns an array of image URL strings
  */
 const getGalleryImages = async (maxResults?: number) => {
-	const relativePath = process.env.NODE_ENV === "production" ? "../../client/images/gallery" : "../../../static/images/gallery"
 
-	const files = await readdir(path.join(__dirname, relativePath));
+	const filepaths = (await Promise.all(
+			Object.entries(coolFiles).map(async ([_, value]) => (await value() as any))
+		))
+		.map(image => ({
+			img: (image.img as ImagePropsWithHeight),
+			sources: (image.sources as ImageProps[])
+			
+		} as unknown as ImageMeta))
+		.slice(0, maxResults)
+		
 	
-
-	const prefixedFiles = Array.from(
-		new Set(
-			files.map(filename => `images/gallery/${path.parse(filename).name}`).slice(0, maxResults)
-		)
-	);
-
-	return prefixedFiles;
+	filepaths.forEach(filepath => filepath.img.src = `${base}${filepath.img.src}`)
+		
+	
+	return filepaths;
 }
 
 export default getGalleryImages;

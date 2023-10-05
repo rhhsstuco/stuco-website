@@ -10,7 +10,7 @@ export const load: PageServerLoad = async () => {
 		minDate: new Date(),
 	});
 	
-	const imageURLsPromise = getGalleryImages(6);
+	const imageURLsPromise = getGalleryImages(5);
 
 	return {
 		events: spreadsheetDataPromise,
