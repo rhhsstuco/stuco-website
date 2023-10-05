@@ -2,7 +2,7 @@ import { base } from "$app/paths";
 import type { ImageProps, ImagePropsWithHeight } from "$lib/types/image.types";
 import type ImageMeta from "$lib/types/image.types";
 
-const coolFiles = import.meta.glob("../../../static/images/gallery/*.jpg", {
+const coolFiles = import.meta.glob("$images/gallery/*.jpg", {
 	query: {
 		w: '200;400;800',
 		format: 'jpg;webp;avif',

@@ -6,7 +6,7 @@
 	const sources = meta.sources;
 	const fallback = meta.img;
 
-	export let sizes = '33vw';
+	export let sizes = '100vw';
 	export let alt = '';
 	export let loading: 'lazy' | 'eager' | null | undefined = 'eager';
 </script>
