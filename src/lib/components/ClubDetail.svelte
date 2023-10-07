@@ -1,13 +1,16 @@
 <script lang="ts">
+  import type SchoolClub from "$lib/models/SchoolClub.model";
   import Image from "./Image.svelte";
+  import Picture from "./Picture.svelte";
 
   export let club: SchoolClub;
+
 </script>
 
 <div class="club">
 	<div class="club__banner" style:background-color={club.bannerColor}>
 		<div class="club__banner__icon">
-			<Image src={club.imageURL} alt={club.name}/>
+			<Picture meta={club.imageURL} alt={club.name}/>
 		</div>
 	</div>
 	<div class="club__info">

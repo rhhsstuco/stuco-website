@@ -1,6 +1,37 @@
 import { PUBLIC_SPREADSHEET_ID } from '$env/static/public';
-import path from 'path';
+import type SchoolClub from '$lib/models/SchoolClub.model';
+import type { ImageMeta, ImageProps, ImagePropsWithHeight } from '$lib/types/image.types';
 import { getSpreadSheetValues, initSheetsAuth } from './spreadsheet';
+
+const filepaths = import.meta.glob("$images/club_logos/*.jpg", { as: 'raw', eager: true });
+
+const files = import.meta.glob("$images/club_logos/*.jpg", {
+	query: {
+		w: '400;1600',
+		format: 'jpg;webp;avif',
+		meta: true,
+		as: 'picture',
+	}
+})
+
+const filenames = Object.keys(filepaths)
+	.map(path => {
+		return path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.',));
+	});
+
+const clubPictureData = (await Promise.all(
+		Object.entries(files).map(async ([_, value]) => (await value() as any))
+	))
+	.map(image => ({
+		img: (image.img as ImagePropsWithHeight),
+		sources: (image.sources as ImageProps[])
+		
+	} as unknown as ImageMeta))
+
+const clubImageMap = new Map<string, ImageMeta>();
+
+filenames.map((filename, index) => clubImageMap.set(filename, clubPictureData[index]))
+
 
 
 /**
@@ -18,17 +49,21 @@ const getClubs = async (maxResults?: number) => {
 	// Grab the 2D array of cells from the Google Sheet
 	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Clubs", range)).data.values || [];
 
-
 	// Remove metadata row and transform the values
 	const transformedValues = values.slice(1).map(row => {
 
+		const clubImage = clubImageMap.get(row[4]);
+
+		if (!clubImage) {
+			throw new Error(`club image not found. (key: ${row[4]}) (keys: ${[...clubImageMap.keys()]}) (values: ${[...clubImageMap.values()]})`);
+		}
 
 		return {
 			name: row[0],
 			room: row[1],
 			meetingTime: row[2],
 			bannerColor: row[3],
-			imageURL: `images/club_logos/${row[4]}`,
+			imageURL: clubImage,
 		} as SchoolClub
 	});
 

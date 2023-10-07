@@ -2,9 +2,9 @@ import { base } from "$app/paths";
 import type { ImageProps, ImagePropsWithHeight } from "$lib/types/image.types";
 import type ImageMeta from "$lib/types/image.types";
 
-const coolFiles = import.meta.glob("$images/gallery/*.jpg", {
+const files = import.meta.glob("$images/gallery/*.jpg", {
 	query: {
-		w: '200;400;800',
+		w: '400;800;1600',
 		format: 'jpg;webp;avif',
 		meta: true,
 		as: 'picture',
@@ -19,7 +19,7 @@ const coolFiles = import.meta.glob("$images/gallery/*.jpg", {
 const getGalleryImages = async (maxResults?: number) => {
 
 	const filepaths = (await Promise.all(
-			Object.entries(coolFiles).map(async ([_, value]) => (await value() as any))
+			Object.entries(files).map(async ([_, value]) => (await value() as any))
 		))
 		.map(image => ({
 			img: (image.img as ImagePropsWithHeight),
@@ -29,7 +29,7 @@ const getGalleryImages = async (maxResults?: number) => {
 		.slice(0, maxResults)
 		
 	
-	filepaths.forEach(filepath => filepath.img.src = `${base}${filepath.img.src}`)
+	filepaths.forEach(filepath => filepath.img.src = `${filepath.img.src}`)
 		
 	
 	return filepaths;
