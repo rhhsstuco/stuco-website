@@ -19,13 +19,13 @@
 	<section class="members__display">
 		{#if !$mediaMaxLarge}
 			<div class="members__display__row">
-				{#each data.members.slice(0, 3) as member}
+				{#each data.members.slice(0, 3) as member (member.name)}
 					<MemberCard {member}/>
 				{/each}
 			</div>
 		{/if}
 		<div class="members__display__grid">
-			{#each data.members.slice(gridOffset) as member}
+			{#each data.members.slice(gridOffset) as member (member.name)}
 				<MemberCard {member} loading="lazy"/>
 			{/each}
 		</div>

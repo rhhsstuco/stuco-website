@@ -32,7 +32,7 @@
 	</div>
 	{#if filteredClubs.length}
 		<div class="clubs__grid">
-			{#each filteredClubs as club}
+			{#each filteredClubs as club (club)}
 				<ClubDetail {club}/>
 			{/each}
 		</div>

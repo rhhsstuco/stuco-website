@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Image from "$lib/components/Image.svelte";
 	import clickOutside from "$lib/actions/clickOutside";
   	import Dialog from "./Dialog.svelte";
   	import type ImageMeta from "$lib/types/image.types";
@@ -46,7 +45,7 @@
 <section class="gallery" style:--columns={columns}>
 	{#each imageGrid as imageColumn}
 		<div class="gallery__column">
-			{#each imageColumn as image, index}
+			{#each imageColumn as image (image.img.src)}
 				<button class="gallery__column__image" on:click={onImageClick(image)} aria-label="Select this image">
 					<Picture meta={image}/>
 				</button>

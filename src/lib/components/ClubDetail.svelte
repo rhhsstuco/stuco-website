@@ -1,14 +1,24 @@
 <script lang="ts">
   import type SchoolClub from "$lib/models/SchoolClub.model";
-  import Image from "./Image.svelte";
   import Picture from "./Picture.svelte";
 
   export let club: SchoolClub;
 
+  $: useRainbow = club.bannerColor === "rainbow";
+
 </script>
 
 <div class="club">
-	<div class="club__banner" style:background-color={club.bannerColor}>
+	<div class="club__banner" style:background-color={club.bannerColor} class:rainbow={useRainbow}>
+		<!-- Rainbow! -->
+		{#if useRainbow}
+			<div style:background-color="#ff3c40"></div>
+			<div style:background-color="#fe9843"></div>
+			<div style:background-color="#feef54"></div>
+			<div style:background-color="#00802d"></div>
+			<div style:background-color="#1558f5"></div>
+			<div style:background-color="#851f86"></div>
+		{/if}
 		<div class="club__banner__icon">
 			<Picture meta={club.imageURL} alt={club.name}/>
 		</div>
@@ -64,6 +74,15 @@
 
 			width: 8rem;
 			height: 8rem;
+		}
+
+		&.rainbow {
+			display: flex;
+			flex-direction: column;
+
+			> div {
+				flex-grow: 1;
+			}
 		}
 	}
 

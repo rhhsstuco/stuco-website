@@ -144,16 +144,18 @@
 				{@const dayCount = ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1}
 				{@const currentDate = new Date(year, month, dayCount)}
 				{@const validDate = (dayCount > 0) && (dayCount <= daysInMonth[month])}
-
-				<CalendarDay
-					events={eventsMap.get(currentDate.toDateString())}
-					clickable={validDate}
-					on:click={selectDate(currentDate)}
-				>
-					{#if validDate}
+				
+				{#if validDate}
+					<CalendarDay
+						events={eventsMap.get(currentDate.toDateString())}
+						clickable={validDate}
+						on:click={selectDate(currentDate)}
+					>
 						<span class="calendar__body__day">{ dayCount }</span>
-					{/if}
-				</CalendarDay>
+					</CalendarDay>
+				{:else}
+					<div></div>
+				{/if}
 			{/each}
 		{/each}
 		{#each events as event}

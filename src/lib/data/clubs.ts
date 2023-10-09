@@ -7,9 +7,7 @@ const filepaths = import.meta.glob("$images/club_logos/*.jpg", { as: 'raw', eage
 
 const files = import.meta.glob("$images/club_logos/*.jpg", {
 	query: {
-		w: '400;1600',
-		format: 'jpg;webp;avif',
-		meta: true,
+		format: 'avif;webp;jpg',
 		as: 'picture',
 	}
 })

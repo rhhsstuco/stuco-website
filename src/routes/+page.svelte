@@ -1,4 +1,6 @@
 <script lang="ts">
+	// @ts-ignore
+	import HeroImages from "$lib/images/home-page-people-laptop.png?format=avif;webp;png;&quality=100&as=picture"
   	import { base } from "$app/paths";
 	import Carousel from "$lib/components/Carousel.svelte";
 	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
@@ -6,6 +8,7 @@
 	import Navbar from "$lib/components/Navbar/Navbar.svelte";
   	import themeStore from "$lib/stores/theme.store";
 	import type { PageServerData } from "./$types";
+  	import Picture from "$lib/components/Picture.svelte";
 
 	export let data: PageServerData;
 
@@ -33,7 +36,8 @@
       <img class="vector" src="{base}/images/bg-vector-{$themeStore}.svg" alt=""/>
     </div>
 	<div class="hero-image-container">
-		<img class="people-laptop" src="{base}/images/home-page-people-laptop.png" alt=""/>
+		<Picture meta={HeroImages} sizes="(max-width:600px) 600px, (max-width:1200px) 1500px, 2000px"/>
+		<!-- <img class="people-laptop" src="{base}/images/home-page-people-laptop.png" alt=""/> -->
 	</div>
     <section class="hero">
       <h1>RHHS STUCO</h1>
@@ -83,7 +87,6 @@
 		right: 16%;
 		z-index: 1;
 		width: clamp(14rem, 22%, 24rem);
-		aspect-ratio: 1 / 1;
 
 		img {
 			width: 100%;
