@@ -57,9 +57,7 @@
   <!-- Image Gallery -->
   <section class="gallery">
 	<h2>Gallery</h2>
-	<MediaQuery query="(max-width: 864px)" let:matches>
-		<Carousel imageURLs={data.imageURLs}/>
-	</MediaQuery>
+	<Carousel imageURLs={data.imageURLs}/>
   </section>
 </main>
 
@@ -87,11 +85,6 @@
 		right: 16%;
 		z-index: 1;
 		width: clamp(14rem, 22%, 24rem);
-
-		img {
-			width: 100%;
-			object-fit: cover;
-		}
 	}
 
 	.hero__navbar {
