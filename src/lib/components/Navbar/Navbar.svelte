@@ -103,6 +103,10 @@
 		align-items: center;
 	}
 
+	.nav__logo {
+		font-family: "Poppins";
+	}
+
 	.nav__logo a {
 		font-size: var(--font-size-logo);
 		font-weight: 900;

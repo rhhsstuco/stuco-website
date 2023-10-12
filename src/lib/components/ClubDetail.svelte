@@ -99,12 +99,15 @@
 			font-size: var(--club-title-font-size, 2rem);
 			font-weight: 900;
 			color: var(--color-dark);
+
+			font-family: 'Poppins', sans-serif;
 		}
 
 		.club__info__room,
 		.club__info__meeting-time {
 			font-size: var(--club-subtitle-font-size, 1.25rem);
 			color: var(--color-darker-1);
+
 
 			display: flex;
 			flex-direction: row;

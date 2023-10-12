@@ -1,6 +1,7 @@
 <script lang="ts">
 	// Global Styling
 	import '../app.scss';
+	// import '../fonts.scss';
 
 
  	import { onMount } from 'svelte';

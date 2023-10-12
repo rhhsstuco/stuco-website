@@ -90,6 +90,10 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: flex-start;
+
+		i {
+			font-size: 1.5rem;
+		}
 	}
 	
 	@include exports.media-large {
