@@ -19,7 +19,7 @@
 			srcset={srcMeta.map((meta) => `${meta.src} ${meta.w}w`).join(', ')}
 		/>
 	{/each}
-	<img src={fallback.src} {alt} {loading}/>
+	<img src={fallback.src} {alt} {loading} width={fallback.w} height={fallback.h}/>
 </picture>
 
 <style lang="scss">
