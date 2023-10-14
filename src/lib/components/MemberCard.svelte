@@ -1,5 +1,6 @@
 <script lang="ts">
-  	import Image from "./Image.svelte";
+  	import type StucoMember from "$lib/models/StucoMember.model";
+  	import Picture from "./Picture.svelte";
 
 	export let member: StucoMember;
 	export let loading: "lazy" | "eager" = "eager";
@@ -8,7 +9,7 @@
 
 <div class="member-card">
 	<div class="member-card__photo">
-		<Image src={member.imageURL} alt={member.name} {loading}/>
+		<Picture meta={member.imageURL} alt={member.name} sizes="(max-width: 800px) 400px, 1200px" {loading}/>
 	</div>
 	<div class="member-card__text">
 		<h2 class="member-card__text__name">
