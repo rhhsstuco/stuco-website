@@ -6,10 +6,9 @@
 */
 
 const rotateMap = new Map<string, string>([
+	['005.jpg', "90"],
 	['007.jpg', "90"],
 	['008.jpg', "90"],
-	['009.jpg', "-90"],
-	['010.jpg', "90"],
 ]);
 
 const defaultDirectives = (url: URL) => {

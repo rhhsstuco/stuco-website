@@ -20,7 +20,16 @@
 			<div style:background-color="#851f86"></div>
 		{/if}
 		<div class="club__banner__icon">
-			<Picture meta={club.imageURL} alt={club.name}/>
+			{#if club.instagramURL}
+				<a href={club.instagramURL}>
+					<Picture meta={club.imageURL} alt={club.name}/>
+				</a>
+			{:else}
+				<Picture meta={club.imageURL} alt={club.name}/>
+			{/if}
+		</div>
+		<div class="club__banner__insta">
+			<i class="ri-instagram-line"></i>
 		</div>
 	</div>
 	<div class="club__info">

@@ -9,12 +9,15 @@ const files = import.meta.glob("$images/gallery/*.jpg", {
 	}
 })
 
+type Orientation = 'horizontal' | 'vertical';
+
 /**
  * Reads image names from static folder and transformes them into image URLs
  * @param {number?} maxResults the maximum size of the response set or undefined if no limit is specified.
- * @returns an array of image URL strings
+ * @param {Orientation} orientation allows filtering my image orientation
+ * @returns an array of ImageMeta objects
  */
-const getGalleryImages = async (maxResults?: number) => {
+const getGalleryImages = async (maxResults?: number, orientation?: Orientation) => {
 
 	const filepaths = (await Promise.all(
 			Object.entries(files).map(async ([_, value]) => (await value() as any))
@@ -25,8 +28,19 @@ const getGalleryImages = async (maxResults?: number) => {
 			
 		} as unknown as ImageMeta))
 		.slice(0, maxResults)
+
+	let filteredFilepaths = filepaths;
+
+	if (orientation === 'horizontal') {
+		filteredFilepaths = filepaths.filter(img => img.img.w > img.img.h);
+	}
+
+	if (orientation === 'vertical') {
+		filteredFilepaths = filepaths.filter(img => img.img.h > img.img.w);
+	}
 	
-	return filepaths;
+	
+	return filteredFilepaths;
 }
 
 export default getGalleryImages;

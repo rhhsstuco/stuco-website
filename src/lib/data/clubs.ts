@@ -42,7 +42,7 @@ const getClubs = async (maxResults?: number) => {
 	await initSheetsAuth();
 
 	// Optionally limit size of result set
-	const range = maxResults === undefined ? "A:E" : `A1:E${(+maxResults) + 1}`;
+	const range = maxResults === undefined ? "A:F" : `A1:F${(+maxResults) + 1}`;
 
 	// Grab the 2D array of cells from the Google Sheet
 	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Clubs", range)).data.values || [];
@@ -62,6 +62,7 @@ const getClubs = async (maxResults?: number) => {
 			meetingTime: row[2],
 			bannerColor: row[3],
 			imageURL: clubImage,
+			instagramURL: row[5]
 		} as SchoolClub
 	});
 
