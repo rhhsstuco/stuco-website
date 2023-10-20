@@ -59,11 +59,9 @@
 	}
 
 	.members__display__row {
-		display: flex;
-		flex-direction: row;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
 		gap: 2rem;
-		justify-content: center;
-		align-items: center;
 	}
 
 	.members__display__grid {

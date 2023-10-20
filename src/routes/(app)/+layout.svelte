@@ -11,6 +11,8 @@
 <style lang="scss">
 	header {
 		color: var(--color-dark);
+
+		view-transition-name: header;
 	}
 </style>
 

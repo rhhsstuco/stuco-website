@@ -64,6 +64,8 @@
 	--color-darker-2: var(--dark-theme-color-darker-2);
 
 	--color-box-shadow: var(--dark-theme-box-shadow);
+
+	--color-nav-hover: var(--light-theme-color-accent);
 }
 
 [data-theme="light"] {
@@ -87,4 +89,6 @@
 	--color-darker-2: var(--light-theme-color-darker-2);
 
 	--color-box-shadow: var(--light-theme-box-shadow);
+
+	--color-nav-hover: var(--color-primary);
 }

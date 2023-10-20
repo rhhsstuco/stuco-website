@@ -3,8 +3,8 @@
 	import '../app.scss';
 	import '../fonts.scss';
 
-
  	import { onMount } from 'svelte';
+	import { onNavigate } from '$app/navigation';
 	import themeStore, { type Theme } from '$lib/stores/theme.store';
   	import Footer from '$lib/components/Footer.svelte';
 
@@ -27,9 +27,53 @@
 
 	});
 	
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
 
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <slot/>
 
 <Footer/>
+
+<style lang="scss">
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+	}
+
+	@keyframes fade-out {
+		to {
+			opacity: 0;
+		}
+	}
+
+	@keyframes slide-from-right {
+		from {
+			transform: translateX(20px);
+		}
+	}
+
+	@keyframes slide-to-left {
+		to {
+			transform: translateX(-20px);
+		}
+	}
+
+	:root::view-transition-old(root) {
+		animation: 50ms cubic-bezier(0.4, 0, 1, 1) both fade-out, 150ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+	}
+
+	:root::view-transition-new(root) {
+		animation: 120ms cubic-bezier(0, 0, 0.2, 1) 50ms both fade-in, 150ms cubic-bezier(0.4, 0, 0.2, 1) both
+				slide-from-right;
+	}
+</style>

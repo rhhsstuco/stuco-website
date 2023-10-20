@@ -91,6 +91,8 @@
 		background-color: var(--color-accent);
 		height: clamp(20rem, 100vh, 70rem);
 
+		--color-nav-hover: white;
+
 		header {
 			position: relative;
 			z-index: 20;

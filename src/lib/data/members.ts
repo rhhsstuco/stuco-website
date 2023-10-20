@@ -4,7 +4,7 @@ import type { ImageMeta, ImageProps, ImagePropsWithHeight } from '$lib/types/ima
 const files = import.meta.glob("$images/members/*.jpg", {
 	query: {
 		format: 'avif;webp;jpg',
-		w: '400;1200',
+		w: '400;800',
 		as: 'picture',
 	}
 })

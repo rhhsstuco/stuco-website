@@ -63,3 +63,11 @@ html,body {
 		transition: background-color 200ms ease-in-out;
 	}
 }
+
+@media (prefers-reduced-motion) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}

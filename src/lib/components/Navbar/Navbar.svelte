@@ -90,10 +90,17 @@
 
 		box-sizing: border-box;
 
-		&.active {
-			border-bottom: 2px solid
+		&.active::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			margin-bottom: -2px;
+			border-bottom: 2px solid;
 		}
+	}
 
+	nav li:hover {
+		color: var(--color-nav-hover);
 	}
 
 	.nav__logo,
