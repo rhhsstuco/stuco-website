@@ -96,6 +96,7 @@
 		header {
 			position: relative;
 			z-index: 20;
+			view-transition-name: header;
 
 			color: var(--color-accent);
 		}
@@ -504,4 +505,15 @@
 		}
 	}
 
+	@media (max-width: 1024px) {
+		header {
+			view-transition-name: none;
+		}
+	}
+
+	@media (max-height: 577px) {
+		header {
+			view-transition-name: none;
+		}
+	}
 </style>

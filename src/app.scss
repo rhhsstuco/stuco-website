@@ -71,3 +71,19 @@ html,body {
 		animation: none !important;
 	}
 }
+
+@media (max-width: 1024px) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}
+
+@media (max-height: 577px) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}
