@@ -17,7 +17,13 @@
 		<source
 			type="image/{type}"
 			{sizes}
-			srcset={srcMeta.map((meta) => `${meta.src} ${meta.w}w`).join(', ')}
+			srcset={srcMeta.map((meta) => {
+				if (meta.dpr) {
+					return `${meta.src} ${meta.dpr}x`
+				}
+				
+				return `${meta.src} ${meta.w}w`
+			}).join(', ')}
 		/>
 	{/each}
 	<img src={fallback.src} {alt} {loading} width={fallback.w} height={fallback.h}/>

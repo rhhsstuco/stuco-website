@@ -1,6 +1,7 @@
 export interface ImageProps {
 	src: string;
 	w: number;
+	dpr?: number;
 };
 
 export type ImagePropsWithHeight = ImageProps & { h: number };

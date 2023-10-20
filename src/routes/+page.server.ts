@@ -10,7 +10,11 @@ export const load: PageServerLoad = async () => {
 		minDate: new Date(),
 	});
 	
-	const imageURLsPromise = getGalleryImages(5, 'horizontal');
+	const imageURLsPromise = getGalleryImages({
+		maxResults: 5,
+		orientation: 'horizontal',
+		useDPR: false
+	});
 
 	return {
 		events: spreadsheetDataPromise,

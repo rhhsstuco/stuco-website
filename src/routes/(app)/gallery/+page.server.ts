@@ -7,7 +7,7 @@ export const load: PageServerLoad = async () => {
 	let imageURLs: ImageMeta[];
 
 	try {
-		imageURLs = await getGalleryImages();
+		imageURLs = await getGalleryImages({ useDPR: true });
 	} catch (err) {
 		console.error(err);
 		return {
