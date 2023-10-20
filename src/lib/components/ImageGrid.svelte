@@ -36,13 +36,9 @@
 
 		return (e: Event) => dialog.showModal();
 	}
-
-	
-	
-
 </script>
 
-<section class="gallery" style:--columns={columns}>
+<section class="gallery">
 	{#each imageGrid as imageColumn}
 		<div class="gallery__column">
 			{#each imageColumn as image (image.img.src)}
@@ -64,12 +60,14 @@
 <style lang="scss">
 	@use "../../styles/exports.scss" as exports;
 
+
 	.gallery {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		gap: 0.25rem;
 		margin: 0 auto;
+		width: 100%
 	}
 
 	.gallery__column {
@@ -94,4 +92,6 @@
 		
 		object-fit: cover;
 	}
+
+
 </style>

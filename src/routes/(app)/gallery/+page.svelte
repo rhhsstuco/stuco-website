@@ -9,7 +9,7 @@
 
 	export let data: PageServerData;
 
-	let columns = 5;
+	let columns = 4;
 
 	function changeColumns(numColumns: number) {
 		return (matches: boolean) => {
@@ -51,6 +51,8 @@
 	@use "../../../styles/exports.scss" as exports;
 
 	main {
+		--columns: 4;
+
 		display: flex;
 		flex-direction: column;
 		gap: 2.5rem;
@@ -70,4 +72,43 @@
 	.gallery__image-grid {
 		margin: 0 auto;
 	}
+
+	@media (max-width: 1280px) {
+		main {
+			--columns: 4;
+		}
+	}
+
+	@media (max-width: 1152px) {
+		main {
+			--columns: 3;
+		}
+	}
+
+	@media (max-width: 1024px) {
+		main {
+			--columns: 3;
+		}
+	}
+
+	@media (max-width: 768px) {
+		main {
+			--columns: 2;
+		}
+	}
+
+	@media (max-width: 640px) {
+		main {
+			--columns: 2;
+		}
+	}
+	@media (max-width: 480px) {
+		main {
+			--columns: 1;
+		}
+	}
+
+
+
+
 </style>
