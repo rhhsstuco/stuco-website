@@ -2,6 +2,7 @@
 	// Global Styling
 	import '../app.scss';
 	import '../fonts.scss';
+	import 'remixicon/fonts/remixicon.css';
 
  	import { onMount } from 'svelte';
 	import { onNavigate } from '$app/navigation';

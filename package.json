@@ -34,6 +34,7 @@
 		"google-spreadsheet": "^4.0.2",
 		"googleapis": "^105.0.0",
 		"moment": "^2.29.4",
+		"remixicon": "^3.5.0",
 		"supports-color": "^9.4.0",
 		"svelte-gestures": "^1.5.2",
 		"swiper": "^10.3.1"
