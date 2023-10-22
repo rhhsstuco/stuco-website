@@ -25,8 +25,8 @@
 			</div>
 		{/if}
 		<div class="members__display__grid">
-			{#each data.members.slice(gridOffset) as member (member.name)}
-				<MemberCard {member} loading="lazy"/>
+			{#each data.members.slice(gridOffset) as member, index (member.name)}
+				<MemberCard {member} loading={($mediaMaxLarge && index < 3) ? "eager" : "lazy" }/>
 			{/each}
 		</div>
 	</section>

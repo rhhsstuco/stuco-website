@@ -4,6 +4,7 @@ import { getSpreadSheetValues, initSheetsAuth } from './spreadsheet';
 interface GetEventsParams {
 	maxResults?: number;
 	minDate?: Date;
+	removeDuplicates?: boolean;
 }
 
 
@@ -15,12 +16,16 @@ interface GetEventsParams {
 const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
 	const maxResults = params?.maxResults;
 	const minDate = params?.minDate;
+	const removeDuplicates = params?.removeDuplicates;
 	
 	// Initialize service account connection with Google Sheet
 	await initSheetsAuth();
 
 	// Grab the 2D array of cells from the Google Sheet
 	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Events", "A:D")).data.values || [];
+
+	// Create set for deduping values
+	const seenNames = new Set<string>();
 
 	// Remove metadata row and transform the values
 	const transformedValues = values.slice(1).map(row => {
@@ -39,6 +44,18 @@ const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
 		
 		if (minDate) {
 			return schoolEvent.startDate > minDate;
+		}
+
+		return true;
+	}).filter(schoolEvent => {
+		if (removeDuplicates) {
+			const eventName = schoolEvent.name;
+
+			if (seenNames.has(eventName)) {
+				return false;
+			}
+
+			seenNames.add(eventName);
 		}
 
 		return true;

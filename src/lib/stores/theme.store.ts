@@ -2,6 +2,7 @@ import { writable } from "svelte/store";
 
 export type Theme = "light" | "dark";
 
-const themeStore = writable<Theme>("light");
+// TODO: reset default to "light" after halloweek
+const themeStore = writable<Theme>("dark");
 
 export default themeStore;

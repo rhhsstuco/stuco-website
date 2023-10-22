@@ -1,14 +1,16 @@
 <script lang="ts">
+	// TODO: undo pumpkin graphic after Halloweek
 	// @ts-ignore
-	import HeroImages from "$lib/images/home-page-people-laptop.png?format=avif;webp;png;&quality=100&as=picture"
+	import HeroImages from "$lib/images/pumpkin.png?format=avif;webp;png&w=400;800&as=picture"
+	// import HeroImages from "$lib/images/home-page-people-laptop.png?format=avif;webp;png&w=400;800&as=picture"
   	import { base } from "$app/paths";
 	import Carousel from "$lib/components/Carousel.svelte";
 	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
-  	import MediaQuery from "$lib/components/MediaQuery.svelte";
 	import Navbar from "$lib/components/Navbar/Navbar.svelte";
   	import themeStore from "$lib/stores/theme.store";
 	import type { PageServerData } from "./$types";
   	import Picture from "$lib/components/Picture.svelte";
+  	import type ImageMeta from "$lib/types/image.types";
 
 	export let data: PageServerData;
 
@@ -17,6 +19,16 @@
 		startDate: new Date(event.startDate),
 		endDate: new Date(event.endDate),
 	}));
+
+	$: {
+		const sources = Object.entries((HeroImages as ImageMeta).sources);
+
+		for (const source of sources) {
+			const images = source[1];
+			
+			images.forEach((image, i) => image.dpr = i + 1);
+		}
+	}
 </script>
 
 <svelte:head>
@@ -36,8 +48,7 @@
       <img class="vector" src="{base}/images/bg-vector-{$themeStore}.svg" alt=""/>
     </div>
 	<div class="hero-image-container">
-		<Picture meta={HeroImages} sizes="(max-width:600px) 600px, (max-width:1200px) 1500px, 2000px"/>
-		<!-- <img class="people-laptop" src="{base}/images/home-page-people-laptop.png" alt=""/> -->
+		<Picture meta={HeroImages} sizes="400px"/>
 	</div>
     <section class="hero">
       <h1>RHHS STUCO</h1>

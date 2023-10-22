@@ -10,7 +10,8 @@
   	import Footer from '$lib/components/Footer.svelte';
 
 	onMount(() => {
-		let theme = <Theme> localStorage.getItem("theme") ?? "light";
+		// TODO: undo pumpkin graphic after Halloweek
+		let theme = <Theme> localStorage.getItem("theme") ?? "dark";
 
 		if ("matchMedia" in window) {
 			if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
