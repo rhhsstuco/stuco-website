@@ -237,7 +237,7 @@
 		h2 {
 			text-transform: uppercase;
 			font-size: var(--calendar-heading-font-size);
-			width: fit-content;
+			width: 13rem;
 
 			font-weight: bold;
 		}
@@ -376,7 +376,6 @@
 			--calendar-detail-date-font-size: 1rem;
 			--calendar-detail-description-font-size: 0.8rem;
 			--calendar-detail-event-font-size: 0.9rem;
-
 		}
 
 		.calendar__header {
@@ -386,6 +385,10 @@
 
 		.calendar-detail {
 			width: 42%;
+		}
+
+		.calendar__header h2 {
+			width: 11rem;
 		}
 	}
 

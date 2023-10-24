@@ -21,7 +21,7 @@
 		{/if}
 		<div class="club__banner__icon">
 			{#if club.instagramURL}
-				<a href={club.instagramURL}>
+				<a href={club.instagramURL} target="_blank" rel="noopener noreferrer">
 					<Picture meta={club.imageURL} alt={club.name}/>
 				</a>
 			{:else}
