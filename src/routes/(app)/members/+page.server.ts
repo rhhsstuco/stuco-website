@@ -131,7 +131,7 @@ export const load: PageServerLoad = async () => {
 		{
 			name: "Shawn Liang",
 			position: "Grade 10 Rep",
-			imageURL: images["ronan_hasan"],
+			imageURL: images["shawn_chen"],
 		},
 		{
 			name: "Elspeth Attwood",
