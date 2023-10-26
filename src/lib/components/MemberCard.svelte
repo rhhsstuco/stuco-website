@@ -4,7 +4,6 @@
 
 	export let member: StucoMember;
 	export let loading: "lazy" | "eager" = "eager";
-
 </script>
 
 <div class="member-card">
