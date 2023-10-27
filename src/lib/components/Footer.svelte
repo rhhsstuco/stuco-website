@@ -16,12 +16,12 @@
 			</h2>
 			<ul>
 				<li>
-					<a href="https://www.instagram.com/rhhs_stuco/">
+					<a href="https://www.instagram.com/rhhs_stuco/" target="_blank" rel="noopener noreferrer">
 						<i class="ri-instagram-line"></i> &mdash; rhhs_stuco
 					</a>
 				</li>
 				<li>
-					<a href="https://twitter.com/RHHS_StuCo/">
+					<a href="https://twitter.com/RHHS_StuCo/" target="_blank" rel="noopener noreferrer">
 						<i class="ri-twitter-line"></i> &mdash; RHHS_StuCo
 					</a>
 				</li>
