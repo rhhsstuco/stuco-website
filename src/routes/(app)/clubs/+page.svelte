@@ -26,9 +26,7 @@
 <main class="clubs">
 	<h1>Clubs</h1>
 	<div class="clubs__search">
-
 		<SearchBar on:value-change={onValueChange}/>
-
 	</div>
 	{#if filteredClubs.length}
 		<div class="clubs__grid">
@@ -37,7 +35,7 @@
 			{/each}
 		</div>
 	{:else} 
-		<p class="clubs__grid__not-found">No Clubs Found :(</p>
+		<p class="clubs__grid__not-found">No clubs found :(</p>
 	{/if}
 </main>
 
@@ -65,7 +63,7 @@
 	}
 
 	.clubs__search {
-		width: clamp(18rem, 60%, 48rem);
+		width: clamp(16rem, 60%, 48rem);
 		margin: 0 auto;
 	}
 
@@ -138,6 +136,11 @@
 			--margin-horizontal: auto;
 			
 			max-width: 32rem;
+		}
+
+		.clubs__search {
+			width: clamp(12rem, 80%, 32rem);
+			margin: 0 auto;
 		}
 	}
 

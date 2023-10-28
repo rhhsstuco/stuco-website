@@ -32,31 +32,30 @@
 </div>
 
 <style lang="scss">
-	.search {
-		display: flex;
-		flex-direction: row;
-		background-color: var(--color-light);
-		color: var(--color-dark);
+	@use "../../styles/exports.scss" as exports;
 
+	.search {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 
+		background-color: var(--color-light);
+		color: var(--color-dark);
+
 		box-shadow: 0 4px 4px var(--color-box-shadow);
+		padding: 1rem 0.75rem 1rem 1rem;
+		gap: 0.75rem;
 	}
 
-	.search__icon, .close__icon {
-		padding: 1rem;
-		
-		i {
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			align-items: center;
-			font-size: 1.25rem;
-			color: var(--color-dark);
-		}
+	.search__icon, .close__icon i {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		font-size: 1.25rem;
+		color: var(--color-dark);
 	}
+	
 
 	.search__input {
 		all: unset;
@@ -65,7 +64,7 @@
 
 	.close__icon {
 		all: unset;
-		padding: 0.75rem;
+		/* padding: 0.75rem; */
 
 		i {
 			font-size: 1.5rem;
@@ -76,4 +75,15 @@
 		}
 	}
 	
+	@include exports.media-small {
+		.search {
+			font-size: 0.9rem;
+			padding: 0.75rem 0.5rem 0.75rem 0.75rem;
+			gap: 0.5rem;
+		}
+
+		.search__icon, .close__icon i {
+			font-size: 1.25rem;
+		}
+	}
 </style>
