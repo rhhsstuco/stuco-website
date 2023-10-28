@@ -141,12 +141,16 @@
 		}
 	}
 
+	@include exports.media-max(1536px) {
+		.nav__links > ul {
+			gap: 2.5rem;
+		}
+	}
+	
+
 	@include exports.media-largest {
 		nav {
 			--font-size-links: 1rem;
-		}
-		.nav__links > ul {
-			gap: 2.5rem;
 		}
 	}
 	
@@ -156,7 +160,7 @@
 			gap: 1.5rem;
 		}
 	}
-	
+
 	@include exports.media-max(calc(exports.$breakpoint-large - 1px)) {
 		.nav__links > ul {
 			gap: 1rem;
