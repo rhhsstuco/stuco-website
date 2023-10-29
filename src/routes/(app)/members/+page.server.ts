@@ -50,7 +50,7 @@ export const load: PageServerLoad = async () => {
 		},
 		{
 			name: "Jin Lu Yu",
-			position: "Social Convener",
+			position: "Social Convenor",
 			imageURL: images["jin_lu_yu"],
 		},
 		{
