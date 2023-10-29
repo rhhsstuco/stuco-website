@@ -153,4 +153,10 @@
 			max-width: 16rem;
 		}
 	}
+
+	@include exports.media-max(360px) {
+		.clubs__grid {
+			max-width: 14rem;
+		}
+	}
 </style>
