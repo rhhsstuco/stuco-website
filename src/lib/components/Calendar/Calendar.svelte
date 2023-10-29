@@ -202,8 +202,8 @@
 		--calendar-detail-date-font-size: 1.25rem;
 
 		--calendar-detail-heading-gap: 0.75rem;
-		--calendar-detail-events-gap: 0.25rem;
-		--calendar-detail-events-info-gap: 0.125rem;
+		--calendar-detail-events-gap: 0.5rem;
+		--calendar-detail-events-info-gap: 0.1rem;
 
 		overflow: hidden;
 
@@ -357,8 +357,8 @@
 			--calendar-detail-event-font-size: 0.95rem;
 
 			--calendar-detail-heading-gap: 0.5rem;
-			--calendar-detail-events-gap: 0.25rem;
-			--calendar-detail-events-info-gap: 0.125rem;
+			--calendar-detail-events-gap: 0.4rem;
+			--calendar-detail-events-info-gap: 0.1rem;
 		}
 
 		.calendar-detail {
