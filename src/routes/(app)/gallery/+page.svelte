@@ -45,7 +45,7 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content={data.imageURLs[0].img.src}>
 	{#if !dev}
-		<meta property="og:url" content="rhhsstuco.ca/gallery">
+		<meta property="og:url" content="https://rhhsstuco.ca/gallery">
 	{/if}
 </svelte:head>
 

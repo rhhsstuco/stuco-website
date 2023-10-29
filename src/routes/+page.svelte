@@ -43,7 +43,7 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content={HeroImages.img.src}>
 	{#if !dev}
-		<meta property="og:url" content="rhhsstuco.ca">
+		<meta property="og:url" content="https://rhhsstuco.ca">
 	{/if}
 </svelte:head>
 

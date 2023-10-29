@@ -30,7 +30,7 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content={data.clubs[0].imageURL.img.src}>
 	{#if !dev}
-		<meta property="og:url" content="rhhsstuco.ca/clubs">
+		<meta property="og:url" content="https://rhhsstuco.ca/clubs">
 	{/if}
 </svelte:head>
 

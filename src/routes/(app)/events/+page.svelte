@@ -34,7 +34,7 @@
 	<meta property="og:description" content={DESCRIPTION}>
 	<meta property="og:type" content="website">
 	{#if !dev}
-		<meta property="og:url" content="rhhsstuco.ca/events">
+		<meta property="og:url" content="https://rhhsstuco.ca/events">
 	{/if}
 </svelte:head>
 
