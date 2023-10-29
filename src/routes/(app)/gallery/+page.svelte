@@ -1,11 +1,11 @@
 <script lang="ts">
-  	import { base } from "$app/paths";
   	import ImageGrid from "$lib/components/ImageGrid.svelte";
   	import type { PageServerData } from "./$types";
   	import { mediaSmallest, mediaSmall, mediaMedium, mediaLarge, mediaLarger, mediaLargest, mediaSmaller } from "$lib/stores/screenWidth.store";
   	
 	import { onDestroy } from "svelte";
 	import type { Unsubscriber } from "svelte/store";
+  	import { dev } from "$app/environment";
 
 	export let data: PageServerData;
 
@@ -33,11 +33,20 @@
 		mediaUnsubscribe.forEach(fn => fn())
 	})
 
+	const TITLE = "Gallery | RHHS StuCo";
+	const DESCRIPTION = "A look into our 2022-2023 school year.";
 </script>
 
 <svelte:head>
-	<title>Gallery</title>
-	<meta name="description" content="A look into our 2022-2023 school year.">
+	<title>{TITLE}</title>
+	<meta name="description" content={DESCRIPTION}>
+	<meta property="og:title" content={TITLE}>
+	<meta property="og:description" content={DESCRIPTION}>
+	<meta property="og:type" content="website">
+	<meta property="og:image" content={data.imageURLs[0].img.src}>
+	{#if !dev}
+		<meta property="og:url" content="rhhsstuco.ca/gallery">
+	{/if}
 </svelte:head>
 
 <main class="gallery">

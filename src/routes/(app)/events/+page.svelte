@@ -1,6 +1,7 @@
 <script lang="ts">
+  	import { dev } from "$app/environment";
   	import Calendar from "$lib/components/Calendar/Calendar.svelte";
-  import HomePageEvent from "$lib/components/HomePageEvent.svelte";
+  	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
 	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
@@ -20,16 +21,21 @@
 				duplicateEvents.add(event.name);
 				return true;
 			})
-
-
-
 	}
 
+	const TITLE = "Events | RHHS StuCo";
+	const DESCRIPTION = "Stay up to date on all school events here!";
 </script>
 
 <svelte:head>
-	<title>Events</title>
-	<meta name="description" content="Stay up to date on all school events here!">
+	<title>{TITLE}</title>
+	<meta name="description" content={DESCRIPTION}>
+	<meta property="og:title" content={TITLE}>
+	<meta property="og:description" content={DESCRIPTION}>
+	<meta property="og:type" content="website">
+	{#if !dev}
+		<meta property="og:url" content="rhhsstuco.ca/events">
+	{/if}
 </svelte:head>
 
 <main>

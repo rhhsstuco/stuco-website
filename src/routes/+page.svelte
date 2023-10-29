@@ -11,6 +11,7 @@
 	import type { PageServerData } from "./$types";
   	import Picture from "$lib/components/Picture.svelte";
   	import type ImageMeta from "$lib/types/image.types";
+  	import { dev } from "$app/environment";
 
 	export let data: PageServerData;
 
@@ -29,11 +30,21 @@
 			images.forEach((image, i) => image.dpr = i + 1);
 		}
 	}
+
+	const TITLE = "RHHS StuCo";
+	const DESCRIPTION = "StuCo is a group of students who come together and act as the liason between admin and the student body.";
 </script>
 
 <svelte:head>
-	<title>RHHS StuCo</title>
-	<meta name="description" content="StuCo is a group of students who come together and act as the liason between admin and the student body.">
+	<title>{TITLE}</title>
+	<meta name="description" content={DESCRIPTION}>
+	<meta property="og:title" content={TITLE}>
+	<meta property="og:description" content={DESCRIPTION}>
+	<meta property="og:type" content="website">
+	<meta property="og:image" content={HeroImages.img.src}>
+	{#if !dev}
+		<meta property="og:url" content="rhhsstuco.ca">
+	{/if}
 </svelte:head>
 
 <main>

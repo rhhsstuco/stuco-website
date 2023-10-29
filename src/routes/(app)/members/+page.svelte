@@ -1,4 +1,5 @@
 <script lang="ts">
+  	import { dev } from "$app/environment";
   	import MemberCard from "$lib/components/MemberCard.svelte";
   	import { mediaMaxLarge } from "$lib/stores/maxScreenWidth.store";
   	import type { PageServerData } from "./$types";
@@ -7,11 +8,20 @@
 
 	$: gridOffset = $mediaMaxLarge ? 0 : 3; 
 	
+	const TITLE = "Members | RHHS StuCo";
+	const DESCRIPTION = "Meet the members of our the 2023-2024 Student Council!";
 </script>
 
 <svelte:head>
-	<title>Members</title>
-	<meta name="description" content="Meet the members of our the 2023-2024 Student Council!">
+	<title>{TITLE}</title>
+	<meta name="description" content={DESCRIPTION}>
+	<meta property="og:title" content={TITLE}>
+	<meta property="og:description" content={DESCRIPTION}>
+	<meta property="og:type" content="website">
+	<meta property="og:image" content={data.members[1].imageURL.img.src}>
+	{#if !dev}
+		<meta property="og:url" content="rhhsstuco.ca/members">
+	{/if}
 </svelte:head>
 
 <main class="members">

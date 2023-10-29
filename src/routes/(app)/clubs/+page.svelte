@@ -1,4 +1,5 @@
 <script lang="ts">
+  	import { dev } from "$app/environment";
 	import ClubDetail from "$lib/components/ClubDetail.svelte";
   	import SearchBar from "$lib/components/SearchBar.svelte";
   	import type { PageServerData } from "./$types";
@@ -16,11 +17,21 @@
 		club.name.toLowerCase().includes(value) ||
 		club.room.toLowerCase().includes(value)
 	);
+
+	const TITLE = "Clubs | RHHS StuCo";
+	const DESCRIPTION = "Want to find a club? You came to the right place! Here you can search for clubs that fit your interests.";
 </script>
 
 <svelte:head>
-	<title>Clubs</title>
-	<meta name="description" content="Want to find a club? You came to the right place! Here you can search for clubs that fit your interests.">
+	<title>{TITLE}</title>
+	<meta name="description" content={DESCRIPTION}>
+	<meta property="og:title" content={TITLE}>
+	<meta property="og:description" content={DESCRIPTION}>
+	<meta property="og:type" content="website">
+	<meta property="og:image" content={data.clubs[0].imageURL.img.src}>
+	{#if !dev}
+		<meta property="og:url" content="rhhsstuco.ca/clubs">
+	{/if}
 </svelte:head>
 
 <main class="clubs">
