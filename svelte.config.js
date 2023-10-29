@@ -14,7 +14,8 @@ const config = {
 			$images: "static/images",
 		},
 		paths: {
-			base: process.env.NODE_ENV === "production" ? "/test" : "",
+			// Allows custom base URL
+			base: process.env.NODE_ENV === "production" ? "" : "",
 		},
 	}
 };
