@@ -1,8 +1,6 @@
 <script lang="ts">
-	// TODO: undo pumpkin graphic after Halloweek
 	// @ts-ignore
-	import HeroImages from "$lib/images/pumpkin.png?format=avif;webp;png&w=400;800&as=picture"
-	// import HeroImages from "$lib/images/home-page-people-laptop.png?format=avif;webp;png&w=400;800&as=picture"
+	import HeroImages from "$lib/images/home-page-people-laptop.png?format=avif;webp;png&w=400;800&as=picture";
   	import { base } from "$app/paths";
 	import Carousel from "$lib/components/Carousel.svelte";
 	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
