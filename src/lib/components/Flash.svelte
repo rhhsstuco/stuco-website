@@ -30,6 +30,7 @@
 		border-radius: 4px;
 		box-shadow: exports.$box-shadow;
 		background-color: var(--color-light);
+		color: var(--color-dark);
 		z-index: 1000;
 
 		display: flex;

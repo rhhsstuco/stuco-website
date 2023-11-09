@@ -66,6 +66,10 @@
 	--color-box-shadow: var(--dark-theme-box-shadow);
 
 	--color-nav-hover: var(--light-theme-color-accent);
+
+	a {
+		color: hsl(200, 100%, 50%);
+	}
 }
 
 [data-theme="light"] {
