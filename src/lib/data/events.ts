@@ -22,7 +22,7 @@ const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
 	await initSheetsAuth();
 
 	// Grab the 2D array of cells from the Google Sheet
-	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Events", "A:D")).data.values || [];
+	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Events", "A:E")).data.values || [];
 
 	// Create set for deduping values
 	const seenNames = new Set<string>();
@@ -39,6 +39,7 @@ const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
 			description: row[1],
 			startDate: new Date(+splitStartDate[2], +splitStartDate[0] - 1, +splitStartDate[1]),
 			endDate: new Date(+splitEndDate[2], +splitEndDate[0] - 1, +splitEndDate[1]),
+			useHTML: row[4] ? (row[4].toLowerCase() === "true") : undefined
 		} as SchoolEvent
 	}).filter(schoolEvent => {
 		
