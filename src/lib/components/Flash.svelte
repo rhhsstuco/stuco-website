@@ -45,6 +45,10 @@
 
 	button {
 		all: unset;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	i {
