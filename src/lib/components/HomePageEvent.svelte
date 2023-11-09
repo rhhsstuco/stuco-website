@@ -16,7 +16,11 @@
       {event.name}
     </h3>
     <p class="event__info__description">
-      {event.description}
+		{#if !event.useHTML}
+      		{event.description}
+	  	{:else}
+		  	{@html event.description}
+		{/if}
     </p>
   </div>
 </div>

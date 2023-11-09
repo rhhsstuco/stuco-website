@@ -8,6 +8,15 @@
 	import { onNavigate } from '$app/navigation';
 	import themeStore, { type Theme } from '$lib/stores/theme.store';
   	import Footer from '$lib/components/Footer.svelte';
+  	import Flash from '$lib/components/Flash.svelte';
+
+	let showFlash = false;
+
+	const onFlashClose = () => {
+		showFlash = false;
+
+		localStorage.setItem("showFlash", "0")
+	}
 
 	onMount(() => {
 		let theme = <Theme> localStorage.getItem("theme") ?? "light";
@@ -26,6 +35,8 @@
 			document.documentElement.setAttribute("data-theme", value);
 		})
 
+		// Flash
+		showFlash = localStorage.getItem("showFlash") != "0";
 	});
 	
 	onNavigate((navigation) => {
@@ -45,6 +56,15 @@
 <slot/>
 
 <Footer/>
+
+<div class="portal">
+	{#if showFlash}
+		<Flash
+			text={'Submit a music request for Semi Formal <a href="https://forms.gle/g1J1dX4oag6ozwjJA" target="_blank" rel="noopener noreferrer">here</a>!'}
+			on:close={onFlashClose}
+		/>
+	{/if}
+</div>
 
 <style lang="scss">
 	@keyframes fade-in {
@@ -78,5 +98,9 @@
 	:root::view-transition-new(root) {
 		animation: 120ms cubic-bezier(0, 0, 0.2, 1) 50ms both fade-in, 150ms cubic-bezier(0.4, 0, 0.2, 1) both
 				slide-from-right;
+	}
+
+	.portal {
+		position: relative;
 	}
 </style>

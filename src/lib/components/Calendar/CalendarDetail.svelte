@@ -29,11 +29,13 @@
 			{#each events as event}
 				<div class="calendar-detail__content__events__event">
 					<h4>{event.name}</h4>
-					{#if !event.useHTML}
-						<p>{event.description}</p>
-					{:else}
-						<p>{@html event.description}</p>
-					{/if}
+					<p>
+						{#if !event.useHTML}
+							{event.description}
+						{:else}
+							{@html event.description}
+						{/if}
+					</p>
 				</div>
 			{:else}
 				<div class="calendar-detail__no-events">
