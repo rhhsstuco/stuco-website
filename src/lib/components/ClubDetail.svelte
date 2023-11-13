@@ -33,9 +33,11 @@
 		</div>
 	</div>
 	<div class="club__info">
-		<h2 class="club__info__title">
-			{club.name}
-		</h2>
+		<a href={club.instagramURL} target="_blank" rel="noopener noreferrer">
+			<h2 class="club__info__title">
+				{club.name}
+			</h2>
+		</a>
 		<div>
 			<span class="club__info__room">
 				{club.room}
@@ -103,6 +105,10 @@
 		font-family: 'Inter', sans-serif;
 
 		padding: 1rem;
+
+		a {
+			all: unset;
+		}
 
 		.club__info__title {
 			font-size: var(--club-title-font-size, 2rem);

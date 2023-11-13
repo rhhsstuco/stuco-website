@@ -3,6 +3,7 @@
 
 	const dispatch = createEventDispatcher<{ 'value-change': string }>();
 
+	export let placeholder: string;
 	let value: string = '';
 
 	$: dispatch('value-change', value);
@@ -22,6 +23,7 @@
 	type="text"
 	aria-label="Search clubs"
 	class="search__input"
+	{placeholder}
 	bind:value
 	>
 	{#if showClose}

@@ -37,7 +37,7 @@
 <main class="clubs">
 	<h1>Clubs</h1>
 	<div class="clubs__search">
-		<SearchBar on:value-change={onValueChange}/>
+		<SearchBar on:value-change={onValueChange} placeholder="Search by club name, location, or time"/>
 	</div>
 	{#if filteredClubs.length}
 		<div class="clubs__grid">
