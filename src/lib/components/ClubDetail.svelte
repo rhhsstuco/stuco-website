@@ -108,6 +108,10 @@
 
 		a {
 			all: unset;
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 
 		.club__info__title {
