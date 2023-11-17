@@ -2,7 +2,6 @@ import getGalleryImages from "$lib/data/images";
 import type ImageMeta from "$lib/types/image.types";
 import type { PageServerLoad } from "./$types";
 
-
 export const load: PageServerLoad = async () => {
 	let imageURLs: ImageMeta[];
 

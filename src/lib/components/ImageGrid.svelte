@@ -3,6 +3,7 @@
   	import Dialog from "./Dialog.svelte";
   	import type ImageMeta from "$lib/types/image.types";
   	import Picture from "./Picture.svelte";
+  import nthItem from "$lib/util/nthItem";
 
 	export let imageURLs: ImageMeta[];
 	export let columns = 5;
@@ -14,10 +15,12 @@
 		const remainderImages = imageLength % columns;
 
 		const images: ImageMeta[][] = [];
-
+		imageURLS = nthItem(imageURLS, columns);
+		
 		for (let i = 0; i < columns; i++) {
 			images[i] = imageURLS.slice(i * imagesPerColumn, (i + 1) * imagesPerColumn);
 		}
+
 
 		for (let i = 0; i < remainderImages; i++) {
 			images[i].push(imageURLS[(imagesPerColumn * columns) + i]);

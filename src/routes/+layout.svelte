@@ -57,14 +57,14 @@
 
 <Footer/>
 
-<div class="portal">
+<!-- <div class="portal">
 	{#if showFlash}
 		<Flash
 			text={'Submit a music request for Semi Formal <a href="https://forms.gle/g1J1dX4oag6ozwjJA" target="_blank" rel="noopener noreferrer">here</a>!'}
 			on:close={onFlashClose}
 		/>
 	{/if}
-</div>
+</div> -->
 
 <style lang="scss">
 	@keyframes fade-in {
