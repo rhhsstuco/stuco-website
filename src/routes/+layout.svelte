@@ -15,7 +15,7 @@
 	const onFlashClose = () => {
 		showFlash = false;
 
-		localStorage.setItem("showFlash", "0")
+		localStorage.setItem("showFlashOpenHouse", "0")
 	}
 
 	onMount(() => {
@@ -36,7 +36,7 @@
 		})
 
 		// Flash
-		showFlash = localStorage.getItem("showFlash") != "0";
+		showFlash = localStorage.getItem("showFlashOpenHouse") != "0";
 	});
 	
 	onNavigate((navigation) => {
@@ -57,14 +57,14 @@
 
 <Footer/>
 
-<!-- <div class="portal">
+<div class="portal">
 	{#if showFlash}
 		<Flash
-			text={'Submit a music request for Semi Formal <a href="https://forms.gle/g1J1dX4oag6ozwjJA" target="_blank" rel="noopener noreferrer">here</a>!'}
+			text={'Welcome Grade Eights!!!!'}
 			on:close={onFlashClose}
 		/>
 	{/if}
-</div> -->
+</div>
 
 <style lang="scss">
 	@keyframes fade-in {
