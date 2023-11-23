@@ -60,7 +60,7 @@
 <div class="portal">
 	{#if showFlash}
 		<Flash
-			text={'Welcome Grade Eights!!!!'}
+			text={'Welcome Grade 8s!!!!'}
 			on:close={onFlashClose}
 		/>
 	{/if}
