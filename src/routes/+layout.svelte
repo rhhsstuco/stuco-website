@@ -15,7 +15,7 @@
 	const onFlashClose = () => {
 		showFlash = false;
 
-		localStorage.setItem("showFlashOpenHouse", "0")
+		localStorage.setItem("showFlash", "0")
 	}
 
 	onMount(() => {
@@ -36,7 +36,7 @@
 		})
 
 		// Flash
-		showFlash = localStorage.getItem("showFlashOpenHouse") != "0";
+		showFlash = localStorage.getItem("showFlash") != "0";
 	});
 	
 	onNavigate((navigation) => {
@@ -57,14 +57,14 @@
 
 <Footer/>
 
-<div class="portal">
+<!-- <div class="portal">
 	{#if showFlash}
 		<Flash
 			text={'Welcome Grade 8s!!!!'}
 			on:close={onFlashClose}
 		/>
 	{/if}
-</div>
+</div> -->
 
 <style lang="scss">
 	@keyframes fade-in {
