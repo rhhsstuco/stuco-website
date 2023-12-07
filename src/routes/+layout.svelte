@@ -10,12 +10,14 @@
   	import Footer from '$lib/components/Footer.svelte';
   	import Flash from '$lib/components/Flash.svelte';
 
+	const FLASH_TOKEN = "showFlashCaf";
+
 	let showFlash = false;
 
 	const onFlashClose = () => {
 		showFlash = false;
 
-		localStorage.setItem("showFlash", "0")
+		localStorage.setItem(FLASH_TOKEN, "0")
 	}
 
 	onMount(() => {
@@ -36,7 +38,7 @@
 		})
 
 		// Flash
-		showFlash = localStorage.getItem("showFlash") != "0";
+		showFlash = localStorage.getItem(FLASH_TOKEN) != "0";
 	});
 	
 	onNavigate((navigation) => {
@@ -57,14 +59,22 @@
 
 <Footer/>
 
-<!-- <div class="portal">
+<div class="portal">
 	{#if showFlash}
 		<Flash
-			text={'Welcome Grade 8s!!!!'}
+			text={`
+				Submit cafeteria food feedback
+					<a
+						href="https://docs.google.com/forms/d/e/1FAIpQLSftox6SMdyTtqPFiIPBElE0bPXeipRZ5uXiZHiPO06XCHh9kw/viewform"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						here</a>!
+				`}
 			on:close={onFlashClose}
 		/>
 	{/if}
-</div> -->
+</div>
 
 <style lang="scss">
 	@keyframes fade-in {
