@@ -40,6 +40,7 @@
 	<meta property="og:description" content={DESCRIPTION}>
 	<meta property="og:type" content="website">
 	<meta property="og:image" content={HeroImages.img.src}>
+	<meta property="thumbnail" content={HeroImages.img.src}/>
 	{#if !dev}
 		<meta property="og:url" content="https://rhhsstuco.ca">
 	{/if}

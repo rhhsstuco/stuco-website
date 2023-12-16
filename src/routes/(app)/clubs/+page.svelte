@@ -29,6 +29,7 @@
 	<meta property="og:description" content={DESCRIPTION}>
 	<meta property="og:type" content="website">
 	<meta property="og:image" content={data.clubs[0].imageURL.img.src}>
+	<meta property="thumbnail" content={data.clubs[0].imageURL.img.src}>
 	{#if !dev}
 		<meta property="og:url" content="https://rhhsstuco.ca/clubs">
 	{/if}

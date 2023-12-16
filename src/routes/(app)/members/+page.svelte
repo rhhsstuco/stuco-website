@@ -19,6 +19,7 @@
 	<meta property="og:description" content={DESCRIPTION}>
 	<meta property="og:type" content="website">
 	<meta property="og:image" content={data.members[1].imageURL.img.src}>
+	<meta property="thumbnail" content={data.members[1].imageURL.img.src}>
 	{#if !dev}
 		<meta property="og:url" content="https://rhhsstuco.ca/members">
 	{/if}
