@@ -131,7 +131,7 @@
 			margin-right: var(--margin-horizontal);
 		}
 
-		.clubs_new {
+		.clubs__new {
 			--font-size: 0.9rem;
 		}
 	}
