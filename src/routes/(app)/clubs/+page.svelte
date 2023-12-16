@@ -39,7 +39,7 @@
 	<h1>Clubs</h1>
 	<div class="clubs__search">
 		<SearchBar on:value-change={onValueChange} placeholder="Search by club name, location, or time"/>
-		<p class="clubs_new">Want to create a new club? Use this <a href="https://docs.google.com/forms/d/e/1FAIpQLSc78K3iBYlg9bXtkh3sqePokGIELF9WQKUX833hdEb8qdHl-A/viewform?usp=sf_link">Google Form</a>!</p>
+		<p class="clubs__new">Want to create a new club? Use this <a href="https://docs.google.com/forms/d/e/1FAIpQLSc78K3iBYlg9bXtkh3sqePokGIELF9WQKUX833hdEb8qdHl-A/viewform?usp=sf_link">Google Form</a>!</p>
 	</div>
 	{#if filteredClubs.length}
 		<div class="clubs__grid">
@@ -75,7 +75,7 @@
 		margin-bottom: 8rem;
 	}
 
-	.clubs_new {
+	.clubs__new {
 		--font-size: 1rem;
 		width: fit-content;
 		margin: 0 auto;
