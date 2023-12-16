@@ -24,6 +24,10 @@
 		})
 	}
 
+	function checkActiveURL(path: string) {
+		return (url === `${base}/${path}`) || (url === `${base}/${path}/`)
+	}
+
 	$: url = $page.url.pathname;
 
 	// Close menu when url changes
@@ -43,10 +47,10 @@
 			<MediaQuery query="(min-height: 577px)" let:matches={matches2}>
 				{#if matches1 && matches2}
 					<li><a href="{base}/" class:active={url === `${base}/` || url === `${base}`}>Home</a></li>
-					<li><a href="{base}/events" class:active={url === `${base}/events`}>Events</a></li>
-					<li><a href="{base}/clubs" class:active={url === `${base}/clubs`}>Clubs</a></li>
-					<li><a href="{base}/gallery" class:active={url === `${base}/gallery`}>Gallery</a></li>
-					<li><a href="{base}/members" class:active={url === `${base}/members`}>Members</a></li>
+					<li><a href="{base}/events" class:active={url === `${base}/events` || url === `${base}/events/`}>Events</a></li>
+					<li><a href="{base}/clubs" class:active={url === `${base}/clubs` || url === `${base}/clubs/`}>Clubs</a></li>
+					<li><a href="{base}/gallery" class:active={url === `${base}/gallery` || url === `${base}/gallery/`}>Gallery</a></li>
+					<li><a href="{base}/members" class:active={url === `${base}/members` || url === `${base}/members/`}>Members</a></li>
 				{:else}
 					<li>
 						<Hamburger bind:open={menuIsOpen}/>

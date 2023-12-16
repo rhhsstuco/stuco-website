@@ -5,9 +5,9 @@ import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async () => {
 
-	const spreadsheetDataPromise = getClubs();
+	const spreadsheetData = await getClubs();
 
 	return {
-		clubs: spreadsheetDataPromise
+		clubs: spreadsheetData
 	};
 };

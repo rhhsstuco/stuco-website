@@ -17,8 +17,10 @@ export const load: PageServerLoad = async () => {
 		useDPR: false
 	});
 
+	const [spreadsheetData, imageURLS] = await Promise.all([spreadsheetDataPromise, imageURLsPromise]);
+
 	return {
-		events: spreadsheetDataPromise,
-		imageURLs: imageURLsPromise,
+		events: spreadsheetData,
+		imageURLs: imageURLS,
 	};
 };
