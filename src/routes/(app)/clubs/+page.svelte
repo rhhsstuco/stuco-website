@@ -2,6 +2,7 @@
   	import { dev } from "$app/environment";
 	import ClubDetail from "$lib/components/ClubDetail.svelte";
   	import SearchBar from "$lib/components/SearchBar.svelte";
+  import { DOMAIN } from "$lib/constants";
   	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
@@ -28,8 +29,8 @@
 	<meta property="og:title" content={TITLE}>
 	<meta property="og:description" content={DESCRIPTION}>
 	<meta property="og:type" content="website">
-	<meta property="og:image" content={data.clubs[0].imageURL.img.src}>
-	<meta property="thumbnail" content={data.clubs[0].imageURL.img.src}>
+	<meta property="og:image" content={`${DOMAIN}${data.clubs[0].imageURL.img.src}`}>
+	<meta property="thumbnail" content={`${DOMAIN}${data.clubs[0].imageURL.img.src}`}>
 	{#if !dev}
 		<meta property="og:url" content="https://rhhsstuco.ca/clubs">
 	{/if}

@@ -6,6 +6,7 @@
 	import { onDestroy } from "svelte";
 	import type { Unsubscriber } from "svelte/store";
   	import { dev } from "$app/environment";
+  import { DOMAIN } from "$lib/constants";
 
 	export let data: PageServerData;
 
@@ -43,8 +44,8 @@
 	<meta property="og:title" content={TITLE}>
 	<meta property="og:description" content={DESCRIPTION}>
 	<meta property="og:type" content="website">
-	<meta property="og:image" content={data.imageURLs[0].img.src}>
-	<meta property="thumbnail" content={data.imageURLs[0].img.src}>
+	<meta property="og:image" content={`${DOMAIN}${data.imageURLs[0].img.src}`}>
+	<meta property="thumbnail" content={`${DOMAIN}${data.imageURLs[0].img.src}`}>
 	{#if !dev}
 		<meta property="og:url" content="https://rhhsstuco.ca/gallery">
 	{/if}

@@ -1,6 +1,7 @@
 <script lang="ts">
   	import { dev } from "$app/environment";
   	import MemberCard from "$lib/components/MemberCard.svelte";
+  import { DOMAIN } from "$lib/constants";
   	import { mediaMaxLarge } from "$lib/stores/maxScreenWidth.store";
   	import type { PageServerData } from "./$types";
 
@@ -18,8 +19,8 @@
 	<meta property="og:title" content={TITLE}>
 	<meta property="og:description" content={DESCRIPTION}>
 	<meta property="og:type" content="website">
-	<meta property="og:image" content={data.members[1].imageURL.img.src}>
-	<meta property="thumbnail" content={data.members[1].imageURL.img.src}>
+	<meta property="og:image" content={`${DOMAIN}${data.members[1].imageURL.img.src}`}>
+	<meta property="thumbnail" content={`${DOMAIN}${data.members[1].imageURL.img.src}`}>
 	{#if !dev}
 		<meta property="og:url" content="https://rhhsstuco.ca/members">
 	{/if}
