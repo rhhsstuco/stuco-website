@@ -46,8 +46,7 @@
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-			Google Form
-			</a>!
+			Google Form</a>!
 		</p>
 	</div>
 	{#if filteredClubs.length}
