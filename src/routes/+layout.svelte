@@ -61,7 +61,7 @@
 
 <div class="portal">
 	{#if showFlash}
-		<Flash
+		<!-- <Flash
 			text={`
 				Submit cafeteria food feedback
 					<a
@@ -72,7 +72,7 @@
 						here</a>!
 				`}
 			on:close={onFlashClose}
-		/>
+		/> -->
 	{/if}
 </div>
 
