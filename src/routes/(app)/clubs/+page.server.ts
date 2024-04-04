@@ -1,4 +1,3 @@
-
 import getClubs from "$lib/data/clubs";
 import type { PageServerLoad } from "./$types";
 

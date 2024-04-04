@@ -30,8 +30,6 @@ const clubImageMap = new Map<string, ImageMeta>();
 
 filenames.map((filename, index) => clubImageMap.set(filename, clubPictureData[index]))
 
-
-
 /**
  * Gets events from the Google spreadsheet
  * @param {number?} maxResults the maximum size of the response set or undefined if no limit is specified.
