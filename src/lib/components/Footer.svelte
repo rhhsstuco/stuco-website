@@ -25,6 +25,11 @@
 						<i class="ri-twitter-line"></i> &mdash; RHHS_StuCo
 					</a>
 				</li>
+				<li>
+					<a href="https://github.com/rhhsstuco" target="_blank" rel="noopener noreferrer">
+						<i class="ri-github-fill"></i> &mdash; rhhsstuco
+					</a>
+				</li>
 			</ul>
 		</div>
 	</section>
