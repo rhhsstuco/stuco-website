@@ -118,5 +118,15 @@
 		.grade-position__position {
 			min-width: 2.75rem;
 		}
+
+		.grade-position__info {
+			gap: 1rem;
+		}
+	}
+
+	@include exports.media-smallest {
+		.grade-position__info {
+			gap: 0.5rem;
+		}
 	}
 </style>
