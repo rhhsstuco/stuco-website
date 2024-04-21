@@ -1,7 +1,7 @@
 <script lang="ts">
   	import { createEventDispatcher } from "svelte";
 
-	export let text: string;
+	export let closeable: boolean = true;
 
 	const dispatch = createEventDispatcher();
 
@@ -11,11 +11,13 @@
 
 </script>
 
-<section class="flash">
-	<button on:click={onClick}>
-		<i class="ri-close-line"></i>
-	</button>
-	<p>{@html text}</p>
+<section class="flash" class:extra-padding={!closeable}>
+	{#if closeable}
+		<button on:click={onClick}>
+			<i class="ri-close-line"></i>
+		</button>
+	{/if}
+	<p><slot/></p>
 </section>
 
 <style lang="scss">
@@ -39,6 +41,10 @@
 		align-items: center;
 	}
 
+	.extra-padding {
+		padding: 1.25rem 1.5rem;
+	}
+
 	.flash p {
 		font-family: "Poppins", sans-serif;
 		font-size: 1rem;
@@ -51,6 +57,7 @@
 			cursor: pointer;
 		}
 	}
+
 
 	i {
 		color: var(--color-darker-2);

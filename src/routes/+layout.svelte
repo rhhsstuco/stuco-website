@@ -60,19 +60,19 @@
 <Footer/>
 
 <div class="portal">
-	{#if showFlash}
-		<!-- <Flash
-			text={`
-				Submit cafeteria food feedback
-					<a
-						href="https://docs.google.com/forms/d/e/1FAIpQLSftox6SMdyTtqPFiIPBElE0bPXeipRZ5uXiZHiPO06XCHh9kw/viewform"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						here</a>!
-				`}
+	{#if showFlash || true}
+		<Flash
+			closeable={false}
 			on:close={onFlashClose}
-		/> -->
+		>
+			<em>View the Grade Wars Leaderboard
+			<a
+				href="grade-wars"
+				target="_blank"
+				rel="noopener noreferrer"
+			>here</a>!
+		</em>
+		</Flash>
 	{/if}
 </div>
 
@@ -112,5 +112,9 @@
 
 	.portal {
 		position: relative;
+	}
+
+	em  {
+		font-weight: bold;
 	}
 </style>
