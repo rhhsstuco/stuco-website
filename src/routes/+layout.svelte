@@ -65,7 +65,7 @@
 			closeable={false}
 			on:close={onFlashClose}
 		>
-			<em>View the Grade Wars Leaderboard
+			<em>View the Grade Wars leaderboard
 			<a
 				href="grade-wars"
 				target="_blank"

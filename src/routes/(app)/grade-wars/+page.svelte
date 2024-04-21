@@ -1,9 +1,24 @@
 <script lang="ts">
+  	import { dev } from "$app/environment";
   	import Leaderboard from "$lib/components/Leaderboard/Leaderboard.svelte";
   	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
+	const TITLE = "Grade Wars | RHHS StuCo";
+	const DESCRIPTION = "Check out the Grade Wars leaderboard";
 </script>
+
+<!-- svelte-ignore missing-declaration -->
+<svelte:head>
+	<title>{TITLE}</title>
+	<meta name="description" content={DESCRIPTION}>
+	<meta property="og:title" content={TITLE}>
+	<meta property="og:description" content={DESCRIPTION}>
+	<meta property="og:type" content="website">
+	{#if !dev}
+		<meta property="og:url" content="https://rhhsstuco.ca/grade-wars">
+	{/if}
+</svelte:head>
 
 <main>
 	<h1>Leaderboard</h1>
