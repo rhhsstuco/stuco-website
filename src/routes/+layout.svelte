@@ -68,8 +68,6 @@
 			<em>View the Grade Wars leaderboard
 			<a
 				href="grade-wars"
-				target="_blank"
-				rel="noopener noreferrer"
 			>here</a>!
 		</em>
 		</Flash>
