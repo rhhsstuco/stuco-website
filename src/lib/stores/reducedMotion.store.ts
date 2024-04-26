@@ -1,9 +1,9 @@
 import { onMount } from "svelte";
-import { readable, type Readable } from "svelte/store"
+import { readable } from "svelte/store"
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)' 
 
-let reducedMotion = readable(false, set => {
+let reducedMotion = readable<boolean>(false, set => {
 	onMount(() => {
 		const initialMotionPreference = window.matchMedia(REDUCED_MOTION_QUERY).matches;
 
@@ -21,7 +21,5 @@ let reducedMotion = readable(false, set => {
 		}
 	})
 });
-
-
 
 export default reducedMotion;

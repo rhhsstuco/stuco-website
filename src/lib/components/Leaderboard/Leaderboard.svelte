@@ -9,7 +9,6 @@
 
 <section class="leaderboard">
   {#each gradePoints as gradePoint, i}
-    <!-- <GradePositionTest {gradePoint}/> -->
     <GradePosition {gradePoint} position={i + 1} color={gradeColors[i]}/>
   {/each}
 </section>

@@ -6,6 +6,7 @@
 	export let data: PageServerData;
 	const TITLE = "Grade Wars | RHHS StuCo";
 	const DESCRIPTION = "Check out the Grade Wars leaderboard";
+
 </script>
 
 <!-- svelte-ignore missing-declaration -->
