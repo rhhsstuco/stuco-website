@@ -55,7 +55,7 @@ export const initDriveAuth = async () => {
 const downloadImages = async (driveFolderID: string, outputFolder: string, maxResults?: number) => {
 	const authClient = await initDriveAuth();
 
-	const drive = google.drive({ version: 'v3', auth: authClient as any});
+	const drive = google.drive({ version: 'v3', auth: authClient as any });
 
 	const files = await drive.files.list({ 
 		pageSize: maxResults,
