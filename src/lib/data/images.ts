@@ -15,6 +15,7 @@ interface GetGalleryImagesParams {
 	maxResults?: number;
 	orientation?: Orientation;
 	useDPR?: boolean;
+	reverse?: boolean;
 }
 
 /**
@@ -24,13 +25,12 @@ interface GetGalleryImagesParams {
  * @param {boolean} useDPR use DPR for responsive images.
  * @returns an array of ImageMeta objects
  */
-const getGalleryImages = async ({ maxResults, orientation, useDPR }: GetGalleryImagesParams = {}) => {
+const getGalleryImages = async ({ maxResults, orientation, useDPR, reverse }: GetGalleryImagesParams = {}) => {
 
 	const filepaths = (await Promise.all(
 			Object.entries(files).map(async ([_, value]) => (await value() as any))
 		))
 		.map(image => {
-
 			const sources = (image.sources as ({
 				[key: string]: ImageProps[];
 			}));
@@ -42,27 +42,28 @@ const getGalleryImages = async ({ maxResults, orientation, useDPR }: GetGalleryI
 				});
 			}
 
-
-
-
 			return {
 				img: (image.img as ImagePropsWithHeight),
 				sources: sources,
 				
 			} as unknown as ImageMeta
-		})
-		.slice(0, maxResults)
+		});
 
 	let filteredFilepaths = filepaths;
 
+	if (reverse) {
+		filteredFilepaths.reverse();
+	}
+	
+	filteredFilepaths = filteredFilepaths.slice(0, maxResults)
+
 	if (orientation === 'horizontal') {
-		filteredFilepaths = filepaths.filter(img => img.img.w > img.img.h);
+		filteredFilepaths = filteredFilepaths.filter(img => img.img.w > img.img.h);
 	}
 
 	if (orientation === 'vertical') {
-		filteredFilepaths = filepaths.filter(img => img.img.h > img.img.w);
+		filteredFilepaths = filteredFilepaths.filter(img => img.img.h > img.img.w);
 	}
-	
 	
 	return filteredFilepaths;
 }

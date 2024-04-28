@@ -6,7 +6,7 @@
 	import { onDestroy } from "svelte";
 	import type { Unsubscriber } from "svelte/store";
   	import { dev } from "$app/environment";
-  import { DOMAIN } from "$lib/constants";
+  	import { DOMAIN } from "$lib/constants";
 
 	export let data: PageServerData;
 

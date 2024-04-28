@@ -3,7 +3,7 @@
   	import Dialog from "./Dialog.svelte";
   	import type ImageMeta from "$lib/types/image.types";
   	import Picture from "./Picture.svelte";
-  import nthItem from "$lib/util/nthItem";
+  	import nthItem from "$lib/util/nthItem";
 
 	export let imageURLs: ImageMeta[];
 	export let columns = 5;

@@ -12,9 +12,10 @@ export const load: PageServerLoad = async () => {
 	});
 	
 	const imageURLsPromise = getGalleryImages({
-		maxResults: 5,
+		maxResults: 8,
 		orientation: 'horizontal',
-		useDPR: false
+		useDPR: false,
+		reverse: true,
 	});
 
 	const [spreadsheetData, imageURLS] = await Promise.all([spreadsheetDataPromise, imageURLsPromise]);
