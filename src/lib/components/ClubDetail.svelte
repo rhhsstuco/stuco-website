@@ -139,4 +139,10 @@
 			gap: 0.25rem;
 		}
 	}
+
+	@include exports.media-small {
+		.club {
+			min-width: 14rem;
+		}
+	}
 </style>
