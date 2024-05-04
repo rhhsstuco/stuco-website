@@ -60,7 +60,7 @@
 <Footer/>
 
 <div class="portal">
-	{#if showFlash || true}
+	<!-- {#if showFlash}
 		<Flash
 			closeable={false}
 			on:close={onFlashClose}
@@ -71,7 +71,7 @@
 			>here</a>!
 		</em>
 		</Flash>
-	{/if}
+	{/if} -->
 </div>
 
 <style lang="scss">
