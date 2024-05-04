@@ -1,1 +1,0 @@
-import{o as i}from"./scheduler.HgaEQNbO.js";import{r as c}from"./index.cgJownJU.js";const r="(prefers-reduced-motion: reduce)";let m=c(!1,e=>{i(()=>{const n=window.matchMedia(r).matches;e(n);const t=a=>{e(a.matches)},o=window.matchMedia(r);return o.addEventListener("change",t),()=>{o.removeEventListener("change",t)}})});export{m as r};
