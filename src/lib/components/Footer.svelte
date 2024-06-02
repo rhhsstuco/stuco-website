@@ -8,7 +8,6 @@
 				<li>Richmond Hill - Ontario - Canada</li>
 				<li>201 Yorkland Street - L4S 1A2</li>
 				<li>(905) 884-2131</li>
-				<li><a href="https://docs.google.com/document/d/e/2PACX-1vQb_xmB3PHRb04KgONGDNKJXQOYpmS1fTwMoTvlSS90-4ShiNTttbWVlKm2sBjT2J5xZUsb7_zMjUEy/pub" target="_blank" rel="noopener noreferrer">Our Constitution</a></li>
 			</ul>
 		</div>
 		<div class="footer__content__links">
