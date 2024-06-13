@@ -27,7 +27,7 @@
 			<li><a href="{base}/events" class:active={url === `${base}/events`}>Events</a></li>
 			<li><a href="{base}/clubs" class:active={url === `${base}/clubs`}>Clubs</a></li>
 			<li><a href="{base}/gallery" class:active={url === `${base}/gallery`}>Gallery</a></li>
-			<li><a href="{base}/members" class:active={url === `${base}/members`}>Members</a></li>
+			<li><a href="{base}/about-us" class:active={url === `${base}/about-us`}>About Us</a></li>
 		</ul>
 	</div>
 </div>

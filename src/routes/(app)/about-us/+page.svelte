@@ -9,7 +9,7 @@
 
 	$: gridOffset = $mediaMaxLarge ? 0 : 3; 
 	
-	const TITLE = "Members | RHHS StuCo";
+	const TITLE = "About Us | RHHS StuCo";
 	const DESCRIPTION = "Meet the members of our the 2023-2024 Student Council!";
 </script>
 
@@ -22,25 +22,33 @@
 	<meta property="og:image" content={`${DOMAIN}${data.members[1].imageURL.img.src}`}>
 	<meta property="thumbnail" content={`${DOMAIN}${data.members[1].imageURL.img.src}`}>
 	{#if !dev}
-		<meta property="og:url" content="https://rhhsstuco.ca/members">
+		<meta property="og:url" content="https://rhhsstuco.ca/about-us">
 	{/if}
 </svelte:head>
 
-<main class="members">
-	<h1>Members</h1>
-	<section class="members__display">
-		{#if !$mediaMaxLarge}
-			<div class="members__display__row">
-				{#each data.members.slice(0, 3) as member (member.name)}
-					<MemberCard {member}/>
+<main class="about-us">
+	<h1>About Us</h1>
+
+	<section class="members">
+		<h2>Members</h2>
+		<div class="members__display">
+			{#if !$mediaMaxLarge}
+				<div class="members__display__row">
+					{#each data.members.slice(0, 3) as member (member.name)}
+						<MemberCard {member}/>
+					{/each}
+				</div>
+			{/if}
+			<div class="members__display__grid">
+				{#each data.members.slice(gridOffset) as member, index (member.name)}
+					<MemberCard {member} loading={($mediaMaxLarge && index < 3) ? "eager" : "lazy" }/>
 				{/each}
 			</div>
-		{/if}
-		<div class="members__display__grid">
-			{#each data.members.slice(gridOffset) as member, index (member.name)}
-				<MemberCard {member} loading={($mediaMaxLarge && index < 3) ? "eager" : "lazy" }/>
-			{/each}
-		</div>
+		</div>	
+	</section>
+
+	<section class="constitution">
+		<h2><a href="https://docs.google.com/document/d/e/2PACX-1vQb_xmB3PHRb04KgONGDNKJXQOYpmS1fTwMoTvlSS90-4ShiNTttbWVlKm2sBjT2J5xZUsb7_zMjUEy/pub" target="_blank" rel="noopener noreferrer">Constitution</a></h2>
 	</section>
 </main>
 
@@ -48,7 +56,7 @@
 <style lang="scss">
 	@use "../../../styles/exports.scss" as exports;
 
-	.members {
+	.about-us {
 		width: clamp(18rem, 70%, 80rem);
 		margin: 0 auto;
 		font-family: 'Poppins', sans-serif;
@@ -61,6 +69,15 @@
 		h1 {
 			margin-top: 2rem;
 			@include exports.header;
+		}
+
+		h2 {
+			margin-bottom: 1.5rem;
+			@include exports.header($font-size: calc(var(--font-size-header) - 1rem));
+		}
+
+		h2 a {
+			color: inherit
 		}
 	}
 
@@ -96,7 +113,7 @@
 	}
 
 	@include exports.media-small {
-		.members {
+		.about-us {
 			width: clamp(18rem, 80%, 80rem);
 		}
 
@@ -106,7 +123,7 @@
 	}
 
 	@include exports.media-smallest {
-		.members {
+		.about-us {
 			width: clamp(16rem, 75%, 80rem);
 		}
 
