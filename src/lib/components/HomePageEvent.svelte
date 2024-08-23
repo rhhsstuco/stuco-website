@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let event: SchoolEvent;
+	/** 
+	 * The card component that displays upcoming event information in the homepage
+	*/
+
+  	export let event: SchoolEvent;
 </script>
 
 <div class="event">
@@ -82,6 +86,7 @@
 		}
 
 		.event__info__description {
+			line-height: 1.2;
 			font-size: var(--event-description-font-size, 1.125rem);
 			color: var(--color-darker-1);
 		}

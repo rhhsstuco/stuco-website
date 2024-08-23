@@ -15,8 +15,9 @@ dotenv.config({ path: envFilePath });
 const SECRET_GOOGLE_DRIVE_CREDENTIALS = process.env.SECRET_GOOGLE_DRIVE_CREDENTIALS; 
 const PUBLIC_GALLERY_FOLDER_ID = process.env.PUBLIC_GALLERY_FOLDER_ID; 
 const PUBLIC_CLUB_LOGOS_FOLDER_ID = process.env.PUBLIC_CLUB_LOGOS_FOLDER_ID; 
+const PUBLIC_MEMBERS_FOLDER_ID = process.env.PUBLIC_MEMBERS_FOLDER_ID; 
 
-if (!SECRET_GOOGLE_DRIVE_CREDENTIALS || !PUBLIC_GALLERY_FOLDER_ID || !PUBLIC_CLUB_LOGOS_FOLDER_ID) {
+if (!SECRET_GOOGLE_DRIVE_CREDENTIALS || !PUBLIC_GALLERY_FOLDER_ID || !PUBLIC_CLUB_LOGOS_FOLDER_ID || !PUBLIC_MEMBERS_FOLDER_ID) {
 	throw new Error(`.env variables not defined in ${envFilePath}`)
 }
 
@@ -87,7 +88,7 @@ const downloadImages = async (driveFolderID: string, outputFolder: string, maxRe
 				const destStream = createWriteStream(filename);
 
 				fileStream.data
-					.on("end", () => console.log("done"))
+					.on("end", () => console.log(`downloaded ${filename}`))
 					.on("error", err => console.log(err))
 					.pipe(destStream);
 			}
@@ -99,3 +100,4 @@ const downloadImages = async (driveFolderID: string, outputFolder: string, maxRe
 
 downloadImages(PUBLIC_GALLERY_FOLDER_ID, '../../static/images/gallery');
 downloadImages(PUBLIC_CLUB_LOGOS_FOLDER_ID, '../../static/images/club_logos');
+downloadImages(PUBLIC_MEMBERS_FOLDER_ID, '../../static/images/members');

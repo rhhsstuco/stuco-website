@@ -1,6 +1,6 @@
 {
-	"name": "rhhs-stuco-website",
-	"version": "1.0.0",
+	"name": "stuco-website",
+	"version": "1.1.0",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",

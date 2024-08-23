@@ -1,68 +1,20 @@
 <script lang="ts">
- 	import { fly, type FlyParams } from "svelte/transition";
+	/** The calendar component showing school events */
+
+ 	import { fly } from "svelte/transition";
   	import CalendarDay from "./CalendarDay.svelte";
 	import CalendarDetail from "./CalendarDetail.svelte";
 	import { quadInOut } from "svelte/easing";
   	import reducedMotion from "$lib/stores/reducedMotion.store";
-  import MediaQuery from "../MediaQuery.svelte";
-  import themeStore from "$lib/stores/theme.store";
+	import themeStore from "$lib/stores/theme.store";
+
 	export let events: SchoolEvent[];
 
-	/** 
-	 * Represents a mapping of a key to all entries which have this key
-	*/
-	type Grouping<K, T> = Map<K, T[]>;
-
-	/**
-	 * Groups the entries in the array using the keyMapper function
-	 * 
-	*/
-	function groupBy<K, T>(array: T[], keyMapper: (obj: T) => K[]): Grouping<K, T> {
-		const map: Grouping<K, T> = new Map();
-
-		array.forEach(item => {
-			const keys = keyMapper(item);
-
-			for (const key of keys) {
-				const collection = map.get(key) || [];
-
-				collection.push(item);
-				map.set(key, collection);
-			}
-
-		})
-
-		return map;
-	}
-
+	/// Constants
 	const MS_IN_DAY = 1000 * 60 * 60 * 24;
 
-	function numDays(date1: Date, date2: Date) {
-		return (date2.getTime() - date1.getTime()) / (MS_IN_DAY);
-	}
-
-	$: eventsMap = groupBy(events, event => {
-		const days = Array(numDays(event.startDate, event.endDate) + 1).fill(0);
-
-		const startYear = event.startDate.getFullYear();
-		const startMonth = event.startDate.getMonth();
-		const startDate = event.startDate.getDate();
-
-
-		return days.map((_, i) => new Date(startYear, startMonth, startDate + i).toDateString());;
-	});
-
-
-	// Calculations to render calendar
-	function isLeapYear(year: number): boolean {
-		return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0);
-	}
-
-	function getFebruaryDays(year: number): number {
-		return isLeapYear(year) ? 29 : 28;
-	}
-
 	const DAYS_IN_WEEK = 7;
+
 	const MONTHS = [
 		"January",
 		"February",
@@ -88,9 +40,91 @@
 		"Sat",
 	];
 
-	// Date and date derived properties
+
+	/** 
+	 * Represents a mapping of a key to all entries which have this key.
+	*/
+	type Grouping<K, T> = Map<K, T[]>;
+
+	/**
+	 * Groups the entries in the array using the keyMapper function.
+	 * Standard 'group by' function, but each item can have multiply identities
+	 * and can be grouped multiple times under different keys.
+	 * @param array the items to group
+	 * @param keyMapper the identity function: assigns a list of keys to each time
+	 * @returns a grouping of keys to all values that are identified by the key.
+	 * A value may appear under more than one key.
+	*/
+	function multiGroupBy<K, T>(array: T[], keyMapper: (obj: T) => K[]): Grouping<K, T> {
+		const map: Grouping<K, T> = new Map();
+
+		array.forEach(item => {
+			const keys = keyMapper(item);
+
+			for (const key of keys) {
+				const collection = map.get(key) || [];
+
+				collection.push(item);
+				map.set(key, collection);
+			}
+
+		})
+
+		return map;
+	}
+
+	/**
+	 * Calculates the number of days between two datetimes.
+	 * @param datetime1 the first datetime
+	 * @param datetime1 the second datetime
+	 * @returns the number of days between the dates
+	 */
+	function numDays(datetime1: Date, datetime2: Date) {
+		// Removes the time to compare by date only
+		const date1 = new Date(datetime1);
+		const date2 = new Date(datetime2);
+		
+		date1.setHours(0, 0, 0, 0);
+		date2.setHours(0, 0, 0, 0);
+	
+		return (date2.getTime() - date1.getTime()) / (MS_IN_DAY);
+	}
+
+	/** Grouping of events under the day(s) that the are happening */
+	$: eventsMap = multiGroupBy(events, event => {
+		const days = Array(numDays(event.startDate, event.endDate) + 1).fill(0);
+
+		const startYear = event.startDate.getFullYear();
+		const startMonth = event.startDate.getMonth();
+		const startDate = event.startDate.getDate();
+
+		return days.map((_, i) => new Date(startYear, startMonth, startDate + i).toDateString());
+	});
+
+
+	/**
+	 * Helper function to calculate if a year is a leap year.
+	 * @param year the year
+	 * @returns if the year is a leap year
+	*/
+	function isLeapYear(year: number): boolean {
+		return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0);
+	}
+
+	/**
+	 * Helper function to get the days in February.
+	 * @param year the year
+	 * @returns the number of days in February in that year
+	*/
+	function getFebruaryDays(year: number): number {
+		return isLeapYear(year) ? 29 : 28;
+	}
+
+	/** Date which should be visible from the calendar */
 	export let date: Date = new Date();
 
+
+	/** Date-derived proeprties */
 	$: month = date.getMonth();
 	$: year = date.getFullYear();
 	$: daysInMonth = [
@@ -103,17 +137,6 @@
 	let selectedDate: Date | null = null;
 
 	const selectDate = (date: Date) => () => selectedDate = date;
-
-	// Custom transition
-	const directedFlyTransition = (node: Element, args: Omit<FlyParams, 'x' | 'y'> & { distance: number, direction: 'x' | 'y' }) => {
-		return fly(node, { 
-			delay: args.delay,
-			duration: args.duration,
-			easing: args.easing,
-			opacity: args.opacity,
-			[args.direction]: args.distance
-		})
-	}
 </script>
 
 <div class="calendar">
@@ -140,7 +163,8 @@
 		class:light-mode={$themeStore === 'light'}	
 	>
 		{#each { length: rows } as _, i}
-			{#each { length: DAYS_IN_WEEK} as _, j}
+			<!-- Calculating the offset at the begining and end of the month -->
+			{#each { length: DAYS_IN_WEEK } as _, j}
 				{@const dayCount = ((i * DAYS_IN_WEEK) + j) - firstDayOffset + 1}
 				{@const currentDate = new Date(year, month, dayCount)}
 				{@const validDate = (dayCount > 0) && (dayCount <= daysInMonth[month])}
@@ -159,6 +183,7 @@
 			{/each}
 		{/each}
 		{#each events as event}
+			<!-- Calculating where to place the date button using CSS Grid Layout -->
 			{#if ((event.startDate.getMonth() === month) && (event.startDate.getFullYear() === year))}
 				<div
 					class="calendar__body__event"
@@ -172,7 +197,7 @@
 			{/if}
 		{/each}
 		<!-- Calender detail that slides in from the right -->
-		<!-- Does not transitions if the user preferes reduced motion -->
+		<!-- Does not transitions if the user prefers reduced motion -->
 		{#if selectedDate}
 			<div
 				class="calendar-detail"
@@ -413,7 +438,6 @@
 			transition: none;
 		}
 	}
-
 </style>
 
 

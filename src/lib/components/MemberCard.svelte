@@ -1,4 +1,7 @@
 <script lang="ts">
+	/** Displays a StuCo member in a cart*/
+
+	import DefaultProfilePicture from "$lib/images/default_pfp.png?format=avif;webp;png&w=400;800&as=picture";
   	import type StucoMember from "$lib/models/StucoMember.model";
   	import Picture from "./Picture.svelte";
 
@@ -8,7 +11,7 @@
 
 <div class="member-card">
 	<div class="member-card__photo">
-		<Picture meta={member.imageURL} alt={member.name} sizes="(max-width: 800px) 400px, 1200px" {loading}/>
+		<Picture meta={member?.imageURL || DefaultProfilePicture} alt={member.name} sizes="(max-width: 800px) 400px, 1200px" {loading}/>
 	</div>
 	<div class="member-card__text">
 		<h2 class="member-card__text__name">

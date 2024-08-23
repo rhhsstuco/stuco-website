@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type SchoolClub from "$lib/models/SchoolClub.model";
-  import Picture from "./Picture.svelte";
+	/** Club card in the club display*/
 
-  export let club: SchoolClub;
+	import type SchoolClub from "$lib/models/SchoolClub.model";
+	import Picture from "./Picture.svelte";
 
-  $: useRainbow = club.bannerColor === "rainbow";
+	export let club: SchoolClub;
 
+	$: useRainbow = club.bannerColor === "rainbow";
 </script>
 
 <div class="club">

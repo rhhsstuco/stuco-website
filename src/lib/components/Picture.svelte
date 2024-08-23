@@ -1,11 +1,12 @@
 <script lang="ts">
-	import type ImageMeta from '../types/image.types';
+	/** <picture> wrapper for images processed by vite-imagetools */
+
+	import type { ImageMeta } from '../types/image.types';
 
 	export let meta: ImageMeta;
 
 	$: sources = meta.sources;
 	$: fallback = meta.img;
-
 
 	export let sizes = '(max-width: 600px) 400px, (max-width: 1200px) 800px, 1600px';
 	export let alt = '';

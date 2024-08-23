@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** The leaderboard component which displays the point total and rankings for grade wars. */
+
 	import type { RankColor } from "$lib/models/GradePoints.model";
 	import type GradePoint from "$lib/models/GradePoints.model";
 	import GradePosition from "./GradePosition.svelte";
@@ -8,9 +10,9 @@
 </script>
 
 <section class="leaderboard">
-  {#each gradePoints as gradePoint, i}
-    <GradePosition {gradePoint} position={i + 1} color={gradeColors[i]}/>
-  {/each}
+	{#each gradePoints as gradePoint, i}
+		<GradePosition {gradePoint} position={i + 1} color={gradeColors[i]}/>
+	{/each}
 </section>
 
 <style lang="scss">

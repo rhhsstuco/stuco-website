@@ -1,5 +1,6 @@
 import getPoints from "$lib/data/points";
-import type { PageServerLoad } from "./$types";
+import { PageServerLoad } from "./$types";
+
 
 export const load: PageServerLoad = async () => {
 

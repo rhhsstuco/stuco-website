@@ -1,9 +1,10 @@
 <script lang="ts">
-  	import { dev } from "$app/environment";
-  	import MemberCard from "$lib/components/MemberCard.svelte";
-  import { DOMAIN } from "$lib/constants";
+	// @ts-ignore
+	import DefaultProfilePicture from "$lib/images/default_pfp.png?format=avif;webp;png&w=400;800&as=picture";
+  	import MemberCard from "$lib/components/MemberCard.svelte";;
   	import { mediaMaxLarge } from "$lib/stores/maxScreenWidth.store";
   	import type { PageServerData } from "./$types";
+  	import Metadata from "$lib/components/Metadata.svelte";
 
 	export let data: PageServerData;
 
@@ -13,18 +14,12 @@
 	const DESCRIPTION = "Meet the members of our the 2023-2024 Student Council!";
 </script>
 
-<svelte:head>
-	<title>{TITLE}</title>
-	<meta name="description" content={DESCRIPTION}>
-	<meta property="og:title" content={TITLE}>
-	<meta property="og:description" content={DESCRIPTION}>
-	<meta property="og:type" content="website">
-	<meta property="og:image" content={`${DOMAIN}${data.members[1].imageURL.img.src}`}>
-	<meta property="thumbnail" content={`${DOMAIN}${data.members[1].imageURL.img.src}`}>
-	{#if !dev}
-		<meta property="og:url" content="https://rhhsstuco.ca/about-us">
-	{/if}
-</svelte:head>
+<Metadata
+	title={TITLE}
+	description={DESCRIPTION}
+	url="https://rhhsstuco.ca/about-us"
+	image={data.members[1].imageURL || DefaultProfilePicture}
+/>
 
 <main class="about-us">
 	<h1>About Us</h1>
@@ -34,13 +29,13 @@
 		<div class="members__display">
 			{#if !$mediaMaxLarge}
 				<div class="members__display__row">
-					{#each data.members.slice(0, 3) as member (member.name)}
+					{#each data.members.slice(0, 3) as member}
 						<MemberCard {member}/>
 					{/each}
 				</div>
 			{/if}
 			<div class="members__display__grid">
-				{#each data.members.slice(gridOffset) as member, index (member.name)}
+				{#each data.members.slice(gridOffset) as member, index}
 					<MemberCard {member} loading={($mediaMaxLarge && index < 3) ? "eager" : "lazy" }/>
 				{/each}
 			</div>
@@ -95,15 +90,9 @@
 
 	.members__display__grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 
 		gap: 2rem;
-	}
-
-	@include exports.media-largest {
-		.members__display__grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
 	}
 
 	@include exports.media-large {

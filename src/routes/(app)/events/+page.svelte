@@ -1,7 +1,7 @@
 <script lang="ts">
-  	import { dev } from "$app/environment";
   	import Calendar from "$lib/components/Calendar/Calendar.svelte";
   	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
+  	import Metadata from "$lib/components/Metadata.svelte";
 	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
@@ -27,16 +27,11 @@
 	const DESCRIPTION = "Stay up to date on all school events here!";
 </script>
 
-<svelte:head>
-	<title>{TITLE}</title>
-	<meta name="description" content={DESCRIPTION}>
-	<meta property="og:title" content={TITLE}>
-	<meta property="og:description" content={DESCRIPTION}>
-	<meta property="og:type" content="website">
-	{#if !dev}
-		<meta property="og:url" content="https://rhhsstuco.ca/events">
-	{/if}
-</svelte:head>
+<Metadata
+	title={TITLE}
+	description={DESCRIPTION}
+	url="https://rhhsstuco.ca/events"
+/>
 
 <main>
 	<h1>Events</h1>
@@ -44,6 +39,9 @@
 	<section class="month-events">
 		<h2>Events This Month</h2>
 		<div class="events__list">
+			{#if monthEvents.length === 0}
+				<h3 class="events__list-no-events">No Events This Month</h3>
+			{/if}
 			{#each monthEvents as event}
 				<HomePageEvent event={event}/>
 			{/each}
@@ -54,21 +52,26 @@
 <style lang="scss">
 	@use "../../../styles/exports.scss" as exports;
 
+	
 	main {
 		min-height: calc(100vh - 5.5rem);
 		margin-bottom: 8rem;
 	}
-
+	
 	h1 {
 		margin-top: 2rem;
 		@include exports.header;
 	}
-
+	
 	h2 {
 		margin-top: 3rem;
 		@include exports.header($font-size: calc(var(--font-size-header) - 1rem));
 	}
 
+	.events__list-no-events {
+		@include exports.not-found-message
+	}
+	
 	.month-events {
 		font-family: 'Poppins', sans-serif;
 		

@@ -1,16 +1,20 @@
 import { PUBLIC_SPREADSHEET_ID } from '$env/static/public';
 import { getSpreadSheetValues, initSheetsAuth } from './spreadsheet';
 
+/**
+ * @param maxResults the maximum size of the response set or undefined if no limit is specified.
+ * @param minDate the earliest the event date can be
+ * @param removeDuplicates if duplicates should be removed
+ */
 interface GetEventsParams {
 	maxResults?: number;
 	minDate?: Date;
 	removeDuplicates?: boolean;
 }
 
-
 /**
  * Gets events from the Google spreadsheet
- * @param {number?} maxResults the maximum size of the response set or undefined if no limit is specified.
+ * @param params parameters to modify the events to retrieve
  * @returns an array of SchoolEvents
  */
 const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
@@ -22,17 +26,15 @@ const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
 	await initSheetsAuth();
 
 	// Grab the 2D array of cells from the Google Sheet
-	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Events", "A:E")).data.values || [];
+	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Events", "A:E")) || [];
 
 	// Create set for deduping values
 	const seenNames = new Set<string>();
 
 	// Remove metadata row and transform the values
 	const transformedValues = values.slice(1).map(row => {
-
 		const splitStartDate = row[2].split('/');
 		const splitEndDate = row[3].split('/');
-
 
 		return {
 			name: row[0],
@@ -42,7 +44,6 @@ const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
 			useHTML: row[4] ? (row[4].toLowerCase() === "true") : undefined
 		} as SchoolEvent
 	}).filter(schoolEvent => {
-		
 		if (minDate) {
 			return schoolEvent.startDate > minDate;
 		}

@@ -1,5 +1,5 @@
-# 2023 - 2024 Student Council Website
+# 2024 - 2025 Student Council Website
 
-The Richmond Hill High School StuCo Website for the 2023/24 school year. Made with Sveltekit!
+The Richmond Hill High School StuCo Website for the 2024/25 school year. Made with Sveltekit!
 
 [Check it out!](https://www.rhhsstuco.ca)

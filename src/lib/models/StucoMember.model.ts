@@ -1,9 +1,7 @@
-import type ImageMeta from "$lib/types/image.types";
+import type { ImageMeta } from "$lib/types/image.types";
 
-interface StucoMember {
+export default interface StucoMember {
 	name: string;
 	position: string;
-	imageURL: ImageMeta;
+	imageURL?: ImageMeta;
 }
-
-export default StucoMember;

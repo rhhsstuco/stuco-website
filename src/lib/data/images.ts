@@ -1,7 +1,7 @@
 import type { ImageProps, ImagePropsWithHeight } from "$lib/types/image.types";
-import type ImageMeta from "$lib/types/image.types";
+import type { ImageMeta } from "$lib/types/image.types";
 
-const files = import.meta.glob("$images/gallery/*.jpg", {
+const files = import.meta.glob("$images/gallery/*.{jpg,png,webp,avif}", {
 	query: {
 		format: 'avif;webp;jpg',
 		w: '600;800;1200',
@@ -11,6 +11,12 @@ const files = import.meta.glob("$images/gallery/*.jpg", {
 
 type Orientation = 'horizontal' | 'vertical';
 
+/**
+ * @param maxResults the maximum size of the response set or undefined if no limit is specified
+ * @param orientation allows filtering my image orientation
+ * @param useDPR use DPR for responsive images
+ * @param reverse if the result order should be reversed
+ */
 interface GetGalleryImagesParams {
 	maxResults?: number;
 	orientation?: Orientation;
@@ -19,13 +25,11 @@ interface GetGalleryImagesParams {
 }
 
 /**
- * Reads image names from static folder and transformes them into image URLs
- * @param {number?} maxResults the maximum size of the response set or undefined if no limit is specified.
- * @param {Orientation} orientation allows filtering my image orientation
- * @param {boolean} useDPR use DPR for responsive images.
+ * Reads image names from static folder and transforms them into image URLs
+ * @param params parameters that can be used to modify this function's behaviour
  * @returns an array of ImageMeta objects
  */
-const getGalleryImages = async ({ maxResults, orientation, useDPR, reverse }: GetGalleryImagesParams = {}) => {
+const getGalleryImages = async (params: GetGalleryImagesParams = {}) => {
 
 	const filepaths = (await Promise.all(
 			Object.entries(files).map(async ([_, value]) => (await value() as any))
@@ -36,7 +40,7 @@ const getGalleryImages = async ({ maxResults, orientation, useDPR, reverse }: Ge
 			}));
 
 
-			if (useDPR) {
+			if (params.useDPR) {
 				Object.entries(sources).forEach(props => {
 					props[1].forEach((prop, i) => prop.dpr = (i + 1));
 				});
@@ -51,17 +55,17 @@ const getGalleryImages = async ({ maxResults, orientation, useDPR, reverse }: Ge
 
 	let filteredFilepaths = filepaths;
 
-	if (reverse) {
+	if (params.reverse) {
 		filteredFilepaths.reverse();
 	}
 	
-	filteredFilepaths = filteredFilepaths.slice(0, maxResults)
+	filteredFilepaths = filteredFilepaths.slice(0, params.maxResults)
 
-	if (orientation === 'horizontal') {
+	if (params.orientation === 'horizontal') {
 		filteredFilepaths = filteredFilepaths.filter(img => img.img.w > img.img.h);
 	}
 
-	if (orientation === 'vertical') {
+	if (params.orientation === 'vertical') {
 		filteredFilepaths = filteredFilepaths.filter(img => img.img.h > img.img.w);
 	}
 	

@@ -4,7 +4,6 @@ import type { PageServerLoad } from "./$types";
 
 
 export const load: PageServerLoad = async () => {
-
 	const spreadsheetDataPromise = getEvents({
 		maxResults: 3,
 		minDate: new Date(),

@@ -5,8 +5,7 @@
   	
 	import { onDestroy } from "svelte";
 	import type { Unsubscriber } from "svelte/store";
-  	import { dev } from "$app/environment";
-  	import { DOMAIN } from "$lib/constants";
+  	import Metadata from "$lib/components/Metadata.svelte";
 
 	export let data: PageServerData;
 
@@ -35,21 +34,15 @@
 	})
 
 	const TITLE = "Gallery | RHHS StuCo";
-	const DESCRIPTION = "A look into our 2022-2023 school year.";
+	const DESCRIPTION = "A look into our 2024-2025 school year.";
 </script>
 
-<svelte:head>
-	<title>{TITLE}</title>
-	<meta name="description" content={DESCRIPTION}>
-	<meta property="og:title" content={TITLE}>
-	<meta property="og:description" content={DESCRIPTION}>
-	<meta property="og:type" content="website">
-	<meta property="og:image" content={`${DOMAIN}${data.imageURLs[0].img.src}`}>
-	<meta property="thumbnail" content={`${DOMAIN}${data.imageURLs[0].img.src}`}>
-	{#if !dev}
-		<meta property="og:url" content="https://rhhsstuco.ca/gallery">
-	{/if}
-</svelte:head>
+<Metadata
+	title={TITLE}
+	description={DESCRIPTION}
+	url="https://rhhsstuco.ca/gallery"
+	image={data.imageURLs[0]}
+/>
 
 <main class="gallery">
 	<h1>Gallery</h1>

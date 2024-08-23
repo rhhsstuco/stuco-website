@@ -1,7 +1,7 @@
 import { onMount } from "svelte";
 import { readable } from "svelte/store";
 
-
+/** A width media query with a lower and upper bound  */
 export const screenWidthQuery = (minWidth: number, maxWidth: number) => readable<boolean>(false, set => {
 
 	const query = `(max-width: ${maxWidth}px) and (min-width: ${minWidth}px) `;

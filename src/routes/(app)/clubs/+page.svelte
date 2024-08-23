@@ -1,8 +1,7 @@
 <script lang="ts">
-  	import { dev } from "$app/environment";
 	import ClubDetail from "$lib/components/ClubDetail.svelte";
+  	import Metadata from "$lib/components/Metadata.svelte";
   	import SearchBar from "$lib/components/SearchBar.svelte";
-  import { DOMAIN } from "$lib/constants";
   	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
@@ -23,18 +22,12 @@
 	const DESCRIPTION = "Want to find a club? You came to the right place! Here you can search for clubs that fit your interests.";
 </script>
 
-<svelte:head>
-	<title>{TITLE}</title>
-	<meta name="description" content={DESCRIPTION}>
-	<meta property="og:title" content={TITLE}>
-	<meta property="og:description" content={DESCRIPTION}>
-	<meta property="og:type" content="website">
-	<meta property="og:image" content={`${DOMAIN}${data.clubs[0].imageURL.img.src}`}>
-	<meta property="thumbnail" content={`${DOMAIN}${data.clubs[0].imageURL.img.src}`}>
-	{#if !dev}
-		<meta property="og:url" content="https://rhhsstuco.ca/clubs">
-	{/if}
-</svelte:head>
+<Metadata
+	title={TITLE}
+	description={DESCRIPTION}
+	url="https://rhhsstuco.ca/clubs"
+	image={data.clubs[0].imageURL}
+/>
 
 <main class="clubs">
 	<h1>Clubs</h1>

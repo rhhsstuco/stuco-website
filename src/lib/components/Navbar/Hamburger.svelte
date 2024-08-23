@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** The hamburger menu in mobile UIs */
+
 	export let open: boolean;
 
 	function onClick() {

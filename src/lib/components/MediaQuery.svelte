@@ -1,4 +1,8 @@
 <script lang="ts">
+	/** 
+	 * Utility component which allows for reactive media queries in the markup 
+	*/
+
   	import { onDestroy, onMount } from "svelte";
 
 	export let query: string;
@@ -15,6 +19,9 @@
 		}
 	}
 
+	/** 
+	 * Adds a new media query change listener
+	 */
 	function addNewListener(query: string) {
 		mediaQuery = window.matchMedia(query);
 
@@ -24,6 +31,9 @@
 		matches = mediaQuery.matches;
 	}
 
+	/** 
+	 * Removes the current medai query change listener
+	 */
 	function removeActiveListener() {
 		if (mediaQuery && queryListener) {
 			mediaQuery.removeEventListener("change", queryListener);

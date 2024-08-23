@@ -1,3 +1,5 @@
+<!-- Footer containing school information and links -->
+
 <footer class="footer">
 	<section class="footer__content">
 		<div class="footer__content__info">

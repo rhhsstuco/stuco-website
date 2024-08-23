@@ -1,4 +1,4 @@
-import type ImageMeta from "$lib/types/image.types";
+import type { ImageMeta } from "$lib/types/image.types";
 
 export default interface SchoolClub {
 	name: string;

@@ -3,20 +3,24 @@ import type SchoolClub from '$lib/models/SchoolClub.model';
 import type { ImageMeta, ImageProps, ImagePropsWithHeight } from '$lib/types/image.types';
 import { getSpreadSheetValues, initSheetsAuth } from './spreadsheet';
 
-const filepaths = import.meta.glob("$images/club_logos/*.jpg", { as: 'raw', eager: true });
+// Gets filepaths of club logo thumbnails
+const filepaths = import.meta.glob("$images/club_logos/*.{jpg,png,webp,avif}", { as: 'raw', eager: true });
 
-const files = import.meta.glob("$images/club_logos/*.jpg", {
+// Gets metadata of processed club logo thumbnails
+const files = import.meta.glob("$images/club_logos/*.{jpg,png,webp,avif}", {
 	query: {
 		format: 'avif;webp;jpg',
 		as: 'picture',
 	}
 })
 
+// Gets filenames from file paths
 const filenames = Object.keys(filepaths)
 	.map(path => {
 		return path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.',));
 	});
 
+// Gets the image metadata from vite-imagetools and adds typing
 const clubPictureData = (await Promise.all(
 		Object.entries(files).map(async ([_, value]) => (await value() as any))
 	))
@@ -24,15 +28,16 @@ const clubPictureData = (await Promise.all(
 		img: (image.img as ImagePropsWithHeight),
 		sources: (image.sources as ImageProps[])
 		
-	} as unknown as ImageMeta))
+	} as unknown as ImageMeta));
 
+// Maps each file name to its image metadata
 const clubImageMap = new Map<string, ImageMeta>();
 
 filenames.map((filename, index) => clubImageMap.set(filename, clubPictureData[index]))
 
 /**
  * Gets events from the Google spreadsheet
- * @param {number?} maxResults the maximum size of the response set or undefined if no limit is specified.
+ * @param maxResults the maximum size of the response set or undefined if no limit is specified.
  * @returns an array of SchoolEvents
  */
 const getClubs = async (maxResults?: number) => {
@@ -43,7 +48,7 @@ const getClubs = async (maxResults?: number) => {
 	const range = maxResults === undefined ? "A:F" : `A1:F${(+maxResults) + 1}`;
 
 	// Grab the 2D array of cells from the Google Sheet
-	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Clubs", range)).data.values || [];
+	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Clubs", range)) || [];
 
 	// Remove metadata row and transform the values
 	const transformedValues = values.slice(1).map(row => {

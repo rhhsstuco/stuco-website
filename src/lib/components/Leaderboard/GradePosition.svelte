@@ -1,12 +1,14 @@
 <script lang="ts">
-  import type { RankColor } from "$lib/models/GradePoints.model";
-  import type GradePoint from "$lib/models/GradePoints.model";
+	/** The ranking card of a grade in the Leaderboard component */
 
-  export let position: number;
-  export let gradePoint: GradePoint;
-  export let color: RankColor;
+	import type { RankColor } from "$lib/models/GradePoints.model";
+	import type GradePoint from "$lib/models/GradePoints.model";
 
-  $: effectiveColor = gradePoint.points === 0 ? "none" : color;
+	export let position: number;
+	export let gradePoint: GradePoint;
+	export let color: RankColor;
+
+	$: effectiveColor = gradePoint.points === 0 ? "none" : color;
 </script>
 
 <div class="grade-position"
@@ -15,16 +17,16 @@
 	class:bg-bronze={effectiveColor === 'bronze'}
 >
   <div class="grade-position__info">
-	<div class="grade-position__position">
-	  {position}.
+		<div class="grade-position__position">
+			{position}.
+		</div>
+		<div class="grade-position__grade">
+			Grade {gradePoint.grade}
+		</div>
 	</div>
-	<div class="grade-position__grade">
-		Grade {gradePoint.grade}
+	<div class="grade-position__points">
+		{gradePoint.points} Point{gradePoint.points !== 1 ? "s" : ""}
 	</div>
-  </div>
-  <div class="grade-position__points">
-	{gradePoint.points} Point{gradePoint.points !== 1 ? "s" : ""}
-  </div>
 </div>
 
 <style lang="scss">

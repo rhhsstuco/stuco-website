@@ -1,7 +1,9 @@
 <script lang="ts">
+	/** The menu that pops from the side in mobile UIs */
+
 	import { base } from "$app/paths";
 	import { page } from "$app/stores";
-  import clickOutside from "$lib/actions/clickOutside";
+ 	import clickOutside from "$lib/actions/clickOutside";
   	import { createEventDispatcher } from "svelte";
   	import { fly } from "svelte/transition";
 

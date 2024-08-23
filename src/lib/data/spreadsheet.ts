@@ -33,11 +33,14 @@ export const initSheetsAuth = async () => {
  * Gets the values from the specified sheet and range
  * @param {string} spreadsheetId the id of the spreadsheet as given in the URL
  * @param {string} sheetName the name of the sheet within the spreadsheet document
- * @param {string} range 
+ * @param {string} range the range to fetch from
+ * @returns the spreadsheet values
  */
 export const getSpreadSheetValues = async (spreadsheetId: string, sheetName: string, range: string) => {
-	return await sheets.spreadsheets.values.get({
+	const sheetValues = await sheets.spreadsheets.values.get({
 		spreadsheetId,
 		range: `${sheetName}!${range}`
-	})
+	});
+
+	return sheetValues.data.values;
 }

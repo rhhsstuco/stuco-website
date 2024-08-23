@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** Flash dialog message to display information */
+
   	import { createEventDispatcher } from "svelte";
 
 	export let closeable: boolean = true;

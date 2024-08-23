@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** The detail component which appears from the side of the Calendar component */
+
   	import { createEventDispatcher } from "svelte";
 
 	export let date: Date;
@@ -7,7 +9,7 @@
 	const dispatch = createEventDispatcher();
 
 	function onClose() {
-		dispatch('close')
+		dispatch('close');
 	}
 </script>
 

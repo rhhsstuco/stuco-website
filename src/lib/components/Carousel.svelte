@@ -1,9 +1,11 @@
 <script lang="ts">
+	/** The gallery iamge carousel */
+
 	import { mediaMobile } from "$lib/stores/screenWidth.store";
 	import { onDestroy } from "svelte";
 	import Picture from "./Picture.svelte";
   	import { register } from 'swiper/element/bundle';
-  	import type ImageMeta from "$lib/types/image.types";
+  	import type { ImageMeta } from "$lib/types/image.types";
 
 	register();
 

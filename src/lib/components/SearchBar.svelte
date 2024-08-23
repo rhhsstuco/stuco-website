@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** A generic search bar component */
+
   	import { createEventDispatcher } from "svelte";
 
 	const dispatch = createEventDispatcher<{ 'value-change': string }>();
@@ -20,11 +22,11 @@
 		<i class="ri-search-line"></i>
 	</span>
 	<input
-	type="text"
-	aria-label="Search clubs"
-	class="search__input"
-	{placeholder}
-	bind:value
+		type="text"
+		aria-label="Search clubs"
+		class="search__input"
+		{placeholder}
+		bind:value
 	>
 	{#if showClose}
 		<button class="close__icon" on:click={clearSearch}>
@@ -66,8 +68,7 @@
 
 	.close__icon {
 		all: unset;
-		/* padding: 0.75rem; */
-
+		
 		i {
 			font-size: 1.5rem;
 		}

@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** The navigation bar */
+
  	import themeStore from "$lib/stores/theme.store";
 	import { base } from "$app/paths";
 	import { page } from '$app/stores';  
@@ -24,8 +26,11 @@
 		})
 	}
 
-	function checkActiveURL(path: string) {
-		return (url === `${base}/${path}`) || (url === `${base}/${path}/`)
+	/** 
+	 * Checks if the active url matches a certain path
+	*/
+	function checkActiveURL(path: string, activeURL: string) {
+		return (activeURL === `${base}/${path}`) || (activeURL === `${base}/${path}/`)
 	}
 
 	$: url = $page.url.pathname;
@@ -47,10 +52,10 @@
 			<MediaQuery query="(min-height: 577px)" let:matches={matches2}>
 				{#if matches1 && matches2}
 					<li><a href="{base}/" class:active={url === `${base}/` || url === `${base}`}>Home</a></li>
-					<li><a href="{base}/events" class:active={url === `${base}/events` || url === `${base}/events/`}>Events</a></li>
-					<li><a href="{base}/clubs" class:active={url === `${base}/clubs` || url === `${base}/clubs/`}>Clubs</a></li>
-					<li><a href="{base}/gallery" class:active={url === `${base}/gallery` || url === `${base}/gallery/`}>Gallery</a></li>
-					<li><a href="{base}/about-us" class:active={url === `${base}/about-us` || url === `${base}/about-us/`}>About Us</a></li>
+					<li><a href="{base}/events" class:active={checkActiveURL('events', url)}>Events</a></li>
+					<li><a href="{base}/clubs" class:active={checkActiveURL('clubs', url)}>Clubs</a></li>
+					<li><a href="{base}/gallery" class:active={checkActiveURL('gallery', url)}>Gallery</a></li>
+					<li><a href="{base}/about-us" class:active={checkActiveURL('about-us', url)}>About Us</a></li>
 				{:else}
 					<li>
 						<Hamburger bind:open={menuIsOpen}/>

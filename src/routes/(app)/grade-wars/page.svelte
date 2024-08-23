@@ -1,6 +1,6 @@
 <script lang="ts">
-  	import { dev } from "$app/environment";
   	import Leaderboard from "$lib/components/Leaderboard/Leaderboard.svelte";
+  	import Metadata from "$lib/components/Metadata.svelte";
   	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
@@ -9,17 +9,11 @@
 
 </script>
 
-<!-- svelte-ignore missing-declaration -->
-<svelte:head>
-	<title>{TITLE}</title>
-	<meta name="description" content={DESCRIPTION}>
-	<meta property="og:title" content={TITLE}>
-	<meta property="og:description" content={DESCRIPTION}>
-	<meta property="og:type" content="website">
-	{#if !dev}
-		<meta property="og:url" content="https://rhhsstuco.ca/grade-wars">
-	{/if}
-</svelte:head>
+<Metadata
+	title={TITLE}
+	description={DESCRIPTION}
+	url="https://rhhsstuco.ca/grade-wars"
+/>
 
 <main>
 	<h1>Leaderboard</h1>

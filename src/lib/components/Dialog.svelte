@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** Generic dialog styling*/
+	
 	export let dialog: HTMLDialogElement;
 </script>
 

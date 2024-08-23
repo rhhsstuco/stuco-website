@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** The individual button representing a day on the Calendar component */
+
 	export let events: SchoolEvent[] | undefined;
 	export let clickable: boolean = false;
 </script>

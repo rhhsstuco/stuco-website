@@ -10,6 +10,13 @@
 	text-align: $align;
 }
 
+@mixin not-found-message {
+	font-family: 'Inter', sans-serif;
+	text-align: center;
+	font-size: 1.25rem;
+	color: var(--color-darker-2)
+}
+
 // Responsive styles
 @mixin media($start, $end) {
 	@media only screen and (min-width: $start) and (max-width: $end) {

@@ -8,8 +8,8 @@
   	import themeStore from "$lib/stores/theme.store";
 	import type { PageServerData } from "./$types";
   	import Picture from "$lib/components/Picture.svelte";
-  	import type ImageMeta from "$lib/types/image.types";
-  	import { dev } from "$app/environment";
+  	import type { ImageMeta } from "$lib/types/image.types";
+  	import Metadata from "$lib/components/Metadata.svelte";
 
 	export let data: PageServerData;
 
@@ -33,18 +33,12 @@
 	const DESCRIPTION = "StuCo is a group of students who come together and act as the liason between admin and the student body.";
 </script>
 
-<svelte:head>
-	<title>{TITLE}</title>
-	<meta name="description" content={DESCRIPTION}>
-	<meta property="og:title" content={TITLE}>
-	<meta property="og:description" content={DESCRIPTION}>
-	<meta property="og:type" content="website">
-	<meta property="og:image" content={HeroImages.img.src}>
-	<meta property="thumbnail" content={HeroImages.img.src}/>
-	{#if !dev}
-		<meta property="og:url" content="https://rhhsstuco.ca">
-	{/if}
-</svelte:head>
+<Metadata
+	title={TITLE}
+	description={DESCRIPTION}
+	url="https://rhhsstuco.ca"
+	image={HeroImages}
+/>
 
 <main>
   <div class="hero__navbar">
@@ -69,6 +63,9 @@
   <section class="events">
     <h2>Upcoming Events</h2>
     <div class="events__list">
+		{#if data.events.length === 0}
+			<h3 class="events__list-no-events">No Upcoming Events</h3>
+		{/if}
 		{#each data.events as event}
 		  <HomePageEvent {event} />
 		{/each}
@@ -158,8 +155,13 @@
 			-webkit-text-fill-color: transparent;
 		}
 	}
+
 	h2 {
-		@include exports.header();
+		@include exports.header;
+	}
+
+	.events__list-no-events {
+		@include exports.not-found-message;
 	}
 
 	.events {
