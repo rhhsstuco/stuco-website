@@ -35,7 +35,7 @@
 		<SearchBar on:value-change={onValueChange} placeholder="Search by club name, location, or time"/>
 		<p class="clubs__new">Want to create a new club? Use this
 			<a
-				href="https://docs.google.com/forms/d/e/1FAIpQLSc78K3iBYlg9bXtkh3sqePokGIELF9WQKUX833hdEb8qdHl-A/viewform?usp=sf_link"
+				href="https://docs.google.com/forms/d/e/1FAIpQLSdIlle7_NF4P52azLB--275E3zdVoyYQT2eK6UICtsKiae3_w/viewform"
 				target="_blank"
 				rel="noopener noreferrer"
 			>

@@ -33,7 +33,11 @@
 		}}
 		navigation={showNavigation}
 	>
-		<!-- <div class="carousel__image"> -->
+		{#if imageURLs.length === 0}
+			<div class="gallery__placeholder">
+				<h3 class="gallery__placeholder__text">No Images Yet</h3>
+			</div>
+		{/if}
 		{#each imageURLs as src}
 			<swiper-slide class="carousel__image">
 				<div class="swiper-zoom-container">
@@ -71,7 +75,7 @@
 		border: 4px solid var(--color-light);
 	}
 
-	.carousel__image {
+	.carousel__image, .gallery__placeholder {
 		position: relative;
 
 		overflow: hidden;
@@ -84,6 +88,18 @@
 		height: 100%;
 		aspect-ratio: 16 / 9;
 
-		background-color: var(--color-lighter-2);
+		background-color: var(--color-lighter-1);
+	}
+
+	.gallery__placeholder__text {
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+
+		@include exports.not-found-message;
 	}
 </style>
