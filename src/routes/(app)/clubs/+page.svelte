@@ -2,14 +2,24 @@
 	import ClubDetail from "$lib/components/ClubDetail.svelte";
   	import Metadata from "$lib/components/Metadata.svelte";
   	import SearchBar from "$lib/components/SearchBar.svelte";
+  	import type SchoolClub from "$lib/models/SchoolClub.model";
   	import type { PageServerData } from "./$types";
 
 	export let data: PageServerData;
 
+	let selectedClub: SchoolClub | null = null;
 	let value: string = '';
 	
 	function onValueChange(v: CustomEvent<string>) {
 		value = v.detail.toLowerCase();
+	}
+
+	function onClubSelect(club: SchoolClub) {
+		if (club === selectedClub) {
+			selectedClub = null;
+		} else {
+			selectedClub = club;
+		}
 	}
 
 	$: filteredClubs = data.clubs.filter(club => 
@@ -45,7 +55,7 @@
 	{#if filteredClubs.length}
 		<div class="clubs__grid">
 			{#each filteredClubs as club (club)}
-				<ClubDetail {club}/>
+				<ClubDetail {club} selected={selectedClub === club} on:click={(e) => onClubSelect(club)}/>
 			{/each}
 		</div>
 	{:else} 
@@ -64,6 +74,7 @@
 	.clubs {
 		--club-title-font-size: 2rem;
 		--club-subtitle-font-size: 1.25rem;
+		--club-description-font-size: 1rem;
 
 		font-family: 'Poppins', sans-serif;
 
@@ -149,6 +160,7 @@
 		.clubs {
 			--club-title-font-size: 1.5rem;
 			--club-subtitle-font-size: 1.125rem;
+			--club-description-font-size: 0.95rem;
 		}
 
 		.clubs__grid {

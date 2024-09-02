@@ -45,7 +45,7 @@ const getClubs = async (maxResults?: number) => {
 	await initSheetsAuth();
 
 	// Optionally limit size of result set
-	const range = maxResults === undefined ? "A:F" : `A1:F${(+maxResults) + 1}`;
+	const range = maxResults === undefined ? "A:G" : `A1:F${(+maxResults) + 1}`;
 
 	// Grab the 2D array of cells from the Google Sheet
 	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Clubs", range)) || [];
@@ -53,19 +53,20 @@ const getClubs = async (maxResults?: number) => {
 	// Remove metadata row and transform the values
 	const transformedValues = values.slice(1).map(row => {
 
-		const clubImage = clubImageMap.get(row[4]);
+		const clubImage = clubImageMap.get(row[5]);
 
 		if (!clubImage) {
-			throw new Error(`club image not found. (key: ${row[4]}) (keys: ${[...clubImageMap.keys()]}) (values: ${[...clubImageMap.values()]})`);
+			throw new Error(`club image not found. (key: ${row[5]}) (keys: ${[...clubImageMap.keys()]}) (values: ${[...clubImageMap.values()]})`);
 		}
 
 		return {
 			name: row[0],
 			room: row[1],
 			meetingTime: row[2],
-			bannerColor: row[3],
+			description: row[3] || "",
+			bannerColor: row[4],
 			imageURL: clubImage,
-			instagramURL: row[5]
+			instagramURL: row[6]
 		} as SchoolClub
 	});
 
