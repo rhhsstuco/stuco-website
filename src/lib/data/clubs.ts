@@ -63,7 +63,7 @@ const getClubs = async (maxResults?: number) => {
 			name: row[0],
 			room: row[1],
 			meetingTime: row[2],
-			description: row[3] || "",
+			description: row[3] || "Description coming soon!",
 			bannerColor: row[4],
 			imageURL: clubImage,
 			instagramURL: row[6]
