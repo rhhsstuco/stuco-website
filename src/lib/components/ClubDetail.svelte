@@ -29,7 +29,7 @@
 			{/if}
 			<div class="club__banner__icon">
 				{#if club.instagramURL}
-					<a href={club.instagramURL} target="_blank" rel="noopener noreferrer">
+					<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation={console.log}>
 						<Picture meta={club.imageURL} alt={club.name}/>
 					</a>
 				{:else}
@@ -42,7 +42,7 @@
 		</div>
 		<div class="club__info-container">
 			<div class="club__info club__info--front">
-				<a href={club.instagramURL} target="_blank" rel="noopener noreferrer">
+				<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation={console.log}>
 					<h2 class="club__info__title">
 						{club.name}
 					</h2>
@@ -91,7 +91,7 @@
 		.club__banner__icon {
 			position: absolute;
 
-			transition: transform 0ms 0.15s;
+			transition: transform 0ms calc(var(--transition-time) / 4);
 
 			aspect-ratio: 1 / 1;
 
@@ -179,7 +179,7 @@
 	}
 
 	.club__info--front, .club__info--back {
-		transition: visibility 0ms 0.15s;
+		transition: visibility 0ms calc(var(--transition-time) / 4);
 	}
 
 	.club__info--back > .club__info__desc {
@@ -205,6 +205,20 @@
 	@include exports.media-small {
 		.club {
 			min-width: 14rem;
+		}
+	}
+
+	@media (prefers-reduced-motion) {
+		.club__info--front, .club__info--back {
+			transition: none;
+		}
+
+		.club__banner .club__banner__icon {
+			transition: none;
+		}
+
+		.club {
+			transition: none;
 		}
 	}
 </style>
