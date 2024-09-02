@@ -39,11 +39,17 @@
 		</div>
 		<div class="club__info-container">
 			<div class="club__info club__info--front">
-				<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation={console.log}>
+				{#if club.instagramURL}
+					<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation={console.log}>
+						<h2 class="club__info__title">
+							{club.name}
+						</h2>
+					</a>
+				{:else}
 					<h2 class="club__info__title">
 						{club.name}
 					</h2>
-				</a>
+				{/if}
 				<span class="club__info__room">
 					{club.room}
 				</span>
