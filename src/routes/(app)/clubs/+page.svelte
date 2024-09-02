@@ -7,19 +7,10 @@
 
 	export let data: PageServerData;
 
-	let selectedClub: SchoolClub | null = null;
 	let value: string = '';
 	
 	function onValueChange(v: CustomEvent<string>) {
 		value = v.detail.toLowerCase();
-	}
-
-	function onClubSelect(club: SchoolClub) {
-		if (club === selectedClub) {
-			selectedClub = null;
-		} else {
-			selectedClub = club;
-		}
 	}
 
 	$: filteredClubs = data.clubs.filter(club => 
@@ -55,7 +46,7 @@
 	{#if filteredClubs.length}
 		<div class="clubs__grid">
 			{#each filteredClubs as club (club)}
-				<ClubDetail {club} selected={selectedClub === club} on:click={(e) => onClubSelect(club)}/>
+				<ClubDetail {club}/>
 			{/each}
 		</div>
 	{:else} 

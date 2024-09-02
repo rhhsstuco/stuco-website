@@ -3,20 +3,17 @@
 
 	
 	import type SchoolClub from "$lib/models/SchoolClub.model";
-  	import { blur, crossfade, fade } from "svelte/transition";
 	import Picture from "./Picture.svelte";
-  	import { quintOut } from "svelte/easing";
-  import flip from "$lib/actions/flip";
 
 
 	export let club: SchoolClub;
-	export let selected: boolean = false;
+	let selected: boolean = false;
 
 	$: useRainbow = club.bannerColor === "rainbow";
 </script>
 
-<div class="club__container" class:selected={selected}>
-	<button class="club" on:click>
+<button class="club__container" class:selected={selected} on:click={(e) => selected = !selected}>
+	<div class="club">
 		<div class="club__banner" style:background-color={club.bannerColor} class:rainbow={useRainbow}>
 			<!-- Rainbow! -->
 			{#if useRainbow}
@@ -60,16 +57,18 @@
 				</p>
 			</div>
 		</div>
-	</button>
-</div>
+	</div>
+</button>
 
 <style lang="scss">
 	@use '../../styles/exports.scss' as exports;
 
+	.club__container {
+		all: unset;
+	}
+
 	.club {
 		--transition-time: 0.6s;
-
-		all: unset;
 
 		font-family: "Poppins", sans-serif;
 
@@ -175,6 +174,7 @@
 		.club__info__desc {
 			font-size: var(--club-description-font-size, 1rem);
 			color: var(--color-darker-2);
+			line-height: 1.2;
 		}
 	}
 
