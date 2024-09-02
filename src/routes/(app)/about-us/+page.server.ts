@@ -34,7 +34,7 @@ export const load: PageServerLoad = async () => {
 				imageURL: images["gordon_wang"],
 			},
 			{
-				name: "Eevie Lin",
+				name: "Eviee Lin",
 				position: "Social Convenor",
 				imageURL: images["eevie_lin"],
 			},
