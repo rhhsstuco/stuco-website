@@ -236,7 +236,7 @@
 
 		font-family: 'Poppins', sans-serif;
 
-		width: clamp(18rem, 85%, 52rem);
+		width: clamp(18rem, 85%, 56rem);
 		margin: 0 auto;
 		margin-top: 3rem;
 
@@ -269,7 +269,6 @@
 	}
 
 	.calendar__body__event {
-		
 		position: absolute;
 
 		bottom: 0;

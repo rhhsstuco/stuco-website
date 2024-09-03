@@ -55,7 +55,7 @@
 		<Picture meta={HeroImages} sizes="400px"/>
 	</div>
     <section class="hero">
-      <h1>RHHS STUCO</h1>
+      <h1>RHHS StuCo</h1>
     </section>
   </div>
 
@@ -143,6 +143,8 @@
 			font-weight: 900;
 			font-family: "Poppins";
 			line-height: 0.85;
+
+			text-transform: uppercase;
 
 			background: var(--color-primary);
 			background: linear-gradient(

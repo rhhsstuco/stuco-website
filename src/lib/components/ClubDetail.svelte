@@ -26,7 +26,7 @@
 			{/if}
 			<div class="club__banner__icon">
 				{#if club.instagramURL}
-					<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation={console.log}>
+					<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation>
 						<Picture meta={club.imageURL} alt={club.name}/>
 					</a>
 				{:else}
@@ -40,7 +40,7 @@
 		<div class="club__info-container">
 			<div class="club__info club__info--front">
 				{#if club.instagramURL}
-					<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation={console.log}>
+					<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation>
 						<h2 class="club__info__title">
 							{club.name}
 						</h2>
