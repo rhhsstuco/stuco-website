@@ -74,6 +74,7 @@
 	}
 
 	.gallery__image-grid {
+		width: clamp(16rem, 75%, 84rem);
 		margin: 0 auto;
 	}
 
