@@ -33,9 +33,6 @@
 					<Picture meta={club.imageURL} alt={club.name}/>
 				{/if}
 			</div>
-			<div class="club__banner__insta">
-				<i class="ri-instagram-line"></i>
-			</div>
 		</div>
 		<div class="club__info-container">
 			<div class="club__info club__info--front">
