@@ -3,16 +3,30 @@
 
 	
 	import type SchoolClub from "$lib/models/SchoolClub.model";
+  	import Confetti from "svelte-confetti";
 	import Picture from "./Picture.svelte";
 
 
 	export let club: SchoolClub;
 	let selected: boolean = false;
+	let iconSpin: boolean = false;
 
 	$: useRainbow = club.bannerColor === "rainbow";
+
+	function onIconClick() {
+		iconSpin = true;
+
+		setTimeout(() => iconSpin = false, 2500)
+	}
+
+	
 </script>
 
-<button class="club__container" class:selected={selected} on:click={(e) => selected = !selected}>
+<div
+	class="club__container"
+	class:selected={selected}
+	aria-roledescription="flipping card"
+>
 	<div class="club">
 		<div class="club__banner" style:background-color={club.bannerColor} class:rainbow={useRainbow}>
 			<!-- Rainbow! -->
@@ -24,44 +38,80 @@
 				<div style:background-color="#1558f5"></div>
 				<div style:background-color="#851f86"></div>
 			{/if}
-			<div class="club__banner__icon">
+			<button
+				class="club__banner__icon"
+				class:icon-spin={iconSpin}
+				on:click={onIconClick}
+			>
 				{#if club.instagramURL}
-					<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation>
+					<!-- <a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation> -->
 						<Picture meta={club.imageURL} alt={club.name}/>
-					</a>
+					<!-- </a> -->
 				{:else}
 					<Picture meta={club.imageURL} alt={club.name}/>
 				{/if}
+			</button>
+			{#if iconSpin}
+			<div class="confetti">
+				<Confetti
+					amount={30}
+					delay={[0, 250]}
+					size={50}
+					xSpread={0}
+					rounded
+					colorArray={[`url(${club.imageURL.img.src})`]}
+				/>
 			</div>
+		{/if}
 		</div>
 		<div class="club__info-container">
 			<div class="club__info club__info--front">
-				{#if club.instagramURL}
-					<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation>
+				<div>
+					{#if club.instagramURL}
+						<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation>
+							<h2 class="club__info__title">
+								{club.name}
+							</h2>
+						</a>
+					{:else}
 						<h2 class="club__info__title">
 							{club.name}
 						</h2>
-					</a>
-				{:else}
-					<h2 class="club__info__title">
-						{club.name}
-					</h2>
-				{/if}
-				<span class="club__info__room">
-					{club.room}
-				</span>
-				<span class="club__info__meeting-time">
-					{club.meetingTime}
-				</span>
+					{/if}
+					<span class="club__info__room">
+						{club.room}
+					</span>
+					<span class="club__info__meeting-time">
+						{club.meetingTime}
+					</span>
+				</div>
+				<div>
+					<hr>
+					<div class="club__info__desc-button">
+						<button on:click={(e) => selected = !selected}>
+							View Description
+						</button>
+						<i class="ri-arrow-right-fill"></i>
+					</div>
+				</div>
 			</div>
 			<div class="club__info club__info--back">
 				<p class="club__info__desc">
 					{club.description}
 				</p>
+				<div>
+					<hr>
+					<div class="club__info__desc-button">
+						<i class="ri-arrow-left-fill"></i>
+						<button on:click={(e) => selected = !selected}>
+							Close Description
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</button>
+</div>
 
 <style lang="scss">
 	@use '../../styles/exports.scss' as exports;
@@ -83,31 +133,22 @@
 
 		background-color: var(--color-light);
 
-		min-height: 18rem;
+		min-height: 20rem;
+
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transition: transform var(--transition-time);
+		transform-style: preserve-3d;
+	}
+
+	.confetti {
+		position: absolute;
 	}
 
 	.club__banner {
 		position: relative;
 		height: 5.75rem;
-
-		.club__banner__icon {
-			position: absolute;
-
-			transition: transform 0ms calc(var(--transition-time) / 4);
-
-			aspect-ratio: 1 / 1;
-
-			border: 0.5rem solid var(--color-light);
-			border-radius: 50%;
-			overflow: hidden;
-			box-shadow: exports.$box-shadow;
-
-			top: -28%;
-			left: -12.5%;
-
-			width: 8rem;
-			height: 8rem;
-		}
 
 		&.rainbow {
 			display: flex;
@@ -119,27 +160,58 @@
 		}
 	}
 
+	.club__banner__icon {
+		all: unset;
+		position: absolute;
+
+		transition: transform 0ms calc(var(--transition-time) / 4);
+
+		aspect-ratio: 1 / 1;
+
+		border: 0.5rem solid var(--color-light);
+		border-radius: 50%;
+		overflow: hidden;
+		box-shadow: exports.$box-shadow;
+
+		top: -28%;
+		left: -12.5%;
+
+		width: 8rem;
+		height: 8rem;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.club__banner__icon.icon-spin {
+		transform-style: preserve-3d;
+		
+		perspective: 1000px;
+
+		animation: 0.8s ease-out 1 icon-spin;
+	}
+
 	.club__container {
 		background-color: transparent;
-		perspective: 1000px; /* Remove this if you don't want the 3D effect */
+		
+		/* Remove this if you don't want the 3D effect */
+		perspective: 1000px; 
 	}
 
 	.club__container.selected .club {
 		transform: rotateY(180deg);
 	}
 
-	.club {
-		position: relative;
-		width: 100%;
-		height: 100%;
-		transition: transform var(--transition-time);
-		transform-style: preserve-3d;
-	}
-
 	.club__info {
 		display: flex;
 		flex-direction: column;
-		gap: 0.125rem;
+		justify-content: space-between;
+		gap: 1rem;
+
+		-webkit-font-smoothing: subpixel-antialiased;
+		transform: translateZ(0);
+
 
 		grid-row: 1 / 1;
 		grid-column: 1 / 1;
@@ -147,6 +219,8 @@
 		font-family: 'Inter', sans-serif;
 
 		padding: 1rem;
+		padding-top: 0.75rem;
+		padding-bottom: 0.75rem;
 
 		a {
 			all: unset;
@@ -154,6 +228,10 @@
 			&:hover {
 				cursor: pointer;
 			}
+		}
+
+		hr {
+			border-top: 0.5px solid var(--color-lighter-2);
 		}
 
 		.club__info__title {
@@ -181,11 +259,42 @@
 		}
 	}
 
+
+	.club__info__desc-button {
+		color: var(--color-darker-1);
+		width: 100%;
+		font-size: var(--club-description-font-size, 1rem);
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		i {
+			font-size: var(--club-subtitle-font-size, 1.25rem);
+		}
+
+		button {
+			all: unset;
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.club__container.selected .club__info__desc-button:hover i {
+		animation: none;
+	}
+
+	.club__container .club__info__desc-button:hover i {
+		animation: 1s linear infinite arrow-bobbing;
+	}
+
 	.club__info--front, .club__info--back {
 		transition: visibility 0ms calc(var(--transition-time) / 4);
 	}
 
-	.club__info--back > .club__info__desc {
+	.club__info--back {
 		transform: rotateY(180deg);
 	}
 
@@ -202,6 +311,7 @@
 	}
 
 	.club__info-container {
+		flex-grow: 1;
 		display: grid;
 	}
 
@@ -222,6 +332,53 @@
 
 		.club {
 			transition: none;
+		}
+	}
+
+	
+	@keyframes arrow-bobbing {
+		$offset: 0.2rem;
+
+		0% {
+			translate: 0;
+		}
+		25% {
+			translate: $offset;
+		}
+		50% {
+			translate: 0;
+		}
+		75% {
+			translate: $offset;
+		}
+		100% {
+			translate: 0;
+		}
+	}
+
+	/* @keyframes icon-spin {
+		0% {
+			rotate: y 0;
+		}
+		100% {
+			rotate: y 1turn;
+		}
+	} */
+
+	@keyframes icon-spin {
+		0% {
+			scale: 1;
+			rotate: y 0;
+		}
+		10% {
+			rotate: y 0.25turn;
+			scale: 0.825;
+		}
+		80% {
+			scale: 0.95;
+		}
+		100% {
+			rotate: y 1turn;
 		}
 	}
 </style>
