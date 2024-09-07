@@ -123,11 +123,6 @@ export const load: PageServerLoad = async () => {
 				position: "Mascot",
 				imageURL: images["?"],
 			},
-			{
-				name: "You?",
-				position: "Mascot",
-				imageURL: images["?"],
-			},
 		],
 	};
 };
