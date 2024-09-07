@@ -14,6 +14,11 @@
 	$: useRainbow = club.bannerColor === "rainbow";
 
 	function onIconClick() {
+		if (iconSpin) {
+			iconSpin = false;
+			return
+		}
+
 		iconSpin = true;
 
 		setTimeout(() => iconSpin = false, 2500)
