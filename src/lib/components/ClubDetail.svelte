@@ -11,17 +11,33 @@
 	let selected: boolean = false;
 	let iconSpin: boolean = false;
 
+	let timeout: NodeJS.Timeout | null;
+
 	$: useRainbow = club.bannerColor === "rainbow";
 
 	function onIconClick() {
 		if (iconSpin) {
 			iconSpin = false;
-			return
+			if (timeout) {
+				clearTimeout(timeout);
+				timeout = null;
+			}
+			return;
 		}
 
 		iconSpin = true;
 
-		setTimeout(() => iconSpin = false, 2500)
+		timeout = setTimeout(() => (iconSpin = false), 2500)
+	}
+
+	function onDescriptionToggle() {
+		selected = !selected;
+
+		iconSpin = false;
+
+		if (timeout) {
+			clearTimeout(timeout);
+		}
 	}
 
 	
@@ -30,7 +46,6 @@
 <div
 	class="club__container"
 	class:selected={selected}
-	aria-roledescription="flipping card"
 >
 	<div class="club">
 		<div class="club__banner" style:background-color={club.bannerColor} class:rainbow={useRainbow}>
@@ -43,31 +58,27 @@
 				<div style:background-color="#1558f5"></div>
 				<div style:background-color="#851f86"></div>
 			{/if}
+
 			<button
 				class="club__banner__icon"
 				class:icon-spin={iconSpin}
 				on:click={onIconClick}
 			>
-				{#if club.instagramURL}
-					<!-- <a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation> -->
-						<Picture meta={club.imageURL} alt={club.name}/>
-					<!-- </a> -->
-				{:else}
-					<Picture meta={club.imageURL} alt={club.name}/>
-				{/if}
+				<Picture meta={club.imageURL} alt={club.name}/>
 			</button>
+
 			{#if iconSpin}
-			<div class="confetti">
-				<Confetti
-					amount={30}
-					delay={[0, 250]}
-					size={50}
-					xSpread={0}
-					rounded
-					colorArray={[`url(${club.imageURL.img.src})`]}
-				/>
-			</div>
-		{/if}
+				<div class="confetti">
+					<Confetti
+						amount={30}
+						delay={[0, 250]}
+						size={50}
+						xSpread={0}
+						rounded
+						colorArray={[`url(${club.imageURL.img.src})`]}
+					/>
+				</div>
+			{/if}
 		</div>
 		<div class="club__info-container">
 			<div class="club__info club__info--front">
@@ -90,13 +101,13 @@
 						{club.meetingTime}
 					</span>
 				</div>
-				<div>
-					<hr>
+				<div class="club__info__desc-group">
+					<div class="hr-div"></div>
 					<div class="club__info__desc-button">
-						<button on:click={(e) => selected = !selected}>
-							View Description
+						<button on:click={onDescriptionToggle}>
+							<p>View Description</p>
+							<i class="ri-arrow-right-fill"></i>
 						</button>
-						<i class="ri-arrow-right-fill"></i>
 					</div>
 				</div>
 			</div>
@@ -104,12 +115,12 @@
 				<p class="club__info__desc">
 					{club.description}
 				</p>
-				<div>
-					<hr>
+				<div class="club__info__desc-group">
+					<div class="hr-div"></div>
 					<div class="club__info__desc-button">
-						<i class="ri-arrow-left-fill"></i>
-						<button on:click={(e) => selected = !selected}>
-							Close Description
+						<button on:click={onDescriptionToggle}>
+							<i class="ri-arrow-left-fill"></i>
+							<p>Close Description</p>
 						</button>
 					</div>
 				</div>
@@ -138,11 +149,9 @@
 
 		background-color: var(--color-light);
 
-		min-height: 20rem;
+		height: 22rem;
 
 		position: relative;
-		width: 100%;
-		height: 100%;
 		transition: transform var(--transition-time);
 		transform-style: preserve-3d;
 	}
@@ -155,6 +164,9 @@
 		position: relative;
 		height: 5.75rem;
 
+		-webkit-perspective: 1000px;
+		perspective: 1000px;
+		
 		&.rainbow {
 			display: flex;
 			flex-direction: column;
@@ -168,6 +180,9 @@
 	.club__banner__icon {
 		all: unset;
 		position: absolute;
+		display: block;
+
+		transform: rotateY(-360deg);
 
 		transition: transform 0ms calc(var(--transition-time) / 4);
 
@@ -189,12 +204,26 @@
 		}
 	}
 
-	.club__banner__icon.icon-spin {
-		transform-style: preserve-3d;
-		
-		perspective: 1000px;
+	.club__container.selected .club__banner__icon {
+		transform: rotateY(-540deg);
+	}
 
-		animation: 0.8s ease-out 1 icon-spin;
+	.club__banner__icon.icon-spin {
+		-webkit-animation: 0.8s ease-out 1 icon-spin-front; /* Safari 4+ */
+		-moz-animation: 0.8s ease-out 1 icon-spin-front; /* Fx 5+ */
+		-o-animation: 0.8s ease-out 1 icon-spin-front; /* Opera 12+ */
+		animation: 0.8s ease-out 1 icon-spin-front; /* IE 10+, Fx 29+ */
+
+		animation-direction: reverse;
+	}
+
+	.club__container.selected .club__banner__icon.icon-spin {
+		-webkit-animation: 0.8s ease-out 1 icon-spin-back; /* Safari 4+ */
+		-moz-animation: 0.8s ease-out 1 icon-spin-back; /* Fx 5+ */
+		-o-animation: 0.8s ease-out 1 icon-spin-back; /* Opera 12+ */
+		animation: 0.8s ease-out 1 icon-spin-back; /* IE 10+, Fx 29+ */
+
+		animation-direction: reverse;
 	}
 
 	.club__container {
@@ -212,11 +241,6 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		gap: 1rem;
-
-		-webkit-font-smoothing: subpixel-antialiased;
-		transform: translateZ(0);
-
 
 		grid-row: 1 / 1;
 		grid-column: 1 / 1;
@@ -226,18 +250,6 @@
 		padding: 1rem;
 		padding-top: 0.75rem;
 		padding-bottom: 0.75rem;
-
-		a {
-			all: unset;
-
-			&:hover {
-				cursor: pointer;
-			}
-		}
-
-		hr {
-			border-top: 0.5px solid var(--color-lighter-2);
-		}
 
 		.club__info__title {
 			font-size: var(--club-title-font-size, 2rem);
@@ -262,17 +274,31 @@
 			color: var(--color-darker-2);
 			line-height: 1.2;
 		}
+
+		h2 {
+			margin-bottom: 0.25rem;
+		}
 	}
 
+	.club__info a {
+		all: unset;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.hr-div {
+		background-color: var(--color-lighter-2);
+		height: 1px;
+	}
 
 	.club__info__desc-button {
 		color: var(--color-darker-1);
 		width: 100%;
 		font-size: var(--club-description-font-size, 1rem);
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
+		padding-top: 0.75rem;
+
 
 		i {
 			font-size: var(--club-subtitle-font-size, 1.25rem);
@@ -280,6 +306,11 @@
 
 		button {
 			all: unset;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
 		}
 
 		&:hover {
@@ -293,6 +324,10 @@
 
 	.club__container .club__info__desc-button:hover i {
 		animation: 1s linear infinite arrow-bobbing;
+	}
+
+	.club__container .club__info__desc-button:hover p {
+		text-decoration: underline;
 	}
 
 	.club__info--front, .club__info--back {
@@ -340,50 +375,75 @@
 		}
 	}
 
-	
 	@keyframes arrow-bobbing {
-		$offset: 0.2rem;
-
 		0% {
 			translate: 0;
 		}
 		25% {
-			translate: $offset;
+			translate: 0.2rem;
 		}
 		50% {
 			translate: 0;
 		}
 		75% {
-			translate: $offset;
+			translate: 0.2rem;
 		}
 		100% {
 			translate: 0;
 		}
 	}
 
-	/* @keyframes icon-spin {
+	@keyframes icon-spin-front {
 		0% {
-			rotate: y 0;
-		}
-		100% {
-			rotate: y 1turn;
-		}
-	} */
-
-	@keyframes icon-spin {
-		0% {
+			-webkit-transform: rotateY(-360deg);
+			-moz-transform: rotateY(-360deg);
+			-o-transform: rotateY(-360deg);
+			transform: rotateY(-360deg);
 			scale: 1;
-			rotate: y 0;
 		}
-		10% {
-			rotate: y 0.25turn;
-			scale: 0.825;
-		}
-		80% {
+		20% {
 			scale: 0.95;
 		}
+		90% {
+			-webkit-transform: rotateY(-90deg);
+			-moz-transform: rotateY(-90deg);
+			-o-transform: rotateY(-90deg);
+			transform: rotateY(-90deg);
+			scale: 0.825;
+		}
 		100% {
-			rotate: y 1turn;
+			-webkit-transform: rotateY(0deg);
+			-moz-transform: rotateY(0deg);
+			-o-transform: rotateY(0deg);
+			transform: rotateY(0deg);
+			scale: 1;
+		}
+	}
+
+	@keyframes icon-spin-back {
+		0% {
+			-webkit-transform: rotateY(-540deg);
+			-moz-transform: rotateY(-540deg);
+			-o-transform: rotateY(-540deg);
+			transform: rotateY(-540deg);
+			scale: 1;
+		}
+		20% {
+			scale: 0.95;
+		}
+		90% {
+			-webkit-transform: rotateY(-270deg);
+			-moz-transform: rotateY(-270deg);
+			-o-transform: rotateY(-270deg);
+			transform: rotateY(-270deg);
+			scale: 0.825;
+		}
+		100% {
+			-webkit-transform: rotateY(-180deg);
+			-moz-transform: rotateY(-180deg);
+			-o-transform: rotateY(-180deg);
+			transform: rotateY(-180deg);
+			scale: 1;
 		}
 	}
 </style>
