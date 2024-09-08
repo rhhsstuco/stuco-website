@@ -94,14 +94,16 @@
 							{club.name}
 						</h2>
 					{/if}
-					<span class="club__info__room">
-						{club.room}
-					</span>
-					<span class="club__info__meeting-time">
-						{club.meetingTime}
-					</span>
+					<div class="club__info__subheading">
+						<span class="club__info__room">
+							{club.room}
+						</span>
+						<span class="club__info__meeting-time">
+							{club.meetingTime}
+						</span>
+					</div>
 				</div>
-				<div class="club__info__desc-group">
+				<div>
 					<div class="hr-div"></div>
 					<div class="club__info__desc-button">
 						<button on:click={onDescriptionToggle}>
@@ -115,7 +117,7 @@
 				<p class="club__info__desc">
 					{club.description}
 				</p>
-				<div class="club__info__desc-group">
+				<div>
 					<div class="hr-div"></div>
 					<div class="club__info__desc-button">
 						<button on:click={onDescriptionToggle}>
@@ -231,6 +233,12 @@
 		
 		/* Remove this if you don't want the 3D effect */
 		perspective: 1000px; 
+	}
+
+	.club__info__subheading {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
 	}
 
 	.club__container.selected .club {
