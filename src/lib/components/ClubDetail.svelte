@@ -59,13 +59,15 @@
 				<div style:background-color="#851f86"></div>
 			{/if}
 
-			<button
-				class="club__banner__icon"
-				class:icon-spin={iconSpin}
-				on:click={onIconClick}
-			>
-				<Picture meta={club.imageURL} alt={club.name}/>
-			</button>
+			<div class="club_banner__icon-wrapper">
+				<button
+					class="club__banner__icon"
+					class:icon-spin={iconSpin}
+					on:click={onIconClick}
+				>
+					<Picture meta={club.imageURL} alt={club.name}/>
+				</button>
+			</div>
 
 			{#if iconSpin}
 				<div class="confetti">
@@ -165,9 +167,6 @@
 	.club__banner {
 		position: relative;
 		height: 5.75rem;
-
-		-webkit-perspective: 1000px;
-		perspective: 1000px;
 		
 		&.rainbow {
 			display: flex;
@@ -181,19 +180,28 @@
 
 	.club__banner__icon {
 		all: unset;
-		position: absolute;
 		display: block;
-
-		transform: rotateY(-360deg);
-
-		transition: transform 0ms calc(var(--transition-time) / 4), background-color .2s ease-in-out;
-
-		aspect-ratio: 1 / 1;
 
 		border: 0.5rem solid var(--color-light);
 		border-radius: 50%;
 		overflow: hidden;
 		box-shadow: exports.$box-shadow;
+
+		aspect-ratio: 1 / 1;
+		width: 100%;
+		height: 100%;
+
+		transform: rotateY(-360deg);
+		transition: transform 0ms calc(var(--transition-time) / 4), background-color .2s ease-in-out;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.club_banner__icon-wrapper {
+		position: absolute;
+		display: block;
 
 		top: -28%;
 		left: -12.5%;
@@ -201,9 +209,9 @@
 		width: 8rem;
 		height: 8rem;
 
-		&:hover {
-			cursor: pointer;
-		}
+		transform-style: preserve-3d;
+		-webkit-perspective: 1000px;
+		perspective: 1000px;
 	}
 
 	.club__container.selected .club__banner__icon {
