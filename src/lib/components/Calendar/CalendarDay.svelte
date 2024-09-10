@@ -1,4 +1,7 @@
 <script lang="ts">
+  import reducedMotion from "$lib/stores/reducedMotion.store";
+  import { fade } from "svelte/transition";
+
 	/** The individual button representing a day on the Calendar component */
 
 	export let events: SchoolEvent[] | undefined;
@@ -23,12 +26,12 @@
 		return [numSchoolEvents, numClubEvents];
 	}
 
-	$: [numSchoolEvents, numClubEvents] = calculateEventTypes(events)
+	$: [numSchoolEvents, numClubEvents] = calculateEventTypes(events);
 </script>
 
 <button class="calendar-day" disabled={!clickable} on:click>
 	{#if clickable}
-		<div class="calendar-day__event-count">
+		<div class="calendar-day__event-count" >
 			{#if numSchoolEvents != 0}
 				<div style={`--color-badge: var(--color-badge-school);`}>{numSchoolEvents}</div>
 			{/if}

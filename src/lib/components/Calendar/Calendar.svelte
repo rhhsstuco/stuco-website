@@ -1,12 +1,12 @@
 <script lang="ts">
 	/** The calendar component showing school events */
 
- 	import { fly } from "svelte/transition";
   	import CalendarDay from "./CalendarDay.svelte";
 	import CalendarDetail from "./CalendarDetail.svelte";
 	import { quadInOut } from "svelte/easing";
   	import reducedMotion from "$lib/stores/reducedMotion.store";
 	import themeStore from "$lib/stores/theme.store";
+  	import { fade, fly } from "svelte/transition";
 
 	export let events: SchoolEvent[];
 
@@ -202,7 +202,7 @@
 		{#if selectedDate}
 			<div
 				class="calendar-detail"
-				transition:fly={{ x: 250, opacity: 1, duration: $reducedMotion ? 0: 250, easing: quadInOut }}
+				transition:fly={{ x: 250, opacity: 1, duration: $reducedMotion ? 0 : 250, easing: quadInOut }}
 			>
 				<CalendarDetail
 					date={selectedDate}

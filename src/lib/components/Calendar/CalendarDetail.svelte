@@ -30,7 +30,7 @@
 		<div class="calendar-detail__content__events">
 			{#each events as event}
 				<div class="calendar-detail__content__events__event">
-					<h4>{event.name}</h4>
+					<h4 style={`--color-badge: var(--color-badge-${event.type})`}>{event.name}</h4>
 					<p>
 						{#if !event.useHTML}
 							{event.description}
@@ -93,12 +93,27 @@
 		flex-direction: column;
 		gap: var(--calendar-detail-events-info-gap, 0.25rem);
 
-		h4 {
-			font-weight: 600;
-			text-transform: uppercase;
-			font-size: var(--calendar-detail-event-font-size, 1rem);
-		}
+	}
 
+	.calendar-detail__content__events__event h4 {
+		font-weight: 600;
+		text-transform: uppercase;
+		position: relative;
+		font-size: var(--calendar-detail-event-font-size, 1rem);
+		margin-bottom: 0.25rem;
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: -0.2rem;
+			border-radius: 5rem;
+			height: 0.2rem;
+
+
+			background-color: var(--color-badge);
+		}
 	}
 
 	.calendar-detail__content__events__event p, .calendar-detail__no-events {
