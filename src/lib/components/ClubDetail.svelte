@@ -154,7 +154,7 @@
 		height: 22rem;
 
 		position: relative;
-		transition: transform var(--transition-time);
+		transition: transform var(--transition-time), background-color .2s ease-in-out;
 		transform-style: preserve-3d;
 	}
 
@@ -186,7 +186,7 @@
 
 		transform: rotateY(-360deg);
 
-		transition: transform 0ms calc(var(--transition-time) / 4);
+		transition: transform 0ms calc(var(--transition-time) / 4), background-color .2s ease-in-out;
 
 		aspect-ratio: 1 / 1;
 
@@ -339,7 +339,7 @@
 	}
 
 	.club__info--front, .club__info--back {
-		transition: visibility 0ms calc(var(--transition-time) / 4);
+		transition: visibility 0ms calc(var(--transition-time) / 4), background-color .2s ease-in-out;
 	}
 
 	.club__info--back {

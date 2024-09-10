@@ -3,5 +3,6 @@ interface SchoolEvent {
 	description: string;
 	startDate: Date;
 	endDate: Date;
-	useHTML?: boolean
+	type: "school" | "club";
+	useHTML?: boolean;
 }

@@ -36,12 +36,23 @@ const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
 		const splitStartDate = row[2].split('/');
 		const splitEndDate = row[3].split('/');
 
+		let type = row[4]
+
+		if (type === "School Event") {
+			type = "school"
+		} else if (type === "Club Event") {
+			type = "club"
+		} else {
+			throw Error("Event type is not either 'School Event' or 'Club Event'.");
+		}
+
 		return {
 			name: row[0],
 			description: row[1],
 			startDate: new Date(+splitStartDate[2], +splitStartDate[0] - 1, +splitStartDate[1]),
 			endDate: new Date(+splitEndDate[2], +splitEndDate[0] - 1, +splitEndDate[1]),
-			useHTML: row[4] ? (row[4].toLowerCase() === "true") : undefined
+			type: <"school" | "club"> type,
+			useHTML: row[5] ? (row[5].toLowerCase() === "true") : undefined
 		} as SchoolEvent
 	}).filter(schoolEvent => {
 		if (minDate) {

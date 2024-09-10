@@ -3,16 +3,45 @@
 
 	export let events: SchoolEvent[] | undefined;
 	export let clickable: boolean = false;
+
+	function calculateEventTypes(events: SchoolEvent[] | undefined): [number, number] {
+		if (!events) {
+			return [0, 0];
+		}
+
+		let numSchoolEvents = 0;
+		let numClubEvents = 0;
+
+		for (const event of events) {
+			if (event.type === 'school') {
+				numSchoolEvents++;
+			} else {
+				numClubEvents++;
+			}
+		}
+
+		return [numSchoolEvents, numClubEvents];
+	}
+
+	$: [numSchoolEvents, numClubEvents] = calculateEventTypes(events)
 </script>
 
 <button class="calendar-day" disabled={!clickable} on:click>
-	{#if events && clickable}
-		<div class="calendar-day__event-count">{events.length}</div>
+	{#if clickable}
+		<div class="calendar-day__event-count">
+			{#if numSchoolEvents != 0}
+				<div style={`--color-badge: var(--color-badge-school);`}>{numSchoolEvents}</div>
+			{/if}
+			{#if numClubEvents != 0}
+				<div style={`--color-badge: var(--color-badge-club);`}>{numClubEvents}</div>
+			{/if}
+		</div>
 	{/if}
 	<slot/>
 </button>
 
 <style lang="scss">
+	@use "../../../styles/exports.scss" as exports;
 	@use "sass:color";
 
 	.calendar-day {		
@@ -38,19 +67,42 @@
 	.calendar-day__event-count {
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
+		justify-content: flex-end;
 		align-items: center;
-		text-align: center;
+		gap: 0.25rem;
 
 		position: absolute;
-		background-color: var(--color-badge);
-		border-radius: 50%;
-		width: max(17%, 0.8rem);
-		aspect-ratio: 1 / 1;
-
 		font-size: var(--calendar-events-font-size, 0.6rem);
+
 		
 		top: 0.125rem;
 		right: 0.125rem;
+		left: 0.125rem;
+		
+		div {
+			background-color: var(--color-badge);
+			border-radius: 50%;
+			aspect-ratio: 1 / 1;
+			width: max(1.25vw, 1.25rem);
+
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
+	}
+
+	@include exports.media-medium {
+		.calendar-day__event-count div {
+			width: max(1.25vw, 1rem);
+		}
+	}
+
+	@include exports.media-small {
+		.calendar-day__event-count {
+			flex-direction: row-reverse;
+			justify-content: space-between;
+		}
 	}
 </style>

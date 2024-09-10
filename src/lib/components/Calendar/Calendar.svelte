@@ -190,6 +190,7 @@
 					style={`
 						grid-row: ${Math.ceil((event.startDate.getDate() + firstDayOffset) / 7)} / ${Math.ceil((event.endDate.getDate() + firstDayOffset) / 7)};
 						grid-column: ${event.startDate.getDay() + 1} / ${event.endDate.getDay() + 2};
+						--color-badge: var(--color-badge-${event.type})
 					`}
 					>
 					{event.name}
