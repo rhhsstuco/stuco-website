@@ -212,6 +212,7 @@
 		transform-style: preserve-3d;
 		-webkit-perspective: 1000px;
 		perspective: 1000px;
+		background: transparent;
 	}
 
 	.club__container.selected .club__banner__icon {
