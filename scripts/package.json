@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
-    "download-images": "npm run compile && node ./build/downloadImages.js"
+    "download-images": "npm run compile && node ./build/downloadImages.js",
+    "insert-images": "npm run compile && node ./build/insertImages.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "tslib": "^2.6.2"
   },
   "dependencies": {
-    "@googleapis/drive": "^8.2.0"
+    "@googleapis/drive": "^8.2.0",
+    "inquirer": "^11.1.0"
   }
 }

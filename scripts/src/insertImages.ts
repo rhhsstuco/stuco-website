@@ -1,0 +1,121 @@
+import * as path from 'path';
+import { fileURLToPath } from 'url';
+import { rename, readdir } from "fs/promises";
+import * as dotenv from "dotenv";
+import inquirer from 'inquirer';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+interface ImageEntry {
+	filepath: string;
+	basename: string;
+}
+
+async function main() {
+	const answers = await inquirer.prompt(
+		[
+			{
+				name: "main",
+				type: "input",
+				message: "What is the path of the folder to be inserted into?",
+
+			},
+			{
+				name: "input",
+				type: "input",
+				message: "What is the path of the folder to inserted?",
+			},
+		]
+	);
+
+	// Get absolute paths of the two folders
+	const mainPath = path.join(
+		__dirname, 
+		"..",
+		answers.main,
+	);
+
+	const inputPath = path.join(
+		__dirname, 
+		"..",
+		answers.input,
+	);
+	
+	// Read files from folders
+	const mainFiles = await readdir(mainPath);
+	const inputFiles = await readdir(inputPath);
+
+	// Calculate file name length
+	const numFiles = mainFiles.length + inputFiles.length;
+	const digits = Math.ceil(Math.log10(numFiles))
+
+	// Map filenames to ImageEntries
+	const orderArray = mainFiles.map(file => ({
+		basename: file,
+		filepath: path.join(mainPath, file),
+	}) as ImageEntry)
+
+	const inputArray = inputFiles.map(file => ({
+		basename: file,
+		filepath: path.join(inputPath, file),
+	}) as ImageEntry)
+
+	// Prompt for insertion
+	for (const input of inputArray) {
+		const answer = await inquirer.prompt([
+			{
+				name: "choice",
+				type: "list",
+				loop: false,
+				message: `Where do you want to insert '${input.basename}'?`,
+				choices: orderArray.map(entry => entry.basename),
+			}
+		])
+
+		// Find and insert item
+		const position = orderArray.findIndex(entry => entry.basename === answer.choice);
+		orderArray.splice(position, 0, input);
+	}
+
+	// Prompt for deletion
+	const answer = await inquirer.prompt([
+		{
+			name: "checked",
+			type: "checkbox",
+			loop: false,
+			message: `Select files to delete`,
+			choices: orderArray.map(entry => entry.basename),
+		}
+	]);
+
+	// Delete selected items
+	const deleted = new Set<string>(answer.checked)
+	const filteredArray = orderArray.filter(entry => !deleted.has(entry.basename))
+
+	/** 
+	 * Helper function which renames a file to a zero-padded integer
+	 * @param position the new name of the file
+	 * @param oldPath the old path to the file
+	 * @param ext the file extension
+	 */
+	function renameWithExt(position: number, oldPath: string, ext: string) {
+		const name = position.toString().padStart(digits, "0") + ext;
+	
+		const newPath = path.join(mainPath, name);
+	
+		return rename(oldPath, newPath);
+	}
+
+	// Rename to temp files then to iamge files to avoid name conflicts
+	await Promise.all(filteredArray.map(({ filepath }, i) => renameWithExt(i + 1, filepath, ".temp")))
+	await Promise.all(filteredArray.map(({ filepath }, i) => {
+		const tempName = (i + 1).toString().padStart(digits, "0") + ".temp";
+		const tempPath = path.join(mainPath, tempName);
+
+		renameWithExt(i + 1, tempPath, path.extname(filepath).toLowerCase())
+	}))
+}
+
+
+main()

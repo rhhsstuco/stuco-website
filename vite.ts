@@ -5,7 +5,8 @@
  I've spent like 5 hours trying to resolve this issue and I cannot find a better solution right now.
 */
 const rotateMap = new Map<string, string>([
-	// Example: ['005.jpg', "90"],
+	['01.jpg', "90"],
+	['04.jpg', "90"],
 ]);
 
 const defaultDirectives = (url: URL) => {
