@@ -6,7 +6,7 @@
 	import { quadInOut } from "svelte/easing";
   	import reducedMotion from "$lib/stores/reducedMotion.store";
 	import themeStore from "$lib/stores/theme.store";
-  	import { fade, fly } from "svelte/transition";
+  	import { fly } from "svelte/transition";
 
 	export let events: SchoolEvent[];
 
