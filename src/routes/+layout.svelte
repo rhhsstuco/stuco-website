@@ -10,16 +10,6 @@
   	import Footer from '$lib/components/Footer.svelte';
   	import Flash from '$lib/components/Flash.svelte';
 
-	const FLASH_TOKEN = "showFlashCaf";
-
-	let showFlash = false;
-
-	const onFlashClose = () => {
-		showFlash = false;
-
-		localStorage.setItem(FLASH_TOKEN, "0")
-	}
-
 	onMount(() => {
 		let theme = <Theme> localStorage.getItem("theme") ?? "light";
 
@@ -36,9 +26,6 @@
 
 			document.documentElement.setAttribute("data-theme", value);
 		})
-
-		// Flash
-		showFlash = localStorage.getItem(FLASH_TOKEN) != "0";
 	});
 	
 	onNavigate((navigation) => {
@@ -60,18 +47,20 @@
 <Footer/>
 
 <div class="portal">
-	<!-- {#if showFlash}
-		<Flash
-			closeable={false}
-			on:close={onFlashClose}
-		>
-			<em>View the Grade Wars leaderboard
+	<Flash
+		closeable={false}
+		id={'semi-formal-songs'}
+	>
+		<em>Suggest a song for Semi-Formal
 			<a
-				href="grade-wars"
-			>here</a>!
+				href="https://forms.gle/sks1RppkrrUQn5XAA"
+				target="_blank"
+				rel="noopener noreferrer"
+				on:click|stopPropagation
+			>
+			here</a>!
 		</em>
-		</Flash>
-	{/if} -->
+	</Flash>
 </div>
 
 <style lang="scss">

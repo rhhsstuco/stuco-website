@@ -1,26 +1,37 @@
 <script lang="ts">
 	/** Flash dialog message to display information */
 
-  	import { createEventDispatcher } from "svelte";
+  	import { onMount } from "svelte";
+
+	const FLASH_TOKEN = "flash";
 
 	export let closeable: boolean = true;
+	export let id: string;
 
-	const dispatch = createEventDispatcher();
+	let showFlash = true;
 
-	const onClick = (e: MouseEvent) => {
-		dispatch('close');
+	const onFlashClose = () => {
+		showFlash = false;
+
+		localStorage.setItem(FLASH_TOKEN, id)
 	}
+
+	onMount(() => {
+		showFlash = localStorage.getItem(FLASH_TOKEN) !== id
+	})
 
 </script>
 
-<section class="flash" class:extra-padding={!closeable}>
-	{#if closeable}
-		<button on:click={onClick}>
-			<i class="ri-close-line"></i>
-		</button>
-	{/if}
-	<p><slot/></p>
-</section>
+{#if showFlash}
+	<section class="flash" class:extra-padding={!closeable}>
+		{#if closeable}
+			<button on:click={onFlashClose}>
+				<i class="ri-close-line"></i>
+			</button>
+		{/if}
+		<p><slot/></p>
+	</section>
+{/if}
 
 <style lang="scss">
 	@use "../../styles/exports.scss" as exports;
