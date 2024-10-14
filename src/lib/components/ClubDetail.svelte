@@ -153,7 +153,7 @@
 
 		background-color: var(--color-light);
 
-		height: 22rem;
+		height: 24rem;
 
 		position: relative;
 		transition: transform var(--transition-time), background-color .2s ease-in-out;

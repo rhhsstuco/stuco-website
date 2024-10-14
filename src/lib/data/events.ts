@@ -26,7 +26,7 @@ const getEvents = async (params?: GetEventsParams): Promise<SchoolEvent[]> => {
 	await initSheetsAuth();
 
 	// Grab the 2D array of cells from the Google Sheet
-	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Events", "A:E")) || [];
+	const values = <string[][]> (await getSpreadSheetValues(PUBLIC_SPREADSHEET_ID, "Events", "A:F")) || [];
 
 	// Create set for deduping values
 	const seenNames = new Set<string>();

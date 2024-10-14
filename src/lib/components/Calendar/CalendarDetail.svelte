@@ -16,9 +16,13 @@
 <div class="calendar-detail">
 	<div class="calendar-detail__content">
 		<div class="calendar-detail__content__heading">
-			<button on:click={onClose}>
-				&times;
-			</button>
+			<div class="calendar-detail__content__heading__header">
+				<button on:click={onClose}>
+					&times;
+				</button>
+				<span class="school-event">School</span>
+				<span class="club-event">Club</span>
+			</div>
 			<h3>
 				{date.toLocaleDateString('en-us', {
 					year: 'numeric',
@@ -54,7 +58,31 @@
 		width: 100%;
 		height: 100%;
 		overflow-y: auto;
+	}
 
+	.school-event {
+		background-color: var(--color-badge-school);
+	}
+
+	.club-event {
+		background-color: var(--color-badge-club);
+	}
+
+	.calendar-detail__content__heading__header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		font-size: 0.9rem;
+		gap: 0.5rem;
+
+		span {
+			flex: 1;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			border-radius: 5px;
+		}
 	}
 
 	.calendar-detail__content {
@@ -66,10 +94,15 @@
 	}
 
 	.calendar-detail__content__heading {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+
 		button {
 			all: unset;
 			font-size: 2rem;
-			margin-bottom: 0.5rem;
+			padding: 0 0.5rem;
+
 
 			&:hover {
 				cursor:pointer
@@ -110,7 +143,6 @@
 			bottom: -0.2rem;
 			border-radius: 5rem;
 			height: 0.2rem;
-
 
 			background-color: var(--color-badge);
 		}
