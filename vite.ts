@@ -9,6 +9,8 @@ const rotateMap = new Map<string, string>([
 	['04.jpg', "90"],
 ]);
 
+export { rotateMap };
+
 const defaultDirectives = (url: URL) => {
 	const pathname = url.pathname;
 	const filename = pathname.substring(pathname.lastIndexOf('/') + 1);
