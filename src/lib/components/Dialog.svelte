@@ -5,7 +5,7 @@
 </script>
 
 <dialog bind:this={dialog} on:close>
-	<slot/>
+	<slot class="test"/>
 </dialog>
 
 <style lang="scss">

@@ -10,6 +10,7 @@
   	import type { ImageMeta } from "$lib/types/image.types";
   	import Picture from "./Picture.svelte";
   	import flatPartitions from "$lib/util/flatPartitions";
+  import fitImageToWindow from "$lib/actions/fitImageToWindow";
 
 	export let imageURLs: ImageMeta[];
 	export let columns = 5;
@@ -68,19 +69,20 @@
 			{/each}
 		</div>
 		{/each}
-		<Dialog bind:dialog>
-			{#if selectedImageURL}
-			<div class="dialog__image" use:clickOutside on:click_outside={dialog.close()}>
-				<Picture meta={selectedImageURL}/>
-			</div>
-			{/if}
+		<Dialog bind:dialog --dialog-min-width="40rem">
+			{#key selectedImageURL}
+				{#if selectedImageURL}
+				<div class="dialog__image" use:clickOutside on:click_outside={dialog.close()} use:fitImageToWindow>
+					<Picture meta={selectedImageURL}/>
+				</div>
+				{/if}
+			{/key}
 		</Dialog>
 	</section>
 {/if} 
 	
 <style lang="scss">
 	@use "../../styles/exports.scss" as exports;
-
 
 	.gallery {
 		display: flex;
@@ -118,13 +120,4 @@
 			cursor: pointer;
 		}
 	}
-
-	.dialog__image {
-		max-width: 34rem;
-		height: auto;
-		
-		object-fit: cover;
-	}
-
-
 </style>

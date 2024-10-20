@@ -14,7 +14,7 @@ export const load: PageServerLoad = async () => {
 		maxResults: 8,
 		orientation: 'horizontal',
 		useDPR: false,
-		reverse: true,
+		reverse: false,
 	});
 
 	const [spreadsheetData, imageURLS] = await Promise.all([spreadsheetDataPromise, imageURLsPromise]);

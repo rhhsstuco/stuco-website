@@ -69,13 +69,17 @@ async function main() {
 				type: "list",
 				loop: false,
 				message: `Where do you want to insert '${input.basename}'?`,
-				choices: orderArray.map(entry => entry.basename),
+				choices: [...orderArray.map(entry => entry.basename), "<append>"],
 			}
 		])
 
 		// Find and insert item
-		const position = orderArray.findIndex(entry => entry.basename === answer.choice);
-		orderArray.splice(position, 0, input);
+		if (answer.choice === "<append>") {
+			orderArray.push(input)
+		} else {
+			const position = orderArray.findIndex(entry => entry.basename === answer.choice);
+			orderArray.splice(position, 0, input);
+		}
 	}
 
 	// Prompt for deletion
