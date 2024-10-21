@@ -124,4 +124,8 @@
 	.dialog__image {
 		object-fit: cover;
 	}
+
+	:global(.dialog__image picture) {
+		display: inline;
+	}
 </style>

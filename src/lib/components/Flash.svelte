@@ -93,6 +93,7 @@
 		.flash {
 			width: auto;
 			left: 0.5rem;
+			padding: 1.5rem 0.75rem;
 		}
 
 		.flash p {

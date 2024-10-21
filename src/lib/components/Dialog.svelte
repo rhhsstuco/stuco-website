@@ -13,6 +13,7 @@
 		border: none;
 		padding: 0.5rem;
 		overflow-y: hidden;
+		background-color: var(--color-light);
 	}
 
 	dialog::backdrop {
