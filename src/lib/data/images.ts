@@ -89,7 +89,7 @@ const getGalleryImages = async (params: GetGalleryImagesParams = {}) => {
 		filteredFilepaths.reverse();
 	}
 	
-	filteredFilepaths = filteredFilepaths.slice(0, params.maxResults)
+	filteredFilepaths = filteredFilepaths.slice(0, params.maxResults);
 
 	if (params.orientation === 'horizontal') {
 		filteredFilepaths = filteredFilepaths.filter(filterOrientation(img => img.img.w > img.img.h));

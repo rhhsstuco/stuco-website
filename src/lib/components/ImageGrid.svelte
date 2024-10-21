@@ -120,4 +120,8 @@
 			cursor: pointer;
 		}
 	}
+
+	.dialog__image {
+		object-fit: cover;
+	}
 </style>

@@ -12,6 +12,7 @@
 	dialog {
 		border: none;
 		padding: 0.5rem;
+		overflow-y: hidden;
 	}
 
 	dialog::backdrop {
