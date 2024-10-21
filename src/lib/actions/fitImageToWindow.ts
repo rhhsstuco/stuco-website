@@ -9,16 +9,16 @@ export default function fitImageToWindow(node: HTMLElement) {
 		const nodeAspectRatio = +image.getAttribute("width")! / +image.getAttribute("height")!;
 		const windowAspectRatio = window.innerWidth / window.innerHeight;
 
-		node.parentElement!.style.aspectRatio = nodeAspectRatio.toString();
+		// picture.style.aspectRatio = nodeAspectRatio.toString();
 	
 		if (nodeAspectRatio > windowAspectRatio) {
-			node.parentElement!.style.width = `calc(100% - ${HORIZONTAL_INSET_REM}rem)`;
-			node.parentElement!.style.height = "";
+			picture.style.width = `min(calc(100vw - ${HORIZONTAL_INSET_REM}rem), 48rem)`;
+			picture.style.height = "";
 		}
 		
 		if (nodeAspectRatio < windowAspectRatio) {
-			node.parentElement!.style.height = `calc(100% - ${VERTICAL_INSET_REM}rem)`;
-			node.parentElement!.style.width = "";
+			picture.style.height = `min(calc(100vh - ${VERTICAL_INSET_REM}rem), 40rem)`;
+			picture.style.width = "";
 		}
 	}
 

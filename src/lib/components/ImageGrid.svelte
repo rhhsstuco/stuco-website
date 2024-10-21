@@ -122,10 +122,10 @@
 	}
 
 	.dialog__image {
-		object-fit: cover;
-	}
+		display: flex;
+	} 
 
-	:global(.dialog__image picture) {
-		display: inline;
+	:global(.dialog__image img) {
+		display: block;
 	}
 </style>
