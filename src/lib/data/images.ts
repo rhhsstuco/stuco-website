@@ -64,6 +64,7 @@ const getGalleryImages = async (params: GetGalleryImagesParams = {}) => {
 			Object.entries(files).map(async ([filepath, value]) => ([path.basename(filepath), await value() as any]))
 		))
 		.map(([filename, image]) => {
+
 			const sources = (image.sources as ({
 				[key: string]: ImageProps[];
 			}));
@@ -77,7 +78,7 @@ const getGalleryImages = async (params: GetGalleryImagesParams = {}) => {
 
 			return {
 				filename: filename,
-				img: (image.img as ImagePropsWithHeight),
+				img: {...(image.img as ImagePropsWithHeight)}, // Make copy bc the dimensions of this object are somehow stateful?? Maybe the file objects are cached.
 				sources: sources,
 				
 			} as unknown as ImageMeta & { filename: string }
@@ -91,12 +92,20 @@ const getGalleryImages = async (params: GetGalleryImagesParams = {}) => {
 	
 	filteredFilepaths = filteredFilepaths.slice(0, params.maxResults);
 
+	filteredFilepaths.forEach(img => {
+		if (mismatchedOrientation(img)) {
+			const temp = img.img.w;
+			img.img.w = img.img.h;
+			img.img.h = temp;
+		}
+	});
+
 	if (params.orientation === 'horizontal') {
-		filteredFilepaths = filteredFilepaths.filter(filterOrientation(img => img.img.w > img.img.h));
+		filteredFilepaths = filteredFilepaths.filter(img => img.img.w > img.img.h);
 	}
 
 	if (params.orientation === 'vertical') {
-		filteredFilepaths = filteredFilepaths.filter(filterOrientation(img => img.img.h > img.img.w));
+		filteredFilepaths = filteredFilepaths.filter(img => img.img.h > img.img.w);
 	}
 	
 	return filteredFilepaths;

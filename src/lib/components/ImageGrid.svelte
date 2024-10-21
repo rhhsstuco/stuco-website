@@ -69,7 +69,7 @@
 			{/each}
 		</div>
 		{/each}
-		<Dialog bind:dialog --dialog-min-width="40rem">
+		<Dialog bind:dialog>
 			{#key selectedImageURL}
 				{#if selectedImageURL}
 				<div class="dialog__image" use:clickOutside on:click_outside={dialog.close()} use:fitImageToWindow>
