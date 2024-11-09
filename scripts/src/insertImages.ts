@@ -24,7 +24,7 @@ async function main() {
 			{
 				name: "input",
 				type: "input",
-				message: "What is the path of the folder to inserted?",
+				message: "What is the path of the folder to insert?",
 			},
 		]
 	);
@@ -43,8 +43,8 @@ async function main() {
 	);
 	
 	// Read files from folders
-	const mainFiles = await readdir(mainPath);
-	const inputFiles = await readdir(inputPath);
+	const mainFiles = (await readdir(mainPath)).filter(file => file !== ".DS_Store");
+	const inputFiles = (await readdir(inputPath)).filter(file => file !== ".DS_Store");
 
 	// Calculate file name length
 	const numFiles = mainFiles.length + inputFiles.length;

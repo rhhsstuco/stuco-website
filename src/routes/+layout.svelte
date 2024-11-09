@@ -46,7 +46,7 @@
 
 <Footer/>
 
-<div class="portal">
+<!-- <div class="portal">
 	<Flash
 		closeable={false}
 		id={'semi-formal-songs'}
@@ -61,7 +61,7 @@
 			here</a>!
 		</em>
 	</Flash>
-</div>
+</div> -->
 
 <style lang="scss">
 	@keyframes fade-in {

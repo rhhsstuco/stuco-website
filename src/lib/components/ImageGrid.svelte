@@ -10,7 +10,7 @@
   	import type { ImageMeta } from "$lib/types/image.types";
   	import Picture from "./Picture.svelte";
   	import flatPartitions from "$lib/util/flatPartitions";
-  import fitImageToWindow from "$lib/actions/fitImageToWindow";
+    import fitImageToWindow from "$lib/actions/fitImageToWindow";
 
 	export let imageURLs: ImageMeta[];
 	export let columns = 5;
@@ -80,7 +80,7 @@
 		</Dialog>
 	</section>
 {/if} 
-	
+
 <style lang="scss">
 	@use "../../styles/exports.scss" as exports;
 
