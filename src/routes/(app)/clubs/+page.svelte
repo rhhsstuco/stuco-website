@@ -5,19 +5,23 @@
   	import type SchoolClub from "$lib/models/SchoolClub.model";
   	import type { PageServerData } from "./$types";
 
-	export let data: PageServerData;
-
-	let value: string = '';
-	
-	function onValueChange(v: CustomEvent<string>) {
-		value = v.detail.toLowerCase();
+	interface Props {
+		data: PageServerData;
 	}
 
-	$: filteredClubs = data.clubs.filter(club => 
+	let { data }: Props = $props();
+
+	let value: string = $state('');
+	
+	function onValueChange(value: string) {
+		value = value.toLowerCase();
+	}
+
+	let filteredClubs = $derived(data.clubs.filter(club => 
 		club.meetingTime.toLowerCase().includes(value) ||
 		club.name.toLowerCase().includes(value) ||
 		club.room.toLowerCase().includes(value)
-	);
+	));
 
 	const TITLE = "Clubs | RHHS StuCo";
 	const DESCRIPTION = "Want to find a club? You came to the right place! Here you can search for clubs that fit your interests.";
@@ -33,7 +37,7 @@
 <main class="clubs">
 	<h1>Clubs</h1>
 	<div class="clubs__search">
-		<SearchBar on:value-change={onValueChange} placeholder="Search by club name, location, or time"/>
+		<SearchBar bind:value placeholder="Search by club name, location, or time"/>
 		<p class="clubs__new">Want to create a new club? Use this
 			<a
 				href="https://docs.google.com/forms/d/e/1FAIpQLSdIlle7_NF4P52azLB--275E3zdVoyYQT2eK6UICtsKiae3_w/viewform"

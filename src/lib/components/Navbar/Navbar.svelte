@@ -1,30 +1,14 @@
 <script lang="ts">
 	/** The navigation bar */
-
- 	import themeStore from "$lib/stores/theme.store";
-	import { base } from "$app/paths";
-	import { page } from '$app/stores';  
-	import MediaQuery from "../MediaQuery.svelte";
-	import Hamburger from "./Hamburger.svelte";
-	import Menu from "./Menu.svelte";
-
-	let menuIsOpen: boolean = false;
+ 	import { base } from "$app/paths";
+ 	import { page } from '$app/stores';
+ 	import theme from "$lib/state/theme.svelte";
+ 	import MediaQuery from "../MediaQuery.svelte";
+ 	import Hamburger from "./Hamburger.svelte";
+ 	import Menu from "./Menu.svelte";
 
 	// Reads theme data from the theme store
-	$: icon = $themeStore === "dark" ? "ri-moon-fill" : "ri-moon-line";
-
-	/** 
-	 * Updates the theme store with the new theme value once the theme is toggled
-	*/
-	function onThemeChange() {
-		themeStore.update(oldValue => {
-			if (oldValue === "dark") {
-				return "light";
-			}
-
-			return "dark";
-		})
-	}
+	let icon = $derived(theme.value === "dark" ? "ri-moon-fill" : "ri-moon-line");
 
 	/** 
 	 * Checks if the active url matches a certain path
@@ -33,13 +17,17 @@
 		return (activeURL === `${base}/${path}`) || (activeURL === `${base}/${path}/`)
 	}
 
-	$: url = $page.url.pathname;
+    // TODO: fix this when page becomes $state
+	let url = $state($page.url.pathname);
 
-	// Close menu when url changes
-	$: {
-		menuIsOpen = false;
-		url = url;
-	}
+    $effect(() => {
+        $page.url.pathname;
+
+        menuIsOpen = false;
+    })
+
+    // Close menu when url changes
+    let menuIsOpen = $state(false);
 </script>
 
 <nav>
@@ -48,30 +36,34 @@
 	</div>
 	<div class="nav__links">
 		<ul>
-			<MediaQuery query="(min-width: 1024px)" let:matches={matches1}>
-			<MediaQuery query="(min-height: 577px)" let:matches={matches2}>
-				{#if matches1 && matches2}
-					<li><a href="{base}/" class:active={url === `${base}/` || url === `${base}`}>Home</a></li>
-					<li><a href="{base}/events" class:active={checkActiveURL('events', url)}>Events</a></li>
-					<li><a href="{base}/clubs" class:active={checkActiveURL('clubs', url)}>Clubs</a></li>
-					<li><a href="{base}/gallery" class:active={checkActiveURL('gallery', url)}>Gallery</a></li>
-					<li><a href="{base}/about-us" class:active={checkActiveURL('about-us', url)}>About Us</a></li>
-				{:else}
-					<li>
-						<Hamburger bind:open={menuIsOpen}/>
-					</li>
-					{#if menuIsOpen}
-						<Menu on:menu-close={() => menuIsOpen = false}/>
-					{/if}
-				{/if}
-			</MediaQuery>
-			</MediaQuery>
+            <MediaQuery query="(min-width: 1024px)" >
+                {#snippet children(matches1)}
+                    <MediaQuery query="(min-height: 577px)" >
+                        {#snippet children(matches2)}
+                            {#if matches1 && matches2}
+                                <li><a href="{base}/" class:active={url === `${base}/` || url === `${base}`}>Home</a></li>
+                                <li><a href="{base}/events" class:active={checkActiveURL('events', url)}>Events</a></li>
+                                <li><a href="{base}/clubs" class:active={checkActiveURL('clubs', url)}>Clubs</a></li>
+                                <li><a href="{base}/gallery" class:active={checkActiveURL('gallery', url)}>Gallery</a></li>
+                                <li><a href="{base}/about-us" class:active={checkActiveURL('about-us', url)}>About Us</a></li>
+                            {:else}
+                                <li>
+                                    <Hamburger bind:open={menuIsOpen}/>
+                                </li>
+                                {#if menuIsOpen}
+                                    <Menu onClose={() => menuIsOpen = false}/>
+                                {/if}
+                            {/if}
+                        {/snippet}
+                    </MediaQuery>
+                {/snippet}
+            </MediaQuery>
 			<li>
 				<button
 					class="{icon} change-theme"
 					aria-label="Change theme"
-					on:click={onThemeChange}
-				/>
+					onclick={theme.toggle}
+				></button>
 			</li>
 		</ul>
 	</div>

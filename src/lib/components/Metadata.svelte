@@ -2,11 +2,23 @@
   	import { dev } from "$app/environment";
   	import { DOMAIN } from "$lib/constants";
   	import type { ImageMeta } from "$lib/types/image.types";
+    import type { Snippet } from "svelte";
 
-	export let title: string;
-	export let description: string;
-	export let url: string;
-	export let image: ImageMeta | null = null;
+	interface Props {
+		title: string;
+		description: string;
+		url: string;
+		image?: ImageMeta;
+		children?: Snippet;
+	}
+
+	let {
+		title,
+		description,
+		url,
+		image,
+		children
+	}: Props = $props();
 </script>
 
 <svelte:head>
@@ -23,5 +35,5 @@
 		<meta property="og:url" content={url}>
 	{/if}
 
-	<slot/>
+	{@render children?.()}
 </svelte:head>

@@ -4,11 +4,15 @@
 	import type { RankColor } from "$lib/models/GradePoints.model";
 	import type GradePoint from "$lib/models/GradePoints.model";
 
-	export let position: number;
-	export let gradePoint: GradePoint;
-	export let color: RankColor;
+	interface Props {
+		position: number;
+		gradePoint: GradePoint;
+		color: RankColor;
+	}
 
-	$: effectiveColor = gradePoint.points === 0 ? "none" : color;
+	let { position, gradePoint, color }: Props = $props();
+
+	let effectiveColor = $derived(gradePoint.points === 0 ? "none" : color);
 </script>
 
 <div class="grade-position"

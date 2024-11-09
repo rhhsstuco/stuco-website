@@ -1,16 +1,14 @@
 <script lang="ts">
 	/** A generic search bar component */
 
-  	import { createEventDispatcher } from "svelte";
+	interface Props {
+		placeholder: string;
+        value: string;
+	}
 
-	const dispatch = createEventDispatcher<{ 'value-change': string }>();
+	let { placeholder, value = $bindable() }: Props = $props();
 
-	export let placeholder: string;
-	let value: string = '';
-
-	$: dispatch('value-change', value);
-
-	$: showClose = value.trim().length != 0;
+	let showClose = $derived(value.trim().length != 0);
 
 	function clearSearch() {
 		value = '';
@@ -29,7 +27,7 @@
 		bind:value
 	>
 	{#if showClose}
-		<button class="close__icon" on:click={clearSearch}>
+		<button class="close__icon" onclick={clearSearch} aria-label="clear the search bar">
 			<i class="ri-close-line"></i>
 		</button>
 	{/if}

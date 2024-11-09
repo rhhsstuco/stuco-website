@@ -5,10 +5,15 @@
 
 	const FLASH_TOKEN = "flash";
 
-	export let closeable: boolean = true;
-	export let id: string;
+	interface Props {
+		closeable?: boolean;
+		id: string;
+		children?: import('svelte').Snippet;
+	}
 
-	let showFlash = true;
+	let { closeable = true, id, children }: Props = $props();
+
+	let showFlash = $state(true);
 
 	const onFlashClose = () => {
 		showFlash = false;
@@ -19,17 +24,16 @@
 	onMount(() => {
 		showFlash = localStorage.getItem(FLASH_TOKEN) !== id
 	})
-
 </script>
 
 {#if showFlash}
 	<section class="flash" class:extra-padding={!closeable}>
 		{#if closeable}
-			<button on:click={onFlashClose}>
+			<button onclick={onFlashClose} aria-label="close the flash message">
 				<i class="ri-close-line"></i>
 			</button>
 		{/if}
-		<p><slot/></p>
+		<p>{@render children?.()}</p>
 	</section>
 {/if}
 

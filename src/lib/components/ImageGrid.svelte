@@ -12,10 +12,14 @@
   	import flatPartitions from "$lib/util/flatPartitions";
     import fitImageToWindow from "$lib/actions/fitImageToWindow";
 
-	export let imageURLs: ImageMeta[];
-	export let columns = 5;
+	interface Props {
+		imageURLs: ImageMeta[];
+		columns?: number;
+	}
 
-	$: imageLength = imageURLs.length;
+	let { imageURLs, columns = 5 }: Props = $props();
+
+	let imageLength = $derived(imageURLs.length);
 
 	/** 
 	 * Splits in images into columns so the vertical progression in images roughly matches their input order.
@@ -42,15 +46,22 @@
 		return images;
 	}
 
-	$: imageGrid = splitImages(imageURLs, columns);
+	let imageGrid = $derived(splitImages(imageURLs, columns));
 
-	let selectedImageURL: ImageMeta;
-	let dialog: HTMLDialogElement;
+	let selectedImageURL = $state<ImageMeta>();
+	let dialog = $state<HTMLDialogElement>();
 
 	function onImageClick(url: ImageMeta) {
-		selectedImageURL = url;
+        return (e: Event) => {
 
-		return (e: Event) => dialog.showModal();
+            selectedImageURL = url;
+            
+            if (!dialog) {
+                return;
+            }
+            
+            dialog.showModal();
+        }
 	}
 </script>
 
@@ -63,16 +74,16 @@
 		{#each imageGrid as imageColumn}
 		<div class="gallery__column">
 			{#each imageColumn as image (image.img.src)}
-			<button class="gallery__column__image" on:click={onImageClick(image)} aria-label="Select this image">
+			<button class="gallery__column__image" onclick={onImageClick(image)} aria-label="Select this image">
 				<Picture meta={image}/>
 			</button>
 			{/each}
 		</div>
 		{/each}
-		<Dialog bind:dialog>
+		<Dialog bind:dialog={dialog!}>
 			{#key selectedImageURL}
 				{#if selectedImageURL}
-				<div class="dialog__image" use:clickOutside on:click_outside={dialog.close()} use:fitImageToWindow>
+				<div class="dialog__image" use:clickOutside onclick_outside={dialog!.close()} use:fitImageToWindow>
 					<Picture meta={selectedImageURL}/>
 				</div>
 				{/if}

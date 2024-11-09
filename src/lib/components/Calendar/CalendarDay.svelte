@@ -1,11 +1,13 @@
 <script lang="ts">
-  import reducedMotion from "$lib/stores/reducedMotion.store";
-  import { fade } from "svelte/transition";
+    /** The individual button representing a day on the Calendar component */
 
-	/** The individual button representing a day on the Calendar component */
+    interface Props {
+		events: SchoolEvent[] | undefined;
+		children?: import('svelte').Snippet;
+        onClick?: () => void; 
+	}
 
-	export let events: SchoolEvent[] | undefined;
-	export let clickable: boolean = false;
+	let { events, onClick, children }: Props = $props();
 
 	function calculateEventTypes(events: SchoolEvent[] | undefined): [number, number] {
 		if (!events) {
@@ -26,11 +28,11 @@
 		return [numSchoolEvents, numClubEvents];
 	}
 
-	$: [numSchoolEvents, numClubEvents] = calculateEventTypes(events);
+	let [numSchoolEvents, numClubEvents] = $derived(calculateEventTypes(events));
 </script>
 
-<button class="calendar-day" disabled={!clickable} on:click>
-	{#if clickable}
+<button class="calendar-day" disabled={!onClick} onclick={onClick}>
+	{#if onClick}
 		<div class="calendar-day__event-count" >
 			{#if numSchoolEvents != 0}
 				<div style={`--color-badge: var(--color-badge-school);`}>{numSchoolEvents}</div>
@@ -40,7 +42,7 @@
 			{/if}
 		</div>
 	{/if}
-	<slot/>
+	{@render children?.()}
 </button>
 
 <style lang="scss">

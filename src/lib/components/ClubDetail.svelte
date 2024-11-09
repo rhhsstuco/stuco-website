@@ -1,23 +1,25 @@
 <script lang="ts">
-	/** Club card in the club display*/
-
-	
+    /** Club card in the club display*/
 	import type SchoolClub from "$lib/models/SchoolClub.model";
   	import Confetti from "svelte-confetti";
 	import Picture from "./Picture.svelte";
 
+	interface Props {
+		club: SchoolClub;
+	}
 
-	export let club: SchoolClub;
-	let selected: boolean = false;
-	let iconSpin: boolean = false;
+	let { club }: Props = $props();
+	let selected: boolean = $state(false);
+	let iconSpin: boolean = $state(false);
 
 	let timeout: NodeJS.Timeout | null;
 
-	$: useRainbow = club.bannerColor === "rainbow";
+	let useRainbow = $derived(club.bannerColor === "rainbow");
 
 	function onIconClick() {
 		if (iconSpin) {
 			iconSpin = false;
+
 			if (timeout) {
 				clearTimeout(timeout);
 				timeout = null;
@@ -63,7 +65,7 @@
 				<button
 					class="club__banner__icon"
 					class:icon-spin={iconSpin}
-					on:click={onIconClick}
+					onclick={onIconClick}
 				>
 					<Picture meta={club.imageURL} alt={club.name}/>
 				</button>
@@ -86,7 +88,7 @@
 			<div class="club__info club__info--front">
 				<div>
 					{#if club.instagramURL}
-						<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" on:click|stopPropagation>
+						<a href={club.instagramURL} target="_blank" rel="noopener noreferrer" onclick={(e) => e.stopPropagation()}>
 							<h2 class="club__info__title">
 								{club.name}
 							</h2>
@@ -108,7 +110,7 @@
 				<div>
 					<div class="hr-div"></div>
 					<div class="club__info__desc-button">
-						<button on:click={onDescriptionToggle}>
+						<button onclick={onDescriptionToggle}>
 							<p>View Description</p>
 							<i class="ri-arrow-right-fill"></i>
 						</button>
@@ -122,7 +124,7 @@
 				<div>
 					<div class="hr-div"></div>
 					<div class="club__info__desc-button">
-						<button on:click={onDescriptionToggle}>
+						<button onclick={onDescriptionToggle}>
 							<i class="ri-arrow-left-fill"></i>
 							<p>Close Description</p>
 						</button>

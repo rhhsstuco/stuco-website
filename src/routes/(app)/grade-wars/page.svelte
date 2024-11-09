@@ -3,7 +3,11 @@
   	import Metadata from "$lib/components/Metadata.svelte";
   	import type { PageServerData } from "./$types";
 
-	export let data: PageServerData;
+	interface Props {
+		data: PageServerData;
+	}
+
+	let { data }: Props = $props();
 	const TITLE = "Grade Wars | RHHS StuCo";
 	const DESCRIPTION = "Check out the Grade Wars leaderboard";
 

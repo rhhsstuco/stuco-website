@@ -1,13 +1,17 @@
 <script lang="ts">
-	/** Displays a StuCo member in a cart*/
+	/** Displays a StuCo member in a card */
 
 	// @ts-ignore
 	import DefaultProfilePicture from "$lib/images/default_pfp.png?format=avif;webp;png&w=400;800&as=picture";
   	import type StucoMember from "$lib/models/StucoMember.model";
   	import Picture from "./Picture.svelte";
 
-	export let member: StucoMember;
-	export let loading: "lazy" | "eager" = "eager";
+	interface Props {
+		member: StucoMember;
+		loading?: "lazy" | "eager";
+	}
+
+	let { member, loading = "eager" }: Props = $props();
 </script>
 
 <div class="member-card">

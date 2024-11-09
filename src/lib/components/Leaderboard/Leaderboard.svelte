@@ -1,12 +1,16 @@
 <script lang="ts">
 	/** The leaderboard component which displays the point total and rankings for grade wars. */
-
+    
 	import type { RankColor } from "$lib/models/GradePoints.model";
 	import type GradePoint from "$lib/models/GradePoints.model";
 	import GradePosition from "./GradePosition.svelte";
 
-	export let gradeColors: RankColor[];
-	export let gradePoints: GradePoint[];
+	interface Props {
+		gradeColors: RankColor[];
+		gradePoints: GradePoint[];
+	}
+
+	let { gradeColors, gradePoints }: Props = $props();
 </script>
 
 <section class="leaderboard">

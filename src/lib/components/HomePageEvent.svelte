@@ -1,32 +1,37 @@
 <script lang="ts">
-	/** 
+    /** 
 	 * The card component that displays upcoming event information in the homepage
 	*/
+	
 
-  	export let event: SchoolEvent;
+    interface Props {
+        event: SchoolEvent;
+    }
+
+    let { event }: Props = $props();
 </script>
 
 <div class="event">
-  <div class="event__date">
-    <span class="event__date__day">
-      {event.startDate.getDate()}
-    </span>
-    <span class="event__date__month">
-      {event.startDate.toLocaleString("default", { month: "short" })}
-    </span>
-  </div>
-  <div class="event__info">
-    <h3 class="event__info__title">
-      {event.name}
-    </h3>
-    <p class="event__info__description">
-		{#if !event.useHTML}
-      		{event.description}
-	  	{:else}
-		  	{@html event.description}
-		{/if}
-    </p>
-  </div>
+    <div class="event__date">
+        <span class="event__date__day">
+            {event.startDate.getDate()}
+        </span>
+        <span class="event__date__month">
+            {event.startDate.toLocaleString("default", { month: "short" })}
+        </span>
+    </div>
+    <div class="event__info">
+        <h3 class="event__info__title">
+            {event.name}
+        </h3>
+        <p class="event__info__description">
+            {#if !event.useHTML}
+                {event.description}
+            {:else}
+                {@html event.description}
+            {/if}
+        </p>
+    </div>
 </div>
 
 <style lang="scss">

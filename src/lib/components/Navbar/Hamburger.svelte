@@ -1,14 +1,18 @@
 <script lang="ts">
-	/** The hamburger menu in mobile UIs */
+    /** The hamburger menu in mobile UIs */
 
-	export let open: boolean;
+	interface Props {
+		open: boolean;
+	}
+
+	let { open = $bindable() }: Props = $props();
 
 	function onClick() {
 		open = !open;
 	}
 </script>
 
-<button class="hamburger" on:click={onClick} aria-label="Open hamburger menu">
+<button class="hamburger" onclick={onClick} aria-label="Open hamburger menu">
 	<i class="ri-menu-line"></i>
 </button>
 

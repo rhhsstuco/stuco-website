@@ -4,22 +4,22 @@
 	import { base } from "$app/paths";
 	import { page } from "$app/stores";
  	import clickOutside from "$lib/actions/clickOutside";
-  	import { createEventDispatcher } from "svelte";
   	import { fly } from "svelte/transition";
 
-	const dispatch = createEventDispatcher();
+    interface Props {
+        onClose: () => void;
+    }
 
-	function onClose() {
-		dispatch('menu-close');
-	}
+    let { onClose }: Props = $props();
 
-	$: url = $page.url.pathname;
+    // TODO: fix this when page becomes $state
+	let url = $derived($page.url.pathname);
 </script>
 
 
-<div class="menu" transition:fly={{ x: 500, duration: 600 }} use:clickOutside on:click_outside={onClose}>
+<div class="menu" transition:fly={{ x: 500, duration: 600 }} use:clickOutside onclick_outside={onClose}>
 	<div class="menu__top">
-		<button on:click={onClose}>
+		<button onclick={onClose} aria-label="closes the hamburger menu">
 			<i class="ri-close-line"></i>
 		</button>
 	</div>

@@ -1,23 +1,22 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
+
 	/** 
 	 * Utility component which allows for reactive media queries in the markup 
 	*/
 
-  	import { onDestroy, onMount } from "svelte";
+	interface Props {
+		query: string;
+		children?: Snippet<[boolean]>;
+	}
 
-	export let query: string;
+	let { query, children }: Props = $props();
 
 	let mediaQuery: MediaQueryList;
 	let queryListener: (res: MediaQueryListEvent) => void;
-	let wasMounted = false;
-	let matches = false;
+	let wasMounted = $state(false);
+	let matches = $state(false);
 
-	$: {
-		if (wasMounted) {
-			removeActiveListener();
-			addNewListener(query);
-		}
-	}
 
 	/** 
 	 * Adds a new media query change listener
@@ -40,13 +39,18 @@
 		}
 	}
 
-	onMount(() => {
-		wasMounted = true;
-	})
+    $effect(() => {
+        wasMounted = true;
 
-	onDestroy(() => {
-		removeActiveListener()
-	})
+        return removeActiveListener;
+    })
+
+	$effect(() => {
+		if (wasMounted) {
+			removeActiveListener();
+			addNewListener(query);
+		}
+	});
 </script>
 
-<slot {matches}/>
+{@render children?.(matches)}

@@ -1,15 +1,17 @@
 <script lang="ts">
   	import ImageGrid from "$lib/components/ImageGrid.svelte";
   	import type { PageServerData } from "./$types";
-  	import { mediaSmallest, mediaSmall, mediaMedium, mediaLarge, mediaLarger, mediaLargest, mediaSmaller } from "$lib/stores/screenWidth.store";
+  	import { mediaSmallest, mediaSmall, mediaMedium, mediaLarge, mediaLarger, mediaLargest, mediaSmaller } from "$lib/state/screenWidth.svelte";
   	
-	import { onDestroy } from "svelte";
-	import type { Unsubscriber } from "svelte/store";
   	import Metadata from "$lib/components/Metadata.svelte";
 
-	export let data: PageServerData;
+	interface Props {
+		data: PageServerData;
+	}
 
-	let columns = 4;
+	let { data }: Props = $props();
+
+	let columns = $state(4);
 
 	function changeColumns(numColumns: number) {
 		return (matches: boolean) => {
@@ -19,19 +21,26 @@
 		}
 	}
 
-	const mediaUnsubscribe: Unsubscriber[] = [];
+    const COLUMN_COUNTS: [
+        { readonly value: boolean },
+        number
+    ][] = [
+        [mediaLargest, 4],
+        [mediaLarger, 4],
+        [mediaLarge, 3],
+        [mediaMedium, 3],
+        [mediaSmall, 2],
+        [mediaSmaller, 2],
+        [mediaSmallest, 1],
+    ];
 
-	mediaUnsubscribe.push(mediaLargest.subscribe(changeColumns(4)));
-	mediaUnsubscribe.push(mediaLarger.subscribe(changeColumns(4)));
-	mediaUnsubscribe.push(mediaLarge.subscribe(changeColumns(3)));
-	mediaUnsubscribe.push(mediaMedium.subscribe(changeColumns(3)));
-	mediaUnsubscribe.push(mediaSmall.subscribe(changeColumns(2)));
-	mediaUnsubscribe.push(mediaSmaller.subscribe(changeColumns(2)));
-	mediaUnsubscribe.push(mediaSmallest.subscribe(changeColumns(1)));
+    COLUMN_COUNTS.map(([media, count]) => {
+        $effect(() => {
+            media.value;
 
-	onDestroy(() => {
-		mediaUnsubscribe.forEach(fn => fn())
-	})
+            changeColumns(count);
+        })
+    })
 
 	const TITLE = "Gallery | RHHS StuCo";
 	const DESCRIPTION = "A look into our 2024-2025 school year.";

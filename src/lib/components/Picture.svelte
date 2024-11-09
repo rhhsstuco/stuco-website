@@ -3,14 +3,21 @@
 
 	import type { ImageMeta } from '../types/image.types';
 
-	export let meta: ImageMeta;
+	interface Props {
+		meta: ImageMeta;
+		sizes?: string;
+		alt?: string;
+		loading?: 'lazy' | 'eager' | null | undefined;
+	}
 
-	$: sources = meta.sources;
-	$: fallback = meta.img;
-
-	export let sizes = '(max-width: 600px) 400px, (max-width: 1200px) 800px, 1600px';
-	export let alt = '';
-	export let loading: 'lazy' | 'eager' | null | undefined = 'eager';
+	let {
+		meta,
+		sizes = '(max-width: 600px) 400px, (max-width: 1200px) 800px, 1600px',
+		alt = '',
+		loading = 'eager'
+	}: Props = $props();
+	let sources = $derived(meta.sources);
+	let fallback = $derived(meta.img);
 </script>
 
 <picture>

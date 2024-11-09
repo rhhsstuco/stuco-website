@@ -1,14 +1,20 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
   	import Calendar from "$lib/components/Calendar/Calendar.svelte";
   	import HomePageEvent from "$lib/components/HomePageEvent.svelte";
   	import Metadata from "$lib/components/Metadata.svelte";
 	import type { PageServerData } from "./$types";
 
-	export let data: PageServerData;
+	interface Props {
+		data: PageServerData;
+	}
 
-	let monthEvents: SchoolEvent[];
+	let { data }: Props = $props();
 
-	$: {
+	let monthEvents: SchoolEvent[] = $state();
+
+	run(() => {
 		const duplicateEvents = new Set<string>();
 
 		monthEvents = data.events
@@ -21,7 +27,7 @@
 				duplicateEvents.add(event.name);
 				return true;
 			})
-	}
+	});
 
 	const TITLE = "Events | RHHS StuCo";
 	const DESCRIPTION = "Stay up to date on all school events here!";

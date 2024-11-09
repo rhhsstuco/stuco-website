@@ -2,13 +2,19 @@
 	// @ts-ignore
 	import DefaultProfilePicture from "$lib/images/default_pfp.png?format=avif;webp;png&w=400;800&as=picture";
   	import MemberCard from "$lib/components/MemberCard.svelte";;
-  	import { mediaMaxLarge } from "$lib/stores/maxScreenWidth.store";
   	import type { PageServerData } from "./$types";
   	import Metadata from "$lib/components/Metadata.svelte";
+    import { createScreenWidthQuery } from "$lib/state/screenWidth.svelte";
 
-	export let data: PageServerData;
+	interface Props {
+		data: PageServerData;
+	}
 
-	$: gridOffset = $mediaMaxLarge ? 0 : 3; 
+	let { data }: Props = $props();
+
+    let mediaMaxLarge = createScreenWidthQuery(0, 1024);
+
+	let gridOffset = $derived(mediaMaxLarge ? 0 : 3); 
 	
 	const TITLE = "About Us | RHHS StuCo";
 	const DESCRIPTION = "Meet the members of our the 2023-2024 Student Council!";
@@ -27,7 +33,7 @@
 	<section class="members">
 		<h2>Members</h2>
 		<div class="members__display">
-			{#if !$mediaMaxLarge}
+			{#if !mediaMaxLarge.value}
 				<div class="members__display__row">
 					{#each data.members.slice(0, 3) as member}
 						<MemberCard {member}/>
@@ -36,7 +42,7 @@
 			{/if}
 			<div class="members__display__grid">
 				{#each data.members.slice(gridOffset) as member, index}
-					<MemberCard {member} loading={($mediaMaxLarge && index < 3) ? "eager" : "lazy" }/>
+					<MemberCard {member} loading={(mediaMaxLarge.value && index < 3) ? "eager" : "lazy" }/>
 				{/each}
 			</div>
 		</div>	

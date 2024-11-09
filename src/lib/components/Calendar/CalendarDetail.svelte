@@ -1,23 +1,21 @@
 <script lang="ts">
 	/** The detail component which appears from the side of the Calendar component */
-
-  	import { createEventDispatcher } from "svelte";
-
-	export let date: Date;
-	export let events: SchoolEvent[]
-
-	const dispatch = createEventDispatcher();
-
-	function onClose() {
-		dispatch('close');
+    
+	interface Props {
+		date: Date;
+		events: SchoolEvent[];
+        onClose: () => void;
 	}
+
+	let { date, events, onClose }: Props = $props();
+
 </script>
 
 <div class="calendar-detail">
 	<div class="calendar-detail__content">
 		<div class="calendar-detail__content__heading">
 			<div class="calendar-detail__content__heading__header">
-				<button on:click={onClose}>
+				<button onclick={onClose}>
 					&times;
 				</button>
 				<span class="school-event">School</span>

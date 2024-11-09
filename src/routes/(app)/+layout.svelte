@@ -1,12 +1,17 @@
-<script>
+<script lang="ts">
   import Navbar from "$lib/components/Navbar/Navbar.svelte";
+  interface Props {
+    children?: import('svelte').Snippet;
+  }
+
+  let { children }: Props = $props();
 </script>
 
 <header>
   <Navbar />
 </header>
 
-<slot />
+{@render children?.()}
 
 <style lang="scss">
 	header {
