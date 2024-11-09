@@ -4,7 +4,11 @@ import type { ImageMeta, ImageProps, ImagePropsWithHeight } from '$lib/types/ima
 import { getSpreadSheetValues, initSheetsAuth } from './spreadsheet';
 
 // Gets filepaths of club logo thumbnails
-const filepaths = import.meta.glob("$images/club_logos/*.{jpg,png,webp,avif}", { as: 'raw', eager: true });
+const filepaths = import.meta.glob("$images/club_logos/*.{jpg,png,webp,avif}", {
+    import: 'default',
+    query: '?raw',
+    eager: true,
+});
 
 // Gets metadata of processed club logo thumbnails
 const files = import.meta.glob("$images/club_logos/*.{jpg,png,webp,avif}", {
