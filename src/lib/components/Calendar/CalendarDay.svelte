@@ -1,9 +1,11 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
+
     /** The individual button representing a day on the Calendar component */
 
     interface Props {
 		events: SchoolEvent[] | undefined;
-		children?: import('svelte').Snippet;
+		children?: Snippet;
         onClick?: () => void; 
 	}
 

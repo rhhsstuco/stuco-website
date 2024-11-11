@@ -1,5 +1,3 @@
-import { writable } from "svelte/store";
-
 export type Theme = "light" | "dark";
 
 function createThemeState(initialTheme: Theme) {
@@ -21,18 +19,18 @@ function createThemeState(initialTheme: Theme) {
             }
         },
         mount() {
-            theme.value = (localStorage.getItem("theme") ?? "light") as Theme;
+            themeState = (localStorage.getItem("theme") ?? "light") as Theme;
 
             if ("matchMedia" in window.matchMedia) {
                 if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                    theme.value = "dark"
+                    themeState = "dark"
                 }
             }
         },
         mountEffects() {
-            localStorage.setItem("theme", theme.value)
+            localStorage.setItem("theme", themeState)
 
-            document.documentElement.setAttribute("data-theme", theme.value);
+            document.documentElement.setAttribute("data-theme", themeState);
         }
     }
 }

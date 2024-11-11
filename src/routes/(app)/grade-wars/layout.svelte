@@ -1,8 +1,10 @@
 <script lang="ts">
   	import reducedMotion from "$lib/state/reducedMotion.svelte";
+    import type { Snippet } from "svelte";
   	import Confetti from "svelte-confetti";
+
 	interface Props {
-		children?: import('svelte').Snippet;
+		children?: Snippet;
 	}
 
 	let { children }: Props = $props();

@@ -1,14 +1,14 @@
 <script lang="ts">
 	/** Flash dialog message to display information */
 
-  	import { onMount } from "svelte";
+  	import { onMount, type Snippet } from "svelte";
 
 	const FLASH_TOKEN = "flash";
 
 	interface Props {
 		closeable?: boolean;
 		id: string;
-		children?: import('svelte').Snippet;
+		children?: Snippet;
 	}
 
 	let { closeable = true, id, children }: Props = $props();

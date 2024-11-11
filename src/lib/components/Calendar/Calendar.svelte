@@ -102,18 +102,18 @@
     return isLeapYear(year) ? 29 : 28;
   }
 
+
   interface Props {
     events: SchoolEvent[];
     /** Date which should be visible from the calendar */
     date?: Date;
+    selectedDate?: Date | null;
   }
 
-  let { events, date = $bindable(new Date()) }: Props = $props();
-
-  // Selecting date for detail
-  let selectedDate: Date | null = $state(null);
+  let { events, date = $bindable(new Date()), selectedDate = $bindable() }: Props = $props();
 
   const selectDate = (date: Date) => () => (selectedDate = date);
+
   /** Grouping of events under the day(s) that the are happening */
   let eventsMap = $derived(
     multiGroupBy(events, (event) => {
@@ -150,7 +150,7 @@
 
   /** Offset of first day */
   let firstDayOffset = $derived(
-    ((new Date(year, month, 1).getDay() % 7) + 1 - 1 + 7) % 7
+    new Date(year, month, 1).getDay() % 7
   );
   let rows = $derived(Math.ceil((firstDayOffset + daysInMonth[month]) / 7));
 </script>

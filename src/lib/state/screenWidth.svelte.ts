@@ -1,6 +1,3 @@
-import { onMount } from "svelte";
-import { readable } from "svelte/store";
-
 /** A width media query with a lower and upper bound  */
 export const createScreenWidthQuery = (minWidth: number, maxWidth: number) => {
 
