@@ -1,7 +1,7 @@
 <script lang="ts">
   	import ImageGrid from "$lib/components/ImageGrid.svelte";
   	import type { PageServerData } from "./$types";
-  	import { mediaSmallest, mediaSmall, mediaMedium, mediaLarge, mediaLarger, mediaLargest, mediaSmaller } from "$lib/state/screenWidth.svelte";
+  	import { mediaSmallest, mediaSmall, mediaMedium, mediaLarge, mediaLarger, mediaLargest, mediaSmaller, createScreenWidthQuery } from "$lib/state/screenWidth.svelte";
   	
   	import Metadata from "$lib/components/Metadata.svelte";
 
@@ -13,16 +13,8 @@
 
 	let columns = $state(4);
 
-	function changeColumns(numColumns: number) {
-		return (matches: boolean) => {
-			if (matches) {
-				columns = numColumns;
-			}
-		}
-	}
-
     const COLUMN_COUNTS: [
-        { readonly value: boolean },
+        ReturnType<typeof createScreenWidthQuery>,
         number
     ][] = [
         [mediaLargest, 4],
@@ -36,9 +28,9 @@
 
     COLUMN_COUNTS.map(([media, count]) => {
         $effect(() => {
-            media.value;
-
-            changeColumns(count);
+            if (media.value) {   
+                columns = count;
+            }
         })
     })
 

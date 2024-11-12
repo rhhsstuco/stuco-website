@@ -11,6 +11,7 @@
   	import Flash from '$lib/components/Flash.svelte';
     import type { Snippet } from 'svelte';
     import reducedMotion from '$lib/state/reducedMotion.svelte';
+    import { mediaLarge, mediaLarger, mediaLargest, mediaMedium, mediaSmall, mediaSmaller, mediaSmallest, type createScreenWidthQuery } from '$lib/state/screenWidth.svelte';
 
     interface Props {
         children: Snippet;
@@ -20,6 +21,22 @@
 
     $effect(() => {
         return reducedMotion.mount();
+    });
+
+    const SCREEN_WIDTH_QUERIES: ReturnType<typeof createScreenWidthQuery>[] = [
+        mediaLargest,
+        mediaLarger,
+        mediaLarge,
+        mediaMedium,
+        mediaSmall,
+        mediaSmaller,
+        mediaSmallest,
+    ];
+
+    SCREEN_WIDTH_QUERIES.forEach(query => {
+        $effect(() => {
+            return query.init();
+        })
     })
 
 	$effect(() => {

@@ -14,7 +14,11 @@
 
     let mediaMaxLarge = createScreenWidthQuery(0, 1024);
 
-	let gridOffset = $derived(mediaMaxLarge ? 0 : 3); 
+    $effect(() => {
+        mediaMaxLarge.init();
+    })
+
+	let gridOffset = $derived(mediaMaxLarge.value ? 0 : 3); 
 	
 	const TITLE = "About Us | RHHS StuCo";
 	const DESCRIPTION = "Meet the members of our the 2023-2024 Student Council!";
@@ -35,7 +39,7 @@
 		<div class="members__display">
 			{#if !mediaMaxLarge.value}
 				<div class="members__display__row">
-					{#each data.members.slice(0, 3) as member}
+					{#each data.members.slice(0, gridOffset) as member}
 						<MemberCard {member}/>
 					{/each}
 				</div>
