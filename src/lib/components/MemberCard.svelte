@@ -52,7 +52,7 @@
 	}
 
 	.member-card__text {
-        --name-font-size: 10.25rem;
+        --name-font-size: 1.25rem;
 		--position-font-size: 1rem;
         
 		display: flex;
