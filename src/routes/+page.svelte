@@ -528,6 +528,10 @@
         .hero-image-container {
             top: 15%;
         }
+
+        .hero h1 {
+            grid-row: 6 / 20;
+        }
     }
 
     @media (max-width: 1024px) {
