@@ -18,8 +18,8 @@
 <style lang="scss">
 	dialog {
 		border: none;
-		padding: 0.5rem;
-		overflow-y: hidden;
+		padding: 0;
+		overflow: visible;
 		background-color: var(--color-light);
 	}
 

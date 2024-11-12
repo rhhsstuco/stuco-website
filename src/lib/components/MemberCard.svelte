@@ -4,7 +4,8 @@
 	// @ts-ignore
 	import DefaultProfilePicture from "$lib/images/default_pfp.png?format=avif;webp;png&w=400;800&as=picture";
   	import type StucoMember from "$lib/models/StucoMember.model";
-  	import Picture from "./Picture.svelte";
+    import Card from "$lib/components/Card.svelte";
+  	import Picture from "$lib/components/Picture.svelte";
 
 	interface Props {
 		member: StucoMember;
@@ -14,7 +15,7 @@
 	let { member, loading = "eager" }: Props = $props();
 </script>
 
-<div class="member-card">
+<Card>
 	<div class="member-card__photo">
 		<Picture meta={member?.imageURL || DefaultProfilePicture} alt={member.name} sizes="(max-width: 800px) 400px, 1200px" {loading}/>
 	</div>
@@ -26,20 +27,10 @@
 			{member.position}
 		</h3>
 	</div>
-</div>
+</Card>
 
 <style lang="scss">
 	@use "../../styles/exports.scss" as exports;
-
-	.member-card {
-		--name-font-size: 1.25rem;
-		--position-font-size: 1rem;
-		--max-padding: 1rem;
-
-		box-shadow: exports.$box-shadow;
-		background-color: var(--color-light);
-		padding: min(var(--max-padding), 5%);
-	}
 
 	.member-card__photo {
 		width: 100%;
@@ -61,6 +52,9 @@
 	}
 
 	.member-card__text {
+        --name-font-size: 10.25rem;
+		--position-font-size: 1rem;
+        
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -82,15 +76,9 @@
 	}
 
 	@media (max-width: 92rem) {
-		.member-card {
+		.member-card__text {
 			--name-font-size: 1.125rem;
 			--position-font-size: 0.95rem;
-		}
-	}
-
-	@include exports.media-largest {
-		.member-card {
-			--max-padding: 0.5rem;
 		}
 	}
 </style>

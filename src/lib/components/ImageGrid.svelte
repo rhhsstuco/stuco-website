@@ -11,6 +11,7 @@
   	import Picture from "./Picture.svelte";
   	import flatPartitions from "$lib/util/flatPartitions";
     import fitImageToWindow from "$lib/actions/fitImageToWindow";
+    import Card from "./Card.svelte";
 
 	interface Props {
 		imageURLs: ImageMeta[];
@@ -53,7 +54,6 @@
 
 	function onImageClick(url: ImageMeta) {
         return (e: Event) => {
-
             selectedImageURL = url;
             
             if (!dialog) {
@@ -83,9 +83,11 @@
 		<Dialog bind:dialog={dialog!}>
 			{#key selectedImageURL}
 				{#if selectedImageURL}
-				<div class="dialog__image" use:clickOutside onclick_outside={dialog!.close()} use:fitImageToWindow>
-					<Picture meta={selectedImageURL}/>
-				</div>
+                <Card>
+                    <div class="dialog__image" use:clickOutside onclick_outside={() => dialog!.close()} use:fitImageToWindow>
+                        <Picture meta={selectedImageURL}/>
+                    </div>
+                </Card>
 				{/if}
 			{/key}
 		</Dialog>
@@ -134,7 +136,7 @@
 
 	.dialog__image {
 		display: flex;
-	} 
+	}
 
 	:global(.dialog__image img) {
 		display: block;
