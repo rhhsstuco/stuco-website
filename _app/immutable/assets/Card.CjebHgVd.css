@@ -1,0 +1,1 @@
+:root{--font-size-header: 4rem}@media only screen and (max-width: 40em){:root{--font-size-header: 3rem}}.card.svelte-tmg7hy{--max-padding: 1rem;--box-shadow: 0 4px 4px var(--color-box-shadow);box-shadow:var(--box-shadow);background-color:var(--color-light);padding:min(var(--max-padding),5%)}@media only screen and (max-width: 80em){.card.svelte-tmg7hy{--max-padding: .5rem}}
