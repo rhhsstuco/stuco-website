@@ -2,6 +2,7 @@
 	/** The navigation bar */
  	import { base } from "$app/paths";
  	import { page } from '$app/stores';
+  import { createPathnameState } from "$lib/state/pathname.svelte";
  	import theme from "$lib/state/theme.svelte";
  	import MediaQuery from "../MediaQuery.svelte";
  	import Hamburger from "./Hamburger.svelte";
@@ -18,10 +19,14 @@
 	}
 
     // TODO: fix this when page becomes $state
-	let url = $state($page.url.pathname);
+	let url = createPathnameState();
 
     $effect(() => {
-        $page.url.pathname;
+        url.init();
+    })
+
+    $effect(() => {
+        url.value;
 
         menuIsOpen = false;
     })
@@ -41,11 +46,11 @@
                     <MediaQuery query="(min-height: 577px)" >
                         {#snippet children(matches2)}
                             {#if matches1 && matches2}
-                                <li><a href="{base}/" class:active={url === `${base}/` || url === `${base}`}>Home</a></li>
-                                <li><a href="{base}/events" class:active={checkActiveURL('events', url)}>Events</a></li>
-                                <li><a href="{base}/clubs" class:active={checkActiveURL('clubs', url)}>Clubs</a></li>
-                                <li><a href="{base}/gallery" class:active={checkActiveURL('gallery', url)}>Gallery</a></li>
-                                <li><a href="{base}/about-us" class:active={checkActiveURL('about-us', url)}>About Us</a></li>
+                                <li><a href="{base}/" class:active={url.value === `${base}/` || url.value === `${base}`}>Home</a></li>
+                                <li><a href="{base}/events" class:active={checkActiveURL('events', url.value)}>Events</a></li>
+                                <li><a href="{base}/clubs" class:active={checkActiveURL('clubs', url.value)}>Clubs</a></li>
+                                <li><a href="{base}/gallery" class:active={checkActiveURL('gallery', url.value)}>Gallery</a></li>
+                                <li><a href="{base}/about-us" class:active={checkActiveURL('about-us', url.value)}>About Us</a></li>
                             {:else}
                                 <li>
                                     <Hamburger bind:open={menuIsOpen}/>

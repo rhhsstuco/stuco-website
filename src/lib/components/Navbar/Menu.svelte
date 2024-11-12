@@ -2,8 +2,8 @@
 	/** The menu that pops from the side in mobile UIs */
 
 	import { base } from "$app/paths";
-	import { page } from "$app/stores";
  	import clickOutside from "$lib/actions/clickOutside";
+    import { createPathnameState } from "$lib/state/pathname.svelte";
   	import { fly } from "svelte/transition";
 
     interface Props {
@@ -13,7 +13,11 @@
     let { onClose }: Props = $props();
 
     // TODO: fix this when page becomes $state
-	let url = $derived($page.url.pathname);
+	let url = createPathnameState();
+
+    $effect(() => {
+        url.init();
+    })
 </script>
 
 
@@ -25,11 +29,11 @@
 	</div>
 	<div class="menu__content">
 		<ul class="menu__content__links">
-			<li><a href="{base}/" class:active={url === `${base}/` || url === `${base}`}>Home</a></li>
-			<li><a href="{base}/events" class:active={url === `${base}/events`}>Events</a></li>
-			<li><a href="{base}/clubs" class:active={url === `${base}/clubs`}>Clubs</a></li>
-			<li><a href="{base}/gallery" class:active={url === `${base}/gallery`}>Gallery</a></li>
-			<li><a href="{base}/about-us" class:active={url === `${base}/about-us`}>About Us</a></li>
+			<li><a href="{base}/" class:active={url.value === `${base}/` || url.value === `${base}`}>Home</a></li>
+			<li><a href="{base}/events" class:active={url.value === `${base}/events`}>Events</a></li>
+			<li><a href="{base}/clubs" class:active={url.value === `${base}/clubs`}>Clubs</a></li>
+			<li><a href="{base}/gallery" class:active={url.value === `${base}/gallery`}>Gallery</a></li>
+			<li><a href="{base}/about-us" class:active={url.value === `${base}/about-us`}>About Us</a></li>
 		</ul>
 	</div>
 </div>
