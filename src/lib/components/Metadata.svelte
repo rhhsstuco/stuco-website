@@ -28,8 +28,8 @@
 	<meta property="og:description" content={description}>
 	<meta property="og:type" content="website">
 	{#if image}
-		<meta property="og:image" content={`${DOMAIN}${image.img.src}`}>
-		<meta property="thumbnail" content={`${DOMAIN}${image.img.src}`}>
+		<meta property="og:image" content={`${dev ? DOMAIN : ''}${image.img.src}`}>
+		<meta property="thumbnail" content={`${dev ? DOMAIN : ''}${image.img.src}`}>
 	{/if}
 	{#if !dev}
 		<meta property="og:url" content={url}>
