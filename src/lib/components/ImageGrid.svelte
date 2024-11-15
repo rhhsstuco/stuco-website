@@ -73,9 +73,9 @@
 	<section class="gallery">
 		{#each imageGrid as imageColumn}
 		<div class="gallery__column">
-			{#each imageColumn as image (image.img.src)}
+			{#each imageColumn as image, i (image.img.src)}
 			<button class="gallery__column__image" onclick={onImageClick(image)} aria-label="Select this image">
-				<Picture meta={image}/>
+				<Picture meta={image} loading={i < 3 ? "eager" : "lazy"}/>
 			</button>
 			{/each}
 		</div>
