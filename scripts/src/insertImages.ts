@@ -67,7 +67,7 @@ async function main() {
 			{
 				name: "choice",
 				type: "list",
-				loop: false,
+				loop: true,
 				message: `Where do you want to insert '${input.basename}'?`,
 				choices: [...orderArray.map(entry => entry.basename), "<append>"],
 			}
@@ -87,7 +87,7 @@ async function main() {
 		{
 			name: "checked",
 			type: "checkbox",
-			loop: false,
+			loop: true,
 			message: `Select files to delete`,
 			choices: orderArray.map(entry => entry.basename),
 		}
