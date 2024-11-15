@@ -1,7 +1,6 @@
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { rename, readdir } from "fs/promises";
-import * as dotenv from "dotenv";
 import inquirer from 'inquirer';
 
 const __filename = fileURLToPath(import.meta.url);

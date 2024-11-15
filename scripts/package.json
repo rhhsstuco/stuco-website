@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
     "download-images": "npm run compile && node ./build/downloadImages.js",
-    "insert-images": "npm run compile && node ./build/insertImages.js"
+    "insert-images": "npm run compile && node ./build/insertImages.js",
+    "resize-images": "npm run compile && node ./build/resizeImages.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@googleapis/drive": "^8.2.0",
-    "inquirer": "^11.1.0"
+    "inquirer": "^11.1.0",
+    "sharp": "^0.33.5"
   }
 }
