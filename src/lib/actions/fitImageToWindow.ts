@@ -4,7 +4,7 @@ const VERTICAL_INSET_REM = 6;
 /** Fit image to screen size without changing the aspect ratio */
 export default function fitImageToWindow(node: HTMLElement) {
 	const onResize = () => {
-		const picture = node.children[0] as HTMLPictureElement;
+		const picture = node.children[1] as HTMLPictureElement;
 		const image = picture.lastElementChild as HTMLImageElement;
 		const nodeAspectRatio = +image.getAttribute("width")! / +image.getAttribute("height")!;
 		const windowAspectRatio = window.innerWidth / window.innerHeight;

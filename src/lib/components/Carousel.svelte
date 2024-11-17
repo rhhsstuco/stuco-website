@@ -10,9 +10,10 @@
 
 	interface Props {
 		imageURLs: ImageMeta[];
+		initialSlide?: number;
 	}
 
-	let { imageURLs }: Props = $props();
+	let { imageURLs, initialSlide = 0 }: Props = $props();
 
 	let showNavigation = $derived(!mediaMobile.value);
 </script>
@@ -23,6 +24,7 @@
 		slides-per-view={1}
 		space-between={4}
 		speed={300}
+		initial-slide={initialSlide}
 		loop={true}
 		grab-cursor={true}
 		autoplay={{

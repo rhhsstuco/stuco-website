@@ -5,7 +5,7 @@ import { rotateMap } from "../../../vite";
 const files = import.meta.glob("$images/gallery/*.{jpg,png,webp,avif}", {
 	query: {
 		format: 'avif;webp;jpg',
-		w: '800;1600;2400',
+		w: '800',
 		as: 'picture',
 	}
 })
@@ -21,22 +21,6 @@ type Orientation = 'horizontal' | 'vertical';
  */
 function mismatchedOrientation(img: ImageMeta & { filename: string }) {
 	return rotateMap.has(img.filename) && (+rotateMap.get(img.filename)!) - 90 % 180 === 0
-}
-
-/** 
- * Filters if an images orientation is correct, taking into account the rotations.
- * @param orientationCorrect a function that determines if an orientation is correct or not for a non-rotated image
- * @returns a filter function (predicate) to filter out incorrectly oriented images
- */
-function filterOrientation(orientationCorrect: (img: ImageMeta & { filename: string }) => boolean) {
-	return (img: ImageMeta & { filename: string }) => {
-		const correctOrientation = orientationCorrect(img);
-		const isMismatched = mismatchedOrientation(img);
-		const correctOriginal = correctOrientation && !isMismatched;
-		const correctRotated = !correctOrientation && isMismatched;
-		
-		return correctOriginal || correctRotated;
-	}
 }
 
 /**
