@@ -5,7 +5,7 @@ import { rotateMap } from "../../../vite";
 const files = import.meta.glob("$images/gallery/*.{jpg,png,webp,avif}", {
 	query: {
 		format: 'avif;webp;jpg',
-		w: '800',
+		w: '800;1600;2400',
 		as: 'picture',
 	}
 })
