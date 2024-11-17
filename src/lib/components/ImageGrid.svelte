@@ -213,7 +213,7 @@
 
 		i {
 			font-size: 6rem;
-			color: var(--color-dark);
+			color: var(--light-theme-color-light);
 		}
 
 		&:hover {
