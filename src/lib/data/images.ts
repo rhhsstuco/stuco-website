@@ -2,7 +2,6 @@ import type { ImageProps, ImagePropsWithHeight } from "$lib/types/image.types";
 import type { ImageMeta } from "$lib/types/image.types";
 import * as path from 'path';
 import { rotateMap } from "../../../vite";
-
 const files = import.meta.glob("$images/gallery/*.{jpg,png,webp,avif}", {
 	query: {
 		format: 'avif;webp;jpg',
