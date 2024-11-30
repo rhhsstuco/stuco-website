@@ -69,12 +69,12 @@
 		closeable={false}
 		id={'grade-wars'}
 	>
-		<em>Check out the Grade Wars leaderboard
+		<em>Check out the
 			<a
 				href="{base}/grade-wars"
 				onclick={e => e.stopPropagation()}
 			>
-			here</a>!
+			Grade Wars leaderboard</a>!
 		</em>
 	</Flash>
 </div>
