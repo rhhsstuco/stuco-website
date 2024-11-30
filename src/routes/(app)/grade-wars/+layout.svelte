@@ -3,6 +3,8 @@
     import type { Snippet } from "svelte";
   	import Confetti from "svelte-confetti";
 
+    const SHOW_CONFETTI = false;
+
 	interface Props {
 		children?: Snippet;
 	}
@@ -10,7 +12,7 @@
 	let { children }: Props = $props();
 </script>
 
-{#if !reducedMotion.value}
+{#if !reducedMotion.value && SHOW_CONFETTI}
 	<div class="confetti">
 		<Confetti x={[-6, 6]} y={[0, 0.4]} delay={[0, 4000]} infinite duration={5000} amount={400} fallDistance="100vh" />
 	</div>

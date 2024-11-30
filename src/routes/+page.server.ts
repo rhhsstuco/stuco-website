@@ -1,5 +1,6 @@
 import getEvents from '$lib/data/events';
 import getGalleryImages from '$lib/data/images';
+import { computeStandings } from '$lib/data/points';
 import type { PageServerLoad } from "./$types";
 
 
@@ -17,10 +18,13 @@ export const load: PageServerLoad = async () => {
 		reverse: true,
 	});
 
-	const [spreadsheetData, imageURLs] = await Promise.all([spreadsheetDataPromise, imageURLsPromise]);
+    const standingsPromise = computeStandings()
+
+	const [spreadsheetData, imageURLs, standings] = await Promise.all([spreadsheetDataPromise, imageURLsPromise, standingsPromise]);
 
 	return {
 		events: spreadsheetData,
 		imageURLs: imageURLs,
+        standings,
 	};
 };

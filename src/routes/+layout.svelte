@@ -12,6 +12,7 @@
     import type { Snippet } from 'svelte';
     import reducedMotion from '$lib/state/reducedMotion.svelte';
     import { mediaLarge, mediaLarger, mediaLargest, mediaMedium, mediaSmall, mediaSmaller, mediaSmallest, type createScreenWidthQuery } from '$lib/state/screenWidth.svelte';
+  import { base } from '$app/paths';
 
     interface Props {
         children: Snippet;
@@ -63,22 +64,20 @@
 
 <Footer />
 
-<!-- <div class="portal">
+<div class="portal">
 	<Flash
 		closeable={false}
-		id={'semi-formal-songs'}
+		id={'grade-wars'}
 	>
-		<em>Suggest a song for Semi-Formal
+		<em>Check out the Grade Wars leaderboard
 			<a
-				href="https://forms.gle/sks1RppkrrUQn5XAA"
-				target="_blank"
-				rel="noopener noreferrer"
-				on:click|stopPropagation
+				href="{base}/grade-wars"
+				onclick={e => e.stopPropagation()}
 			>
 			here</a>!
 		</em>
 	</Flash>
-</div> -->
+</div>
 
 <style lang="scss">
     @keyframes fade-in {

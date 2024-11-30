@@ -2,6 +2,7 @@
     import { base } from "$app/paths";
     import Carousel from "$lib/components/Carousel.svelte";
     import HomePageEvent from "$lib/components/HomePageEvent.svelte";
+  import Leaderboard from "$lib/components/Leaderboard/Leaderboard.svelte";
     import Metadata from "$lib/components/Metadata.svelte";
     import Navbar from "$lib/components/Navbar/Navbar.svelte";
     import Picture from "$lib/components/Picture.svelte";
