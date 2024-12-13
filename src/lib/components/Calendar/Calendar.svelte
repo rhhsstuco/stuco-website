@@ -1,12 +1,11 @@
 <script lang="ts">
   /** The calendar component showing school events */
-
-  import reducedMotion from "$lib/state/reducedMotion.svelte";
   import theme from "$lib/state/theme.svelte";
   import { quadInOut } from "svelte/easing";
   import { fly } from "svelte/transition";
   import CalendarDay from "./CalendarDay.svelte";
   import CalendarDetail from "./CalendarDetail.svelte";
+  import { prefersReducedMotion } from "svelte/motion";
 
   /// Constants
   const MS_IN_DAY = 1000 * 60 * 60 * 24;
@@ -226,7 +225,7 @@
         transition:fly={{
           x: 250,
           opacity: 1,
-          duration: reducedMotion.value ? 0 : 250,
+          duration: prefersReducedMotion.current ? 0 : 250,
           easing: quadInOut,
         }}
       >
