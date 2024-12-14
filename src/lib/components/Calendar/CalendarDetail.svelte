@@ -123,8 +123,16 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--calendar-detail-events-info-gap, 0.25rem);
-
 	}
+    
+
+    :global(.calendar-detail__content__events__event b) {
+        font-weight: bold;
+    }
+
+   :global(.calendar-detail__content__events__event em) {
+        font-style: italic;
+    }
 
 	.calendar-detail__content__events__event h4 {
 		font-weight: 600;

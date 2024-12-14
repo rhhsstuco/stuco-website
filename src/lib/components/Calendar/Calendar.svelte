@@ -202,7 +202,7 @@
         {/if}
       {/each}
     {/each}
-    {#each events as event}
+    {#each events.toReversed() as event}
       <!-- Calculating where to place the date button using CSS Grid Layout -->
       {#if event.startDate.getMonth() === month && event.startDate.getFullYear() === year}
         <div
@@ -213,7 +213,7 @@
 						--color-badge: var(--color-badge-${event.type})
 					`}
         >
-          {event.name}
+          <div class="text-wrapper">{event.name}</div>
         </div>
       {/if}
     {/each}
@@ -300,6 +300,12 @@
     bottom: 0;
     left: 0;
     right: 0;
+  }
+
+  .text-wrapper {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .calendar__header__date {
