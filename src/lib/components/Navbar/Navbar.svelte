@@ -1,8 +1,7 @@
 <script lang="ts">
 	/** The navigation bar */
  	import { base } from "$app/paths";
- 	import { page } from '$app/stores';
-  import { createPathnameState } from "$lib/state/pathname.svelte";
+ 	import { page } from '$app/state';
  	import theme from "$lib/state/theme.svelte";
  	import MediaQuery from "../MediaQuery.svelte";
  	import Hamburger from "./Hamburger.svelte";
@@ -11,22 +10,10 @@
 	// Reads theme data from the theme store
 	let icon = $derived(theme.value === "dark" ? "ri-moon-fill" : "ri-moon-line");
 
-	/** 
-	 * Checks if the active url matches a certain path
-	*/
-	function checkActiveURL(path: string, activeURL: string) {
-		return (activeURL === `${base}/${path}`) || (activeURL === `${base}/${path}/`)
-	}
-
-    // TODO: fix this when page becomes $state
-	let url = createPathnameState();
+    let pathname = $derived(page.url.pathname);
 
     $effect(() => {
-        url.init();
-    })
-
-    $effect(() => {
-        url.value;
+        pathname;
 
         menuIsOpen = false;
     })
@@ -46,11 +33,11 @@
                     <MediaQuery query="(min-height: 577px)" >
                         {#snippet children(matches2)}
                             {#if matches1 && matches2}
-                                <li><a href="{base}/" class:active={url.value === `${base}/` || url.value === `${base}`}>Home</a></li>
-                                <li><a href="{base}/events" class:active={checkActiveURL('events', url.value)}>Events</a></li>
-                                <li><a href="{base}/clubs" class:active={checkActiveURL('clubs', url.value)}>Clubs</a></li>
-                                <li><a href="{base}/gallery" class:active={checkActiveURL('gallery', url.value)}>Gallery</a></li>
-                                <li><a href="{base}/about-us" class:active={checkActiveURL('about-us', url.value)}>About Us</a></li>
+                                <li><a href="{base}/" class:active={pathname === `${base}/` || pathname === `${base}`}>Home</a></li>
+                                <li><a href="{base}/events" class:active={pathname === `${base}/events`}>Events</a></li>
+                                <li><a href="{base}/clubs" class:active={pathname === `${base}/clubs`}>Clubs</a></li>
+                                <li><a href="{base}/gallery" class:active={pathname === `${base}/gallery`}>Gallery</a></li>
+                                <li><a href="{base}/about-us" class:active={pathname === `${base}/about-us`}>About Us</a></li>
                             {:else}
                                 <li>
                                     <Hamburger bind:open={menuIsOpen}/>
