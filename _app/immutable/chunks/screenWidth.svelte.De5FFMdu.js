@@ -1,0 +1,1 @@
+import{M as m}from"./media-query.HFTfXbqa.js";const a=(e,s)=>new m(`(max-width: ${s}px) and (min-width: ${e}px)`),i=a(0,480),d=a(480,640),n=a(640,768),o=a(0,768),c=a(768,1024),r=a(1024,1152),l=a(1152,1280),g=a(1280,1e14);export{g as a,l as b,a as c,r as d,c as e,n as f,d as g,i as h,o as m};
