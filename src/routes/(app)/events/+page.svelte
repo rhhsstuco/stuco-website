@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { page } from "$app/stores";
+    import { page } from "$app/state";
     import Calendar from "$lib/components/Calendar/Calendar.svelte";
     import HomePageEvent from "$lib/components/HomePageEvent.svelte";
     import Metadata from "$lib/components/Metadata.svelte";
@@ -36,8 +36,8 @@
     let initialLoad = false;
 
     onMount(() => {
-        if ($page.url.searchParams.has("date")) {
-            const dateStringFragments = $page.url.searchParams.get("date")!.split("-")
+        if (page.url.searchParams.has("date")) {
+            const dateStringFragments = page.url.searchParams.get("date")!.split("-")
             selectedDate = new Date(+dateStringFragments[0], +dateStringFragments[1] - 1, +dateStringFragments[2]);
             initialLoad = true;
         }

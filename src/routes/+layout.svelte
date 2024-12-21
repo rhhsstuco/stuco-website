@@ -10,7 +10,6 @@
     import Footer from '$lib/components/Footer.svelte';
     import Flash from '$lib/components/Flash.svelte';
     import type { Snippet } from 'svelte';
-    import { mediaLarge, mediaLarger, mediaLargest, mediaMedium, mediaSmall, mediaSmaller, mediaSmallest, type createScreenWidthQuery } from '$lib/state/screenWidth.svelte';
     import { base } from '$app/paths';
     import Confetti from 'svelte-confetti';
     import { prefersReducedMotion } from 'svelte/motion';
@@ -20,22 +19,6 @@
     }
 
     let { children }: Props = $props();
-
-    const SCREEN_WIDTH_QUERIES: ReturnType<typeof createScreenWidthQuery>[] = [
-        mediaLargest,
-        mediaLarger,
-        mediaLarge,
-        mediaMedium,
-        mediaSmall,
-        mediaSmaller,
-        mediaSmallest,
-    ];
-
-    SCREEN_WIDTH_QUERIES.forEach(query => {
-        $effect(() => {
-            return query.init();
-        })
-    })
 
 	$effect(() => {
         theme.mount();

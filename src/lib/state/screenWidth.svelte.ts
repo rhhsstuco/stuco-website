@@ -1,28 +1,9 @@
+import { MediaQuery } from "svelte/reactivity";
+
 /** A width media query with a lower and upper bound  */
-export const createScreenWidthQuery = (minWidth: number, maxWidth: number) => {
-
-	const query = `(max-width: ${maxWidth}px) and (min-width: ${minWidth}px) `;
-
-    let queryState = $state(false);
-
-    return {
-        get value() {
-            return queryState;
-        },
-        init() {
-            queryState = window.matchMedia(query).matches;
-
-            const updateMatch = (event: MediaQueryListEvent) => queryState = event.matches;
-            
-            const mediaQueryList = window.matchMedia(query);
-            mediaQueryList.addEventListener('change', updateMatch);
-        
-            return () => {
-                mediaQueryList.removeEventListener('change', updateMatch);
-            }
-        }
-    }
-};
+export const createScreenWidthQuery = (minWidth: number, maxWidth: number) => new MediaQuery(
+    `(max-width: ${maxWidth}px) and (min-width: ${minWidth}px)`
+);
 
 export const mediaSmallest = createScreenWidthQuery(0, 480);
 export const mediaSmaller = createScreenWidthQuery(480, 640);

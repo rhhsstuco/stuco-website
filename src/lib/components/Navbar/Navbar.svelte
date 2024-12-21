@@ -3,7 +3,7 @@
  	import { base } from "$app/paths";
  	import { page } from '$app/state';
  	import theme from "$lib/state/theme.svelte";
- 	import MediaQuery from "../MediaQuery.svelte";
+ 	import { MediaQuery } from 'svelte/reactivity';
  	import Hamburger from "./Hamburger.svelte";
  	import Menu from "./Menu.svelte";
 
@@ -20,6 +20,8 @@
 
     // Close menu when url changes
     let menuIsOpen = $state(false);
+
+    const mediaQuery = new MediaQuery('(min-width: 1024px) and (min-height: 577px)');
 </script>
 
 <nav>
@@ -28,28 +30,20 @@
 	</div>
 	<div class="nav__links">
 		<ul>
-            <MediaQuery query="(min-width: 1024px)" >
-                {#snippet children(matches1)}
-                    <MediaQuery query="(min-height: 577px)" >
-                        {#snippet children(matches2)}
-                            {#if matches1 && matches2}
-                                <li><a href="{base}/" class:active={pathname === `${base}/` || pathname === `${base}`}>Home</a></li>
-                                <li><a href="{base}/events" class:active={pathname === `${base}/events`}>Events</a></li>
-                                <li><a href="{base}/clubs" class:active={pathname === `${base}/clubs`}>Clubs</a></li>
-                                <li><a href="{base}/gallery" class:active={pathname === `${base}/gallery`}>Gallery</a></li>
-                                <li><a href="{base}/about-us" class:active={pathname === `${base}/about-us`}>About Us</a></li>
-                            {:else}
-                                <li>
-                                    <Hamburger bind:open={menuIsOpen}/>
-                                </li>
-                                {#if menuIsOpen}
-                                    <Menu onClose={() => menuIsOpen = false}/>
-                                {/if}
-                            {/if}
-                        {/snippet}
-                    </MediaQuery>
-                {/snippet}
-            </MediaQuery>
+            {#if mediaQuery.current}
+                <li><a href="{base}/" class:active={pathname === `${base}/` || pathname === `${base}`}>Home</a></li>
+                <li><a href="{base}/events" class:active={pathname === `${base}/events`}>Events</a></li>
+                <li><a href="{base}/clubs" class:active={pathname === `${base}/clubs`}>Clubs</a></li>
+                <li><a href="{base}/gallery" class:active={pathname === `${base}/gallery`}>Gallery</a></li>
+                <li><a href="{base}/about-us" class:active={pathname === `${base}/about-us`}>About Us</a></li>
+            {:else}
+                <li>
+                    <Hamburger bind:open={menuIsOpen}/>
+                </li>
+                {#if menuIsOpen}
+                    <Menu onClose={() => menuIsOpen = false}/>
+                {/if}
+            {/if}
 			<li>
 				<button
 					class="{icon} change-theme"

@@ -28,7 +28,7 @@
 
     COLUMN_COUNTS.map(([media, count]) => {
         $effect(() => {
-            if (media.value) {   
+            if (media.current) {   
                 columns = count;
             }
         })
