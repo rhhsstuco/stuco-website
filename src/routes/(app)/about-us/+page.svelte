@@ -14,11 +14,17 @@
 
     let mediaMaxLarge = createScreenWidthQuery(0, 1024);
 
-    $effect(() => {
-        mediaMaxLarge.init();
+    // Create derived value that defaults to false on the server to prevent
+    // hydration_attribute_changed errors on the picture elements
+    let mediaMaxLargeDefaultFalse = $derived.by(() => {
+        if (typeof window !== 'undefined') {
+            return false;
+        }
+
+        return mediaMaxLarge.current; 
     })
 
-	let gridOffset = $derived(mediaMaxLarge.value ? 0 : 3); 
+	let gridOffset = $derived(mediaMaxLargeDefaultFalse ? 3 : 0); 
 	
 	const TITLE = "About Us | RHHS StuCo";
 	const DESCRIPTION = "Meet the members of our the 2023-2024 Student Council!";
@@ -37,16 +43,16 @@
 	<section class="members">
 		<h2>Members</h2>
 		<div class="members__display">
-			{#if !mediaMaxLarge.value}
+			{#if !mediaMaxLargeDefaultFalse}
 				<div class="members__display__row">
-					{#each data.members.slice(0, gridOffset) as member}
+					{#each data.members.slice(0, gridOffset) as member (member.name + member.position)}
 						<MemberCard {member}/>
 					{/each}
 				</div>
-			{/if}
+            {/if}
 			<div class="members__display__grid">
-				{#each data.members.slice(gridOffset) as member, index}
-					<MemberCard {member} loading={(mediaMaxLarge.value && index < 3) ? "eager" : "lazy" }/>
+				{#each data.members.slice(gridOffset) as member, index (member.name + member.position)}
+					<MemberCard {member} loading={(mediaMaxLargeDefaultFalse && index < 3) ? "eager" : "lazy" }/>
 				{/each}
 			</div>
 		</div>	
