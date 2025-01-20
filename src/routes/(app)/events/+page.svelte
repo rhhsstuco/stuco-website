@@ -5,6 +5,8 @@
     import Metadata from "$lib/components/Metadata.svelte";
     import { pushStateWithQuery } from "$lib/util/replaceStateWithQuery";
     import { onMount } from "svelte";
+    import Leaderboard from "$lib/components/Leaderboard/Leaderboard.svelte";
+    import { base } from "$app/paths";
     import type { PageServerData } from "./$types";
 
     interface Props {
@@ -86,6 +88,10 @@ url="https://rhhsstuco.ca/events"
         {/each}
         </div>
     </section>
+    <section class="leaderboard">
+        <h2><a href="{base}/grade-wars">Grade Wars Leaderboard</a></h2>
+        <Leaderboard gradeColors={data.standings.rankings} gradePoints={data.standings.gradePoints}/>
+    </section>
 </main>
 
 <style lang="scss">
@@ -126,6 +132,23 @@ url="https://rhhsstuco.ca/events"
             display: flex;
             flex-direction: column;
             gap: 2rem;
+        }
+    }
+
+    .leaderboard {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+		width: clamp(18rem, 85%, 52rem);
+		margin: 0 auto;
+
+        a {
+            all: unset;
+            text-decoration: underline;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 

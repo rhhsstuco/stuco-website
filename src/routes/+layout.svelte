@@ -44,7 +44,7 @@
 
 <Footer />
 
-<div class="portal">
+<!-- <div class="portal">
 	<Flash
 		closeable={false}
 		id={'grade-wars'}
@@ -57,7 +57,7 @@
 			Grade Wars leaderboard</a>!
 		</em>
 	</Flash>
-</div>
+</div> -->
 
 {#if !prefersReducedMotion.current}
 	<div class="confetti">

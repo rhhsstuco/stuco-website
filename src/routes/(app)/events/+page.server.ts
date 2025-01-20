@@ -1,5 +1,6 @@
 import getEvents from '$lib/data/events';
-import type { PageServerLoad } from "./$types";
+import { computeStandings } from "$lib/data/points";
+import type { PageServerLoad } from './$types';
 
 
 export const load: PageServerLoad = async () => {
@@ -9,10 +10,18 @@ export const load: PageServerLoad = async () => {
 		spreadsheetData = await getEvents();
 	} catch (err) {
 		console.error(err);
-		return {
-			events: []
-		}
+		spreadsheetData = [];
 	}
 
-	return { events: spreadsheetData };
+    let standingsData: Awaited<ReturnType<typeof computeStandings>>;
+
+    try {
+        standingsData = await computeStandings();
+    } catch (err) {
+		console.error(err);
+		standingsData = { gradePoints: [], rankings: [] };
+	}
+    
+
+	return { events: spreadsheetData, standings: standingsData };
 };
