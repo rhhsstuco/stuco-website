@@ -8,7 +8,7 @@
     title="Question 2"
     index={2}
     question="Which Black Canadian politician became the first Black federal member of Parliament in 1968?"
-    nextLocation="Go to the room 2029"
+    nextLocation="Go to room 2029"
     {correctAnswers}
 />
 
