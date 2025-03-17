@@ -59,7 +59,7 @@
 	</Flash>
 </div> -->
 
-{#if !prefersReducedMotion.current}
+<!-- {#if !prefersReducedMotion.current}
 	<div class="confetti">
 		<Confetti
             x={[-6, 6]}
@@ -75,21 +75,21 @@
                 `url("${base}/images/snowflake-line.png")`
             ]}/>
 	</div>
-{/if}
+{/if} -->
 
 <style lang="scss">
-    div.confetti {
-		position: absolute;
-        z-index: 10000;
-		top: -50px;
-		left: 0;
-		height: 150vh;
-		width: 100vw;
-		display: flex;
-		justify-content: center;
-		overflow: hidden;
-		pointer-events: none;
-	}
+    // div.confetti {
+	// 	position: absolute;
+    //     z-index: 10000;
+	// 	top: -50px;
+	// 	left: 0;
+	// 	height: 150vh;
+	// 	width: 100vw;
+	// 	display: flex;
+	// 	justify-content: center;
+	// 	overflow: hidden;
+	// 	pointer-events: none;
+	// }
 
     @keyframes fade-in {
         from {

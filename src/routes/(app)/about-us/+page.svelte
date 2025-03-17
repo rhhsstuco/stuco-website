@@ -17,14 +17,15 @@
     // Create derived value that defaults to false on the server to prevent
     // hydration_attribute_changed errors on the picture elements
     let mediaMaxLargeDefaultFalse = $derived.by(() => {
-        if (typeof window !== 'undefined') {
+        if (typeof window === 'undefined') {
+            console.log("window is defined")
             return false;
         }
 
         return mediaMaxLarge.current; 
-    })
+    });
 
-	let gridOffset = $derived(mediaMaxLargeDefaultFalse ? 3 : 0); 
+	let gridOffset = $derived(mediaMaxLargeDefaultFalse ? 0 : 3); 
 	
 	const TITLE = "About Us | RHHS StuCo";
 	const DESCRIPTION = "Meet the members of our the 2023-2024 Student Council!";
