@@ -123,6 +123,6 @@ export const load: PageServerLoad = async () => {
 				position: "Mascot",
 				imageURL: images["cameron_lee"],
 			},
-		],
+		].map((member, index) => ({ ...member, id: index})),
 	};
 };

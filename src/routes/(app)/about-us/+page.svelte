@@ -46,13 +46,13 @@
 		<div class="members__display">
 			{#if !mediaMaxLargeDefaultFalse}
 				<div class="members__display__row">
-					{#each data.members.slice(0, gridOffset) as member (member.name + member.position)}
+					{#each data.members.slice(0, gridOffset) as member (member.id)}
 						<MemberCard {member}/>
 					{/each}
 				</div>
             {/if}
 			<div class="members__display__grid">
-				{#each data.members.slice(gridOffset) as member, index (member.name + member.position)}
+				{#each data.members.slice(gridOffset) as member, index (member.id)}
 					<MemberCard {member} loading={(mediaMaxLargeDefaultFalse && index < 3) ? "eager" : "lazy" }/>
 				{/each}
 			</div>

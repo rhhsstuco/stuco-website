@@ -12,15 +12,15 @@
 	let { children }: Props = $props();
 </script>
 
-<!-- {#if !prefersReducedMotion.current && SHOW_CONFETTI}
+{#if !prefersReducedMotion.current && SHOW_CONFETTI}
 	<div class="confetti">
 		<Confetti x={[-6, 6]} y={[0, 0.4]} delay={[0, 4000]} infinite duration={5000} amount={400} fallDistance="100vh" />
 	</div>
-{/if} -->
+{/if}
 
 {@render children?.()}
 
-<!-- <style lang="scss">
+<style lang="scss">
 	div.confetti {
 		position: fixed;
 		top: -50px;
@@ -32,4 +32,4 @@
 		overflow: hidden;
 		pointer-events: none;
 	}
-</style> -->
+</style>
