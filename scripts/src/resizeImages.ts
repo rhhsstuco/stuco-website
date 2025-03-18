@@ -4,8 +4,6 @@ import { readdir, writeFile } from "fs/promises";
 import inquirer from 'inquirer';
 import sharp from 'sharp';
 
-const MAX_IMAGE_SIZE = 2400;
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -15,10 +13,20 @@ async function main() {
 	const answers = await inquirer.prompt(
 		[
 			{
-				name: "main",
+				name: "path",
 				type: "input",
 				message: "What is the path of the folder containing the images to be resized?",
+			},
+		]
+	);
 
+    const maxImageWidth = await inquirer.prompt(
+		[
+			{
+				name: "width",
+				type: "number",
+				message: "What is the maximum width of an image?",
+                default: 2400,
 			},
 		]
 	);
@@ -27,7 +35,7 @@ async function main() {
 	const mainPath = path.join(
 		__dirname, 
 		"..",
-		answers.main,
+		answers.path,
 	);
 
 		// Read files from folders
@@ -39,9 +47,9 @@ async function main() {
 	await Promise.all(
 		filepaths.map(async filepath => {
 				const buffer = await sharp(filepath)
-					.keepExif()
+					.withMetadata()
 					.resize({
-						width: MAX_IMAGE_SIZE,
+						width: maxImageWidth.width,
 						withoutEnlargement: true,
 					})
 					.toBuffer();
