@@ -1,16 +1,22 @@
 <script lang="ts">
 	// @ts-ignore
 	import DefaultProfilePicture from "$lib/images/default_pfp.png?format=avif;webp;png&w=400;800&as=picture";
-  	import MemberCard from "$lib/components/MemberCard.svelte";;
-  	import type { PageServerData } from "./$types";
-  	import Metadata from "$lib/components/Metadata.svelte";
-    import { createScreenWidthQuery } from "$lib/state/screenWidth.svelte";
+	import CarouselModal from "$lib/components/CarouselModal.svelte";
+	import MemberCard from "$lib/components/MemberCard.svelte";
+	import Metadata from "$lib/components/Metadata.svelte";
+	import type StucoMember from "$lib/models/StucoMember.model";
+	import { createScreenWidthQuery } from "$lib/state/screenWidth.svelte";
+	import type { ImageMeta } from "$lib/types/image.types";
+	import type { PageServerData } from "./$types";
 
 	interface Props {
 		data: PageServerData;
 	}
 
 	let { data }: Props = $props();
+    let selectedImageIndex = $state<number | null>(null);
+
+    let memberImageUrls = $derived(data.members.map(member => member.imageURL || (DefaultProfilePicture as ImageMeta)));
 
     let mediaMaxLarge = createScreenWidthQuery(0, 1024);
 
@@ -18,7 +24,6 @@
     // hydration_attribute_changed errors on the picture elements
     let mediaMaxLargeDefaultFalse = $derived.by(() => {
         if (typeof window === 'undefined') {
-            console.log("window is defined")
             return false;
         }
 
@@ -28,7 +33,7 @@
 	let gridOffset = $derived(mediaMaxLargeDefaultFalse ? 0 : 3); 
 	
 	const TITLE = "About Us | RHHS StuCo";
-	const DESCRIPTION = "Meet the members of our the 2023-2024 Student Council!";
+	const DESCRIPTION = "Meet the members of the 2024-2025 Student Council!";
 </script>
 
 <Metadata
@@ -38,6 +43,12 @@
 	image={data.members[1].imageURL || DefaultProfilePicture}
 />
 
+{#snippet clickableCard(member: StucoMember, index: number)}
+    <button class="card-button" onclick={() => selectedImageIndex = index}>
+        <MemberCard {member} loading={(mediaMaxLargeDefaultFalse && index < 3) ? "eager" : "lazy" }/>
+    </button>
+{/snippet}
+
 <main class="about-us">
 	<h1>About Us</h1>
 
@@ -46,18 +57,21 @@
 		<div class="members__display">
 			{#if !mediaMaxLargeDefaultFalse}
 				<div class="members__display__row">
-					{#each data.members.slice(0, gridOffset) as member (member.id)}
-						<MemberCard {member}/>
+					{#each data.members.slice(0, gridOffset) as member, index (member.id)}
+                        {@render clickableCard(member, index)}
 					{/each}
 				</div>
             {/if}
 			<div class="members__display__grid">
 				{#each data.members.slice(gridOffset) as member, index (member.id)}
-					<MemberCard {member} loading={(mediaMaxLargeDefaultFalse && index < 3) ? "eager" : "lazy" }/>
+                    {@render clickableCard(member, index + gridOffset)}
+					<!-- <MemberCard {member} loading={(mediaMaxLargeDefaultFalse && index < 3) ? "eager" : "lazy" }/> -->
 				{/each}
 			</div>
 		</div>	
 	</section>
+
+    <CarouselModal imageURLs={memberImageUrls} bind:selectedImageIndex={selectedImageIndex}/>
 
 	<section class="constitution">
 		<h2><a href="https://docs.google.com/document/d/e/2PACX-1vQb_xmB3PHRb04KgONGDNKJXQOYpmS1fTwMoTvlSS90-4ShiNTttbWVlKm2sBjT2J5xZUsb7_zMjUEy/pub" target="_blank" rel="noopener noreferrer">Constitution</a></h2>
@@ -111,6 +125,10 @@
 
 		gap: 2rem;
 	}
+
+    .card-button {
+        all: unset;
+    }
 
 	@include exports.media-large {
 		.members__display__grid {

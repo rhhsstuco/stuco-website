@@ -2,10 +2,10 @@
   /** The calendar component showing school events */
   import theme from "$lib/state/theme.svelte";
   import { quadInOut } from "svelte/easing";
+  import { prefersReducedMotion } from "svelte/motion";
   import { fly } from "svelte/transition";
   import CalendarDay from "./CalendarDay.svelte";
   import CalendarDetail from "./CalendarDetail.svelte";
-  import { prefersReducedMotion } from "svelte/motion";
 
   /// Constants
   const MS_IN_DAY = 1000 * 60 * 60 * 24;
@@ -193,7 +193,7 @@
         {#if validDate}
           <CalendarDay
             events={eventsMap.get(currentDate.toDateString())}
-            onClick={validDate && selectDate(currentDate)}
+            onclick={validDate && selectDate(currentDate)}
           >
             <span class="calendar__body__day">{dayCount}</span>
           </CalendarDay>
@@ -232,7 +232,7 @@
         <CalendarDetail
           date={selectedDate}
           events={eventsMap.get(selectedDate.toDateString()) || []}
-          onClose={() => (selectedDate = null)}
+          onclose={() => (selectedDate = null)}
         />
       </div>
     {/if}

@@ -57,8 +57,6 @@
             return;
         }
 
-        console.log(selectedDate);
-
         pushStateWithQuery({
             date: `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`,
         });

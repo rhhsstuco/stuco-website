@@ -18,17 +18,11 @@
 	@use "../../styles/exports.scss" as exports;
 
 	.card {
-		--max-padding: 1rem;
+		--max-padding: 0.5rem;
         --box-shadow: #{exports.$box-shadow};
 
 		box-shadow: var(--box-shadow);
 		background-color: var(--color-light);
 		padding: min(var(--max-padding), 5%);
-	}
-
-	@include exports.media-largest {
-		.card {
-			--max-padding: 0.5rem;
-		}
 	}
 </style>

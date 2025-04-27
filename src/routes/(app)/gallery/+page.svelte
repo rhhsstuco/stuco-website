@@ -79,36 +79,37 @@
 		margin: 0 auto;
 	}
 
-	@media (max-width: 1280px) {
+    @include exports.media-largest {
 		main {
 			--columns: 4;
 		}
 	}
 
-	@media (max-width: 1152px) {
+    @include exports.media-larger {
 		main {
 			--columns: 3;
 		}
 	}
 
-	@media (max-width: 1024px) {
+    @include exports.media-large {
 		main {
 			--columns: 3;
 		}
 	}
 
-	@media (max-width: 768px) {
+    @include exports.media-medium {
 		main {
 			--columns: 2;
 		}
 	}
 
-	@media (max-width: 640px) {
+    @include exports.media-small {
 		main {
 			--columns: 2;
 		}
 	}
-	@media (max-width: 480px) {
+
+    @include exports.media-smallest {
 		main {
 			--columns: 1;
 		}

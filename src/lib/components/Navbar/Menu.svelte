@@ -7,18 +7,18 @@
   	import { fly } from "svelte/transition";
 
     interface Props {
-        onClose: () => void;
+        onclose: () => void;
     }
 
     let pathname = $derived(page.url.pathname);
 
-    let { onClose }: Props = $props();
+    let { onclose }: Props = $props();
 </script>
 
 
-<div class="menu" transition:fly={{ x: 500, duration: 600 }} use:clickOutside onclick_outside={onClose}>
+<div class="menu" transition:fly={{ x: 500, duration: 600 }} use:clickOutside onclick_outside={onclose}>
 	<div class="menu__top">
-		<button onclick={onClose} aria-label="closes the hamburger menu">
+		<button onclick={onclose} aria-label="closes the hamburger menu">
 			<i class="ri-close-line"></i>
 		</button>
 	</div>

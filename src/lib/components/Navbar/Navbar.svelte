@@ -41,7 +41,7 @@
                     <Hamburger bind:open={menuIsOpen}/>
                 </li>
                 {#if menuIsOpen}
-                    <Menu onClose={() => menuIsOpen = false}/>
+                    <Menu onclose={() => menuIsOpen = false}/>
                 {/if}
             {/if}
 			<li>

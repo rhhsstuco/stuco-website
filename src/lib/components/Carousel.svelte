@@ -15,7 +15,7 @@
 
 	let { imageURLs, initialSlide = 0 }: Props = $props();
 
-	let showNavigation = $derived(!mediaMobile.value);
+	let showNavigation = $derived(!mediaMobile.current);
 </script>
 
 <div class="gallery">	

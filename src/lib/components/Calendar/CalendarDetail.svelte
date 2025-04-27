@@ -4,10 +4,10 @@
 	interface Props {
 		date: Date;
 		events: SchoolEvent[];
-        onClose: () => void;
+        onclose: () => void;
 	}
 
-	let { date, events, onClose }: Props = $props();
+	let { date, events, onclose }: Props = $props();
 
 </script>
 
@@ -15,7 +15,7 @@
 	<div class="calendar-detail__content">
 		<div class="calendar-detail__content__heading">
 			<div class="calendar-detail__content__heading__header">
-				<button onclick={onClose}>
+				<button onclick={onclose}>
 					&times;
 				</button>
 				<span class="school-event">School</span>

@@ -6,10 +6,10 @@
     interface Props {
 		events: SchoolEvent[] | undefined;
 		children?: Snippet;
-        onClick?: () => void; 
+        onclick?: () => void; 
 	}
 
-	let { events, onClick, children }: Props = $props();
+	let { events, onclick, children }: Props = $props();
 
 	function calculateEventTypes(events: SchoolEvent[] | undefined): [number, number] {
 		if (!events) {
@@ -33,8 +33,8 @@
 	let [numSchoolEvents, numClubEvents] = $derived(calculateEventTypes(events));
 </script>
 
-<button class="calendar-day" disabled={!onClick} onclick={onClick}>
-	{#if onClick}
+<button class="calendar-day" disabled={!onclick} onclick={onclick}>
+	{#if onclick}
 		<div class="calendar-day__event-count" >
 			{#if numSchoolEvents != 0}
 				<div style={`--color-badge: var(--color-badge-school);`}>{numSchoolEvents}</div>

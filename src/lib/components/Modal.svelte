@@ -6,13 +6,13 @@
 	interface Props {
 		dialog: HTMLDialogElement;
 		children?: Snippet;
-		onClose: () => void;
+		onclose: () => void;
 	}
 
-	let { dialog = $bindable(), children, onClose }: Props = $props();
+	let { dialog = $bindable(), children, onclose }: Props = $props();
 </script>
 
-<dialog bind:this={dialog} onclose={onClose}>
+<dialog bind:this={dialog} {onclose}>
 	{@render children?.()}
 </dialog>
 
