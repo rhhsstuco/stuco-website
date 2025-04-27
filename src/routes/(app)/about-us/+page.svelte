@@ -22,15 +22,22 @@
 
     // Create derived value that defaults to false on the server to prevent
     // hydration_attribute_changed errors on the picture elements
-    let mediaMaxLargeDefaultFalse = $derived.by(() => {
+    let mediaMaxLargeDefaultNull = $derived.by(() => {
         if (typeof window === 'undefined') {
-            return false;
+            return null;
         }
 
         return mediaMaxLarge.current; 
     });
 
-	let gridOffset = $derived(mediaMaxLargeDefaultFalse ? 0 : 3); 
+	let gridOffset = $derived.by(() => {
+        // Currently on server -> no grid offset
+        if (mediaMaxLargeDefaultNull === null) {
+            return 0;
+        }
+
+        return mediaMaxLargeDefaultNull ? 0 : 3;
+    }); 
 	
 	const TITLE = "About Us | RHHS StuCo";
 	const DESCRIPTION = "Meet the members of the 2024-2025 Student Council!";
@@ -45,17 +52,18 @@
 
 {#snippet clickableCard(member: StucoMember, index: number)}
     <button class="card-button" onclick={() => selectedImageIndex = index}>
-        <MemberCard {member} loading={(mediaMaxLargeDefaultFalse && index < 3) ? "eager" : "lazy" }/>
+        <MemberCard {member} loading={(mediaMaxLargeDefaultNull && index < 3) ? "eager" : "lazy" }/>
     </button>
 {/snippet}
 
 <main class="about-us">
 	<h1>About Us</h1>
+    {gridOffset}
 
 	<section class="members">
 		<h2>Members</h2>
 		<div class="members__display">
-			{#if !mediaMaxLargeDefaultFalse}
+			{#if !mediaMaxLargeDefaultNull}
 				<div class="members__display__row">
 					{#each data.members.slice(0, gridOffset) as member, index (member.id)}
                         {@render clickableCard(member, index)}
@@ -65,7 +73,6 @@
 			<div class="members__display__grid">
 				{#each data.members.slice(gridOffset) as member, index (member.id)}
                     {@render clickableCard(member, index + gridOffset)}
-					<!-- <MemberCard {member} loading={(mediaMaxLargeDefaultFalse && index < 3) ? "eager" : "lazy" }/> -->
 				{/each}
 			</div>
 		</div>	
