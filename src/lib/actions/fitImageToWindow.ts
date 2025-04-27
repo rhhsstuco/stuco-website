@@ -7,7 +7,7 @@ export default function fitImageToWindow(node: HTMLElement) {
         const children = Array.from(node.children)
         
 		const picture = children.find(element => element.tagName === "PICTURE") as HTMLPictureElement | undefined;
-        
+
         if (!picture) {
             return;
         }
@@ -17,12 +17,12 @@ export default function fitImageToWindow(node: HTMLElement) {
 		const windowAspectRatio = window.innerWidth / window.innerHeight;
 	
 		if (nodeAspectRatio > windowAspectRatio) {
-			picture.style.width = `min(calc(100vw - ${HORIZONTAL_INSET_REM}rem), 34rem)`;
+			picture.style.width = `min(calc(100vw - ${HORIZONTAL_INSET_REM}rem), 38rem)`;
 			picture.style.height = "";
 		}
 		
 		if (nodeAspectRatio < windowAspectRatio) {
-			picture.style.height = `min(calc(100vh - ${VERTICAL_INSET_REM}rem), 34rem)`;
+			picture.style.height = `min(calc(100vh - ${VERTICAL_INSET_REM}rem), 38rem)`;
 			picture.style.width = "";
 		}
 	}

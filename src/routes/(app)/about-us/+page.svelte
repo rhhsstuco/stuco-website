@@ -128,6 +128,10 @@
 
     .card-button {
         all: unset;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
 	@include exports.media-large {
