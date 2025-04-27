@@ -58,7 +58,6 @@
 
 <main class="about-us">
 	<h1>About Us</h1>
-    {gridOffset}
 
 	<section class="members">
 		<h2>Members</h2>
