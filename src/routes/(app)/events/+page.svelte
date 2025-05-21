@@ -38,29 +38,31 @@
     let initialLoad = true;
 
     onMount(() => {
-        // if (page.url.searchParams.has("date")) {
-        //     const dateStringFragments = page.url.searchParams.get("date")!.split("-")
-        //     selectedDate = new Date(+dateStringFragments[0], +dateStringFragments[1] - 1, +dateStringFragments[2]);
-        //     initialLoad = true;
-        // }
+        if (page.url.searchParams.has("date")) {
+            const dateStringFragments = page.url.searchParams.get("date")!.split("-")
+            selectedDate = new Date(+dateStringFragments[0], +dateStringFragments[1] - 1, +dateStringFragments[2]);
+            initialLoad = true;
+        }
     });
 
 
     $effect(() => {
         // Router not initialized yet
-        // if (selectedDate === undefined || initialLoad) {
-        //     initialLoad = false;
-        //     return;
-        // }
+        if (selectedDate === undefined || initialLoad) {
+            initialLoad = false;
+            return;
+        }
 
-        // if (selectedDate === null) {
-        //     pushStateWithQuery({});
-        //     return;
-        // }
+        if (selectedDate === null) {
+            pushStateWithQuery({
+                date: null,
+            });
+            return;
+        }
 
-        // pushStateWithQuery({
-        //     date: `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`,
-        // });
+        pushStateWithQuery({
+            date: `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`,
+        });
     });
 
     const TITLE = "Events | RHHS StuCo";
