@@ -27,8 +27,26 @@
             return null;
         }
 
+        mediaMaxLarge.current;
+
         return mediaMaxLarge.current; 
     });
+
+
+    // Force an update to refetch changed image urls and prevent a hydration_attribute_changed error
+    if (typeof window !== 'undefined') {
+		// stash the value...
+		const initial = mediaMaxLargeDefaultNull;
+
+		// unset it...
+        // svelte-ignore
+		mediaMaxLargeDefaultNull = null;
+
+		$effect(() => {
+			// ...and reset after we've mounted
+			mediaMaxLargeDefaultNull = initial;
+		});
+	}
 
 	let gridOffset = $derived.by(() => {
         // Currently on server -> no grid offset
@@ -62,6 +80,7 @@
 	<section class="members">
 		<h2>Members</h2>
 		<div class="members__display">
+            {#key mediaMaxLargeDefaultNull}
 			{#if !mediaMaxLargeDefaultNull}
 				<div class="members__display__row">
 					{#each data.members.slice(0, gridOffset) as member, index (member.id)}
@@ -74,6 +93,7 @@
                     {@render clickableCard(member, index + gridOffset)}
 				{/each}
 			</div>
+            {/key}
 		</div>	
 	</section>
 
