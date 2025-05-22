@@ -8,7 +8,7 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"deploy": "npm run build && npx gh-pages -d build -t true",
+		"deploy": "npm run build && npx gh-pages -d build",
 		"download": "cd scripts && npm run download-images && cd .."
 	},
 	"devDependencies": {
@@ -17,7 +17,7 @@
 		"@sveltejs/kit": "^2.20.7",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@types/node": "^20.5.3",
-		"gh-pages": "^6.0.0",
+		"gh-pages": "^6.3.0",
 		"sass": "^1.63.6",
 		"svelte": "^5.32.1",
 		"svelte-check": "^4.0.0",
