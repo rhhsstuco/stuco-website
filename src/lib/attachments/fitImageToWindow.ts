@@ -1,8 +1,10 @@
+import type { Attachment } from "svelte/attachments";
+
 const HORIZONTAL_INSET_REM = 8;
 const VERTICAL_INSET_REM = 14;
 
 /** Fit image to screen size without changing the aspect ratio */
-export default function fitImageToWindow(node: HTMLElement) {
+const fitImageToWindow: Attachment<HTMLElement> = (node: HTMLElement) => {
 	const onResize = () => {
         const children = Array.from(node.children)
         
@@ -31,9 +33,7 @@ export default function fitImageToWindow(node: HTMLElement) {
 
 	window.addEventListener("resize", onResize);
 
-	return {
-		destroy() {
-			window.removeEventListener("resize", onResize)
-		}
-	}
+	return () => window.removeEventListener("resize", onResize);
 }
+
+export default fitImageToWindow;

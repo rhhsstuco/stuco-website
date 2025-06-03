@@ -3,7 +3,7 @@
 
 	import { base } from "$app/paths";
     import { page } from "$app/state";
- 	import clickOutside from "$lib/actions/clickOutside";
+ 	import clickOutside from "$lib/attachments/clickOutside";
   	import { fly } from "svelte/transition";
 
     interface Props {
@@ -16,7 +16,7 @@
 </script>
 
 
-<div class="menu" transition:fly={{ x: 500, duration: 600 }} use:clickOutside onclick_outside={onclose}>
+<div class="menu" transition:fly={{ x: 500, duration: 600 }} {@attach clickOutside(onclose)}>
 	<div class="menu__top">
 		<button onclick={onclose} aria-label="closes the hamburger menu">
 			<i class="ri-close-line"></i>

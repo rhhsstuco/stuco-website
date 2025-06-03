@@ -19,7 +19,7 @@
 		"@types/node": "^20.5.3",
 		"gh-pages": "^6.3.0",
 		"sass": "^1.63.6",
-		"svelte": "^5.32.1",
+		"svelte": "^5.33.14",
 		"svelte-check": "^4.0.0",
 		"ts-node": "^10.9.1",
 		"tslib": "^2.6.2",

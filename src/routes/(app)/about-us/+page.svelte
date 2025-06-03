@@ -36,7 +36,8 @@
     // Force an update to refetch changed image urls and prevent a hydration_attribute_changed error
     if (typeof window !== 'undefined') {
 		// stash the value...
-		const initial = mediaMaxLargeDefaultNull;
+		// svelte-ignore state_referenced_locally
+        const initial = mediaMaxLargeDefaultNull;
 
 		// unset it...
         // svelte-ignore

@@ -5,15 +5,11 @@
 	 * roughly matches their input order.
 	 */
 
-	import clickOutside from "$lib/actions/clickOutside";
-	import fitImageToWindow from "$lib/actions/fitImageToWindow";
 	import type { ImageMeta } from "$lib/types/image.types";
 	import flatPartitions from "$lib/util/flatPartitions";
 	import { SvelteMap } from "svelte/reactivity";
-	import Card from "./Card.svelte";
-	import Modal from "./Modal.svelte";
 	import Picture from "./Picture.svelte";
-  import CarouselModal from "./CarouselModal.svelte";
+    import CarouselModal from "./CarouselModal.svelte";
 
 	interface Props {
 		imageURLs: ImageMeta[];
@@ -28,10 +24,7 @@
 	let { imageURLs, columns = 4 }: Props = $props();
 
 	let indexedImageURLs = $derived<IndexedImageMeta[]>(imageURLs.map((url, index) => ({ index, url })))
-	let imageURLMap = $derived(new SvelteMap(indexedImageURLs.map((({ url, index }) => [index, url]))))
 	let imageLength = $derived(imageURLs.length);
-	let prevMouseOver = $state(false);
-	let nextMouseOver = $state(false);
 
 	/** 
 	 * Splits in images into columns so the vertical progression in images roughly matches their input order.

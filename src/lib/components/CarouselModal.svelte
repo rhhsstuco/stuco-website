@@ -3,8 +3,8 @@
 	 * A component that allows for images to be viewed in a modal and traversed through with buttons
 	 */
 
-	import clickOutside from "$lib/actions/clickOutside";
-	import fitImageToWindow from "$lib/actions/fitImageToWindow";
+	import clickOutside from "$lib/attachments/clickOutside";
+	import fitImageToWindow from "$lib/attachments/fitImageToWindow";
 	import type { ImageMeta } from "$lib/types/image.types";
 	import { SvelteMap } from "svelte/reactivity";
 	import Card from "./Card.svelte";
@@ -66,7 +66,7 @@
     {#key selectedImageURL}
         {#if selectedImageIndex !== null && selectedImageURL !== null}
         <Card>
-            <div class="dialog__image" use:clickOutside onclick_outside={() => dialog!.close()} use:fitImageToWindow>
+            <div class="dialog__image" {@attach clickOutside(() => dialog!.close())} {@attach fitImageToWindow}>
                 {#if selectedImageIndex !== 0}
                     <button
                         aria-label="view previous image"
