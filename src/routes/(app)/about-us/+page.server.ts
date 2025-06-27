@@ -24,14 +24,14 @@ export const load: PageServerLoad = async () => {
 				imageURL: images["jin_lu_yu"],
 			},
 			{
-				name: "Flora Yi",
-				position: "Secretary",
-				imageURL: images["flora_yi"],
-			},
-			{
 				name: "Gordon Wang",
 				position: "Treasurer",
 				imageURL: images["gordon_wang"],
+			},
+			{
+				name: "Flora Yi",
+				position: "Secretary",
+				imageURL: images["flora_yi"],
 			},
 			{
 				name: "Eviee Lin",
