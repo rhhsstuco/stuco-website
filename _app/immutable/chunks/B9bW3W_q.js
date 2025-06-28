@@ -1,0 +1,1 @@
+import{y as r,a5 as a,N as i,r as f}from"./qAjYaUGA.js";function o(n,c){var e=void 0,t;r(()=>{e!==(e=c())&&(t&&(a(t),t=null),e&&(t=i(()=>{f(()=>e(n))})))})}const u=n=>c=>{const e=t=>{c&&!c.contains(t.target)&&!t.defaultPrevented&&n()};return document.addEventListener("click",e,!0),()=>document.removeEventListener("click",e,!0)};export{o as a,u as c};
