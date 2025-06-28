@@ -12,32 +12,32 @@
 		"download": "cd scripts && npm run download-images && cd .."
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-auto": "^6.0.1",
 		"@sveltejs/adapter-static": "^3.0.0",
-		"@sveltejs/kit": "^2.20.7",
-		"@sveltejs/vite-plugin-svelte": "^5.0.3",
-		"@types/node": "^20.5.3",
+		"@sveltejs/kit": "^2.22.2",
+		"@sveltejs/vite-plugin-svelte": "^5.1.0",
+		"@types/node": "^24.0.6",
 		"gh-pages": "^6.3.0",
-		"sass": "^1.63.6",
-		"svelte": "^5.33.14",
-		"svelte-check": "^4.0.0",
+		"sass": "^1.89.2",
+		"svelte": "^5.34.8",
+		"svelte-check": "^4.2.2",
 		"ts-node": "^10.9.1",
 		"tslib": "^2.6.2",
-		"vite": "^6.3.5",
-		"vite-imagetools": "^5.0.9"
+		"vite": "^7.0.0",
+		"vite-imagetools": "^5.1.2"
 	},
 	"type": "module",
 	"dependencies": {
-		"@google-cloud/local-auth": "^2.1.0",
-		"dotenv": "^16.3.1",
+		"@google-cloud/local-auth": "^3.0.1",
+		"dotenv": "^17.0.0",
 		"encoding": "^0.1.13",
 		"google-spreadsheet": "^4.0.2",
-		"googleapis": "^105.0.0",
+		"googleapis": "^150.0.1",
 		"moment": "^2.29.4",
-		"remixicon": "^3.5.0",
-		"supports-color": "^9.4.0",
-		"svelte-confetti": "^1.4.0",
-		"svelte-gestures": "^1.5.2",
-		"swiper": "^10.3.1"
+		"remixicon": "^4.6.0",
+		"supports-color": "^10.0.0",
+		"svelte-confetti": "^2.3.1",
+		"svelte-gestures": "^5.1.4",
+		"swiper": "^11.2.9"
 	}
 }
