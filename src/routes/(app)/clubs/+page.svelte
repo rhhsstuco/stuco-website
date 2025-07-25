@@ -40,11 +40,11 @@
 		<SearchBar bind:value placeholder="Search by club name, location, or time"/>
 		<p class="clubs__new">Want to create a new club? Use this
 			<a
-				href="https://docs.google.com/forms/d/e/1FAIpQLSdIlle7_NF4P52azLB--275E3zdVoyYQT2eK6UICtsKiae3_w/viewform"
+				href="https://docs.google.com/forms/d/e/1FAIpQLSc_C5iKUHsLE2zMjl-4aiuNkDeB0lecvBSh5QwlMDka6TsyTA/viewform?usp=dialog"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-			Google Form</a>!
+			Google Form</a> (updated for the 2025-2026 year)!
 		</p>
 	</div>
 	{#if filteredClubs.length}
