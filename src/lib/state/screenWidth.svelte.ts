@@ -12,4 +12,4 @@ export const mediaMobile = createScreenWidthQuery(0, 768);
 export const mediaMedium = createScreenWidthQuery(768, 1024);
 export const mediaLarge = createScreenWidthQuery(1024, 1152);
 export const mediaLarger = createScreenWidthQuery(1152, 1280);
-export const mediaLargest = createScreenWidthQuery(1280, 100000000000000);
+export const mediaLargest = createScreenWidthQuery(1280, 2147483648);
