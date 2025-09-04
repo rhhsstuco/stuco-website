@@ -1,0 +1,1 @@
+import{M as m}from"./Cvf7ziks.js";const a=(e,s)=>new m(`(max-width: ${s}px) and (min-width: ${e}px)`),i=a(0,480),d=a(480,640),n=a(640,768),o=a(0,768),c=a(768,1024),r=a(1024,1152),l=a(1152,1280),g=a(1280,2147483648);export{l as a,r as b,a as c,c as d,n as e,d as f,i as g,o as h,g as m};
