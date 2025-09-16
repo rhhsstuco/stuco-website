@@ -38,6 +38,6 @@
 		"supports-color": "^10.2.2",
 		"svelte-confetti": "^2.3.2",
 		"svelte-gestures": "^5.2.1",
-		"swiper": "^11.2.10"
+		"swiper": "^12.0.1"
 	}
 }
