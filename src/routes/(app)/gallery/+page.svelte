@@ -35,7 +35,7 @@
     })
 
 	const TITLE = "Gallery | RHHS StuCo";
-	const DESCRIPTION = "A look into our 2024-2025 school year.";
+	const DESCRIPTION = "A look into our 2025-2026 school year.";
 </script>
 
 <Metadata

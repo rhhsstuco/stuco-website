@@ -59,7 +59,7 @@
     }); 
 	
 	const TITLE = "About Us | RHHS StuCo";
-	const DESCRIPTION = "Meet the members of the 2024-2025 Student Council!";
+	const DESCRIPTION = "Meet the members of the 2025-2026 Student Council!";
 </script>
 
 <Metadata

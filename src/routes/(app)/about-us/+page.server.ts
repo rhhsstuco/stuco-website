@@ -2,7 +2,6 @@ import getMembers from "$lib/data/members";
 import type StucoMember from "$lib/models/StucoMember.model";
 import type { PageServerLoad } from "./$types";
 
-
 export const load: PageServerLoad = async () => {
 	const images = await getMembers();
 
@@ -79,47 +78,52 @@ export const load: PageServerLoad = async () => {
 				imageURL: images["default_pfp"],
 			},
 			{
-				name: "TBD",
+				name: "Jackson Ko",
 				position: "Grade 12 Rep",
 				imageURL: images["default_pfp"],
 			},
 			{
-				name: "TBD",
+				name: "Jayden Park",
 				position: "Grade 12 Rep",
 				imageURL: images["default_pfp"],
 			},
 			{
-				name: "TBD",
+				name: "Jee-Hoo Park",
 				position: "Grade 11 Rep",
 				imageURL: images["default_pfp"],
 			},
 			{
-				name: "TBD",
+				name: "Debbie Xu",
 				position: "Grade 11 Rep",
 				imageURL: images["default_pfp"],
 			},
 			{
-				name: "TBD",
+				name: "Jessie Cui",
 				position: "Grade 10 Rep",
 				imageURL: images["default_pfp"],
 			},
 			{
-				name: "TBD",
+				name: "Angela Yan",
 				position: "Grade 10 Rep",
 				imageURL: images["default_pfp"],
 			},
 			{
-				name: "TBD",
+				name: "Henrik Leung",
 				position: "Grade 9 Rep",
 				imageURL: images["default_pfp"],
 			},
 			{
-				name: "TBD",
+				name: "Karina Chan",
 				position: "Grade 9 Rep",
 				imageURL: images["default_pfp"],
 			},
 			{
-				name: "TBD",
+				name: "Sophia Wei",
+				position: "Mascot",
+				imageURL: images["default_pfp"],
+			},
+			{
+				name: "Raymond Mostafavi",
 				position: "Mascot",
 				imageURL: images["default_pfp"],
 			},
