@@ -35,5 +35,22 @@
 		<meta property="og:url" content={url}>
 	{/if}
 
+	<script type="application/ld+json">
+        {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Richmond Hill High School Student Council",
+            "alternateName": "RHHS StuCo",
+            "url": DOMAIN,
+            "sameAs": [
+				"https://richmondhill-hs.yrdsb.ca/",
+				"https://en.wikipedia.org/wiki/Richmond_Hill_High_School_(Ontario)",
+                "https://www.instagram.com/rhhs_stuco/",
+                "https://www.linkedin.com/company/rhhs-stuco/",
+				"https://github.com/rhhsstuco"
+            ]
+        })}
+    </script>
+
 	{@render children?.()}
 </svelte:head>

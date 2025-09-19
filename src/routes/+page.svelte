@@ -29,7 +29,7 @@
 
     const TITLE = "RHHS StuCo";
     const DESCRIPTION =
-        "StuCo is a group of students who come together and act as the liason between admin and the student body.";
+        "Richmond Hill High School's Student Council (StuCo) is a group of students who come together and act as the liason between admin and the student body.";
 </script>
 
 <Metadata

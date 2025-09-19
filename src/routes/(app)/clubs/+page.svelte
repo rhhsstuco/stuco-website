@@ -44,7 +44,7 @@
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-			Google Form</a> (updated for the 2025-2026 year)!
+			Google Form</a>!
 		</p>
 	</div>
 	{#if filteredClubs.length}
