@@ -24,13 +24,13 @@
 					</a>
 				</li>
 				<li>
-					<a href="https://twitter.com/RHHS_StuCo/" target="_blank" rel="noopener noreferrer">
-						<i class="ri-twitter-line"></i> &mdash; RHHS_StuCo
+					<a href="https://www.linkedin.com/company/rhhs-stuco/" target="_blank" rel="noopener noreferrer">
+						<i class="ri-linkedin-box-line"></i> &mdash; rhhs-stuco
 					</a>
 				</li>
 				<li>
 					<a href="https://github.com/rhhsstuco" target="_blank" rel="noopener noreferrer">
-						<i class="ri-github-fill"></i> &mdash; rhhsstuco
+						<i class="ri-github-line"></i> &mdash; rhhsstuco
 					</a>
 				</li>
 			</ul>
