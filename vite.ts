@@ -12,6 +12,9 @@ const rotateMap = new Map<string, string>([
 	['22.jpg', "90"],
 	['23.jpg', "90"],
 	['32.jpg', "90"],
+	['70.jpg', "90"],
+	['72.jpg', "90"],
+	['73.jpg', "90"],
 ]);
 
 export { rotateMap };

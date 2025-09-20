@@ -1,5 +1,5 @@
 <script lang="ts">
-	/** The gallery iamge carousel */
+	/** The gallery image carousel */
 
 	import { mediaMobile } from "$lib/state/screenWidth.svelte";
 	import Picture from "./Picture.svelte";
