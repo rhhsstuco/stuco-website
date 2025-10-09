@@ -4,8 +4,8 @@ import * as path from 'path';
 import { rotateMap } from "../../../vite";
 const files = import.meta.glob("$images/gallery/*.{jpg,png,webp,avif}", {
 	query: {
-		format: 'avif;webp;jpg',
-		w: '800;1600;2400',
+		format: 'avif;webp',
+		w: '800;1600',
 		as: 'picture',
 	}
 })
@@ -34,6 +34,7 @@ interface GetGalleryImagesParams {
 	orientation?: Orientation;
 	useDPR?: boolean;
 	reverse?: boolean;
+	numericalSort?: boolean;
 }
 
 /**
@@ -67,11 +68,15 @@ const getGalleryImages = async (params: GetGalleryImagesParams = {}) => {
 			} as unknown as ImageMeta & { filename: string }
 		});
 
-	let filteredFilepaths = filepaths;
+	if (params.numericalSort) {
+		filepaths.sort((a, b) => parseInt(a.filename, 10) - parseInt(b.filename, 10));
+	}
 
 	if (params.reverse) {
-		filteredFilepaths.reverse();
+		filepaths.reverse();
 	}
+
+	let filteredFilepaths = filepaths;
 	
 	filteredFilepaths = filteredFilepaths.slice(0, params.maxResults);
 
