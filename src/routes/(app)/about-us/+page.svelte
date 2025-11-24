@@ -1,6 +1,6 @@
 <script lang="ts">
 	// @ts-ignore
-	import DefaultProfilePicture from "$lib/images/default_pfp.png?format=avif;webp;png&w=400;800&as=picture";
+	import DefaultProfilePicture from "$lib/images/default_pfp.jpg?format=avif;webp;jpg&w=400;800&as=picture";
 	import CarouselModal from "$lib/components/CarouselModal.svelte";
 	import MemberCard from "$lib/components/MemberCard.svelte";
 	import Metadata from "$lib/components/Metadata.svelte";
