@@ -2,6 +2,14 @@ import type { ImageProps, ImagePropsWithHeight } from "$lib/types/image.types";
 import type { ImageMeta } from "$lib/types/image.types";
 import * as path from 'path';
 import { rotateMap } from "../../../vite";
+
+/*
+ * Final render size is currently capped at 1600px.
+ * HOWEVER, all source images should always be stored at 2400px.
+ * This is because future devices may handle higher-res output.
+ * Keeping 2400px originals prevents quality loss if we re-enable it.
+ * By 2028, webp can be removed as all browsers should support avif by then.
+ */
 const files = import.meta.glob("$images/gallery/*.{jpg,png,webp,avif}", {
 	query: {
 		format: 'avif;webp',
