@@ -2,7 +2,7 @@
 	/** Displays a StuCo member in a card */
 
 	// @ts-ignore
-	import DefaultProfilePicture from "$lib/images/default_pfp.jpg?format=avif;webp;jpg&w=400;800&as=picture";
+	import DefaultProfilePicture from "$lib/images/default-pfp.jpg?format=avif;webp;jpg&w=400;800&as=picture";
   	import type StucoMember from "$lib/models/StucoMember.model";
     import Card from "$lib/components/Card.svelte";
   	import Picture from "$lib/components/Picture.svelte";

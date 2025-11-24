@@ -8,11 +8,10 @@
 	import { onNavigate } from '$app/navigation';
 	import theme from '$lib/state/theme.svelte';
     import Footer from '$lib/components/Footer.svelte';
-    import Flash from '$lib/components/Flash.svelte';
     import type { Snippet } from 'svelte';
-    import { base } from '$app/paths';
-    import Confetti from 'svelte-confetti';
-    import { prefersReducedMotion } from 'svelte/motion';
+    // import Flash from '$lib/components/Flash.svelte';
+    // import Confetti from 'svelte-confetti';
+    // import { prefersReducedMotion } from 'svelte/motion';
 
     interface Props {
         children: Snippet;
@@ -78,18 +77,18 @@
 {/if} -->
 
 <style lang="scss">
-    // div.confetti {
-	// 	position: absolute;
-    //     z-index: 10000;
-	// 	top: -50px;
-	// 	left: 0;
-	// 	height: 150vh;
-	// 	width: 100vw;
-	// 	display: flex;
-	// 	justify-content: center;
-	// 	overflow: hidden;
-	// 	pointer-events: none;
-	// }
+    /* div.confetti {
+	    position: absolute;
+        z-index: 10000;
+	    top: -50px;
+	    left: 0;
+	    height: 150vh;
+	    width: 100vw;
+	    display: flex;
+        justify-content: center;
+	    overflow: hidden;
+	    pointer-events: none;
+    } */
 
     @keyframes fade-in {
         from {
@@ -127,11 +126,11 @@
             150ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
     }
 
-    .portal {
+    /* .portal {
         position: relative;
-    }
+    } */
 
-    em {
+    /* em {
         font-weight: bold;
-    }
+    } */
 </style>
