@@ -1,0 +1,14 @@
+import"./NZTpNUN0.js";import{o as U}from"./C4nVjsTY.js";import{p as V,s as W,a as X,c as Y,f as Z,g as p,b as m,d as $,h as M,t as _,r as tt}from"./ZUn1EqYv.js";import{i as et}from"./Dwsl-SO5.js";import{e as at,i as ot}from"./BCG6ZVqb.js";import{s as nt}from"./CO8R15nQ.js";import{s as C}from"./CuIhw0gW.js";import{p as e}from"./BiVSnVsy.js";/* empty css        */var it=M('<div class="confetti svelte-rtt661"></div>'),rt=M("<div></div>");function ht(b,t){V(t,!0);const z=e(t,"size",3,10),c=e(t,"x",19,()=>[-.5,.5]),u=e(t,"y",19,()=>[.25,1]),i=e(t,"duration",3,2e3),r=e(t,"infinite",3,!1),l=e(t,"delay",19,()=>[0,50]),v=e(t,"colorRange",19,()=>[0,360]),s=e(t,"colorArray",19,()=>[]),R=e(t,"amount",3,50),d=e(t,"iterationCount",3,1),k=e(t,"fallDistance",3,"100px"),w=e(t,"rounded",3,!1),A=e(t,"cone",3,!1),D=e(t,"noGravity",3,!1),F=e(t,"xSpread",3,.15),G=e(t,"destroyOnComplete",3,!0),O=e(t,"disableForReducedMotion",3,!1);let y=X(!1);U(()=>{!G()||r()||typeof d()=="string"||setTimeout(()=>W(y,!0),(i()+l()[1])*d())});function a(n,o){return Math.random()*(o-n)+n}function S(){return s().length?s()[Math.round(Math.random()*(s().length-1))]:`hsl(${Math.round(a(v()[0],v()[1]))}, 75%, 50%)`}var g=Y(),B=Z(g);{var T=n=>{var o=rt();let h;at(o,21,()=>({length:R()}),ot,(f,lt)=>{var x=it();_((j,q,E,H,I,J,K,L,N,P,Q)=>C(x,`
+        --color: ${j??""};
+        --skew: ${q??""}deg,${E??""}deg;
+        --rotation-xyz: ${H??""}, ${I??""}, ${J??""};
+        --rotation-deg: ${K??""}deg;
+        --translate-y-multiplier: ${L??""};
+        --translate-x-multiplier: ${N??""};
+        --scale: ${P??""};
+        --transition-delay: ${Q??""}ms;
+        --transition-duration: ${r()?`calc(${i()}ms * var(--scale))`:`${i()}ms`};`),[S,()=>a(-45,45),()=>a(-45,45),()=>a(-10,10),()=>a(-10,10),()=>a(-10,10),()=>a(0,360),()=>a(u()[0],u()[1]),()=>a(c()[0],c()[1]),()=>.1*a(2,10),()=>a(l()[0],l()[1])]),m(f,x)}),tt(o),_(f=>{h=nt(o,1,"confetti-holder svelte-rtt661",null,h,f),C(o,`
+    --fall-distance: ${k()??""};
+    --size: ${z()??""}px;
+    --x-spread: ${1-F()};
+    --transition-iteration-count: ${(r()?"infinite":d())??""};`)},[()=>({rounded:w(),cone:A(),"no-gravity":D(),"reduced-motion":O()})]),m(n,o)};et(B,n=>{p(y)||n(T)})}m(b,g),$()}export{ht as C};

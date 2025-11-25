@@ -1,0 +1,1 @@
+import{N as n,ad as r,a0 as i,F as f}from"./ZUn1EqYv.js";function d(c,a){var e=void 0,t;n(()=>{e!==(e=a())&&(t&&(r(t),t=null),e&&(t=i(()=>{f(()=>e(c))})))})}const o=c=>a=>{const e=t=>{a&&!a.contains(t.target)&&!t.defaultPrevented&&c()};return document.addEventListener("click",e,!0),()=>document.removeEventListener("click",e,!0)};export{d as a,o as c};
