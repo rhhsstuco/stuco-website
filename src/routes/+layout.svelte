@@ -9,9 +9,9 @@
 	import theme from '$lib/state/theme.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import type { Snippet } from 'svelte';
+    import Confetti from 'svelte-confetti';
+    import { prefersReducedMotion } from 'svelte/motion';
     // import Flash from '$lib/components/Flash.svelte';
-    // import Confetti from 'svelte-confetti';
-    // import { prefersReducedMotion } from 'svelte/motion';
 
     interface Props {
         children: Snippet;
@@ -58,7 +58,7 @@
 	</Flash>
 </div> -->
 
-<!-- {#if !prefersReducedMotion.current}
+{#if !prefersReducedMotion.current}
 	<div class="confetti">
 		<Confetti
             x={[-6, 6]}
@@ -71,13 +71,13 @@
             size={25}
             fallDistance="100vh"
             colorArray={[
-                `url("${base}/images/snowflake-line.png")`
+                `url("../lib/images/snowflake-line.png")`
             ]}/>
 	</div>
-{/if} -->
+{/if}
 
 <style lang="scss">
-    /* div.confetti {
+    div.confetti {
 	    position: absolute;
         z-index: 10000;
 	    top: -50px;
@@ -88,7 +88,7 @@
         justify-content: center;
 	    overflow: hidden;
 	    pointer-events: none;
-    } */
+    }
 
     @keyframes fade-in {
         from {
