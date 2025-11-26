@@ -9,7 +9,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"deploy": "npm run build && npx gh-pages -d build --nojekyll",
-		"download": "cd scripts && npm run download-images && cd .."
+		"download": "cd scripts && npm run download-images && cd ..",
+		"postinstall": "patch-package"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^7.0.0",
@@ -34,6 +35,8 @@
 		"google-spreadsheet": "^5.0.2",
 		"googleapis": "^166.0.0",
 		"moment": "^2.29.4",
+		"patch-package": "^8.0.1",
+		"postinstall-postinstall": "^2.1.0",
 		"remixicon": "^4.7.0",
 		"supports-color": "^10.2.2",
 		"svelte-confetti": "^2.3.2",

@@ -8,6 +8,7 @@
 	import { onNavigate } from '$app/navigation';
 	import theme from '$lib/state/theme.svelte';
     import Footer from '$lib/components/Footer.svelte';
+    import snowflake from "$lib/images/snowflake-line.png";
     import type { Snippet } from 'svelte';
     import Confetti from 'svelte-confetti';
     import { prefersReducedMotion } from 'svelte/motion';
@@ -70,9 +71,8 @@
             amount={100}
             size={25}
             fallDistance="100vh"
-            colorArray={[
-                `url("../lib/images/snowflake-line.png")`
-            ]}/>
+            colorArray={[snowflake]}
+        />
 	</div>
 {/if}
 
