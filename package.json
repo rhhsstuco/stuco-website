@@ -13,13 +13,18 @@
 		"postinstall": "patch-package"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^7.0.0",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.49.0",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@types/node": "^24.10.1",
+		"dotenv": "^17.2.3",
 		"gh-pages": "^6.3.0",
+		"googleapis": "^166.0.0",
+		"inquirer": "^13.0.1",
+		"patch-package": "^8.0.1",
+		"postinstall-postinstall": "^2.1.0",
 		"sass": "^1.94.2",
+		"supports-color": "^10.2.2",
 		"svelte": "^5.38.10",
 		"svelte-check": "^4.3.4",
 		"ts-node": "^10.9.1",
@@ -29,18 +34,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@google-cloud/local-auth": "^3.0.1",
-		"dotenv": "^17.2.3",
-		"encoding": "^0.1.13",
-		"google-spreadsheet": "^5.0.2",
-		"googleapis": "^166.0.0",
-		"moment": "^2.29.4",
-		"patch-package": "^8.0.1",
-		"postinstall-postinstall": "^2.1.0",
 		"remixicon": "^4.7.0",
-		"supports-color": "^10.2.2",
 		"svelte-confetti": "^2.3.2",
-		"svelte-gestures": "^5.2.2",
 		"swiper": "^12.0.3"
 	}
 }
