@@ -60,7 +60,7 @@
 
 {#if !prefersReducedMotion.current}
     <div class="flakes">
-        {#each Array(50) as _, i}
+        {#each Array(60) as _, i}
             <img
                 class="flake"
                 src={snowflake}
@@ -92,13 +92,12 @@
     }
 
     @keyframes fall {
-        0% {
-            transform: translateY(0) rotate(0deg);
-        }
-
-        100% {
-            transform: translateY(120vh) rotate(360deg);
-        }
+        0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+        20% { transform: translateY(25vh) translateX(5px) rotate(72deg); opacity: 1; }
+        40% { transform: translateY(50vh) translateX(-5px) rotate(144deg); opacity: 1; }
+        60% { transform: translateY(75vh) translateX(5px) rotate(216deg); opacity: 1; }
+        80% { transform: translateY(100vh) translateX(-5px) rotate(288deg); opacity: .7; }
+        100% { transform: translateY(125vh) translateX(0) rotate(360deg); opacity: 0; }
     }
 
     @keyframes fade-in {
