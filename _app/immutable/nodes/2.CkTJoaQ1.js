@@ -1,0 +1,1 @@
+import"../chunks/DsnmJJEf.js";import{a1 as n,a2 as i,a9 as p,a4 as d,a6 as m,a7 as l,a8 as v,aa as h}from"../chunks/BbJlJFQZ.js";import{N as c}from"../chunks/muq5iWVb.js";var f=n('<header class="svelte-1v2axqk"><!></header> <!>',1);function u(e,o){var r=f(),a=i(r),s=m(a);c(s,{}),l(a);var t=v(a,2);p(t,()=>o.children??h),d(e,r)}export{u as component};

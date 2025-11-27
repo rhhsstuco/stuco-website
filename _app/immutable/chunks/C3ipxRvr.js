@@ -1,1 +1,0 @@
-import{aB as c,_ as r,I as i,k as f}from"./gvgEUIHF.js";function d(n,a){var e=void 0,t;c(()=>{e!==(e=a())&&(t&&(r(t),t=null),e&&(t=i(()=>{f(()=>e(n))})))})}const u=n=>a=>{const e=t=>{a&&!a.contains(t.target)&&!t.defaultPrevented&&n()};return document.addEventListener("click",e,!0),()=>document.removeEventListener("click",e,!0)};export{d as a,u as c};
