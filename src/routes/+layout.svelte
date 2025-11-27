@@ -10,7 +10,6 @@
     import Footer from '$lib/components/Footer.svelte';
     import snowflake from "$lib/images/snowflake-line.png";
     import type { Snippet } from 'svelte';
-    import Confetti from 'svelte-confetti';
     import { prefersReducedMotion } from 'svelte/motion';
     // import Flash from '$lib/components/Flash.svelte';
 
@@ -60,34 +59,46 @@
 </div> -->
 
 {#if !prefersReducedMotion.current}
-	<div class="confetti">
-		<Confetti
-            x={[-6, 6]}
-            y={[-0.1, 0.8]}
-            delay={[0, 7000]}
-            infinite
-            rounded
-            duration={20000}
-            amount={100}
-            size={25}
-            fallDistance="100vh"
-            colorArray={[snowflake]}
-        />
-	</div>
+    <div class="flakes">
+        {#each Array(50) as _, i}
+            <img
+                class="flake"
+                src={snowflake}
+                alt=""
+                style={`--x:${Math.random()}; --d:${Math.random() * 10}s;`}
+            />
+        {/each}
+    </div>
 {/if}
 
 <style lang="scss">
-    div.confetti {
-	    position: absolute;
-        z-index: 10000;
-	    top: -50px;
-	    left: 0;
-	    height: 150vh;
-	    width: 100vw;
-	    display: flex;
-        justify-content: center;
-	    overflow: hidden;
-	    pointer-events: none;
+    .flakes {
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        z-index: 9999;
+    }
+
+    .flake {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        left: calc(var(--x) * 100vw);
+        top: -10vh;
+        animation: fall 10s linear infinite;
+        animation-delay: var(--d);
+        opacity: 0.9;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        100% {
+            transform: translateY(120vh) rotate(360deg);
+        }
     }
 
     @keyframes fade-in {
