@@ -9,6 +9,7 @@ import { rotateMap } from "../../../vite";
  * This is because future devices may handle higher-res output.
  * Keeping 2400px originals prevents quality loss if we re-enable it.
  * By 2028, webp can be removed as all browsers should support avif by then.
+ * Other upcoming file formats like JPEG XL should be considered in the future.
  */
 const files = import.meta.glob("$images/gallery/*.{jpg,png,webp,avif}", {
 	query: {
