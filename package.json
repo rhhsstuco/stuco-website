@@ -25,11 +25,11 @@
 		"postinstall-postinstall": "^2.1.0",
 		"sass": "^1.94.2",
 		"supports-color": "^10.2.2",
-		"svelte": "^5.38.10",
+		"svelte": "^5.45.3",
 		"svelte-check": "^4.3.4",
 		"ts-node": "^10.9.1",
 		"tslib": "^2.6.2",
-		"vite": "^7.2.4",
+		"vite": "^7.2.6",
 		"vite-imagetools": "^5.1.2"
 	},
 	"type": "module",

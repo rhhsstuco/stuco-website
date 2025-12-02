@@ -5,8 +5,8 @@
  I've spent like 5 hours trying to resolve this issue and I cannot find a better solution right now.
 */
 const rotateMap = new Map<string, string>([
-	['01.jpg', "90"],
-	['04.jpg', "90"],
+	['1.jpg', "90"],
+	['4.jpg', "90"],
 	['20.jpg', "90"],
 	['21.jpg', "90"],
 	['22.jpg', "90"],
