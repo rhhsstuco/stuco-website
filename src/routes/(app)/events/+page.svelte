@@ -18,18 +18,15 @@
     let monthEvents = $state<SchoolEvent[]>(calculateMonthEvents());
 
     function calculateMonthEvents() {
-        const duplicateEvents = new Set<string>();
+        const seen = new Set<string>();
+        const now = new Date();
 
         return data.events
-        .filter((event) => event.startDate.getMonth() == new Date().getMonth())
-        .filter((event) => {
-            if (duplicateEvents.has(event.name)) {
-                return false;
-            }
-
-            duplicateEvents.add(event.name);
-            return true;
-        });
+            .filter(e =>
+                e.startDate.getMonth() === now.getMonth() &&
+                e.startDate.getFullYear() === now.getFullYear() &&
+                !seen.has(e.name) && seen.add(e.name)
+            );
     }
 
     let selectedDate = $state<Date | null>();
