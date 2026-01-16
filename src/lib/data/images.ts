@@ -1,7 +1,6 @@
 import type { ImageProps, ImagePropsWithHeight } from "$lib/types/image.types";
 import type { ImageMeta } from "$lib/types/image.types";
 import * as path from 'path';
-import { rotateMap } from "../../../vite";
 
 /*
  * Final render size is currently capped at 1600px.
@@ -15,6 +14,7 @@ const files = import.meta.glob("$images/gallery/*.{jpg,png,webp,avif}", {
 	query: {
 		format: 'avif;webp',
 		w: '800;1600',
+		rotate: '0',
 		as: 'picture',
 	}
 })
@@ -28,9 +28,6 @@ type Orientation = 'horizontal' | 'vertical';
  * @param img the image to determine correct orientation for.
  * @returns if the image is rotated such that its orientation has changed
  */
-function mismatchedOrientation(img: ImageMeta & { filename: string }) {
-	return rotateMap.has(img.filename) && (+rotateMap.get(img.filename)!) - 90 % 180 === 0
-}
 
 /**
  * @param maxResults the maximum size of the response set or undefined if no limit is specified
@@ -88,14 +85,6 @@ const getGalleryImages = async (params: GetGalleryImagesParams = {}) => {
 	let filteredFilepaths = filepaths;
 	
 	filteredFilepaths = filteredFilepaths.slice(0, params.maxResults);
-
-	filteredFilepaths.forEach(img => {
-		if (mismatchedOrientation(img)) {
-			const temp = img.img.w;
-			img.img.w = img.img.h;
-			img.img.h = temp;
-		}
-	});
 
 	if (params.orientation === 'horizontal') {
 		filteredFilepaths = filteredFilepaths.filter(img => img.img.w > img.img.h);

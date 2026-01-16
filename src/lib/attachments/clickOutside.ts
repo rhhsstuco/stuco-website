@@ -1,7 +1,5 @@
 import type { Attachment } from 'svelte/attachments';
 
-
-
 /** Dispatch event on click outside of node */
 
 const clickOutside = (onClickOutside: () => void): Attachment<HTMLElement> => {

@@ -4,31 +4,10 @@
  To fix this, I have manually compiled a list of images and the amount by which they need to be rotated :).
  I've spent like 5 hours trying to resolve this issue and I cannot find a better solution right now.
 */
-const rotateMap = new Map<string, string>([
-	['1.jpg', "90"],
-	['4.jpg', "90"],
-	['20.jpg', "90"],
-	['21.jpg', "90"],
-	['22.jpg', "90"],
-	['23.jpg', "90"],
-	['32.jpg', "90"],
-	['70.jpg', "90"],
-	['72.jpg', "90"],
-	['73.jpg', "90"],
-]);
-
-export { rotateMap };
 
 const defaultDirectives = (url: URL) => {
 	const pathname = url.pathname;
 	const filename = pathname.substring(pathname.lastIndexOf('/') + 1);
-	
-	if (rotateMap.has(filename)) {
-		return new URLSearchParams({
-			rotate: rotateMap.get(filename)!,
-			fit: "outside"
-		});
-	}
 
 	return new URLSearchParams();
 }

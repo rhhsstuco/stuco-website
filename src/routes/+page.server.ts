@@ -3,7 +3,6 @@ import getGalleryImages from '$lib/data/images';
 import { computeStandings } from '$lib/data/points';
 import type { PageServerLoad } from "./$types";
 
-
 export const load: PageServerLoad = async () => {
 	const spreadsheetDataPromise = getEvents({
 		maxResults: 3,
