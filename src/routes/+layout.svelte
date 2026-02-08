@@ -7,7 +7,8 @@
 	import { onNavigate } from '$app/navigation';
 	import theme from '$lib/state/theme.svelte';
     import Footer from '$lib/components/Footer.svelte';
-    import snowflake from "$lib/images/snowflake-line.png";
+    import decoration1 from "$lib/images/red-heart.png";
+    import decoration2 from "$lib/images/pink-heart.png";
     import type { Snippet } from 'svelte';
     import { prefersReducedMotion } from 'svelte/motion';
     // import Flash from '$lib/components/Flash.svelte';
@@ -59,10 +60,10 @@
 
 {#if !prefersReducedMotion.current}
     <div class="flakes">
-        {#each Array(60) as _, i}
+        {#each Array(30) as _, i}
             <img
                 class="flake"
-                src={snowflake}
+                src={decoration2 && i % 2 !== 0 ? decoration2 : decoration1}
                 alt=""
                 style={`--x:${Math.random()}; --d:${Math.random() * 10}s;`}
             />
