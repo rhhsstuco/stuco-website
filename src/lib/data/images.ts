@@ -56,13 +56,15 @@ const getGalleryImages = async (params: GetGalleryImagesParams = {}) => {
 		.map(([filename, image]) => {
 
 			const sources = (image.sources as ({
-				[key: string]: ImageProps[];
+				[key: string]: ImageProps[] | { srcset?: string } | string;
 			}));
 
 
 			if (params.useDPR) {
-				Object.entries(sources).forEach(props => {
-					props[1].forEach((prop, i) => prop.dpr = (i + 1));
+				Object.entries(sources).forEach(([, source]) => {
+					if (Array.isArray(source)) {
+						source.forEach((prop, i) => (prop.dpr = i + 1));
+					}
 				});
 			}
 

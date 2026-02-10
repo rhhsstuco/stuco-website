@@ -18,21 +18,42 @@
 	}: Props = $props();
 	let sources = $derived(meta.sources);
 	let fallback = $derived(meta.img);
+
+	const buildSrcset = (srcMeta: unknown) => {
+		if (Array.isArray(srcMeta)) {
+			return srcMeta
+				.map((meta) => {
+					if (meta.dpr) {
+						return `${meta.src} ${meta.dpr}x`;
+					}
+
+					return `${meta.src} ${meta.w}w`;
+				})
+				.join(', ');
+		}
+
+		if (typeof srcMeta === 'string') {
+			return srcMeta;
+		}
+
+		if (srcMeta && typeof srcMeta === 'object' && 'srcset' in srcMeta && typeof (srcMeta as { srcset?: string }).srcset === 'string') {
+			return (srcMeta as { srcset?: string }).srcset || '';
+		}
+
+		return '';
+	};
 </script>
 
 <picture>
 	{#each Object.entries(sources) as [type, srcMeta]}
+		{@const srcset = buildSrcset(srcMeta)}
+		{#if srcset}
 		<source
 			type="image/{type}"
 			{sizes}
-			srcset={srcMeta.map((meta) => {
-				if (meta.dpr) {
-					return `${meta.src} ${meta.dpr}x`
-				}
-				
-				return `${meta.src} ${meta.w}w`
-			}).join(', ')}
+			srcset={srcset}
 		/>
+		{/if}
 	{/each}
 	<img src={fallback.src} {alt} {loading} width={fallback.w} height={fallback.h}/>
 </picture>
