@@ -1,1 +1,0 @@
-import{d as c,h as _,j as d,R as o,l as T,H as b,m as y,f as E,T as R,n as f}from"./DucoqPTw.js";function p(n,i,h=!1){_&&d();var r=new R(n),l=h?o:0;function t(a,s){if(_){const u=T(n)===b;if(a===u){var e=y();E(e),r.anchor=e,f(!1),r.ensure(a,s),f(!0);return}}r.ensure(a,s)}c(()=>{var a=!1;i((s,e=!0)=>{a=!0,t(e,s)}),a||t(!1,null)},l)}export{p as i};
