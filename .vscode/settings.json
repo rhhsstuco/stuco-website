@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "C:/Users/ariba/Desktop/Program Files/WEB/stuco-website/node_modules/bare-fs"
+    "cmake.sourceDirectory": "C:/Users/ariba/Desktop/Program Files/WEB/stuco-website/node_modules/bare-fs",
+    "svelte.enable-ts-plugin": true
 }
