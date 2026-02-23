@@ -28,24 +28,10 @@
         theme.mountEffects();
 	});
 
-    const isHomePath = (pathname?: string | null) => {
-        if (!pathname) return false;
-
-        const normalized = pathname.replace(/\/+$/, '');
-        const baseNormalized = base.replace(/\/+$/, '');
-
-        return normalized === baseNormalized;
-    };
-
 	onNavigate((navigation) => {
-        const toPath = navigation.to?.url.pathname;
-        const fromPath = navigation.from?.url.pathname;
-
         if (
             !document.startViewTransition ||
-            prefersReducedMotion.current ||
-            isHomePath(toPath) ||
-            isHomePath(fromPath)
+            prefersReducedMotion.current
         ) {
             return;
         }
