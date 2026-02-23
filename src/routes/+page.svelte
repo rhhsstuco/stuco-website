@@ -8,7 +8,6 @@
     // @ts-ignore
     import HeroImages from "$lib/images/hearts.png?format=avif;webp;png&w=400;800&as=picture";
     import theme from "$lib/state/theme.svelte";
-    import type { ImageMeta } from "$lib/types/image.types";
     import type { PageServerData } from "./$types";
 
     interface Props {
@@ -16,16 +15,6 @@
     }
 
     let { data = $bindable() }: Props = $props();
-
-    $effect(() => {
-        const sources = Object.entries((HeroImages as ImageMeta).sources);
-
-        for (const source of sources) {
-            const images = source[1];
-
-            images.forEach((image, i) => (image.dpr = i + 1));
-        }
-    });
 
     const TITLE = "RHHS StuCo";
     const DESCRIPTION =

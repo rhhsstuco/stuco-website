@@ -5,6 +5,7 @@
 	import 'remixicon/fonts/remixicon.css';
 
 	import { onNavigate } from '$app/navigation';
+    import { base } from '$app/paths';
 	import theme from '$lib/state/theme.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import decoration1 from "$lib/images/red-heart.png";
@@ -27,15 +28,34 @@
         theme.mountEffects();
 	});
 
-	onNavigate((navigation) => {
-		if (!document.startViewTransition) return;
+    const isHomePath = (pathname?: string | null) => {
+        if (!pathname) return false;
 
-		return new Promise((resolve) => {
-			document.startViewTransition(async () => {
-				resolve();
-				await navigation.complete;
-			});
-		});
+        const normalized = pathname.replace(/\/+$/, '');
+        const baseNormalized = base.replace(/\/+$/, '');
+
+        return normalized === baseNormalized;
+    };
+
+	onNavigate((navigation) => {
+        const toPath = navigation.to?.url.pathname;
+        const fromPath = navigation.from?.url.pathname;
+
+        if (
+            !document.startViewTransition ||
+            prefersReducedMotion.current ||
+            isHomePath(toPath) ||
+            isHomePath(fromPath)
+        ) {
+            return;
+        }
+
+        return new Promise((resolve) => {
+            document.startViewTransition(async () => {
+                resolve();
+                await navigation.complete;
+            });
+        });
 	});
 </script>
 
@@ -100,40 +120,42 @@
         100% { transform: translateY(125vh) translateX(0) rotate(360deg); opacity: 0; }
     }
 
-    @keyframes fade-in {
-        from {
-            opacity: 0;
+    :global {
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
         }
-    }
 
-    @keyframes fade-out {
-        to {
-            opacity: 0;
+        @keyframes fade-out {
+            to {
+                opacity: 0;
+            }
         }
-    }
 
-    @keyframes slide-from-right {
-        from {
-            transform: translateX(20px);
+        @keyframes slide-from-right {
+            from {
+                transform: translateX(20px);
+            }
         }
-    }
 
-    @keyframes slide-to-left {
-        to {
-            transform: translateX(-20px);
+        @keyframes slide-to-left {
+            to {
+                transform: translateX(-20px);
+            }
         }
-    }
 
-    :root::view-transition-old(root) {
-        animation:
-            50ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-            150ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
-    }
+        :root::view-transition-old(root) {
+            animation:
+                50ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+                150ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+        }
 
-    :root::view-transition-new(root) {
-        animation:
-            120ms cubic-bezier(0, 0, 0.2, 1) 50ms both fade-in,
-            150ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+        :root::view-transition-new(root) {
+            animation:
+                120ms cubic-bezier(0, 0, 0.2, 1) 50ms both fade-in,
+                150ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+        }
     }
 
     /* .portal {
