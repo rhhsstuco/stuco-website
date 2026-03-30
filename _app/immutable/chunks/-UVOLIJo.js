@@ -1,0 +1,1 @@
+var e=e=>t=>{let n=n=>{t&&!t.contains(n.target)&&!n.defaultPrevented&&e()};return document.addEventListener(`click`,n,!0),()=>document.removeEventListener(`click`,n,!0)};export{e as t};

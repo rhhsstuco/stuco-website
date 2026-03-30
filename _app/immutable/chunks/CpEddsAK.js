@@ -1,0 +1,14 @@
+import{B as e,C as t,D as n,E as r,G as i,P as a,T as o,Y as s,Z as c,b as l,f as u,i as d,lt as f,n as p,nt as m,p as h,rt as g,x as _}from"./B_-PxHgt.js";import"./CsaauQz1.js";var v=n(`<div class="confetti svelte-rtt661"></div>`),y=n(`<div></div>`);function b(n,b){g(b,!0);let x=d(b,`size`,3,10),S=d(b,`x`,19,()=>[-.5,.5]),C=d(b,`y`,19,()=>[.25,1]),w=d(b,`duration`,3,2e3),T=d(b,`infinite`,3,!1),E=d(b,`delay`,19,()=>[0,50]),D=d(b,`colorRange`,19,()=>[0,360]),O=d(b,`colorArray`,19,()=>[]),k=d(b,`amount`,3,50),A=d(b,`iterationCount`,3,1),j=d(b,`fallDistance`,3,`100px`),M=d(b,`rounded`,3,!1),N=d(b,`cone`,3,!1),P=d(b,`noGravity`,3,!1),F=d(b,`xSpread`,3,.15),I=d(b,`destroyOnComplete`,3,!0),L=d(b,`disableForReducedMotion`,3,!1),R=c(!1);p(()=>{!I()||T()||typeof A()==`string`||setTimeout(()=>s(R,!0),(w()+E()[1])*A())});function z(e,t){return Math.random()*(t-e)+e}function B(){return O().length?O()[Math.round(Math.random()*(O().length-1))]:`hsl(${Math.round(z(D()[0],D()[1]))}, 75%, 50%)`}var V=r(),H=i(V),U=t=>{var n=y();let r;l(n,21,()=>({length:k()}),_,(t,n)=>{var r=v();e((e,t,n,i,a,o,s,c,l,d,f)=>u(r,`
+        --color: ${e??``};
+        --skew: ${t??``}deg,${n??``}deg;
+        --rotation-xyz: ${i??``}, ${a??``}, ${o??``};
+        --rotation-deg: ${s??``}deg;
+        --translate-y-multiplier: ${c??``};
+        --translate-x-multiplier: ${l??``};
+        --scale: ${d??``};
+        --transition-delay: ${f??``}ms;
+        --transition-duration: ${T()?`calc(${w()}ms * var(--scale))`:`${w()}ms`};`),[()=>B(),()=>z(-45,45),()=>z(-45,45),()=>z(-10,10),()=>z(-10,10),()=>z(-10,10),()=>z(0,360),()=>z(C()[0],C()[1]),()=>z(S()[0],S()[1]),()=>.1*z(2,10),()=>z(E()[0],E()[1])]),o(t,r)}),f(n),e(()=>{r=h(n,1,`confetti-holder svelte-rtt661`,null,r,{rounded:M(),cone:N(),"no-gravity":P(),"reduced-motion":L()}),u(n,`
+    --fall-distance: ${j()??``};
+    --size: ${x()??``}px;
+    --x-spread: ${1-F()};
+    --transition-iteration-count: ${(T()?`infinite`:A())??``};`)}),o(t,n)};t(H,e=>{a(R)||e(U)}),o(n,V),m()}var x=b;export{x as t};
